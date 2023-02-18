@@ -1,0 +1,55 @@
+name: templates
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.17.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  font_awesome_flutter: ^10.4.0
+  intl: ^0.18.0
+  url_launcher: ^6.1.9
+  vector_math: ^2.1.4
+
+dev_dependencies:
+  flutter_lints: ^2.0.1
+  flutter_test:
+    sdk: flutter
+
+flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: 'icon/ios.png'
+  image_path_android: 'icon/android.png'
+  adaptive_icon_background: '#ffffff'
+  adaptive_icon_foreground: 'icon/adaptive.png'
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/design_course/
+    - assets/fitness_app/
+    - assets/hotel/
+
+  fonts:
+    - family: WorkSans
+      fonts:
+        - asset: assets/fonts/WorkSans-Regular.ttf
+        - asset: assets/fonts/WorkSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/WorkSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/WorkSans-Bold.ttf
+          weight: 700
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Bold.ttf
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Medium.ttf
+          weight: 400
