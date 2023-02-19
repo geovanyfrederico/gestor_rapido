@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/home_controller.dart';
+import '../../controllers/home_controller.dart';
 class InitView extends StatelessWidget {
   final HomeController controller = Get.put(HomeController()); // Adicione o controller aqui
 

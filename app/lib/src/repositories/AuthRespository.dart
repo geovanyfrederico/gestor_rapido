@@ -1,70 +1,71 @@
 import 'package:sqflite/sqflite.dart';
-import '../models/DatabaseHelper.dart';
-import '../models/task_model.dart';
+import 'package:templates/src/models/UtilizadorModel.dart';
+import 'package:templates/src/models/DatabaseHelper.dart';
 
-class TaskRepository {
+class AuthRepository {
   final dbHelper = DatabaseHelper.instance;
+  final dbTable = "utilizador";
 
-  Future<List<Task>> getAllTasks() async {
-    final maps = await dbHelper.query('tasks');
+  Future<List<UtilizadorModel>> buscarTudo() async {
+    final maps = await dbHelper.query(dbTable);
 
     return List.generate(maps.length, (i) {
-      return Task(
+      return UtilizadorModel(
         id: maps[i]['id'],
-        title: maps[i]['title'],
-        description: maps[i]['description'],
-        isCompleted: maps[i]['isCompleted'] == 1,
+        nome: maps[i]['nome'],
+        pin: maps[i]['pin'],
+        tipo: maps[i]['tipo'],
       );
     });
   }
 
-  Future<Task?> getTask(int id) async {
+  Future<UtilizadorModel?> buscarUm(int id) async {
     final db = await dbHelper.database;
 
     final maps = await db.query(
-      'tasks',
+      dbTable,
       where: 'id = ?',
       whereArgs: [id],
     );
 
     if (maps.isNotEmpty) {
-      return Task(
+      return UtilizadorModel(
         id: maps.first['id'] as int,
-        title: maps.first['title'] as String,
-        description: maps.first['description'] as String,
-        isCompleted: maps.first['isCompleted'] == 1,
+        nome: maps.first['nome'] as String,
+        pin: maps.first['pin'] as int,
+        tipo: maps.first['tipo'] as String,
       );
     }
 
     return null;
   }
 
-  Future<int> addTask(Task task) async {
+  Future<int> adicionar(UtilizadorModel task) async {
     final db = await dbHelper.database;
 
     return db.insert(
-      'tasks',
+      dbTable,
       task.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
-  Future<int> updateTask(Task task) async {
+  Future<int> atualizar(UtilizadorModel task) async {
     final db = await dbHelper.database;
 
     return await db.update(
-      'tasks',
+      dbTable,
       task.toMap(),
       where: 'id = ?',
       whereArgs: [task.id],
     );
   }
 
-  Future<int> deleteTask(int id) async {
+  Future<int> eliminar(int id) async {
     final db = await dbHelper.database;
 
     return await db.delete(
-      'tasks',
+      dbTable,
       where: 'id = ?',
       whereArgs: [id],
     );
