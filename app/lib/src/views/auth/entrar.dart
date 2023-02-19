@@ -13,9 +13,7 @@ class AuthEntrarView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Task list'),
       ),
-      body: Obx(
-              () => const Center(child: Text("Olá mano"),)
-      ),
+      body: const Center(child: Text("Olá mano"),)
 
     );
   }
