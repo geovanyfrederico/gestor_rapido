@@ -3,7 +3,12 @@ import 'package:get/get.dart';
 import 'package:templates/src/controllers/task_form_controller.dart';
 import 'package:templates/src/models/task_model.dart';
 
-class TaskFormView extends GetView<TaskFormController> {
+class TaskFormView extends StatelessWidget {
+
+  final TaskFormController controller = Get.put(TaskFormController());
+
+   TaskFormView({super.key}); // Adicione o controller aqui
+
   @override
   Widget build(BuildContext context) {
     final task = Get.arguments as Task;
@@ -49,7 +54,7 @@ class TaskFormView extends GetView<TaskFormController> {
               Row(
                 children: [
                   Obx(
-                    () => Checkbox(
+                        () => Checkbox(
                       value: controller.isCompleted.value,
                       onChanged: (value) => controller.isCompleted.value = value!,
                     ),

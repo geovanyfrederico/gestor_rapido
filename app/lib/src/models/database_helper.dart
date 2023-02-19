@@ -2,26 +2,30 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
-  static final DatabaseHelper instance = DatabaseHelper._init();
+  static const _databaseName = 'database.db';
+  static const _databaseVersion = 1;
 
-  late Database _database =  _initDatabase() as Database;
 
-  DatabaseHelper._init();
+  DatabaseHelper._privateConstructor();
+  static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
-  Future<Database> _initDatabase() async {
-    _database = await _initDB('tasks.db');
-    return _database;
-  }
+  static Database? _database;
 
   Future<Database> get database async {
-    return _database;
+    if (_database != null) {
+      return _database!;
+    }
+
+    _database = await _initDatabase();
+    return _database!;
   }
 
-  Future<Database> _initDB(String filePath) async {
-    final dbPath = await getDatabasesPath();
-    final path = join(dbPath, filePath);
+  Future<Database> _initDatabase() async {
+    final documentsDirectory = await getDatabasesPath();
+    final path = join(documentsDirectory, _databaseName);
 
-    return await openDatabase(path, version: 1, onCreate: _createDB);
+    return await openDatabase(path,
+        version: _databaseVersion, onCreate: _createDB);
   }
 
   Future _createDB(Database db, int version) async {
@@ -29,7 +33,7 @@ class DatabaseHelper {
       CREATE TABLE tasks (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT,
-        description TEXT
+        description TEXT,
           isCompleted BIT NOT NULL
        )
     ''');

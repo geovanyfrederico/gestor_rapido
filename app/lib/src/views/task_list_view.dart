@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:templates/src/controllers/task_form_controller.dart';
 import 'package:templates/src/controllers/task_list_controller.dart';
-import 'package:templates/src/models/task_model.dart';
 
-class TaskListView extends GetView<TaskListController> {
-  const TaskListView({super.key});
+class TaskListView extends StatelessWidget {
+   final TaskListController controller = Get.put(TaskListController()); // Adicione o controller aqui
+
+   TaskListView({super.key});
 
   @override
   Widget build(BuildContext context) {
