@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:templates/src/controllers/task_form_controller.dart';
-import 'package:templates/src/models/task_model.dart';
 
 class TaskFormView extends StatelessWidget {
 
@@ -11,18 +10,15 @@ class TaskFormView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final task = Get.arguments as Task;
-
-    controller.titleController.text = task.title ?? '';
-    controller.descriptionController.text = task.description ?? '';
-    controller.isCompleted.value = task.isCompleted ?? false;
-
+    controller.titleController.text = '';
+    controller.descriptionController.text =  '';
+    controller.isCompleted.value =  false;
     return Scaffold(
       appBar: AppBar(
-        title: Text(task == null ? 'Add task' : 'Edit task'),
+        title: Text( 'Add task' ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Form(
           key: controller.formKey,
           child: Column(
@@ -64,8 +60,8 @@ class TaskFormView extends StatelessWidget {
               ),
               SizedBox(height: 16),
               ElevatedButton(
-                onPressed: task == null ? controller.saveTask : () => controller.updateTask(task),
-                child: Text(task == null ? 'Save' : 'Update'),
+                onPressed:  controller.saveTask,
+                child: Text('Save'),
               ),
             ],
           ),

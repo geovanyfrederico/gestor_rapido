@@ -1,4 +1,6 @@
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:templates/src/helpers/file_handler.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
@@ -23,7 +25,7 @@ class DatabaseHelper {
   Future<Database> _initDatabase() async {
     final documentsDirectory = await getDatabasesPath();
     final path = join(documentsDirectory, _databaseName);
-
+    print(path);
     return await openDatabase(path,
         version: _databaseVersion, onCreate: _createDB);
   }
