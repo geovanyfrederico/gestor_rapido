@@ -25,19 +25,19 @@ class DatabaseHelper {
   Future<Database> _initDatabase() async {
     final documentsDirectory = await getDatabasesPath();
     final path = join(documentsDirectory, _databaseName);
-    print(path);
+
     return await openDatabase(path,
         version: _databaseVersion, onCreate: _createDB);
   }
 
   Future _createDB(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE tasks (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT,
-        description TEXT,
-          isCompleted BIT NOT NULL
-       )
+      CREATE TABLE IF NOT EXISTS tasks (
+   id INTEGER PRIMARY KEY AUTOINCREMENT,
+   title TEXT,
+   description TEXT,
+   isCompleted BIT NOT NULL
+);
     ''');
   }
   Future<List<Map<String, dynamic>>> query(String table) async {
