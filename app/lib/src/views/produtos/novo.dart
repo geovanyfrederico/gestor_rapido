@@ -7,11 +7,14 @@ class ProdutosNovoView extends StatelessWidget {
   final AuthController controller =
       Get.put(AuthController()); // Adicione o controller aqui
   ProdutosNovoView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("Registar"),
+        child: Row(
+          children: [TextField()],
+        ),
       ),
     );
   }
