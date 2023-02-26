@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:templates/src/config/app_theme.dart';
 import 'package:templates/src/controllers/AuthController.dart';
 
 class AuthEntrarView extends StatelessWidget {
@@ -10,11 +11,30 @@ class AuthEntrarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Task list'),
+      backgroundColor: AppTheme.white,
+      body: Container(
+        child: Row(
+          children: [
+            Text("Entrar no GestorRapido"),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {  },
+                  child: Text('Google'),
+                ),   ElevatedButton(
+                  onPressed: () {  },
+                  child: Text('Google'),
+                )
+              ],
+            )
+          ],
+        ),
       ),
-      body: const Center(child: Text("Olá mano"),)
 
     );
   }
 }
+

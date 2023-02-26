@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:templates/src/views/auth/entrar.dart';
-import 'app_theme.dart';
+import 'package:templates/src/views/auth/registar.dart';
+import 'package:templates/src/views/contactos/novo.dart';
+import 'package:templates/src/views/produtos/novo.dart';
+import 'package:templates/src/config/app_theme.dart';
+
 void main() {
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -18,9 +23,12 @@ class MyApp extends StatelessWidget {
         textTheme: AppTheme.textTheme,
         platform: TargetPlatform.iOS,
       ),
-      initialRoute: '/auth/entrar',
+      initialRoute: '/contactos/novo',
       getPages: [
-        GetPage(name: '/auth/entrar', page: () =>  AuthEntrarView()),
+        GetPage(name: '/auth/entrar', page: () => AuthEntrarView()),
+        GetPage(name: '/auth/registar', page: () => AuthRegistarView()),
+        GetPage(name: '/contactos/novo', page: () => ContactosNovoView()),
+        GetPage(name: '/produtos/novo', page: () => ProdutosNovoView()),
       ],
     );
   }
