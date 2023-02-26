@@ -13,7 +13,6 @@ import 'package:templates/src/views/relatorios/usuarios.dart';
 import 'package:templates/src/views/relatorios/vendas.dart';
 import 'package:templates/src/views/usuarios/listar.dart';
 import 'package:templates/src/views/usuarios/novo.dart';
-
 import 'package:templates/src/views/vendas/listar.dart';
 import 'package:templates/src/views/vendas/nova.dart';
 import 'package:templates/src/views/vendas/visualisar.dart';
