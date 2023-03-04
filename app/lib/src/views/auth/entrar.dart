@@ -16,17 +16,22 @@ class AuthEntrarView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.deepPurple,
+        appBar: AppBar(
+            backgroundColor: Colors.deepPurple,
+            title: const Text(
+              'Gestor Rápido',
+              style: TextStyle(fontSize: 25),
+            )),
         body: Padding(
           padding: EdgeInsets.all(10),
           child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 TextFormField(
                   autofocus: true,
                   keyboardType: TextInputType.text,
-                  style: new TextStyle(color: Colors.white, fontSize: 20),
+                  style: new TextStyle(color: Colors.white, fontSize: 25),
                   decoration: InputDecoration(
                       labelText: "User",
                       labelStyle: TextStyle(color: Colors.white)),
@@ -36,7 +41,7 @@ class AuthEntrarView extends StatelessWidget {
                   autofocus: true,
                   obscureText: true,
                   keyboardType: TextInputType.number,
-                  style: new TextStyle(color: Colors.white, fontSize: 20),
+                  style: new TextStyle(color: Colors.white, fontSize: 25),
                   decoration: InputDecoration(
                       labelText: "PIN",
                       labelStyle: TextStyle(color: Colors.white)),
@@ -53,7 +58,11 @@ class AuthEntrarView extends StatelessWidget {
                     child: Center(
                         child: Text(
                       'ENTRAR',
-                      style: TextStyle(color: Colors.deepPurple),
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        color: Colors.deepPurple,
+                        fontSize: 20,
+                      ),
                     )),
                     onPressed: () {
                       Navigator.push(
