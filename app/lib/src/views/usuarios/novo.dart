@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:templates/src/config/app_theme.dart';
 import 'package:templates/src/controllers/AuthController.dart';
 
-class RelatoriosUsuariosView extends StatelessWidget {
+class UsuariosNovoView extends StatelessWidget {
   final AuthController controller =
       Get.put(AuthController()); // Adicione o controller aqui
-  RelatoriosUsuariosView({super.key});
+  UsuariosNovoView({super.key});
 
   @override
   Widget build(BuildContext context) {

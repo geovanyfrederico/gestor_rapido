@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         textTheme: AppTheme.textTheme,
         platform: TargetPlatform.iOS,
       ),
-      initialRoute: '/contactos/novo',
+      initialRoute: 'auth/entrar',
       getPages: [
         // Auth(Autenticacão)
         GetPage(name: '/auth/entrar', page: () => AuthEntrarView()),
@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
         // Produtos
         GetPage(name: '/produtos/novo', page: () => ProdutosNovoView()),
         GetPage(name: '/produtos/listar', page: () => ProdutosListarView()),
+
         // Relatorios
         GetPage(
             name: '/relatorios/clientes', page: () => RelatoriosClientesView()),
