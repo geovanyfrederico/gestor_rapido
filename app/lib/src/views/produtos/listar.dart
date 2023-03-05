@@ -26,7 +26,7 @@ class ProdutosListarView extends StatelessWidget {
       body: ListView.separated(
         itemBuilder: (BuildContext context, int produto) {
           return ListTile(
-            leading: Text(tabela[produto].sigla),
+            leading: Image.asset(tabela[produto].icone),
             title: Text(tabela[produto].nome),
             trailing: Text(tabela[produto].valor.toString()),
           );
@@ -59,24 +59,22 @@ class ProdutosListarView extends StatelessWidget {
 class Produtos {
   String icone;
   String nome;
-  String sigla;
   double valor;
 
   Produtos({
     required this.icone,
     required this.nome,
-    required this.sigla,
     required this.valor,
   });
 }
 
 class Repositorio {
   static List<Produtos> tabela = [
-    Produtos(icone: '', nome: 'Banana', sigla: 'Bn', valor: 200),
-    Produtos(icone: '', nome: 'Pera', sigla: 'Pr', valor: 150),
-    Produtos(icone: '', nome: 'Manga', sigla: 'Mg', valor: 700),
-    Produtos(icone: '', nome: 'Gingibre', sigla: 'Gb', valor: 999),
-    Produtos(icone: '', nome: 'Goiaba', sigla: 'Go', valor: 199),
-    Produtos(icone: '', nome: 'Tomate', sigla: 'Tm', valor: 200),
+    Produtos(icone: 'assets/images/Banana.png', nome: 'Banana', valor: 200),
+    Produtos(icone: 'assets/images/Pera.png', nome: 'Pera', valor: 150),
+    Produtos(icone: 'assets/images/Manga.png', nome: 'Manga', valor: 700),
+    Produtos(icone: 'assets/images/Gingibre.png', nome: 'Gingibre', valor: 999),
+    Produtos(icone: 'assets/images/Goiaba.png', nome: 'Goiaba', valor: 199),
+    Produtos(icone: 'assets/images/Tomate.png', nome: 'Tomate', valor: 200),
   ];
 }
