@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:templates/src/config/app_theme.dart';
 import 'package:templates/src/controllers/AuthController.dart';
+import 'package:templates/src/views/produtos/novo.dart';
 
 class ProdutosListarView extends StatelessWidget {
   final AuthController controller =
@@ -12,7 +13,6 @@ class ProdutosListarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple,
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         leading: IconButton(
@@ -38,9 +38,11 @@ class ProdutosListarView extends StatelessWidget {
       floatingActionButton: IconButton(
         iconSize: 100,
         splashColor: Colors.blue,
-        hoverColor: Colors.black,
         icon: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ProdutosNovoView()));
+        },
       ),
     );
 
