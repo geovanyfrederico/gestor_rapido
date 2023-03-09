@@ -33,7 +33,10 @@ class Produtos extends State<ProdutosNovoView> {
           children: [
             Row(
               children: [
-                Text('Nome do Produto'),
+                Text(
+                  'Nome do Produto',
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
               ],
             ),
             const SizedBox(
@@ -52,7 +55,10 @@ class Produtos extends State<ProdutosNovoView> {
             ),
             Row(
               children: [
-                Text('Preço do Produto'),
+                Text(
+                  'Preço do Produto',
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
               ],
             ),
             const SizedBox(
@@ -71,7 +77,10 @@ class Produtos extends State<ProdutosNovoView> {
             ),
             Row(
               children: [
-                Text('Descrição do Produto'),
+                Text(
+                  'Descrição do Produto',
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
               ],
             ),
             const SizedBox(

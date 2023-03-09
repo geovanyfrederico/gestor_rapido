@@ -14,7 +14,6 @@ class ProdutosListarView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
         leading: IconButton(
           iconSize: 40,
           splashColor: Colors.black,
