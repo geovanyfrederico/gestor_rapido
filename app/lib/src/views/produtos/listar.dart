@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:templates/src/config/app_theme.dart';
-import 'package:templates/src/controllers/AuthController.dart';
-import 'package:templates/src/views/produtos/novo.dart';
+import 'package:gr/src/config/app_theme.dart';
+import 'package:gr/src/controllers/AuthController.dart';
+import 'package:gr/src/views/produtos/novo.dart';
 
 class ProdutosListarView extends StatelessWidget {
   final AuthController controller =

@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:templates/src/config/app_theme.dart';
-import 'package:templates/src/controllers/AuthController.dart';
+import 'package:gr/src/config/app_theme.dart';
+import 'package:gr/src/controllers/AuthController.dart';
 
 class ContactosListarView extends StatelessWidget {
   final AuthController controller =

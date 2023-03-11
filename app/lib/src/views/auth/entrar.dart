@@ -1,128 +1,140 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:templates/src/config/app_theme.dart';
-import 'package:templates/src/controllers/AuthController.dart';
-import 'package:templates/src/views/inutil/task_list_view.dart';
-
+import 'package:gr/src/config/app_theme.dart';
+import 'package:gr/src/controllers/AuthController.dart';
+import 'package:gr/src/views/inutil/task_list_view.dart';
+import 'package:gr/theme/theme1.dart';
 import '../produtos/listar.dart';
-
+import 'package:getwidget/getwidget.dart';
 class AuthEntrarView extends StatelessWidget {
   final AuthController controller =
-      Get.put(AuthController()); // Adicione o controller aqui
-
+  Get.put(AuthController()); // Adicione o controller aqui
   AuthEntrarView({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.amber,
-        padding: EdgeInsets.only(top: 60, left: 40, right: 40),
-        child: ListView(
-          children: [
-            SizedBox(
-                width: 128,
-                height: 128,
-                child: Image.asset('assets/images/gestor.png')),
-            Text(
-              'Gestor Rápido',
-              style: TextStyle(
-                fontSize: 30,
-                color: Colors.black,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            TextField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: 'E-mail',
-                labelStyle: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
+          color: Theme1.cardTitleBg,
+
+          padding: EdgeInsets.only(top: 60, left: 40, right: 40),
+          child:  Form(
+            key: controller.formLogin,
+            child: ListView(
+              children: [
+                SizedBox(
+                    width: 128,
+                    height: 128,
+                    child: Image.asset('assets/images/gestor.png')),
+                Text(
+                  'GESTOR  RÁPIDO',
+                  style: Theme1.h1TextStyle(),
+                  textAlign: TextAlign.center,
                 ),
-              ),
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextField(
-              keyboardType: TextInputType.text,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Senha',
-                labelStyle: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
+                const SizedBox(
+                  height: 30,
                 ),
-              ),
-              style: TextStyle(fontSize: 20),
-            ),
-            Container(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                child: Text(
-                  'Recuperar Senha...',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () {},
-              ),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Container(
-              height: 60,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(stops: [
-                  0,
-                  1
-                ], colors: [
-                  Color.fromARGB(255, 236, 186, 19),
-                  Color.fromARGB(255, 112, 82, 4),
-                ]),
-                // borderRadius: BorderRadius.all(Radius.circular(5)),
-              ),
-              child: SizedBox.expand(
-                child: TextButton(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Entrar',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                        ),
+                SizedBox(
+                  width: 200,
+                  height: 70,
+                  child: TextFormField(
+                    controller: controller.userInput,
+                    obscureText: false,
+                    keyboardType: TextInputType.text,
+                    decoration: const InputDecoration(
+                      focusColor: Theme1.primary,
+                      prefixIcon: Icon(Icons.person),
+                      fillColor: Theme1.gray,
+                      filled: true,
+                      contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Theme1.primary, width: 2.0),
                       ),
-                      Image.asset(
-                        'assets/images/gestor.png',
-                        height: 35,
-                      ),
-                    ],
+                      border: InputBorder.none,
+                      labelText: 'Usuário',
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Insira um usuário';
+                      }
+                      return null;
+                    },
                   ),
-                  onPressed: () => {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProdutosListarView()))
-                  },
                 ),
-              ),
+                const SizedBox(
+                  height: 15,
+                ),
+                SizedBox(
+                  width: 200,
+
+                  height: 70,
+                  child: TextFormField(
+                    controller: controller.pinInput,
+                    obscureText: true,
+                    keyboardType: const TextInputType.numberWithOptions(
+                        decimal: true
+                    ),
+                    maxLength: 4,
+                    decoration: const  InputDecoration(
+                      focusColor: Theme1.primary,
+                      prefixIcon: Icon(Icons.lock),
+                      fillColor: Theme1.gray,
+                      filled: true,
+                      contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Theme1.primary, width: 2.0),
+                      ),
+
+                      border: InputBorder.none,
+                      labelText: 'Pin',
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Insira um pin';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {},
+                    style: Theme1.linkButtonStyle,
+                    child: const Text(
+                      'Recuperar pin',
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 60,
+                  alignment: Alignment.center,
+                  child: SizedBox.expand(
+                    child:     GFButton(
+                      onPressed: (){
+                        controller.login();
+                        //Get.offNamed('/details');
+                      },
+                      text: "Iniciar sessão",
+                      color: Theme1.primary,
+                      size: GFSize.SMALL,
+
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          )
       ),
     );
   }
 }
-   /* return Scaffold(
+/* return Scaffold(
         backgroundColor: Colors.deepPurple,
         appBar: AppBar(
           backgroundColor: Colors.deepPurple,

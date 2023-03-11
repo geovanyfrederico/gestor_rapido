@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:templates/src/controllers/task_list_controller.dart';
+import 'package:gr/src/controllers/task_list_controller.dart';
 
 class TaskListView extends StatelessWidget {
    final TaskListController controller = Get.put(TaskListController()); // Adicione o controller aqui

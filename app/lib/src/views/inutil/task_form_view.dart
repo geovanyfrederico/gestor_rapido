@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:templates/src/controllers/task_form_controller.dart';
+import 'package:gr/src/controllers/task_form_controller.dart';
 
 class TaskFormView extends StatelessWidget {
 
@@ -34,7 +34,6 @@ class TaskFormView extends StatelessWidget {
                   if (value!.isEmpty) {
                     return 'Please enter a title';
                   }
-
                   return null;
                 },
               ),

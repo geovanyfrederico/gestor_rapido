@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/default_transitions.dart';
-import 'package:templates/src/config/app_theme.dart';
-import 'package:templates/src/controllers/AuthController.dart';
-import 'package:templates/src/views/produtos/listar.dart';
+import 'package:gr/src/config/app_theme.dart';
+import 'package:gr/src/controllers/AuthController.dart';
+import 'package:gr/src/views/produtos/listar.dart';
 
 class ProdutosNovoView extends StatefulWidget {
   const ProdutosNovoView({super.key});

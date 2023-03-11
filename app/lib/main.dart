@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:templates/src/views/auth/entrar.dart';
-import 'package:templates/src/views/auth/registar.dart';
-import 'package:templates/src/views/compras/listar.dart';
-import 'package:templates/src/views/compras/novo.dart';
-import 'package:templates/src/views/contactos/novo.dart';
-import 'package:templates/src/views/contactos/listar.dart';
-import 'package:templates/src/views/produtos/novo.dart';
-import 'package:templates/src/views/produtos/listar.dart';
-import 'package:templates/src/views/relatorios/clientes.dart';
-import 'package:templates/src/views/relatorios/usuarios.dart';
-import 'package:templates/src/views/relatorios/vendas.dart';
-import 'package:templates/src/views/usuarios/listar.dart';
-import 'package:templates/src/views/usuarios/novo.dart';
-import 'package:templates/src/views/vendas/listar.dart';
-import 'package:templates/src/views/vendas/nova.dart';
-import 'package:templates/src/views/vendas/visualisar.dart';
-import 'package:templates/src/config/app_theme.dart';
+import 'package:gr/src/views/auth/entrar.dart';
+import 'package:gr/src/views/auth/registar.dart';
+import 'package:gr/src/views/compras/listar.dart';
+import 'package:gr/src/views/compras/novo.dart';
+import 'package:gr/src/views/contactos/novo.dart';
+import 'package:gr/src/views/contactos/listar.dart';
+import 'package:gr/src/views/dashboard/geral.dart';
+import 'package:gr/src/views/produtos/novo.dart';
+import 'package:gr/src/views/produtos/listar.dart';
+import 'package:gr/src/views/relatorios/clientes.dart';
+import 'package:gr/src/views/relatorios/usuarios.dart';
+import 'package:gr/src/views/relatorios/vendas.dart';
+import 'package:gr/src/views/usuarios/listar.dart';
+import 'package:gr/src/views/usuarios/novo.dart';
+import 'package:gr/src/views/vendas/listar.dart';
+import 'package:gr/src/views/vendas/nova.dart';
+import 'package:gr/src/views/vendas/visualisar.dart';
+import 'package:gr/src/config/app_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,7 +38,9 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: 'auth/entrar',
       getPages: [
+        GetPage(name: '/dashboards/geral', page: () => DashboardGeralView()),
         // Auth(Autenticacão)
+
         GetPage(name: '/auth/entrar', page: () => AuthEntrarView()),
         GetPage(name: '/auth/registar', page: () => AuthRegistarView()),
         // Compras

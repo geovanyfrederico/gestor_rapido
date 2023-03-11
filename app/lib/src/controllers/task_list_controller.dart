@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:templates/src/models/task_model.dart';
-import 'package:templates/src/repositories/task_repository.dart';
+import 'package:gr/src/models/task_model.dart';
+import 'package:gr/src/repositories/task_repository.dart';
 
 class TaskListController extends GetxController {
   final taskList = <Task>[].obs;

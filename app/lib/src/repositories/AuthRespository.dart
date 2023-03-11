@@ -1,13 +1,22 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:templates/src/models/UtilizadorModel.dart';
-import 'package:templates/src/models/DatabaseHelper.dart';
+import 'package:gr/src/models/UtilizadorModel.dart';
+import 'package:gr/src/models/DatabaseHelper.dart';
 
 class AuthRepository {
   final dbHelper = DatabaseHelper.instance;
   final dbTable = "utilizador";
 
+  Future<bool> auth(String usuario, String pin) async{
+    if(usuario == "root" && pin == "123"){
+      return true;
+    }
+    return false;
+  }
+
   Future<List<UtilizadorModel>> buscarTudo() async {
     final maps = await dbHelper.query(dbTable);
+
+
 
     return List.generate(maps.length, (i) {
       return UtilizadorModel(
