@@ -5,14 +5,14 @@ import 'package:gr/src/controllers/AuthController.dart';
 import 'package:gr/src/views/contactos/listar.dart';
 import 'package:gr/theme/theme1.dart';
 
-class ContactosNovoView extends StatefulWidget {
-  const ContactosNovoView({super.key});
+class ContactosNovoFView extends StatefulWidget {
+  const ContactosNovoFView({super.key});
 
   @override
   State<StatefulWidget> createState() => Contactos();
 }
 
-class Contactos extends State<ContactosNovoView> {
+class Contactos extends State<ContactosNovoFView> {
   bool numberInputIsValid = true;
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class Contactos extends State<ContactosNovoView> {
                 MaterialPageRoute(builder: (context) => ContactosListarView()));
           },
         ),
-        title: Text('Cadastro de Clientes'),
+        title: Text('Cadastro de Fornecedores'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(50),

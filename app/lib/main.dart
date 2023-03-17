@@ -5,6 +5,7 @@ import 'package:gr/src/views/auth/registar.dart';
 import 'package:gr/src/views/compras/listar.dart';
 import 'package:gr/src/views/compras/novo.dart';
 import 'package:gr/src/views/contactos/novo.dart';
+import 'package:gr/src/views/contactos/novoF.dart';
 import 'package:gr/src/views/contactos/listar.dart';
 import 'package:gr/src/views/dashboard/geral.dart';
 import 'package:gr/src/views/produtos/novo.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/compras/novo', page: () => ComprasNovoView()),
         // Contactos
         GetPage(name: '/contactos/novo', page: () => ContactosNovoView()),
+        GetPage(name: '/contactos/novoF', page: () => ContactosNovoFView()),
         GetPage(name: '/contactos/listar', page: () => ContactosListarView()),
         // Produtos
         GetPage(name: '/produtos/novo', page: () => ProdutosNovoView()),

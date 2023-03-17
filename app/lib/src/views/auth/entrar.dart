@@ -6,18 +6,20 @@ import 'package:gr/src/views/inutil/task_list_view.dart';
 import 'package:gr/theme/theme1.dart';
 import '../produtos/listar.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:gr/src/views/auth/registar.dart';
+import 'package:gr/src/views/auth/senha.dart';
+
 class AuthEntrarView extends StatelessWidget {
   final AuthController controller =
-  Get.put(AuthController()); // Adicione o controller aqui
+      Get.put(AuthController()); // Adicione o controller aqui
   AuthEntrarView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
           color: Theme1.cardTitleBg,
-
           padding: EdgeInsets.only(top: 60, left: 40, right: 40),
-          child:  Form(
+          child: Form(
             key: controller.formLogin,
             child: ListView(
               children: [
@@ -45,9 +47,11 @@ class AuthEntrarView extends StatelessWidget {
                       prefixIcon: Icon(Icons.person),
                       fillColor: Theme1.gray,
                       filled: true,
-                      contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Theme1.primary, width: 2.0),
+                        borderSide:
+                            BorderSide(color: Theme1.primary, width: 2.0),
                       ),
                       border: InputBorder.none,
                       labelText: 'Usuário',
@@ -65,25 +69,24 @@ class AuthEntrarView extends StatelessWidget {
                 ),
                 SizedBox(
                   width: 200,
-
                   height: 70,
                   child: TextFormField(
                     controller: controller.pinInput,
                     obscureText: true,
-                    keyboardType: const TextInputType.numberWithOptions(
-                        decimal: true
-                    ),
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
                     maxLength: 4,
-                    decoration: const  InputDecoration(
+                    decoration: const InputDecoration(
                       focusColor: Theme1.primary,
                       prefixIcon: Icon(Icons.lock),
                       fillColor: Theme1.gray,
                       filled: true,
-                      contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Theme1.primary, width: 2.0),
+                        borderSide:
+                            BorderSide(color: Theme1.primary, width: 2.0),
                       ),
-
                       border: InputBorder.none,
                       labelText: 'Pin',
                     ),
@@ -101,7 +104,12 @@ class AuthEntrarView extends StatelessWidget {
                 Container(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AuthSenhaView()));
+                    },
                     style: Theme1.linkButtonStyle,
                     child: const Text(
                       'Recuperar pin',
@@ -115,22 +123,36 @@ class AuthEntrarView extends StatelessWidget {
                   height: 60,
                   alignment: Alignment.center,
                   child: SizedBox.expand(
-                    child:     GFButton(
-                      onPressed: (){
+                    child: GFButton(
+                      onPressed: () {
                         controller.login();
                         //Get.offNamed('/details');
                       },
                       text: "Iniciar sessão",
                       color: Theme1.primary,
                       size: GFSize.SMALL,
-
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 60,
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AuthRegistarView()));
+                    },
+                    child: Text(
+                      "Criar conta",
+                      style: TextStyle(color: Theme1.primary),
                     ),
                   ),
                 ),
               ],
             ),
-          )
-      ),
+          )),
     );
   }
 }
