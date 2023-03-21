@@ -5,6 +5,8 @@ import 'package:gr/src/controllers/AuthController.dart';
 import 'package:gr/src/views/inutil/task_list_view.dart';
 import 'package:gr/theme/theme1.dart';
 import '../produtos/listar.dart';
+import '../produtos/novo.dart';
+import '../vendas/nova.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:gr/src/views/auth/registar.dart';
 import 'package:gr/src/views/auth/senha.dart';

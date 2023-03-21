@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/default_transitions.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:gr/src/config/app_theme.dart';
 import 'package:gr/src/controllers/AuthController.dart';
 import 'package:gr/src/views/produtos/listar.dart';
+
+import 'package:gr/theme/theme1.dart';
 
 class ProdutosNovoView extends StatefulWidget {
   const ProdutosNovoView({super.key});
@@ -18,6 +21,7 @@ class Produtos extends State<ProdutosNovoView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme1.primary,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -28,9 +32,19 @@ class Produtos extends State<ProdutosNovoView> {
         title: Text('Cadastro Produtos'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(50),
+        padding: const EdgeInsets.only(top: 6, right: 50, left: 50),
         child: Column(
           children: [
+            IconButton(
+                iconSize: 100,
+                icon: Icon(
+                  Icons.photo,
+                ),
+                onPressed: () {}),
+            TextButton(onPressed: () {}, child: Text('Edit Photo')),
+            SizedBox(
+              height: 10.0,
+            ),
             Row(
               children: [
                 Text(
@@ -46,7 +60,7 @@ class Produtos extends State<ProdutosNovoView> {
               decoration: InputDecoration(
                 labelText: 'Nome do Produto:',
                 border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
               ),
             ),
@@ -68,7 +82,7 @@ class Produtos extends State<ProdutosNovoView> {
               decoration: InputDecoration(
                 labelText: '00,AOA',
                 border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
               ),
             ),
@@ -93,13 +107,14 @@ class Produtos extends State<ProdutosNovoView> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
               ),
-              maxLines: 8,
+              maxLines: 5,
             ),
           ],
         ),
       ),
-      floatingActionButton: ElevatedButton(
+      floatingActionButton: GFButton(
         child: Text('Cadastrar Produto'),
+        color: Theme1.primary,
         onPressed: () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => ProdutosListarView()));
