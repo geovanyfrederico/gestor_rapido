@@ -49,7 +49,21 @@ class ConfigPerfilView extends StatelessWidget {
                         )
                       ],
                       shape: BoxShape.circle,
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage('assets/images/gestor.png')),
                     ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: Container(
+                        height: 48,
+                        width: 48,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(width: 4, color: Colors.white),
+                            color: Theme1.primary)),
                   )
                 ]),
               )
