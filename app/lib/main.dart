@@ -18,6 +18,7 @@ import 'package:gr/src/views/usuarios/novo.dart';
 import 'package:gr/src/views/vendas/listar.dart';
 import 'package:gr/src/views/vendas/nova.dart';
 import 'package:gr/src/views/vendas/visualisar.dart';
+import 'package:gr/src/config/perfil.dart';
 import 'package:gr/src/config/app_theme.dart';
 
 void main() {
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
         textTheme: AppTheme.textTheme,
         platform: TargetPlatform.iOS,
       ),
-      initialRoute: 'auth/entrar',
+      initialRoute: 'config/perfil',
       getPages: [
         GetPage(name: '/dashboards/geral', page: () => DashboardGeralView()),
         // Auth(Autenticacão)
@@ -68,6 +69,8 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/vendas/listar', page: () => VendasListarView()),
         GetPage(name: '/vendas/nova', page: () => VendasNovaView()),
         GetPage(name: '/vendas/visualisar', page: () => VendasVisualisarView()),
+        //Perfil
+        GetPage(name: '/config/perfil', page: () => ConfigPerfilView()),
       ],
     );
   }
