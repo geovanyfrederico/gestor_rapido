@@ -40,7 +40,10 @@ class _DashboardGeralViewState extends State<DashboardGeralView> {
             padding: EdgeInsets.all(18),
             height: 270,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20), color: Theme1.primary),
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30)),
+                color: Theme1.primary),
             child: GridTile(
               child: ListView(
                 scrollDirection: Axis.horizontal,
