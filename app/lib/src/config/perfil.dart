@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 import 'package:gr/src/config/app_theme.dart';
 import 'package:gr/src/controllers/AuthController.dart';
 import 'package:gr/theme/theme1.dart';
+import 'package:gr/src/views/produtos/listar.dart';
+import 'package:gr/src/views/contactos/listar.dart';
+import 'package:gr/src/config/perfil.dart';
+import 'package:gr/src/views/dashboard/geral.dart';
 
 class ConfigPerfilView extends StatelessWidget {
   final AuthController controller =
@@ -16,7 +20,10 @@ class ConfigPerfilView extends StatelessWidget {
         backgroundColor: Theme1.primary,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => DashboardGeralView()));
+          },
         ),
         title: Text('Perfil'),
         actions: [
@@ -58,16 +65,150 @@ class ConfigPerfilView extends StatelessWidget {
                     bottom: 0,
                     right: 0,
                     child: Container(
-                        height: 48,
-                        width: 48,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(width: 4, color: Colors.white),
-                            color: Theme1.primary)),
+                      height: 48,
+                      width: 48,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(width: 4, color: Colors.white),
+                          color: Theme1.primary),
+                      child: Icon(Icons.photo_camera, color: Colors.white),
+                    ),
                   )
                 ]),
-              )
+              ),
+              Container(
+                child: Center(
+                  child: Text(
+                    'Nome da Empresa',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ),
+              ),
+              Divider(),
+              Container(
+                child: Text(
+                  'Descrição da actividade a desenvolver',
+                ),
+              ),
+              SizedBox(height: 100),
+              Divider(),
+              Container(
+                child: Text(
+                  'Informações da empresa',
+                ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                child: Column(
+                  children: [
+                    Text(
+                      'Email:',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    Text('Email')
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                child: Column(
+                  children: [
+                    Text(
+                      'Localização:',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    Text('Localização')
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                child: Column(
+                  children: [
+                    Text(
+                      'NIF:',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    Text('NIF')
+                  ],
+                ),
+              ),
+              Divider(),
+              Container(
+                child: Text(
+                  'Certificados',
+                ),
+              ),
+              SizedBox(height: 100),
+              Divider(),
             ],
+          ),
+        ),
+      ),
+      extendBody: true,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme1.primary,
+        onPressed: () {},
+        child: const Icon(Icons.shopping_cart),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        color: Theme1.primary,
+        child: IconTheme(
+          data: IconThemeData(color: Theme1.primary),
+          child: Padding(
+            padding: EdgeInsets.all(12.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconButton(
+                    color: Colors.white,
+                    icon: Icon(Icons.home),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DashboardGeralView()));
+                    },
+                  ),
+                  IconButton(
+                    color: Colors.white,
+                    icon: Icon(Icons.list),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProdutosListarView()));
+                    },
+                  ),
+                  IconButton(
+                    color: Colors.white,
+                    icon: Icon(Icons.account_box),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ContactosListarView()));
+                    },
+                  ),
+                  IconButton(
+                    color: Colors.white,
+                    icon: Icon(Icons.person),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ConfigPerfilView()));
+                    },
+                  ),
+                ]),
           ),
         ),
       ),

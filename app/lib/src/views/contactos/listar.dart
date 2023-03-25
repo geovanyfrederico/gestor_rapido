@@ -6,6 +6,10 @@ import 'package:gr/src/controllers/AuthController.dart';
 import 'package:gr/src/views/contactos/novo.dart';
 import 'package:gr/src/views/contactos/novoF.dart';
 import 'package:gr/theme/theme1.dart';
+import 'package:gr/src/views/produtos/listar.dart';
+import 'package:gr/src/views/contactos/listar.dart';
+import 'package:gr/src/config/perfil.dart';
+import 'package:gr/src/views/dashboard/geral.dart';
 
 class ContactosListarView extends StatefulWidget {
   const ContactosListarView({super.key});
@@ -20,51 +24,123 @@ class Contactos extends State<ContactosListarView> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-          length: 2,
-          child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: Theme1.primary,
-              title: Text('CONTACTOS'),
-              bottom: const TabBar(tabs: [
-                Tab(
-                  child: Text('Fornecedores'),
-                ),
-                Tab(
-                  child: Text('Clientes'),
-                )
-              ]),
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DashboardGeralView()));
+              },
             ),
-            body: TabBarView(
-              children: [
-                Container(
-                  child: IconButton(
-                    iconSize: 100,
-                    splashColor: Colors.blue,
-                    icon: Icon(Icons.add),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ContactosNovoFView()));
-                    },
-                  ),
+            backgroundColor: Theme1.primary,
+            title: Text('CONTACTOS'),
+            bottom: const TabBar(tabs: [
+              Tab(
+                child: Text('Fornecedores'),
+              ),
+              Tab(
+                child: Text('Clientes'),
+              )
+            ]),
+          ),
+          body: TabBarView(
+            children: [
+              Container(
+                child: IconButton(
+                  iconSize: 100,
+                  splashColor: Colors.blue,
+                  icon: Icon(Icons.add),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ContactosNovoFView()));
+                  },
                 ),
-                Container(
-                  child: IconButton(
-                    iconSize: 100,
-                    splashColor: Colors.blue,
-                    icon: Icon(Icons.add),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ContactosNovoView()));
-                    },
-                  ),
+              ),
+              Container(
+                child: IconButton(
+                  iconSize: 100,
+                  splashColor: Colors.blue,
+                  icon: Icon(Icons.add),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ContactosNovoView()));
+                  },
                 ),
-              ],
+              ),
+            ],
+          ),
+          extendBody: true,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Theme1.primary,
+            onPressed: () {},
+            child: const Icon(Icons.shopping_cart),
+          ),
+          bottomNavigationBar: BottomAppBar(
+            shape: const CircularNotchedRectangle(),
+            color: Theme1.primary,
+            child: IconTheme(
+              data: IconThemeData(color: Theme1.primary),
+              child: Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      IconButton(
+                        color: Colors.white,
+                        icon: Icon(Icons.home),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DashboardGeralView()));
+                        },
+                      ),
+                      IconButton(
+                        color: Colors.white,
+                        icon: Icon(Icons.list),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProdutosListarView()));
+                        },
+                      ),
+                      IconButton(
+                        color: Colors.white,
+                        icon: Icon(Icons.account_box),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ContactosListarView()));
+                        },
+                      ),
+                      IconButton(
+                        color: Colors.white,
+                        icon: Icon(Icons.person),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ConfigPerfilView()));
+                        },
+                      ),
+                    ]),
+              ),
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

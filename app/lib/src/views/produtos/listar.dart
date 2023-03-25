@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gr/src/config/app_theme.dart';
 import 'package:gr/src/controllers/AuthController.dart';
+import 'package:gr/theme/theme1.dart';
 import 'package:gr/src/views/produtos/novo.dart';
+import 'package:gr/src/views/produtos/listar.dart';
+import 'package:gr/src/views/contactos/listar.dart';
+import 'package:gr/src/config/perfil.dart';
+import 'package:gr/src/views/dashboard/geral.dart';
 
 class ProdutosListarView extends StatelessWidget {
   final AuthController controller =
@@ -14,11 +19,13 @@ class ProdutosListarView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme1.primary,
         leading: IconButton(
-          iconSize: 40,
-          splashColor: Colors.black,
-          icon: Icon(Icons.menu),
-          onPressed: () {},
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => DashboardGeralView()));
+          },
         ),
         title: Text('ProdutoS'),
       ),
@@ -34,14 +41,66 @@ class ProdutosListarView extends StatelessWidget {
         separatorBuilder: (_, __) => Divider(),
         itemCount: tabela.length,
       ),
-      floatingActionButton: IconButton(
-        iconSize: 100,
-        splashColor: Colors.blue,
-        icon: Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ProdutosNovoView()));
-        },
+      extendBody: true,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme1.primary,
+        onPressed: () {},
+        child: const Icon(Icons.shopping_cart),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        color: Theme1.primary,
+        child: IconTheme(
+          data: IconThemeData(color: Theme1.primary),
+          child: Padding(
+            padding: EdgeInsets.all(12.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconButton(
+                    color: Colors.white,
+                    icon: Icon(Icons.home),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DashboardGeralView()));
+                    },
+                  ),
+                  IconButton(
+                    color: Colors.white,
+                    icon: Icon(Icons.list),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProdutosListarView()));
+                    },
+                  ),
+                  IconButton(
+                    color: Colors.white,
+                    icon: Icon(Icons.account_box),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ContactosListarView()));
+                    },
+                  ),
+                  IconButton(
+                    color: Colors.white,
+                    icon: Icon(Icons.person),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ConfigPerfilView()));
+                    },
+                  ),
+                ]),
+          ),
+        ),
       ),
     );
 

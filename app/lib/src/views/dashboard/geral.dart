@@ -5,6 +5,12 @@ import 'package:gr/src/controllers/AuthController.dart';
 import 'package:gr/src/views/produtos/listar.dart';
 import 'package:gr/theme/theme1.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:gr/src/views/produtos/listar.dart';
+import 'package:gr/src/views/contactos/listar.dart';
+import 'package:gr/src/config/perfil.dart';
+import 'package:gr/src/views/dashboard/geral.dart';
+import 'package:gr/src/views/vendas/listar.dart';
+import 'package:gr/src/views/relatorios/vendas.dart';
 
 class DashboardGeralView extends StatefulWidget {
   DashboardGeralView({super.key});
@@ -31,7 +37,6 @@ class _DashboardGeralViewState extends State<DashboardGeralView> {
             icon: Icon(Icons.info),
             onPressed: () {},
           ),
-          IconButton(iconSize: 40, icon: Icon(Icons.search), onPressed: () {}),
         ],
       ),
       body: ListView(
@@ -327,7 +332,12 @@ class _DashboardGeralViewState extends State<DashboardGeralView> {
             alignment: Alignment.center,
             child: SizedBox.expand(
               child: GFButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RelatoriosVendasView()));
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -407,14 +417,61 @@ class _DashboardGeralViewState extends State<DashboardGeralView> {
               ),
             ),
           ),
+          const SizedBox(
+            height: 10.0,
+          ),
+          Container(
+            height: 60,
+            alignment: Alignment.center,
+            child: SizedBox.expand(
+              child: GFButton(
+                onPressed: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "",
+                      style: TextStyle(fontSize: 20, color: Theme1.primary),
+                    ),
+                  ],
+                ),
+                color: Color.fromARGB(255, 239, 235, 235),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 10.0,
+          ),
+          Container(
+            height: 60,
+            alignment: Alignment.center,
+            child: SizedBox.expand(
+              child: GFButton(
+                onPressed: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "",
+                      style: TextStyle(fontSize: 20, color: Theme1.primary),
+                    ),
+                  ],
+                ),
+                color: Color.fromARGB(255, 239, 235, 235),
+              ),
+            ),
+          ),
         ],
       ),
       extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme1.primary,
-        onPressed: () {},
-        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => VendasListarView()));
+        },
+        child: const Icon(Icons.shopping_cart),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
@@ -429,22 +486,42 @@ class _DashboardGeralViewState extends State<DashboardGeralView> {
                   IconButton(
                     color: Colors.white,
                     icon: Icon(Icons.home),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DashboardGeralView()));
+                    },
                   ),
                   IconButton(
                     color: Colors.white,
-                    icon: Icon(Icons.list),
-                    onPressed: () {},
+                    icon: Icon(Icons.sports_hockey_sharp),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProdutosListarView()));
+                    },
                   ),
                   IconButton(
                     color: Colors.white,
-                    icon: Icon(Icons.settings),
-                    onPressed: () {},
+                    icon: Icon(Icons.account_box),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ContactosListarView()));
+                    },
                   ),
                   IconButton(
                     color: Colors.white,
                     icon: Icon(Icons.person),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ConfigPerfilView()));
+                    },
                   ),
                 ]),
           ),
