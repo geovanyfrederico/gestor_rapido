@@ -1,32 +1,29 @@
-<?php
+import 'package:gr/src/models/movimento_de_stock_model.dart';
+import 'package:gr/src/models/produto_na_compra_model.dart';
+import 'package:gr/src/models/produto_na_venda_model.dart';
 
-namespace App;
+class SistemaModel {
+    int id;
+    String nome;
+    String tipo;
+    SistemaModel({
+        required this.id,
+        required this.nome,
+        required this.tipo,
+    });
 
-use Illuminate\Database\Eloquent\Model;
-
-/**
- * @property integer $id
- * @property string $nome
- * @property string $tipo
- */
-class Sistema extends Model
-{
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'sistema';
-
-    /**
-     * The "type" of the auto-incrementing ID.
-     * 
-     * @var string
-     */
-    protected $keyType = 'integer';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['nome', 'tipo'];
+    Map<String, dynamic> toMap() {
+        return {
+            'id': id,
+            'nome': nome,
+            'tipo': tipo,
+        };
+    }
+    factory SistemaModel.fromMap(Map<String, dynamic> map) {
+        return SistemaModel(
+            id: map['id'],
+            nome: map['nome'],
+            tipo: map['tipo'],
+        );
+    }
 }
