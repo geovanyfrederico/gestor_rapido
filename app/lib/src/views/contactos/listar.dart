@@ -10,6 +10,7 @@ import 'package:gr/src/views/produtos/listar.dart';
 import 'package:gr/src/views/contactos/listar.dart';
 import 'package:gr/src/config/perfil.dart';
 import 'package:gr/src/views/dashboard/geral.dart';
+import 'package:gr/src/views/vendas/listar.dart';
 
 class ContactosListarView extends StatefulWidget {
   const ContactosListarView({super.key});
@@ -82,7 +83,10 @@ class Contactos extends State<ContactosListarView> {
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(
             backgroundColor: Theme1.primary,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => VendasListarView()));
+            },
             child: const Icon(Icons.shopping_cart),
           ),
           bottomNavigationBar: BottomAppBar(

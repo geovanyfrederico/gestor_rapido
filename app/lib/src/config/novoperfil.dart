@@ -14,7 +14,7 @@ class ConfigNovoperfilView extends StatelessWidget {
     return Scaffold(
       body: Container(
           color: Theme1.cardTitleBg,
-          padding: EdgeInsets.only(top: 60, left: 40, right: 40),
+          padding: EdgeInsets.only(top: 15, left: 40, right: 40, bottom: 40),
           child: Form(
             key: controller.formLogin,
             child: ListView(
@@ -40,6 +40,31 @@ class ConfigNovoperfilView extends StatelessWidget {
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
                       focusColor: Theme1.primary,
+                      prefixIcon: Icon(Icons.store),
+                      fillColor: Theme1.gray,
+                      filled: true,
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Theme1.primary, width: 2.0),
+                      ),
+                      border: InputBorder.none,
+                      labelText: 'Nome da Empresa',
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                SizedBox(
+                  width: 200,
+                  height: 70,
+                  child: TextFormField(
+                    obscureText: false,
+                    keyboardType: TextInputType.text,
+                    decoration: const InputDecoration(
+                      focusColor: Theme1.primary,
                       prefixIcon: Icon(Icons.person),
                       fillColor: Theme1.gray,
                       filled: true,
@@ -52,12 +77,6 @@ class ConfigNovoperfilView extends StatelessWidget {
                       border: InputBorder.none,
                       labelText: 'Nome de usuário',
                     ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Campo obrigatório';
-                      }
-                      return null;
-                    },
                   ),
                 ),
                 const SizedBox(
@@ -83,12 +102,6 @@ class ConfigNovoperfilView extends StatelessWidget {
                       border: InputBorder.none,
                       labelText: 'Email',
                     ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Campo obrigatório';
-                      }
-                      return null;
-                    },
                   ),
                 ),
                 const SizedBox(
@@ -98,13 +111,11 @@ class ConfigNovoperfilView extends StatelessWidget {
                   width: 200,
                   height: 70,
                   child: TextFormField(
-                    obscureText: true,
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
-                    maxLength: 4,
+                    obscureText: false,
+                    keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
                       focusColor: Theme1.primary,
-                      prefixIcon: Icon(Icons.lock),
+                      prefixIcon: Icon(Icons.phone),
                       fillColor: Theme1.gray,
                       filled: true,
                       contentPadding:
@@ -114,14 +125,8 @@ class ConfigNovoperfilView extends StatelessWidget {
                             BorderSide(color: Theme1.primary, width: 2.0),
                       ),
                       border: InputBorder.none,
-                      labelText: 'Pin',
+                      labelText: 'Numero Telefonico',
                     ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Campo obrigatório';
-                      }
-                      return null;
-                    },
                   ),
                 ),
                 const SizedBox(
@@ -131,13 +136,10 @@ class ConfigNovoperfilView extends StatelessWidget {
                   width: 200,
                   height: 70,
                   child: TextFormField(
-                    obscureText: true,
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
-                    maxLength: 4,
+                    obscureText: false,
+                    keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
                       focusColor: Theme1.primary,
-                      prefixIcon: Icon(Icons.lock),
                       fillColor: Theme1.gray,
                       filled: true,
                       contentPadding:
@@ -147,18 +149,37 @@ class ConfigNovoperfilView extends StatelessWidget {
                             BorderSide(color: Theme1.primary, width: 2.0),
                       ),
                       border: InputBorder.none,
-                      labelText: 'Confirmar Pin',
+                      labelText: 'Localidade',
                     ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Campo obrigatório';
-                      }
-                      return null;
-                    },
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 15,
+                ),
+                SizedBox(
+                  width: 200,
+                  height: 70,
+                  child: TextFormField(
+                    obscureText: false,
+                    keyboardType: TextInputType.text,
+                    decoration: const InputDecoration(
+                      focusColor: Theme1.primary,
+                      fillColor: Theme1.gray,
+                      filled: true,
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Theme1.primary, width: 2.0),
+                      ),
+                      border: InputBorder.none,
+                      labelText: 'Actividade a Desenvolver',
+                    ),
+                    maxLines: 20,
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
                 ),
                 Container(
                   height: 60,
@@ -169,27 +190,14 @@ class ConfigNovoperfilView extends StatelessWidget {
                         controller.login();
                         //Get.offNamed('/details');
                       },
-                      text: "Cadastre-se",
+                      text: "Editar Perfil",
                       color: Theme1.primary,
                       size: GFSize.SMALL,
                     ),
                   ),
                 ),
-                Container(
-                  height: 60,
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AuthEntrarView()));
-                    },
-                    child: Text(
-                      "Já tem uma conta?",
-                      style: TextStyle(color: Theme1.primary),
-                    ),
-                  ),
+                const SizedBox(
+                  height: 15,
                 ),
               ],
             ),

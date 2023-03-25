@@ -24,7 +24,7 @@ class RelatoriosVendasView extends StatelessWidget {
         ),
         title: Center(child: Text('Historico')),
       ),
-      body: Text('Relatorio'),
+      body: Center(child: Text('Relatorio')),
     );
   }
 }

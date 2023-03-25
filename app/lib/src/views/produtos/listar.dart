@@ -8,6 +8,7 @@ import 'package:gr/src/views/produtos/listar.dart';
 import 'package:gr/src/views/contactos/listar.dart';
 import 'package:gr/src/config/perfil.dart';
 import 'package:gr/src/views/dashboard/geral.dart';
+import 'package:gr/src/views/vendas/listar.dart';
 
 class ProdutosListarView extends StatelessWidget {
   final AuthController controller =
@@ -28,6 +29,17 @@ class ProdutosListarView extends StatelessWidget {
           },
         ),
         title: Text('ProdutoS'),
+        actions: [
+          IconButton(
+            iconSize: 40,
+            splashColor: Theme1.primary,
+            icon: Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProdutosNovoView()));
+            },
+          )
+        ],
       ),
       body: ListView.separated(
         itemBuilder: (BuildContext context, int produto) {
@@ -45,7 +57,10 @@ class ProdutosListarView extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme1.primary,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => VendasListarView()));
+        },
         child: const Icon(Icons.shopping_cart),
       ),
       bottomNavigationBar: BottomAppBar(

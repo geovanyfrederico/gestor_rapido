@@ -5,7 +5,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:gr/src/config/app_theme.dart';
 import 'package:gr/src/controllers/AuthController.dart';
 import 'package:gr/src/views/produtos/listar.dart';
-
+import 'package:gr/src/controllers/Auth/ProdutoController.dart';
 import 'package:gr/theme/theme1.dart';
 
 class ProdutosNovoView extends StatefulWidget {
@@ -16,6 +16,7 @@ class ProdutosNovoView extends StatefulWidget {
 }
 
 class Produtos extends State<ProdutosNovoView> {
+  final ProdutoController controladorProduto = Get.put(ProdutoController());
   bool numberInputIsValid = true;
   @override
   Widget build(BuildContext context) {
@@ -32,75 +33,94 @@ class Produtos extends State<ProdutosNovoView> {
         title: Text('Cadastro Produtos'),
       ),
       body: Padding(
+        key: controladorProduto.FormRegistarProduto,
         padding: const EdgeInsets.only(top: 6, right: 50, left: 50),
         child: Column(
           children: [
-            IconButton(
-                iconSize: 100,
-                icon: Icon(
-                  Icons.photo,
+            Center(
+              child: Stack(children: [
+                Container(
+                  width: 130,
+                  height: 130,
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 4, color: Colors.white),
+                    boxShadow: [
+                      BoxShadow(
+                        spreadRadius: 2,
+                        blurRadius: 10,
+                        color: Colors.black.withOpacity(0.1),
+                      )
+                    ],
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        fit: BoxFit.cover, image: NetworkImage('')),
+                  ),
                 ),
-                onPressed: () {}),
-            TextButton(onPressed: () {}, child: Text('Edit Photo')),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Container(
+                    height: 48,
+                    width: 48,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(width: 4, color: Colors.white),
+                        color: Theme1.primary),
+                    child: Icon(Icons.photo_camera, color: Colors.white),
+                  ),
+                )
+              ]),
+            ),
             SizedBox(
               height: 10.0,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Nome do Produto',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
-                ),
-              ],
             ),
             const SizedBox(
               height: 10.0,
             ),
-            TextField(
+            TextFormField(
+              controller: controladorProduto.nomeDoProduto,
               decoration: InputDecoration(
                 labelText: 'Nome do Produto:',
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
               ),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Campo obrigatório';
+                }
+                return null;
+              },
             ),
             const SizedBox(
               height: 20.0,
             ),
-            Row(
-              children: [
-                Text(
-                  'Preço do Produto',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
-                ),
-              ],
-            ),
             const SizedBox(
               height: 10.0,
             ),
-            TextField(
+            TextFormField(
+              controller: controladorProduto.preco,
               decoration: InputDecoration(
                 labelText: '00,AOA',
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
               ),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Campo obrigatório';
+                }
+                return null;
+              },
             ),
             const SizedBox(
               height: 20.0,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Descrição do Produto',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
-                ),
-              ],
             ),
             const SizedBox(
               height: 10.0,
             ),
             TextField(
+              controller: controladorProduto.descricao,
               decoration: InputDecoration(
                 labelText: 'Insira a descrição do produto',
                 border: const OutlineInputBorder(
@@ -116,8 +136,7 @@ class Produtos extends State<ProdutosNovoView> {
         child: Text('Cadastrar Produto'),
         color: Theme1.primary,
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ProdutosListarView()));
+          controladorProduto.CadastrarProduto();
         },
       ),
     );

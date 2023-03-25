@@ -72,7 +72,6 @@ class AuthRegistarView extends StatelessWidget {
                   height: 70,
                   child: TextFormField(
                     controller: controlador.nif,
-                    obscureText: false,
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
                       focusColor: Theme1.primary,

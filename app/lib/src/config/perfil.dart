@@ -7,6 +7,8 @@ import 'package:gr/src/views/produtos/listar.dart';
 import 'package:gr/src/views/contactos/listar.dart';
 import 'package:gr/src/config/perfil.dart';
 import 'package:gr/src/views/dashboard/geral.dart';
+import 'package:gr/src/config/novoperfil.dart';
+import 'package:gr/src/views/vendas/listar.dart';
 
 class ConfigPerfilView extends StatelessWidget {
   final AuthController controller =
@@ -87,6 +89,22 @@ class ConfigPerfilView extends StatelessWidget {
                   ),
                 ),
               ),
+              Column(
+                children: [
+                  TextButton(
+                    child: Text(
+                      'Editar Perfil',
+                      style: TextStyle(color: Theme1.primary),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ConfigNovoperfilView()));
+                    },
+                  ),
+                ],
+              ),
               Divider(),
               Container(
                 child: Text(
@@ -155,7 +173,10 @@ class ConfigPerfilView extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme1.primary,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => VendasListarView()));
+        },
         child: const Icon(Icons.shopping_cart),
       ),
       bottomNavigationBar: BottomAppBar(
