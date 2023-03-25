@@ -1,0 +1,55 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * @property integer $id
+ * @property integer $fornecedor_id
+ * @property integer $usuario_id
+ * @property string $data
+ * @property int $totalQtd
+ * @property float $totalPagar
+ * @property float $totalPago
+ * @property float $troco
+ * @property Fornecedor $fornecedor
+ * @property Usuario $usuario
+ */
+class Compra extends Model
+{
+    /**
+     * The table associated with the model.
+     * 
+     * @var string
+     */
+    protected $table = 'compra';
+
+    /**
+     * The "type" of the auto-incrementing ID.
+     * 
+     * @var string
+     */
+    protected $keyType = 'integer';
+
+    /**
+     * @var array
+     */
+    protected $fillable = ['fornecedor_id', 'usuario_id', 'data', 'totalQtd', 'totalPagar', 'totalPago', 'troco'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function fornecedor()
+    {
+        return $this->belongsTo('App\Fornecedor');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function usuario()
+    {
+        return $this->belongsTo('App\Usuario');
+    }
+}

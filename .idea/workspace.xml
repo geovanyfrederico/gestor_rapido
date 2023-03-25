@@ -4,7 +4,32 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ac31ce2-683a-48f9-bf61-dc8522f2c0d3" name="Changes" comment="" />
+    <list default="true" id="7ac31ce2-683a-48f9-bf61-dc8522f2c0d3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/Cliente.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/ClienteModel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/Compra.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/CompraModel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/Empresa.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/EmpresaModel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/Fornecedor.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/FornecedorModel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/MovimentoDeStock.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/MovimentoDeStockModel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/Produto.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/ProdutoModel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/ProdutoNaCompra.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/ProdutoNaCompraModel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/ProdutoNaVenda.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/ProdutoNaVendaModel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/Sistema.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/SistemaModel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/Usuario.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/UsuarioModel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/Venda.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/src/models/VendaModel.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/src/models/DatabaseHelper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/src/models/DatabaseHelper.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/macos/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/app/macos/Podfile.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +37,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="2KM54Kccpu1LWOvO0L1KM7WL5Zx" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -25,7 +53,9 @@
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -37,5 +67,16 @@
       <updated>1673771479620</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

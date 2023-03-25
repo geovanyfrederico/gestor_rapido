@@ -1,0 +1,53 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * @property integer $id
+ * @property integer $usuario_id
+ * @property integer $produto_id
+ * @property string $tipo
+ * @property string $ref
+ * @property int $qtd
+ * @property Produto $produto
+ * @property Usuario $usuario
+ */
+class MovimentoDeStock extends Model
+{
+    /**
+     * The table associated with the model.
+     * 
+     * @var string
+     */
+    protected $table = 'movimentoDeStock';
+
+    /**
+     * The "type" of the auto-incrementing ID.
+     * 
+     * @var string
+     */
+    protected $keyType = 'integer';
+
+    /**
+     * @var array
+     */
+    protected $fillable = ['usuario_id', 'produto_id', 'tipo', 'ref', 'qtd'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function produto()
+    {
+        return $this->belongsTo('App\Produto');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function usuario()
+    {
+        return $this->belongsTo('App\Usuario');
+    }
+}
