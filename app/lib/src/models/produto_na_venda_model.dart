@@ -1,44 +1,46 @@
-<?php
+import 'package:gr/src/models/produto_model.dart';
+class ProdutoNaVendaModel {
+    int id;
+    int produtoId;
+    int qtd;
+    String nome;
+    double preco;
+    double precoTotal;
+    ProdutoModel produto;
+    ProdutoNaVendaModel({
+        required this.id,
+        required this.produtoId,
+        required this.qtd,
+        required this.nome,
+        required this.preco,
+        required this.precoTotal,
+        required this.produto
+    });
 
-namespace App;
+    // List <MovimentoDeStockModel>  movimentoDeStocks;
+    // List <ProdutoNaCompra>  produtoNaCompras;
+    // List <ProdutoNaVenda>  produtoNaVendas;
 
-use Illuminate\Database\Eloquent\Model;
+    Map<String, dynamic> toMap() {
+        return {
+            'id': id,
+            'nome': nome,
+            'preco': preco,
+            'produtoId': produtoId,
+            'precoTotal': precoTotal,
+            'qtd': qtd,
 
-/**
- * @property integer $id
- * @property integer $produto_id
- * @property string $nome
- * @property int $qtd
- * @property float $preco
- * @property float $precoTotal
- * @property Produto $produto
- */
-class ProdutoNaVenda extends Model
-{
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'produtoNaVenda';
-
-    /**
-     * The "type" of the auto-incrementing ID.
-     * 
-     * @var string
-     */
-    protected $keyType = 'integer';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['produto_id', 'nome', 'qtd', 'preco', 'precoTotal'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function produto()
-    {
-        return $this->belongsTo('App\Produto');
+        };
+    }
+    factory ProdutoNaVendaModel.fromMap(Map<String, dynamic> map) {
+        return ProdutoNaVendaModel(
+            id:map['id'],
+            produtoId: map['produtoId'],
+            qtd : map['qtd'],
+            nome: map['nome'],
+            preco:map['preco'],
+            precoTotal:map['precoTotal'],
+            produto: map['produto']
+        );
     }
 }
