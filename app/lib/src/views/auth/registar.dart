@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:gr/src/controllers/AuthController.dart';
 import 'package:gr/src/views/auth/entrar.dart';
 import 'package:gr/theme/theme1.dart';
 import 'package:gr/src/controllers/Auth/RegistarController.dart';
-import 'senha.dart';
 
 class AuthRegistarView extends StatelessWidget {
   final RegistarController controlador =
