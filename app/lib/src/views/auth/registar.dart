@@ -42,7 +42,7 @@ class AuthRegistarView extends StatelessWidget {
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
                       focusColor: Theme1.primary,
-                      prefixIcon: Icon(Icons.person),
+                      prefixIcon: Icon(Icons.store),
                       fillColor: Theme1.gray,
                       filled: true,
                       contentPadding:
@@ -52,7 +52,38 @@ class AuthRegistarView extends StatelessWidget {
                             BorderSide(color: Theme1.primary, width: 2.0),
                       ),
                       border: InputBorder.none,
-                      labelText: 'Nome de usuário',
+                      labelText: 'Nome da empresa',
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Campo obrigatório';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                SizedBox(
+                  width: 200,
+                  height: 70,
+                  child: TextFormField(
+                    obscureText: false,
+                    keyboardType: TextInputType.text,
+                    decoration: const InputDecoration(
+                      focusColor: Theme1.primary,
+                      prefixIcon: Icon(Icons.contact_page),
+                      fillColor: Theme1.gray,
+                      filled: true,
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Theme1.primary, width: 2.0),
+                      ),
+                      border: InputBorder.none,
+                      labelText: 'NIF',
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -72,19 +103,18 @@ class AuthRegistarView extends StatelessWidget {
                     obscureText: false,
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
-                      focusColor: Theme1.primary,
-                      prefixIcon: Icon(Icons.email),
-                      fillColor: Theme1.gray,
-                      filled: true,
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Theme1.primary, width: 2.0),
-                      ),
-                      border: InputBorder.none,
-                      labelText: 'Email',
-                    ),
+                        focusColor: Theme1.primary,
+                        prefixIcon: Icon(Icons.person),
+                        fillColor: Theme1.gray,
+                        filled: true,
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Theme1.primary, width: 2.0),
+                        ),
+                        border: InputBorder.none,
+                        labelText: 'Nome do Usuário'),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Campo obrigatório';
@@ -117,39 +147,6 @@ class AuthRegistarView extends StatelessWidget {
                       ),
                       border: InputBorder.none,
                       labelText: 'Pin',
-                    ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Campo obrigatório';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                SizedBox(
-                  width: 200,
-                  height: 70,
-                  child: TextFormField(
-                    obscureText: true,
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
-                    maxLength: 4,
-                    decoration: const InputDecoration(
-                      focusColor: Theme1.primary,
-                      prefixIcon: Icon(Icons.lock),
-                      fillColor: Theme1.gray,
-                      filled: true,
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Theme1.primary, width: 2.0),
-                      ),
-                      border: InputBorder.none,
-                      labelText: 'Confirmar Pin',
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
