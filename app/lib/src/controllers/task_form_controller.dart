@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:gr/src/models/task_model.dart';
 import 'package:gr/src/repositories/task_repository.dart';
+
 class TaskFormController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
@@ -19,7 +20,6 @@ class TaskFormController extends GetxController {
       await repository.addTask(task);
       Get.back();
     }
-
   }
 
   void updateTask(Task task) async {
