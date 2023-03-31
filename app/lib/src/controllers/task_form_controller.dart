@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:gr/src/models/task_model.dart';
+import 'package:gr/src/models/task__model.dart';
 import 'package:gr/src/repositories/task_repository.dart';
 class TaskFormController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -11,7 +11,7 @@ class TaskFormController extends GetxController {
 
   void saveTask() async {
     if (formKey.currentState!.validate()) {
-      final task = Task(
+      final task = <Task>(
         title: titleController.text,
         description: descriptionController.text,
         isCompleted: isCompleted.value,
