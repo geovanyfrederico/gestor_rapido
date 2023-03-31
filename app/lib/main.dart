@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         textTheme: AppTheme.textTheme,
         platform: TargetPlatform.iOS,
       ),
-      initialRoute: 'auth/entrar',
+      initialRoute: 'auth/registar',
       getPages: [
         GetPage(name: '/dashboards/geral', page: () => DashboardGeralView()),
         // Auth(Autenticacão)
