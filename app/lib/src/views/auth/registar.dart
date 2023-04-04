@@ -3,12 +3,16 @@ import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:gr/src/views/auth/entrar.dart';
 import 'package:gr/theme/theme1.dart';
+<<<<<<< HEAD
 import 'package:gr/src/controllers/Auth/RegistarController.dart';
+=======
+
+import 'senha.dart';
+>>>>>>> parent of 09e7f0b (Fix controladorDoRegisto)
 
 class AuthRegistarView extends StatelessWidget {
-  final RegistarController controlador =
-      Get.put(RegistarController()); // Adicione o controller aqui
-
+  final AuthController controller =
+      Get.put(AuthController()); // Adicione o controller aqui
   AuthRegistarView({super.key});
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,7 @@ class AuthRegistarView extends StatelessWidget {
           color: Theme1.cardTitleBg,
           padding: EdgeInsets.only(top: 60, left: 40, right: 40),
           child: Form(
-            key: controlador.FormRegistar,
+            key: controller.formLogin,
             child: ListView(
               children: [
                 SizedBox(
@@ -37,7 +41,6 @@ class AuthRegistarView extends StatelessWidget {
                   width: 200,
                   height: 70,
                   child: TextFormField(
-                    controller: controlador.nomeDaEmpresa,
                     obscureText: false,
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
@@ -69,7 +72,11 @@ class AuthRegistarView extends StatelessWidget {
                   width: 200,
                   height: 70,
                   child: TextFormField(
+<<<<<<< HEAD
                     controller: controlador.nif,
+=======
+                    obscureText: false,
+>>>>>>> parent of 09e7f0b (Fix controladorDoRegisto)
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
                       focusColor: Theme1.primary,
@@ -100,7 +107,6 @@ class AuthRegistarView extends StatelessWidget {
                   width: 200,
                   height: 70,
                   child: TextFormField(
-                    controller: controlador.usuario,
                     obscureText: false,
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
@@ -131,7 +137,6 @@ class AuthRegistarView extends StatelessWidget {
                   width: 200,
                   height: 70,
                   child: TextFormField(
-                    controller: controlador.pin,
                     obscureText: true,
                     keyboardType:
                         const TextInputType.numberWithOptions(decimal: true),
@@ -167,7 +172,7 @@ class AuthRegistarView extends StatelessWidget {
                   child: SizedBox.expand(
                     child: GFButton(
                       onPressed: () {
-                        controlador.registar();
+                        controller.login();
                         //Get.offNamed('/details');
                       },
                       text: "Cadastre-se",
