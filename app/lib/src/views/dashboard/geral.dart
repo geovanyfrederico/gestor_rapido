@@ -471,7 +471,7 @@ class _DashboardGeralViewState extends State<DashboardGeralView> {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => VendasListarView()));
         },
-        child: const Icon(Icons.shopping_cart),
+        child: const Icon(Icons.add_shopping_cart),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
@@ -495,7 +495,7 @@ class _DashboardGeralViewState extends State<DashboardGeralView> {
                   ),
                   IconButton(
                     color: Colors.white,
-                    icon: Icon(Icons.sports_hockey_sharp),
+                    icon: Icon(Icons.shopping_cart),
                     onPressed: () {
                       Navigator.push(
                           context,

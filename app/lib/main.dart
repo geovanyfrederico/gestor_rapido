@@ -4,8 +4,8 @@ import 'package:gr/src/views/auth/entrar.dart';
 import 'package:gr/src/views/auth/registar.dart';
 import 'package:gr/src/views/compras/listar.dart';
 import 'package:gr/src/views/compras/novo.dart';
-import 'package:gr/src/views/contactos/novo.dart';
-import 'package:gr/src/views/contactos/novoF.dart';
+import 'package:gr/src/views/contactos/NovoCliente.dart';
+import 'package:gr/src/views/contactos/NovoFornecedor.dart';
 import 'package:gr/src/views/contactos/listar.dart';
 import 'package:gr/src/views/dashboard/geral.dart';
 import 'package:gr/src/views/produtos/novo.dart';
@@ -21,6 +21,8 @@ import 'package:gr/src/views/vendas/visualisar.dart';
 import 'package:gr/src/config/perfil.dart';
 import 'package:gr/src/config/novoperfil.dart';
 import 'package:gr/src/config/app_theme.dart';
+import 'package:gr/src/views/auth/newpageSenha.dart';
+import 'package:gr/src/views/auth/senha.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
         textTheme: AppTheme.textTheme,
         platform: TargetPlatform.iOS,
       ),
-      initialRoute: 'auth/registar',
+      initialRoute: '/auth/entrar',
       getPages: [
         GetPage(name: '/dashboards/geral', page: () => DashboardGeralView()),
         // Auth(Autenticacão)
@@ -50,8 +52,12 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/compras/listar', page: () => ComprasListarView()),
         GetPage(name: '/compras/novo', page: () => ComprasNovoView()),
         // Contactos
-        GetPage(name: '/contactos/novo', page: () => ContactosNovoView()),
-        GetPage(name: '/contactos/novoF', page: () => ContactosNovoFView()),
+        GetPage(
+            name: '/contactos/NovoCliente',
+            page: () => ContactosNovoClienteView()),
+        GetPage(
+            name: '/contactos/NovoFornecedor',
+            page: () => ContactosNovoFornecedorView()),
         GetPage(name: '/contactos/listar', page: () => ContactosListarView()),
         // Produtos
         GetPage(name: '/produtos/novo', page: () => ProdutosNovoView()),
@@ -73,6 +79,9 @@ class MyApp extends StatelessWidget {
         //Perfil
         GetPage(name: '/config/perfil', page: () => ConfigPerfilView()),
         GetPage(name: '/config/novoperfil', page: () => ConfigNovoperfilView()),
+
+        GetPage(name: '/auth/newpageSenha', page: () => OutraPage()),
+        GetPage(name: '/auth/senha', page: () => AuthSenhaView()),
       ],
     );
   }

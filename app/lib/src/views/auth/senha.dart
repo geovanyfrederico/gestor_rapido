@@ -3,119 +3,100 @@ import 'dart:js_util';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:gr/src/controllers/AuthController.dart';
+import 'package:gr/src/controllers/Auth/SenhaController.dart';
 import 'package:gr/src/views/auth/entrar.dart';
 import 'package:gr/theme/theme1.dart';
 
 class AuthSenhaView extends StatelessWidget {
-  final AuthController controller =
-      Get.put(AuthController()); // Adicione o controller aqui
+  final SenhaController controlador =
+      Get.put(SenhaController()); // Adicione o controller aqui
   AuthSenhaView({super.key});
   int _value = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-            color: Theme1.cardTitleBg,
-            padding: EdgeInsets.only(top: 60, left: 40, right: 40),
-            child: Form(
-                key: controller.formLogin,
-                child: ListView(children: [
-                  SizedBox(
-                      width: 128,
-                      height: 128,
-                      child: Image.asset('assets/images/gestor.png')),
-                  Text(
-                    'Repor o teu Pin',
-                    style: Theme1.h1TextStyle(),
-                    textAlign: TextAlign.center,
-                  ),
-                  const Divider(),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    'Como pretende recuperar o teu Pin?',
-                    style: Theme1.h3TextStyle(),
-                    textAlign: TextAlign.center,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      RadioListTile(
-                        value: 1,
-                        groupValue: _value,
-                        onChanged: (value) {
-                          setState(() {
-                            _value == value;
-                          });
-                        },
-                        activeColor: Theme1.primary,
-                        title: Text("Radio 1"),
-                        subtitle: Text("Sub title Radio 1"),
-                      ),
-                      RadioListTile(
-                        value: 2,
-                        groupValue: _value,
-                        onChanged: (value) {
-                          setState(() {
-                            _value == value;
-                          });
-                        },
-                        activeColor: Theme1.primary,
-                        title: Text("Radio 2"),
-                        subtitle: Text("Sub title Radio 2"),
-                      ),
-                      RadioListTile(
-                        value: 3,
-                        groupValue: _value,
-                        onChanged: (value) {
-                          setState(() {
-                            _value == value;
-                          });
-                        },
-                        activeColor: Theme1.primary,
-                        title: Text("Radio 3"),
-                        subtitle: Text("Sub title Radio 3"),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    height: 60,
-                    alignment: Alignment.center,
-                    child: SizedBox.expand(
-                      child: GFButton(
-                        onPressed: () {
-                          controller.login();
-                          //Get.offNamed('/details');
-                        },
-                        text: "Continuar",
-                        color: Theme1.primary,
-                        size: GFSize.LARGE,
-                      ),
+      body: Container(
+        color: Theme1.cardTitleBg,
+        padding: const EdgeInsets.only(left: 40, right: 40),
+        child: Form(
+          key: controlador.FormSenha,
+          child: ListView(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    child: Text(
+                      'Cancelar',
+                      style: TextStyle(color: Theme1.primary),
                     ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AuthEntrarView()));
+                    },
                   ),
-                  Container(
-                    height: 60,
-                    alignment: Alignment.center,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AuthEntrarView()));
-                      },
-                      child: Text(
-                        "Cancelar",
-                        style: TextStyle(color: Theme1.primary),
-                      ),
-                    ),
+                ],
+              ),
+              SizedBox(
+                  width: 500, child: Image.asset('assets/images/senha.png')),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Esqueceu Sua Senha?',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Text(
+                'Por favor, informe o E-mail ou o numéro de telefone assoaciado a sua conta. E enviaremos um codigo de verificação para a recuperação da sua conta ',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: controlador.email,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  labelText: 'E-mail',
+                  labelStyle: TextStyle(
+                    color: Colors.black38,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20,
                   ),
-                ]))));
+                ),
+                style: TextStyle(fontSize: 20),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 60,
+                alignment: Alignment.center,
+                child: SizedBox.expand(
+                  child: GFButton(
+                    onPressed: () {
+                      controlador.senha();
+                    },
+                    text: "Continuar",
+                    color: Theme1.primary,
+                    size: GFSize.LARGE,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
-
-  void setState(Null Function() param0) {}
 }

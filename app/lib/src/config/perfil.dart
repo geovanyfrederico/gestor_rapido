@@ -201,7 +201,7 @@ class ConfigPerfilView extends StatelessWidget {
                   ),
                   IconButton(
                     color: Colors.white,
-                    icon: Icon(Icons.list),
+                    icon: Icon(Icons.add_shopping_cart),
                     onPressed: () {
                       Navigator.push(
                           context,

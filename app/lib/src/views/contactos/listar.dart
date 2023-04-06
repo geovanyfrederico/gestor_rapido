@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gr/src/config/app_theme.dart';
 import 'package:gr/src/controllers/AuthController.dart';
-import 'package:gr/src/views/contactos/novo.dart';
-import 'package:gr/src/views/contactos/novoF.dart';
+import 'package:gr/src/views/contactos/NovoCliente.dart';
+import 'package:gr/src/views/contactos/NovoFornecedor.dart';
 import 'package:gr/theme/theme1.dart';
 import 'package:gr/src/views/produtos/listar.dart';
 import 'package:gr/src/views/contactos/listar.dart';
@@ -59,7 +59,8 @@ class Contactos extends State<ContactosListarView> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ContactosNovoFView()));
+                            builder: (context) =>
+                                ContactosNovoFornecedorView()));
                   },
                 ),
               ),
@@ -72,7 +73,7 @@ class Contactos extends State<ContactosListarView> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ContactosNovoView()));
+                            builder: (context) => ContactosNovoClienteView()));
                   },
                 ),
               ),
@@ -87,7 +88,7 @@ class Contactos extends State<ContactosListarView> {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => VendasListarView()));
             },
-            child: const Icon(Icons.shopping_cart),
+            child: const Icon(Icons.add_shopping_cart),
           ),
           bottomNavigationBar: BottomAppBar(
             shape: const CircularNotchedRectangle(),
@@ -111,7 +112,7 @@ class Contactos extends State<ContactosListarView> {
                       ),
                       IconButton(
                         color: Colors.white,
-                        icon: Icon(Icons.list),
+                        icon: Icon(Icons.shopping_cart),
                         onPressed: () {
                           Navigator.push(
                               context,

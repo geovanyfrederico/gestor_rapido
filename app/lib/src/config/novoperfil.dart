@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:gr/src/controllers/AuthController.dart';
+import 'package:gr/src/controllers/Auth/PerfilController.dart';
 import 'package:gr/src/views/auth/entrar.dart';
 import 'package:gr/theme/theme1.dart';
+import 'package:gr/src/config/perfil.dart';
 
 class ConfigNovoperfilView extends StatelessWidget {
-  final AuthController controller =
-      Get.put(AuthController()); // Adicione o controller aqui
+  final PerfilController controlador =
+      Get.put(PerfilController()); // Adicione o controller aqui
   ConfigNovoperfilView({super.key});
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,26 @@ class ConfigNovoperfilView extends StatelessWidget {
           color: Theme1.cardTitleBg,
           padding: EdgeInsets.only(top: 15, left: 40, right: 40, bottom: 40),
           child: Form(
-            key: controller.formLogin,
+            key: controlador.FormPerfil,
             child: ListView(
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      child: Text(
+                        'Cancelar',
+                        style: TextStyle(color: Theme1.primary),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ConfigPerfilView()));
+                      },
+                    ),
+                  ],
+                ),
                 SizedBox(
                     width: 128,
                     height: 128,
@@ -36,6 +54,7 @@ class ConfigNovoperfilView extends StatelessWidget {
                   width: 200,
                   height: 70,
                   child: TextFormField(
+                    controller: controlador.nomeDaEmpresa,
                     obscureText: false,
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
@@ -61,6 +80,7 @@ class ConfigNovoperfilView extends StatelessWidget {
                   width: 200,
                   height: 70,
                   child: TextFormField(
+                    controller: controlador.nomeUsuario,
                     obscureText: false,
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
@@ -86,6 +106,7 @@ class ConfigNovoperfilView extends StatelessWidget {
                   width: 200,
                   height: 70,
                   child: TextFormField(
+                    controller: controlador.email,
                     obscureText: false,
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
@@ -111,6 +132,7 @@ class ConfigNovoperfilView extends StatelessWidget {
                   width: 200,
                   height: 70,
                   child: TextFormField(
+                    controller: controlador.contacto,
                     obscureText: false,
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
@@ -136,6 +158,7 @@ class ConfigNovoperfilView extends StatelessWidget {
                   width: 200,
                   height: 70,
                   child: TextFormField(
+                    controller: controlador.localidade,
                     obscureText: false,
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
@@ -160,6 +183,7 @@ class ConfigNovoperfilView extends StatelessWidget {
                   width: 200,
                   height: 70,
                   child: TextFormField(
+                    controller: controlador.actividade,
                     obscureText: false,
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
@@ -187,7 +211,7 @@ class ConfigNovoperfilView extends StatelessWidget {
                   child: SizedBox.expand(
                     child: GFButton(
                       onPressed: () {
-                        controller.login();
+                        controlador.perfil();
                         //Get.offNamed('/details');
                       },
                       text: "Editar Perfil",
