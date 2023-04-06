@@ -3,16 +3,11 @@ import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:gr/src/views/auth/entrar.dart';
 import 'package:gr/theme/theme1.dart';
-<<<<<<< HEAD
-import 'package:gr/src/controllers/Auth/RegistarController.dart';
-=======
-
-import 'senha.dart';
->>>>>>> parent of 09e7f0b (Fix controladorDoRegisto)
+import 'package:gr/src/controllers/Auth/registrar_controller.dart';
 
 class AuthRegistarView extends StatelessWidget {
-  final AuthController controller =
-      Get.put(AuthController()); // Adicione o controller aqui
+  final RegistrarController controlador =
+      Get.put(RegistrarController()); // Adicione o controller aqui
   AuthRegistarView({super.key});
   @override
   Widget build(BuildContext context) {
@@ -21,7 +16,7 @@ class AuthRegistarView extends StatelessWidget {
           color: Theme1.cardTitleBg,
           padding: EdgeInsets.only(top: 60, left: 40, right: 40),
           child: Form(
-            key: controller.formLogin,
+            key: controlador.formLogin,
             child: ListView(
               children: [
                 SizedBox(
@@ -72,11 +67,7 @@ class AuthRegistarView extends StatelessWidget {
                   width: 200,
                   height: 70,
                   child: TextFormField(
-<<<<<<< HEAD
                     controller: controlador.nif,
-=======
-                    obscureText: false,
->>>>>>> parent of 09e7f0b (Fix controladorDoRegisto)
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
                       focusColor: Theme1.primary,
@@ -172,7 +163,7 @@ class AuthRegistarView extends StatelessWidget {
                   child: SizedBox.expand(
                     child: GFButton(
                       onPressed: () {
-                        controller.login();
+                        controlador.login();
                         //Get.offNamed('/details');
                       },
                       text: "Cadastre-se",
@@ -191,7 +182,7 @@ class AuthRegistarView extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => AuthEntrarView()));
                     },
-                    child: Text(
+                    child: const Text(
                       "Já tem uma conta?",
                       style: TextStyle(color: Theme1.primary),
                     ),

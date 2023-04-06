@@ -2,10 +2,10 @@ class UtilizadorModel {
   static const String tipoVendedor = "v";
   static const String tipoAdministrador = "a";
   static const String tipoGerente = "g";
-  final int id;
-  late final String nome;
-  late final int pin;
-  late final String tipo;
+  int id;
+  String nome;
+  int pin;
+  String tipo;
 
   UtilizadorModel({
     this.id = 0,

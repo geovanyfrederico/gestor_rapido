@@ -1,55 +1,60 @@
-<?php
+import 'dart:ffi';
 
-namespace App;
+import 'package:gr/src/models/cliente_model.dart';
+import 'package:gr/src/models/usuario_model.dart';
 
-use Illuminate\Database\Eloquent\Model;
+class VendaModel {
+    int id;
+    int cliente_id;
+    int usuario_id;
+    String data;
+    int totalQtd;
+    double totalPagar;
+    double totalPago;
+    double troco;
+    late ClienteModel cliente;
+    late UsuarioModel usuario;
 
-/**
- * @property integer $id
- * @property integer $cliente_id
- * @property integer $usuario_id
- * @property string $data
- * @property int $totalQtd
- * @property float $totalPagar
- * @property float $totalPago
- * @property float $troco
- * @property Cliente $cliente
- * @property Usuario $usuario
- */
-class Venda extends Model
-{
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'venda';
+    VendaModel({
+        required this.id,
+        required this.cliente_id,
+        required this.usuario_id,
+        required this.data,
+        required this.totalQtd,
+        required this.totalPagar,
+        required this.totalPago,
+        required this.troco,
+        required this.cliente,
+        required this.usuario,
+    });
 
-    /**
-     * The "type" of the auto-incrementing ID.
-     * 
-     * @var string
-     */
-    protected $keyType = 'integer';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['cliente_id', 'usuario_id', 'data', 'totalQtd', 'totalPagar', 'totalPago', 'troco'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function cliente()
-    {
-        return $this->belongsTo('App\Cliente');
+    Map<String, dynamic> toMap() {
+        return {
+            'id':id,
+            'cliente_id':cliente_id,
+            'usuario_id':usuario_id,
+            'data':data,
+            'totalQtd':totalQtd,
+            'totalPagar':totalPagar,
+            'totalPago':totalPago,
+            'troco':troco,
+            'cliente':cliente,
+            'usuario':usuario,
+        };
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function usuario()
-    {
-        return $this->belongsTo('App\Usuario');
+    factory VendaModel.fromMap(Map<String, dynamic> map) {
+        return VendaModel(
+            id: map['id'],
+            cliente_id: map['cliente_id'],
+            usuario_id: map['usuario_id'] ,
+            data: map['data'],
+            totalQtd: map['totalQtd'],
+            totalPagar: map['totalPagar'],
+            totalPago: map['totalPago'] ,
+            troco: map['troco'],
+            cliente: map['cliente'],
+            usuario: map['usuario'],
+        );
     }
 }

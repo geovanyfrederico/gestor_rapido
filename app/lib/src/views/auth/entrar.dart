@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gr/src/config/app_theme.dart';
 import 'package:gr/src/controllers/AuthController.dart';
-import 'package:gr/src/views/inutil/task_list_view.dart';
 import 'package:gr/theme/theme1.dart';
-import '../produtos/listar.dart';
-import '../produtos/novo.dart';
-import '../vendas/nova.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:gr/src/views/auth/registar.dart';
 import 'package:gr/src/views/auth/senha.dart';
@@ -20,7 +15,7 @@ class AuthEntrarView extends StatelessWidget {
     return Scaffold(
       body: Container(
           color: Theme1.cardTitleBg,
-          padding: EdgeInsets.only(top: 60, left: 40, right: 40),
+          padding: const EdgeInsets.only(top: 60, left: 40, right: 40),
           child: Form(
             key: controller.formLogin,
             child: ListView(
