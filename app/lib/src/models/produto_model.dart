@@ -12,7 +12,7 @@ class ProdutoModel {
     // List <ProdutoNaCompra>  produtoNaCompras;
     // List <ProdutoNaVenda>  produtoNaVendas;
     ProdutoModel({
-        required this.id,
+        this.id=0,
         required this.nome,
         required this.preco,
         required this.stock,
@@ -37,4 +37,5 @@ class ProdutoModel {
             stock: map['stock']
         );
     }
+
 }

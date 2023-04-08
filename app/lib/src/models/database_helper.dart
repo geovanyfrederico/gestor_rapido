@@ -1,35 +1,40 @@
+import 'dart:async';
+import 'dart:io';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {
   static const _databaseName = 'database.db';
   static const _databaseVersion = 1;
 
-
+  // torna esta classe singleton
   DatabaseHelper._privateConstructor();
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
+  // tem apenas uma referência ao banco de dados
   static Database? _database;
-
   Future<Database> get database async {
-    if (_database != null) {
-      return _database!;
-    }
-
+    if (_database != null ) return _database!;
+    // instancia o banco de dados na primeira vez que ele for acessado
     _database = await _initDatabase();
     return _database!;
   }
 
-  Future<Database> _initDatabase() async {
-    final documentsDirectory = await getDatabasesPath();
-    final path = join(documentsDirectory, _databaseName);
-
+  // abre o banco de dados
+  _initDatabase() async {
+    print("A criar banco de dados");
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, _databaseName);
+    print(path);
     return await openDatabase(path,
-        version: _databaseVersion, onCreate: _createDB);
+        version: _databaseVersion, onCreate: _onCreate);
   }
 
-  Future _createDB(Database db, int version) async {
+  // cria a tabela no banco de dados
+  Future _onCreate(Database db, int version) async {
     await db.execute('''
+   
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -283,31 +288,37 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
     ''');
   }
-  Future<List<Map<String, dynamic>>> query(String table) async {
-    final db = await instance.database;
-    return db.query(table);
-  }
-  Future<int> insert(String table, Map<String, dynamic> data) async {
-    final db = await instance.database;
-    return await db.insert(table, data);
-  }
-  Future<int> update(String table, Map<String, dynamic> data) async {
-    final db = await instance.database;
 
-    return await db.update(
-      table,
-      data,
-      where: 'id = ?',
-      whereArgs: [data['id']],
-    );
+  // insere um registro no banco de dados
+  Future<int> insert(String table, Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    return await db.insert(table, row);
   }
+
+  // atualiza um registro no banco de dados
+  Future<int> update(String table, Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    int id = row['id'];
+    return await db.update(table, row, where: 'id = ?', whereArgs: [id]);
+  }
+
+  // exclui um registro do banco de dados
   Future<int> delete(String table, int id) async {
-    final db = await instance.database;
-    return await db.delete(
-      table,
-      where: 'id = ?',
-      whereArgs: [id],
-    );
+    Database db = await instance.database;
+    return await db.delete(table, where: 'id = ?', whereArgs: [id]);
+  }
+
+  // retorna todos os registros do banco de dados
+  Future<List<Map<String, dynamic>>> queryAllRows(String table) async {
+    Database db = await instance.database;
+    return await db.query(table);
+  }
+
+  // retorna um registro pelo id
+  Future<Map<String, dynamic>> queryById(table, int id) async {
+    Database db = await instance.database;
+    List<Map<String, dynamic>> result =
+    await db.query(table, where: 'id = ?', whereArgs: [id], limit: 1);
+    return result.first;
   }
 }
-

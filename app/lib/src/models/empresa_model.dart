@@ -1,3 +1,6 @@
+import 'package:sqflite/sqflite.dart';
+import 'database_helper.dart';
+
 class EmpresaModel {
     final int id;
     late final String nome;
@@ -5,7 +8,7 @@ class EmpresaModel {
     late final String telefone;
     late final String nif;
     late final String logo;
-
+    final dbHelper = DatabaseHelper.instance;
     EmpresaModel({
         this.id = 0,
         required this.nome,
@@ -35,6 +38,13 @@ class EmpresaModel {
             nif: map['nif'],
             logo: map['logo'],
         );
+    }
+
+    Future<bool> salvar() async {
+        final db = DatabaseHelper.instance.database;
+
+
+        return true;
     }
 }
 
