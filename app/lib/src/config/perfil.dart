@@ -177,7 +177,7 @@ class ConfigPerfilView extends StatelessWidget {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => VendasListarView()));
         },
-        child: const Icon(Icons.shopping_cart),
+        child: const Icon(Icons.add_shopping_cart),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
@@ -201,7 +201,7 @@ class ConfigPerfilView extends StatelessWidget {
                   ),
                   IconButton(
                     color: Colors.white,
-                    icon: Icon(Icons.add_shopping_cart),
+                    icon: Icon(Icons.shopping_cart),
                     onPressed: () {
                       Navigator.push(
                           context,

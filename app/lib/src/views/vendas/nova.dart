@@ -4,12 +4,15 @@ import 'package:getwidget/getwidget.dart';
 import 'package:gr/src/config/app_theme.dart';
 import 'package:gr/src/controllers/AuthController.dart';
 import 'package:gr/theme/theme1.dart';
+import 'package:gr/src/views/vendas/listar.dart';
+import 'package:gr/src/views/produtos/listar.dart';
+import 'package:gr/src/controllers/Auth/FacturaController.dart';
 
 class VendasNovaView extends StatelessWidget {
-  final AuthController controller =
-      Get.put(AuthController()); // Adicione o controller aqui
+  final FacturaController controlador =
+      Get.put(FacturaController()); // Adicione o controller aqui
   VendasNovaView({super.key});
-
+  final tabela = Repositorio.tabela;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,95 +22,149 @@ class VendasNovaView extends StatelessWidget {
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => VendasNovaView()));
+                MaterialPageRoute(builder: (context) => VendasListarView()));
           },
         ),
-        title: Text('Vendas Produtos'),
+        title: Text('Imprimir Factura'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 6, right: 50, left: 50),
-        child: Column(
-          children: [
-            IconButton(
-                iconSize: 100,
-                icon: Icon(
-                  Icons.photo,
-                ),
-                onPressed: () {}),
-            Row(
-              children: [
-                Text(
-                  'Nome do Produto',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 10.0,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Nome do Produto:',
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+      body: Container(
+        padding: const EdgeInsets.all(50),
+        child: Form(
+          // key: controlador.FormCliente,
+          child: ListView(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Factura Recibo',
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+              Divider(),
+              Text(
+                'Atendente',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Preço do Produto',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 10.0,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: '00,AOA',
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              TextField(
+                controller: controlador.nomeUsuario,
+                decoration: InputDecoration(
+                  labelText: 'Nome',
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Descrição do Produto',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 10.0,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Insira a descrição do produto',
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              const SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                'Cliente',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
-              maxLines: 5,
-            ),
-          ],
+              TextField(
+                controller: controlador.nomeCliente,
+                decoration: InputDecoration(
+                  labelText: 'Nome',
+                ),
+              ),
+              TextField(
+                controller: controlador.nif,
+                decoration: InputDecoration(
+                  labelText: 'NIF',
+                ),
+              ),
+              TextField(
+                controller: controlador.morada,
+                decoration: InputDecoration(
+                  labelText: 'Endereço',
+                ),
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              Divider(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Factura Nº: 4356123'),
+                  Text('Data: 27/04/2004'),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Produtos',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Banana'),
+                  Text('200'),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Pera'),
+                  Text('150'),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Manga'),
+                  Text('700'),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Gingibre'),
+                  Text('999'),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [Text('Total Factura:'), Text('120000')],
+              ),
+              Divider(),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 60,
+                alignment: Alignment.center,
+                child: SizedBox.expand(
+                  child: GFButton(
+                    onPressed: () {
+                      controlador.factura();
+                      //Get.offNamed('/details');
+                    },
+                    text: "Imprimir Factura",
+                    color: Theme1.primary,
+                    size: GFSize.LARGE,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: GFButton(
-        child: Text('Cadastrar Produto'),
-        color: Theme1.primary,
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => VendasNovaView()));
-        },
       ),
     );
   }

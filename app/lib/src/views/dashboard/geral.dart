@@ -9,6 +9,7 @@ import 'package:gr/src/views/produtos/listar.dart';
 import 'package:gr/src/views/contactos/listar.dart';
 import 'package:gr/src/config/perfil.dart';
 import 'package:gr/src/views/dashboard/geral.dart';
+import 'package:gr/src/views/dashboard/info.dart';
 import 'package:gr/src/views/vendas/listar.dart';
 import 'package:gr/src/views/relatorios/vendas.dart';
 
@@ -35,7 +36,10 @@ class _DashboardGeralViewState extends State<DashboardGeralView> {
         actions: [
           IconButton(
             icon: Icon(Icons.info),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DashboardInfoView()));
+            },
           ),
         ],
       ),
