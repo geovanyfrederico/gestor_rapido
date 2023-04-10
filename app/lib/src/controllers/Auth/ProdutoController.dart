@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gr/src/models/produto_model.dart';
 
 class ProdutoController extends GetXState {
   final FormRegistarProduto = GlobalKey<FormState>();
