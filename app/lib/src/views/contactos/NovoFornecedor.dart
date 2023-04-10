@@ -29,7 +29,7 @@ class Contactos extends State<ContactosNovoFornecedorView> {
                 MaterialPageRoute(builder: (context) => ContactosListarView()));
           },
         ),
-        title: Text('Cadastro de Clientes'),
+        title: Text('Cadastro de Fornecedores'),
       ),
       body: Container(
         padding: const EdgeInsets.all(50),
