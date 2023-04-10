@@ -25,13 +25,160 @@ class _DashboardGeralViewState extends State<DashboardGeralView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        backgroundColor: Theme1.primary,
+        child: ListView(
+          children: [
+            Padding(padding: EdgeInsets.only(top: 30)),
+            Container(
+              width: 130,
+              height: 130,
+              decoration: BoxDecoration(
+                border: Border.all(width: 4, color: Colors.white),
+                boxShadow: [
+                  BoxShadow(
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    color: Colors.black.withOpacity(0.1),
+                  )
+                ],
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage('assets/images/gestor.png')),
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ListTile(
+                  title: Text('Nome da Empresa'),
+                  subtitle: Text('Email'),
+                ),
+              ],
+            ),
+            Divider(),
+            TextButton(
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.people,
+                    color: Colors.black,
+                  ),
+                  Text(
+                    '    Gerir o Pessoal',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ],
+              ),
+              onPressed: () {},
+            ),
+            TextButton(
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.book,
+                    color: Colors.black,
+                  ),
+                  Text(
+                    '    Facturas',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ],
+              ),
+              onPressed: () {},
+            ),
+            TextButton(
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.note_add,
+                    color: Colors.black,
+                  ),
+                  Text(
+                    '    Bloco de Notas',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ],
+              ),
+              onPressed: () {},
+            ),
+            SizedBox(
+              height: 100,
+            ),
+            Divider(),
+            TextButton(
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.question_mark,
+                    color: Colors.black,
+                  ),
+                  Text(
+                    '    Ajuda',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ],
+              ),
+              onPressed: () {},
+            ),
+            TextButton(
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.lock,
+                    color: Colors.black,
+                  ),
+                  Text(
+                    '    Segurança',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ],
+              ),
+              onPressed: () {},
+            ),
+            TextButton(
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.settings,
+                    color: Colors.black,
+                  ),
+                  Text(
+                    '    Configuraçoes',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ],
+              ),
+              onPressed: () {},
+            ),
+            SizedBox(
+              height: 70,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  child: Text(
+                    'Politica de privacidade',
+                    style: TextStyle(color: Colors.black, fontSize: 10),
+                  ),
+                  onPressed: () {},
+                ),
+                TextButton(
+                  child: Text(
+                    ' Termos de Servico',
+                    style: TextStyle(color: Colors.black, fontSize: 10),
+                  ),
+                  onPressed: () {},
+                )
+              ],
+            )
+          ],
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: Theme1.primary,
-        leading: IconButton(
-          iconSize: 40,
-          icon: Icon(Icons.menu),
-          onPressed: () {},
-        ),
         title: Text('Gestor Rápido'),
         actions: [
           IconButton(
