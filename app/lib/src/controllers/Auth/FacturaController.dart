@@ -11,6 +11,6 @@ class FacturaController extends GetXState {
 
   void factura() {
     print(nomeUsuario.text);
-    Get.toNamed("/contactos/listar");
+    Get.toNamed("/vendas/listar");
   }
 }

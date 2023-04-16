@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
@@ -40,7 +38,7 @@ class AuthSenhaView extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                  width: 500, child: Image.asset('assets/images/senha.png')),
+                  width: 500, child: Image.asset('assets/images/Senha.png')),
               SizedBox(
                 height: 20,
               ),

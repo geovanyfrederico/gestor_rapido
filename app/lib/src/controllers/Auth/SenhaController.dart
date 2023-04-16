@@ -7,13 +7,11 @@ class SenhaController extends GetXState {
   final email = TextEditingController();
   final senhaVerificacao = TextEditingController();
 
-  void senha() {
-    print(email.text);
-
+  senha() {
     Get.toNamed("/auth/newpageSenha");
   }
 
   verificar() {
-    Get.toNamed("/auth/entrar ");
+    Get.toNamed("/dashboard/seguranca");
   }
 }
