@@ -42,9 +42,13 @@ class VendasListarView extends StatelessWidget {
         itemBuilder: (BuildContext context, int produto) {
           return Column(
             children: [
-              Image.asset(
-                tabela[produto].icone,
-                height: 70,
+              Container(
+                height: 50,
+                width: 50,
+                child: Image.asset(
+                  tabela[produto].foto,
+                  height: 70,
+                ),
               ),
               Text(tabela[produto].nome),
               Text(tabela[produto].valor.toString()),

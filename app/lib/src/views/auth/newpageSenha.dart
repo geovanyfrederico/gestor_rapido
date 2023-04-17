@@ -30,7 +30,7 @@ class OutraPage extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.only(top: 60, left: 40, right: 40),
         child: Form(
-            key: controlador.FormSenha,
+            key: controlador.FormVerificar,
             child: ListView(children: [
               Text(
                 'Insere o código de 6 dígitos enviado para:',

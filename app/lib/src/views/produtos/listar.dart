@@ -50,7 +50,7 @@ class _ProdutosListarViewState extends State<ProdutosListarView> {
           },
         ),
         title: Text(
-          '${selecionada.length} Selecionadas',
+          '${selecionada.length} Selecionados',
           style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
         ),
         elevation: 1,
@@ -84,7 +84,26 @@ class _ProdutosListarViewState extends State<ProdutosListarView> {
                       backgroundColor: Theme1.primary,
                       child: Icon(Icons.check),
                     )
-                  : Image.asset(tabela[produto].icone),
+                  : Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 4, color: Colors.white),
+                          boxShadow: [
+                            BoxShadow(
+                              spreadRadius: 2,
+                              blurRadius: 10,
+                              color: Colors.black.withOpacity(0.1),
+                            )
+                          ],
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage(
+                              tabela[produto].foto,
+                            ),
+                          )),
+                    ),
               title: Text(tabela[produto].nome),
               trailing: Text(kwanza.format(tabela[produto].valor)),
               selected: selecionada.contains(tabela[produto]),
@@ -136,12 +155,14 @@ class _ProdutosListarViewState extends State<ProdutosListarView> {
 }
 
 class Produtos {
-  String icone;
+  String foto;
   String nome;
+  String descricao;
   double valor;
 
   Produtos({
-    required this.icone,
+    required this.descricao,
+    required this.foto,
     required this.nome,
     required this.valor,
   });
@@ -149,11 +170,41 @@ class Produtos {
 
 class Repositorio {
   static List<Produtos> tabela = [
-    Produtos(icone: 'assets/images/Banana.png', nome: 'Banana', valor: 200),
-    Produtos(icone: 'assets/images/Pera.png', nome: 'Pera', valor: 150),
-    Produtos(icone: 'assets/images/Manga.png', nome: 'Manga', valor: 700),
-    Produtos(icone: 'assets/images/Gingibre.png', nome: 'Gingibre', valor: 999),
-    Produtos(icone: 'assets/images/Goiaba.png', nome: 'Goiaba', valor: 199),
-    Produtos(icone: 'assets/images/Tomate.png', nome: 'Tomate', valor: 200),
+    Produtos(
+        foto: 'assets/images/Magoga.png',
+        nome: 'Magoga',
+        valor: 200,
+        descricao:
+            ' A famosa “magoga” é a combinação de pão com frango, salada e maionese.'),
+    Produtos(
+        foto: 'assets/images/compal.png',
+        nome: 'Compal em lata',
+        valor: 500,
+        descricao:
+            ' É uma bebida com ingredientes de origem natural que concilia um sabor superior, com refrescância e naturalidade.'),
+    Produtos(
+        foto: 'assets/images/Croissant.png',
+        nome: 'Croassã',
+        valor: 700,
+        descricao:
+            'Croissant é um prato tradicional francês que ganhou uma série de redefinições em território brasileiro.'),
+    Produtos(
+        foto: 'assets/images/queque.png',
+        nome: 'Queque',
+        valor: 999,
+        descricao:
+            'Bolo pequeno e redondo, feito de farinha, gordura, ovos e açúcar. '),
+    Produtos(
+        foto: 'assets/images/Gasosa.png',
+        nome: 'Gososa Nacional',
+        valor: 199,
+        descricao:
+            'Um refrigerante surpreendente, quer pela sua qualidade, quer pela oferta alargada de sabores.'),
+    Produtos(
+        foto: 'assets/images/TOP_Gasosa.png',
+        nome: 'Gasosa TOP',
+        valor: 200,
+        descricao:
+            ' É uma verdadeira explosão de sabor, juventude e frescura.'),
   ];
 }
