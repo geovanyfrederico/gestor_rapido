@@ -10,7 +10,7 @@ import 'package:gr/src/views/contactos/NovoCliente.dart';
 import 'package:gr/src/views/contactos/NovoFornecedor.dart';
 import 'package:gr/src/views/contactos/listar.dart';
 import 'package:gr/src/views/dashboard/geral.dart';
-import 'package:gr/src/views/dashboard/seguranca.dart';
+
 import 'package:gr/src/views/dashboard/info.dart';
 import 'package:gr/src/views/produtos/novo.dart';
 import 'package:gr/src/views/produtos/listar.dart';
@@ -46,7 +46,6 @@ class MyApp extends StatelessWidget {
       initialRoute: '/auth/entrar',
       getPages: [
         GetPage(name: '/dashboard/geral', page: () => DashboardGeralView()),
-        GetPage(name: '/dashboard/seguranca', page: () => PINSeguranca()),
         GetPage(name: '/dashboard/info', page: () => DashboardInfoView()),
 
         // Auth(Autenticacão)

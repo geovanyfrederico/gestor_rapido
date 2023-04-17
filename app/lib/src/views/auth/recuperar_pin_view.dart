@@ -15,24 +15,13 @@ class RecuperarPinView extends StatelessWidget {
     return Scaffold(
       body: Container(
         color: Theme1.cardTitleBg,
-        padding: const EdgeInsets.only(left: 40, right: 40),
+        padding: const EdgeInsets.only(left: 25, right: 25),
         child: Form(
           key: controlador.formulario,
           child: ListView(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    child: const Text(
-                      'Cancelar',
-                      style: TextStyle(color: Theme1.primary),
-                    ),
-                    onPressed: () {
-                      Get.to(EntrarView());
-                    },
-                  ),
-                ],
+              const SizedBox(
+                height: 20,
               ),
               SizedBox(
                   width: 200, child: Image.asset('assets/images/Senha.png')),
@@ -48,12 +37,12 @@ class RecuperarPinView extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
-                height: 16,
+                height: 20,
               ),
               const Text(
                 'Insira o seu numero de telefone para recuperar o pin',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.justify,
               ),
               const SizedBox(
                 height: 20,
@@ -88,18 +77,43 @@ class RecuperarPinView extends StatelessWidget {
                     // ... + other textfield params
                   )
               ),
+
+              SizedBox(
+                width: 200,
+                height: 70,
+                child: TextFormField(
+                    controller: controlador.codigo,
+                    enabled: controlador.codigoEnviado,
+                    obscureText: true,
+                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                    maxLength: 4,
+                    decoration: const InputDecoration(
+                      focusColor: Theme1.primary,
+                      fillColor: Theme1.gray,
+                      filled: true,
+                      contentPadding:
+                      EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                        BorderSide(color: Theme1.primary, width: 2.0),
+                      ),
+                      border: InputBorder.none,
+                      hintText: 'CÓDIGO',
+                    )
+                ),
+              ),
               const SizedBox(
                 height: 20,
               ),
               Container(
-                height: 60,
+                height: 50,
                 alignment: Alignment.center,
                 child: SizedBox.expand(
                   child: GFButton(
                     onPressed: () {
-                      controlador.login();
+                      controlador.enviarCodigo();
                     },
-                    text: "Continuar",
+                    text: "Enviar código",
                     color: Theme1.primary,
                     size: GFSize.LARGE,
                   ),
