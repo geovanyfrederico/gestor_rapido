@@ -8,6 +8,8 @@ import 'package:gr/src/views/contactos/NovoCliente.dart';
 import 'package:gr/src/views/contactos/NovoFornecedor.dart';
 import 'package:gr/src/views/contactos/listar.dart';
 import 'package:gr/src/views/dashboard/geral.dart';
+import 'package:gr/src/views/dashboard/seguranca.dart';
+import 'package:gr/src/views/dashboard/info.dart';
 import 'package:gr/src/views/produtos/novo.dart';
 import 'package:gr/src/views/produtos/listar.dart';
 import 'package:gr/src/views/relatorios/clientes.dart';
@@ -43,11 +45,16 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/auth/entrar',
       getPages: [
-        GetPage(name: '/dashboards/geral', page: () => DashboardGeralView()),
+        GetPage(name: '/dashboard/geral', page: () => DashboardGeralView()),
+        GetPage(name: '/dashboard/seguranca', page: () => PINSeguranca()),
+        GetPage(name: '/dashboard/info', page: () => DashboardInfoView()),
+
         // Auth(Autenticacão)
 
         GetPage(name: '/auth/entrar', page: () => AuthEntrarView()),
         GetPage(name: '/auth/registar', page: () => AuthRegistarView()),
+        GetPage(name: '/auth/senha', page: () => AuthSenhaView()),
+        GetPage(name: '/auth/newpageSenha', page: () => OutraPage()),
         // Compras
         GetPage(name: '/compras/listar', page: () => ComprasListarView()),
         GetPage(name: '/compras/novo', page: () => ComprasNovoView()),
@@ -79,9 +86,6 @@ class MyApp extends StatelessWidget {
         //Perfil
         GetPage(name: '/config/perfil', page: () => ConfigPerfilView()),
         GetPage(name: '/config/novoperfil', page: () => ConfigNovoperfilView()),
-
-        GetPage(name: '/auth/newpageSenha', page: () => OutraPage()),
-        GetPage(name: '/auth/senha', page: () => AuthSenhaView()),
       ],
     );
   }

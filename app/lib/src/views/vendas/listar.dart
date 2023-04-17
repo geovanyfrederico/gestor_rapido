@@ -32,16 +32,27 @@ class VendasListarView extends StatelessWidget {
           style: TextStyle(color: Theme1.primary),
         ),
       ),
-      body: ListView.separated(
+      body: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          crossAxisCount: 3,
+        ),
+
         itemBuilder: (BuildContext context, int produto) {
-          return ListTile(
-            leading: Image.asset(tabela[produto].icone),
-            title: Text(tabela[produto].nome),
-            trailing: Text(tabela[produto].valor.toString()),
+          return Column(
+            children: [
+              Image.asset(
+                tabela[produto].icone,
+                height: 70,
+              ),
+              Text(tabela[produto].nome),
+              Text(tabela[produto].valor.toString()),
+            ],
           );
         },
         padding: EdgeInsets.all(16),
-        separatorBuilder: (_, __) => Divider(),
+        //  separatorBuilder: (_, __) => Divider(),
         itemCount: tabela.length,
       ),
       floatingActionButton: IconButton(
