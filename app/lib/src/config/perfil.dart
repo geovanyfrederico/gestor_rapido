@@ -60,7 +60,7 @@ class ConfigPerfilView extends StatelessWidget {
                       shape: BoxShape.circle,
                       image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage('assets/images/gestor.png')),
+                          image: NetworkImage('assets/images/logo.png')),
                     ),
                   ),
                   Positioned(

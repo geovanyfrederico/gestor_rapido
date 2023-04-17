@@ -22,6 +22,7 @@ dependencies:
   path_provider: ^2.0.5
   permission_handler: ^10.2.0
   getwidget: ^2.0.4
+  localstorage: ^4.0.0+1
 
 dev_dependencies:
   flutter_lints: ^2.0.1
@@ -40,6 +41,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/splash/
 
   fonts:
     - family: WorkSans

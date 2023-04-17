@@ -1,18 +1,24 @@
+import 'package:sqflite/sqflite.dart';
+
+import 'database_helper.dart';
+
 class UsuarioModel {
-    static const String tipoVendedor = "v";
-    static const String tipoAdministrador = "a";
-    static const String tipoGerente = "g";
-    int id;
+
+    static const String tabela = "usuario";
+    static const int tipoVendedor = 0;
+    static const int tipoAdministrador = 2;
+    static const int tipoGerente = 1;
+    int? id;
     int tipo;
     String nome;
-    int pin;
+    String pin;
     bool ativo;
     UsuarioModel({
-        required this.id,
+        this.id,
         required this.nome,
         required this.pin,
-        required this.ativo,
-        required this.tipo
+        this.ativo = true,
+        this.tipo = tipoAdministrador
     });
 
     Map<String, dynamic> toMap() {
@@ -21,7 +27,7 @@ class UsuarioModel {
             'nome': nome,
             'tipo': tipo,
             'pin': pin,
-            'ativo': ativo,
+            'ativo': ativo ? 1:0,
         };
     }
     factory UsuarioModel.fromMap(Map<String, dynamic> map) {
@@ -30,7 +36,11 @@ class UsuarioModel {
             nome: map['nome'],
             tipo: map['tipo'],
             pin: map['pin'],
-            ativo: map['ativo'],
+            ativo: map['ativo'] == 1 ? true:false,
         );
+    }
+    Future<int> salvar() async {
+        Database db = await DatabaseHelper.instance.database;
+        return db.insert(tabela, toMap());
     }
 }

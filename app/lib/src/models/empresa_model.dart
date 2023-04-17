@@ -2,15 +2,15 @@ import 'package:sqflite/sqflite.dart';
 import 'database_helper.dart';
 
 class EmpresaModel {
-    final int id;
+    final String tabela = 'empresa';
+    final int? id;
     late final String nome;
     late final String endereco;
     late final String telefone;
     late final String nif;
     late final String logo;
-    final dbHelper = DatabaseHelper.instance;
     EmpresaModel({
-        this.id = 0,
+        this.id,
         required this.nome,
         required this.nif ,
         this.endereco = "",
@@ -40,11 +40,15 @@ class EmpresaModel {
         );
     }
 
-    Future<bool> salvar() async {
-        final db = DatabaseHelper.instance.database;
-
-
-        return true;
+    Future<int> salvar() async {
+        Database db = await DatabaseHelper.instance.database;
+        return db.insert(tabela, {
+            'nome': nome,
+            'telefone': telefone,
+            'endereco': endereco ,
+            'nif': nif ,
+            'logo': logo ,
+        });
     }
 }
 

@@ -40,7 +40,7 @@ class ConfigNovoperfilView extends StatelessWidget {
                 SizedBox(
                     width: 128,
                     height: 128,
-                    child: Image.asset('assets/images/gestor.png')),
+                    child: Image.asset('assets/images/logo.png')),
                 Text(
                   'Editar Perfil',
                   style: Theme1.h1TextStyle(),

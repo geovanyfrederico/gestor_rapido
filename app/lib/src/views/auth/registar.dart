@@ -3,19 +3,20 @@ import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:gr/src/views/auth/entrar.dart';
 import 'package:gr/theme/theme1.dart';
-import 'package:gr/src/controllers/Auth/RegistarController.dart';
+import 'package:gr/src/controllers/Auth/registar_controller.dart';
 
 class AuthRegistarView extends StatelessWidget {
   final RegistarController controlador =
-      Get.put(RegistarController()); // Adicione o controller aqui
+  Get.put(RegistarController()); // Adicione o controller aqui
+  AuthRegistarView
+  ({super.key});
 
-  AuthRegistarView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
           color: Theme1.cardTitleBg,
-          padding: EdgeInsets.only(top: 60, left: 40, right: 40),
+          padding: const EdgeInsets.only(top: 60, left: 40, right: 40),
           child: Form(
             key: controlador.FormRegistar,
             child: ListView(
@@ -23,7 +24,7 @@ class AuthRegistarView extends StatelessWidget {
                 SizedBox(
                     width: 128,
                     height: 128,
-                    child: Image.asset('assets/images/gestor.png')),
+                    child: Image.asset('assets/images/logo.png')),
                 Text(
                   'Criar uma nova conta',
                   style: Theme1.h1TextStyle(),
@@ -46,10 +47,10 @@ class AuthRegistarView extends StatelessWidget {
                       fillColor: Theme1.gray,
                       filled: true,
                       contentPadding:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Theme1.primary, width: 2.0),
+                        BorderSide(color: Theme1.primary, width: 2.0),
                       ),
                       border: InputBorder.none,
                       labelText: 'Nome da empresa',
@@ -77,10 +78,10 @@ class AuthRegistarView extends StatelessWidget {
                       fillColor: Theme1.gray,
                       filled: true,
                       contentPadding:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Theme1.primary, width: 2.0),
+                        BorderSide(color: Theme1.primary, width: 2.0),
                       ),
                       border: InputBorder.none,
                       labelText: 'NIF',
@@ -109,10 +110,10 @@ class AuthRegistarView extends StatelessWidget {
                         fillColor: Theme1.gray,
                         filled: true,
                         contentPadding:
-                            EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                        EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                         focusedBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: Theme1.primary, width: 2.0),
+                          BorderSide(color: Theme1.primary, width: 2.0),
                         ),
                         border: InputBorder.none,
                         labelText: 'Nome do Usuário'),
@@ -134,7 +135,7 @@ class AuthRegistarView extends StatelessWidget {
                     controller: controlador.pin,
                     obscureText: true,
                     keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
+                    const TextInputType.numberWithOptions(decimal: true),
                     maxLength: 4,
                     decoration: const InputDecoration(
                       focusColor: Theme1.primary,
@@ -142,10 +143,10 @@ class AuthRegistarView extends StatelessWidget {
                       fillColor: Theme1.gray,
                       filled: true,
                       contentPadding:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Theme1.primary, width: 2.0),
+                        BorderSide(color: Theme1.primary, width: 2.0),
                       ),
                       border: InputBorder.none,
                       labelText: 'Pin',
@@ -166,11 +167,31 @@ class AuthRegistarView extends StatelessWidget {
                   alignment: Alignment.center,
                   child: SizedBox.expand(
                     child: GFButton(
-                      onPressed: () {
-                        controlador.registar();
-                        //Get.offNamed('/details');
+                      onPressed: () async {
+                        bool  cadastrado =   await controlador.registar();
+                        cadastrado ? GFToast.showToast(
+                            'BOM',
+                            context,
+                            toastPosition: GFToastPosition.BOTTOM,
+                            textStyle: const TextStyle(fontSize: 16, color: GFColors.DARK),
+                            backgroundColor: GFColors.LIGHT,
+                            trailing: const Icon(
+                              Icons.notifications,
+                              color: GFColors.SUCCESS,
+                            )
+                        ) : GFToast.showToast(
+                            'MAU',
+                            context,
+                            toastPosition: GFToastPosition.BOTTOM,
+                            textStyle: const TextStyle(fontSize: 16, color: GFColors.DARK),
+                            backgroundColor: GFColors.LIGHT,
+                            trailing: const Icon(
+                              Icons.notifications,
+                              color: GFColors.SUCCESS,
+                            )
+                        );
                       },
-                      text: "Cadastre-se",
+                      text: controlador.isLoading ? "Cadastrando...." :"Cadastre-se",
                       color: Theme1.primary,
                       size: GFSize.SMALL,
                     ),
@@ -186,7 +207,7 @@ class AuthRegistarView extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => AuthEntrarView()));
                     },
-                    child: Text(
+                    child: const Text(
                       "Já tem uma conta?",
                       style: TextStyle(color: Theme1.primary),
                     ),
@@ -197,4 +218,6 @@ class AuthRegistarView extends StatelessWidget {
           )),
     );
   }
+
 }
+

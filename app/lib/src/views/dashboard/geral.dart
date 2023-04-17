@@ -45,7 +45,7 @@ class _DashboardGeralViewState extends State<DashboardGeralView> {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage('assets/images/gestor.png')),
+                    image: NetworkImage('assets/images/logo.png')),
               ),
             ),
             Column(

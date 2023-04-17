@@ -1,4 +1,4 @@
-package com.example.templates
+package com.ipag.gr
 
 import io.flutter.embedding.android.FlutterActivity
 
