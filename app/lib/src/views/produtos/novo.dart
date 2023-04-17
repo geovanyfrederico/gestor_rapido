@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:gr/src/config/app_theme.dart';
-import 'package:gr/src/controllers/AuthController.dart';
+import 'package:gr/src/controllers/controlador_padrao.dart';
 import 'package:gr/src/views/produtos/listar.dart';
-import 'package:gr/src/controllers/Auth/ProdutoController.dart';
+import 'package:gr/src/controllers/outros/ProdutoController.dart';
 import 'package:gr/theme/theme1.dart';
 
 class ProdutosNovoView extends StatefulWidget {

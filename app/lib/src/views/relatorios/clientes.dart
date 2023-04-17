@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gr/src/config/app_theme.dart';
-import 'package:gr/src/controllers/AuthController.dart';
+import 'package:gr/src/controllers/controlador_padrao.dart';
 import 'package:gr/src/views/dashboard/geral.dart';
 import 'package:gr/theme/theme1.dart';
 
 class RelatoriosClientesView extends StatelessWidget {
-  final AuthController controller =
-      Get.put(AuthController()); // Adicione o controller aqui
+  final ControladorPadrao controller =
+      Get.put(ControladorPadrao()); // Adicione o controller aqui
   RelatoriosClientesView({super.key});
 
   @override

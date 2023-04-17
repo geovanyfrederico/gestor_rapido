@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gr/src/config/app_theme.dart';
-import 'package:gr/src/controllers/AuthController.dart';
+import 'package:gr/src/controllers/controlador_padrao.dart';
 import 'package:gr/theme/theme1.dart';
 import 'package:gr/src/views/produtos/listar.dart';
 import 'package:gr/src/views/contactos/listar.dart';
-import 'package:gr/src/config/perfil.dart';
 import 'package:gr/src/views/dashboard/geral.dart';
 import 'package:gr/src/config/novoperfil.dart';
 import 'package:gr/src/views/vendas/listar.dart';
 
 class ConfigPerfilView extends StatelessWidget {
-  final AuthController controller =
-      Get.put(AuthController()); // Adicione o controller aqui
+  final ControladorPadrao controller =
+      Get.put(ControladorPadrao()); // Adicione o controller aqui
   ConfigPerfilView({super.key});
 
   @override

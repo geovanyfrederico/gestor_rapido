@@ -18,9 +18,8 @@ class UsuarioService{
       where: "nome = ? AND pin = ?",
       whereArgs: [nome, pin],
     );
-     print(results.first);
-    if (results.isNotEmpty) {
 
+    if (results.isNotEmpty) {
       return UsuarioModel.fromMap(results.first);
     }
     return null;

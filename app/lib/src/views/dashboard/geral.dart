@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gr/main.dart';
-import 'package:gr/src/controllers/AuthController.dart';
+import 'package:gr/src/controllers/controlador_padrao.dart';
 import 'package:gr/src/views/produtos/listar.dart';
 import 'package:gr/theme/theme1.dart';
 import 'package:getwidget/getwidget.dart';
@@ -21,7 +21,7 @@ class DashboardGeralView extends StatefulWidget {
 }
 
 class _DashboardGeralViewState extends State<DashboardGeralView> {
-  final AuthController controller = Get.put(AuthController());
+  final ControladorPadrao controller = Get.put(ControladorPadrao());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

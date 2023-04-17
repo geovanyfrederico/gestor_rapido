@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gr/src/config/app_theme.dart';
-import 'package:gr/src/controllers/AuthController.dart';
+import 'package:gr/src/controllers/controlador_padrao.dart';
 import 'package:gr/theme/theme1.dart';
 import 'package:gr/src/views/produtos/novo.dart';
 import 'package:gr/src/views/produtos/listar.dart';
@@ -20,7 +20,7 @@ class ProdutosListarView extends StatefulWidget {
 }
 
 class _ProdutosListarViewState extends State<ProdutosListarView> {
-  final AuthController controller = Get.put(AuthController());
+  final ControladorPadrao controller = Get.put(ControladorPadrao());
   final tabela = Repositorio.tabela;
   NumberFormat kwanza = NumberFormat.currency(name: 'Kz ');
   List<Produtos> selecionada = [];
