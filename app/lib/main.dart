@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gr/src/views/auth/entrar.dart';
-import 'package:gr/src/views/auth/registar.dart';
+import 'package:gr/src/views/auth/entrar_view.dart';
+import 'package:gr/src/views/auth/recuperar_pin_codigo_view.dart';
+import 'package:gr/src/views/auth/recuperar_pin_view.dart';
+import 'package:gr/src/views/auth/registar_view.dart';
 import 'package:gr/src/views/compras/listar.dart';
 import 'package:gr/src/views/compras/novo.dart';
 import 'package:gr/src/views/contactos/NovoCliente.dart';
@@ -23,8 +25,6 @@ import 'package:gr/src/views/vendas/visualisar.dart';
 import 'package:gr/src/config/perfil.dart';
 import 'package:gr/src/config/novoperfil.dart';
 import 'package:gr/src/config/app_theme.dart';
-import 'package:gr/src/views/auth/newpageSenha.dart';
-import 'package:gr/src/views/auth/senha.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,23 +51,23 @@ class MyApp extends StatelessWidget {
 
         // Auth(Autenticacão)
 
-        GetPage(name: '/auth/entrar', page: () => AuthEntrarView()),
-        GetPage(name: '/auth/registar', page: () => AuthRegistarView()),
-        GetPage(name: '/auth/senha', page: () => AuthSenhaView()),
-        GetPage(name: '/auth/newpageSenha', page: () => OutraPage()),
+        GetPage(name: '/auth/entrar', page: () => EntrarView()),
+        GetPage(name: '/auth/registar', page: () => RegistarView()),
+        GetPage(name: '/auth/recuperar/pin', page: () => RecuperarPinView()),
+        GetPage(name: '/auth/recuperar/pin/codigo', page: () => RecuperarPinCodigoView()),
         // Compras
         GetPage(name: '/compras/listar', page: () => ComprasListarView()),
         GetPage(name: '/compras/novo', page: () => ComprasNovoView()),
         // Contactos
         GetPage(
             name: '/contactos/NovoCliente',
-            page: () => ContactosNovoClienteView()),
+            page: () => const ContactosNovoClienteView()),
         GetPage(
             name: '/contactos/NovoFornecedor',
-            page: () => ContactosNovoFornecedorView()),
-        GetPage(name: '/contactos/listar', page: () => ContactosListarView()),
+            page: () => const ContactosNovoFornecedorView()),
+        GetPage(name: '/contactos/listar', page: () => const ContactosListarView()),
         // Produtos
-        GetPage(name: '/produtos/novo', page: () => ProdutosNovoView()),
+        GetPage(name: '/produtos/novo', page: () => const ProdutosNovoView()),
         GetPage(name: '/produtos/listar', page: () => ProdutosListarView()),
 
         // Relatorios
@@ -90,34 +90,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-/*
-
-├── autenticacao
- ├── entrar.dart
- └── registar.dart
-├── compras
- ├── listar.dart
- └── novo.dart
-├── contactos
- ├── listar.dart
- └── novo.dart
-├── inutil
- ├── home_view.dart
- ├── init_view.dart
- ├── task_form_view.dart
- └── task_list_view.dart
-├── produtos
- ├── listar.dart
- └── novo.dart
-├── relatorios
- ├── clientes.dart
- ├── usuarios.dart
- └── vendas.dart
-├── usuarios
- ├── listar.dart
- └── novo.dart
-└── vendas
-    ├── listar.dart
-    ├── nova.dart
-    └── visualisar.dart
- */

@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:gr/src/controllers/AuthController.dart';
-import 'package:gr/src/config/app_theme.dart';
-import 'package:gr/src/controllers/AuthController.dart';
-import 'package:gr/src/controllers/Auth/PINController.dart';
 import 'package:gr/theme/theme1.dart';
+import '../../controllers/controlador_padrao.dart';
 
 class PINSeguranca extends StatelessWidget {
-  final PINController controlador =
-      Get.put(PINController()); // Adicione o controller aqui
+  final ControladorPadrao controlador =
+      Get.put(ControladorPadrao()); // Adicione o controller aqui
   PINSeguranca({super.key});
 
   @override

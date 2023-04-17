@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gr/src/config/app_theme.dart';
-import 'package:gr/src/controllers/AuthController.dart';
+import 'package:gr/src/controllers/controlador_padrao.dart';
 import 'package:gr/src/views/contactos/listar.dart';
 import 'package:gr/theme/theme1.dart';
-import 'package:gr/src/controllers/Auth/ClienteController.dart';
+import 'package:gr/src/controllers/outros/ClienteController.dart';
 
 class ContactosNovoClienteView extends StatefulWidget {
   const ContactosNovoClienteView({super.key});

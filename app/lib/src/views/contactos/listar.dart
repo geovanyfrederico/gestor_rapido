@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gr/src/config/app_theme.dart';
-import 'package:gr/src/controllers/AuthController.dart';
+import 'package:gr/src/controllers/controlador_padrao.dart';
 import 'package:gr/src/views/contactos/NovoCliente.dart';
 import 'package:gr/src/views/contactos/NovoFornecedor.dart';
 import 'package:gr/theme/theme1.dart';

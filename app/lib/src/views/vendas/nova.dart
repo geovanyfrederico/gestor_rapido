@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:gr/src/config/app_theme.dart';
-import 'package:gr/src/controllers/AuthController.dart';
+import 'package:gr/src/controllers/controlador_padrao.dart';
 import 'package:gr/theme/theme1.dart';
 import 'package:gr/src/views/vendas/listar.dart';
 import 'package:gr/src/views/produtos/listar.dart';
-import 'package:gr/src/controllers/Auth/FacturaController.dart';
+import 'package:gr/src/controllers/outros/FacturaController.dart';
 
 class VendasNovaView extends StatelessWidget {
   final FacturaController controlador =

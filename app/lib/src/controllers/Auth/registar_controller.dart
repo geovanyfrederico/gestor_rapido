@@ -5,7 +5,6 @@ import 'package:gr/src/models/empresa_model.dart';
 import 'package:gr/src/models/usuario_model.dart';
 import 'package:gr/src/service/sms_service.dart';
 import 'package:gr/theme/theme1.dart';
-import 'dart:math';
 class RegistarController extends GetxController {
   final formulario = GlobalKey<FormState>();
   final nomeDaEmpresa = TextEditingController();
