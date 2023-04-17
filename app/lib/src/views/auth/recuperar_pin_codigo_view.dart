@@ -1,16 +1,13 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:gr/src/config/app_theme.dart';
-import 'package:gr/src/views/auth/senha.dart';
 import 'package:gr/theme/theme1.dart';
-import 'package:gr/src/controllers/Auth/SenhaController.dart';
+import 'package:gr/src/controllers/Auth/recuperar_pin_controller.dart';
 
-class OutraPage extends StatelessWidget {
-  final SenhaController controlador =
-      Get.put(SenhaController()); // Adicione o controller aqui
-  OutraPage({super.key});
+class RecuperarPinCodigoView extends StatelessWidget {
+  final RecuperarPinController controlador =
+  Get.put(RecuperarPinController()); // Adicione o controller aqui
+  RecuperarPinCodigoView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +19,7 @@ class OutraPage extends StatelessWidget {
           color: Colors.black,
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AuthSenhaView()));
+                MaterialPageRoute(builder: (context) => Au()));
           },
         ),
         title: Center(child: Text('Recuperar Senha')),
@@ -30,7 +27,7 @@ class OutraPage extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.only(top: 60, left: 40, right: 40),
         child: Form(
-            key: controlador.FormSenha,
+            key: controlador.formulario,
             child: ListView(children: [
               Text(
                 'Insere o código de 6 dígitos enviado para:',

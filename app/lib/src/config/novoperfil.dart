@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:gr/src/controllers/Auth/PerfilController.dart';
+import 'package:gr/src/controllers/outros/PerfilController.dart';
 import 'package:gr/src/views/auth/entrar.dart';
 import 'package:gr/theme/theme1.dart';
 import 'package:gr/src/config/perfil.dart';
