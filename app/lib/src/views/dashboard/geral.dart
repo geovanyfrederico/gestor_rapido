@@ -5,17 +5,15 @@ import 'package:gr/src/controllers/controlador_padrao.dart';
 import 'package:gr/src/views/produtos/listar.dart';
 import 'package:gr/theme/theme1.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:gr/src/views/produtos/listar.dart';
 import 'package:gr/src/views/contactos/listar.dart';
 import 'package:gr/src/config/perfil.dart';
-import 'package:gr/src/views/dashboard/geral.dart';
 import 'package:gr/src/views/dashboard/info.dart';
 import 'package:gr/src/views/vendas/listar.dart';
 import 'package:gr/src/views/relatorios/vendas.dart';
+import 'package:gr/widgets/menu_drawer.dart';
 
 class DashboardGeralView extends StatefulWidget {
-  DashboardGeralView({super.key});
-
+  const DashboardGeralView({super.key});
   @override
   State<DashboardGeralView> createState() => _DashboardGeralViewState();
 }
@@ -25,158 +23,7 @@ class _DashboardGeralViewState extends State<DashboardGeralView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        backgroundColor: Theme1.primary,
-        child: ListView(
-          children: [
-            Padding(padding: EdgeInsets.only(top: 30)),
-            Container(
-              width: 130,
-              height: 130,
-              decoration: BoxDecoration(
-                border: Border.all(width: 4, color: Colors.white),
-                boxShadow: [
-                  BoxShadow(
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    color: Colors.black.withOpacity(0.1),
-                  )
-                ],
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage('assets/images/logo.png')),
-              ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ListTile(
-                  title: Text('Nome da Empresa'),
-                  subtitle: Text('Email'),
-                ),
-              ],
-            ),
-            Divider(),
-            TextButton(
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.people,
-                    color: Colors.black,
-                  ),
-                  Text(
-                    '    Gerir o Pessoal',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ],
-              ),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.book,
-                    color: Colors.black,
-                  ),
-                  Text(
-                    '    Facturas',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ],
-              ),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.note_add,
-                    color: Colors.black,
-                  ),
-                  Text(
-                    '    Bloco de Notas',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ],
-              ),
-              onPressed: () {},
-            ),
-            SizedBox(
-              height: 100,
-            ),
-            Divider(),
-            TextButton(
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.question_mark,
-                    color: Colors.black,
-                  ),
-                  Text(
-                    '    Ajuda',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ],
-              ),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.lock,
-                    color: Colors.black,
-                  ),
-                  Text(
-                    '    Segurança',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ],
-              ),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.settings,
-                    color: Colors.black,
-                  ),
-                  Text(
-                    '    Configuraçoes',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ],
-              ),
-              onPressed: () {},
-            ),
-            SizedBox(
-              height: 70,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(
-                  child: Text(
-                    'Politica de privacidade',
-                    style: TextStyle(color: Colors.black, fontSize: 10),
-                  ),
-                  onPressed: () {},
-                ),
-                TextButton(
-                  child: Text(
-                    ' Termos de Servico',
-                    style: TextStyle(color: Colors.black, fontSize: 10),
-                  ),
-                  onPressed: () {},
-                )
-              ],
-            )
-          ],
-        ),
-      ),
+      drawer: const MenuDrawer(),
       appBar: AppBar(
         backgroundColor: Theme1.primary,
         title: Text('Gestor Rápido'),

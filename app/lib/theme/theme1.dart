@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 class Theme1 {
   Theme1._();
   static const Color nearlyWhite = Color(0xFFFAFAFA);
-  static const Color background = Color.fromRGBO(243, 243, 244, 1);
+  static const Color background = Color.fromRGBO(216, 247, 250, 1);
 
   /// Default colors
-  static const Color primary = Color.fromRGBO(246,	168,	33, 1 );
+  static const Color primary = Color.fromRGBO(246, 168, 33, 1.0);
+  static const Color primaryDark = Color.fromRGBO(0, 0, 0, 0.11372549019607843);
   static const Color darkGray = Color.fromRGBO(194, 194, 194, 1);
   static const Color blue = Color.fromRGBO(28, 132, 198, 1);     // Success colo)
   static const Color lazur = Color.fromRGBO(35, 198, 200, 1);   // Info colo)
@@ -30,6 +31,7 @@ class Theme1 {
   // Navigation
   static const Color navBg = Color.fromRGBO(47, 64, 80, 1);
   static const Color navTextColor = Color.fromRGBO(167, 177, 194, 1);
+  static const Color navColor = Color.fromRGBO(165, 165, 167, 1);
 
  static TextStyle inputStyle() {
     return const TextStyle(

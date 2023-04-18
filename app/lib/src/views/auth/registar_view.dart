@@ -4,7 +4,6 @@ import 'package:getwidget/getwidget.dart';
 import 'package:gr/src/views/auth/entrar_view.dart';
 import 'package:gr/theme/theme1.dart';
 import 'package:gr/src/controllers/Auth/registar_controller.dart';
-import 'package:phone_form_field/phone_form_field.dart';
 
 
 class RegistarView extends StatelessWidget {
@@ -37,34 +36,65 @@ class RegistarView extends StatelessWidget {
                   height: 15,
                 ),
                 SizedBox(
-                    width: 200,
-                    height: 70,
-                    child: PhoneFormField(
-                      key: const Key('telefone'),
-
-                      showFlagInInput:false,
-                      controller: null,     // controller & initialValue value
-                      initialValue: null,   // can't be supplied simultaneously
-                      selectorNavigator: const DialogNavigator(),
-                      defaultCountry: 'AO', // default
-                      decoration: const InputDecoration(
-                        focusColor: Theme1.primary,
-                        fillColor: Theme1.gray,
-                        filled: true,
-                        contentPadding:
-                        EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                          BorderSide(color: Theme1.primary, width: 2.0),
-                        ),
-                        border: InputBorder.none,
-                        hintText: 'TELEFONE',
+                  width: 200,
+                  height: 70,
+                  child: TextFormField(
+                    key: const Key('nome'),
+                    controller: controlador.nome,
+                    maxLength: 25,
+                    keyboardType: TextInputType.text,
+                    decoration: const InputDecoration(
+                      focusColor: Theme1.primary,
+                      fillColor: Theme1.gray,
+                      filled: true,
+                      contentPadding:
+                      EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                        BorderSide(color: Theme1.primary, width: 2.0),
                       ),
-                      // default
-                      enabled: true,          // default
-                      autofocus: true,       // default
-                      // ... + other textfield params
-                    )
+                      hintText: 'Seu nome',
+                      border: InputBorder.none,
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Campo obrigatório';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                SizedBox(
+                  width: 200,
+                  height: 70,
+                  child: TextFormField(
+                    key: const Key('usuario'),
+                    controller: controlador.telefone,
+                    maxLength: 9,
+                    keyboardType: TextInputType.phone,
+                    decoration: const InputDecoration(
+                      focusColor: Theme1.primary,
+                      fillColor: Theme1.gray,
+                      filled: true,
+                      contentPadding:
+                      EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                        BorderSide(color: Theme1.primary, width: 2.0),
+                      ),
+                      border: InputBorder.none,
+                      hintText: 'Telefone',
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Campo obrigatório';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
                 const SizedBox(
                   height: 5,
@@ -75,7 +105,6 @@ class RegistarView extends StatelessWidget {
                   child: TextFormField(
                     key: const Key('pin'),
                     controller: controlador.pin,
-                    obscureText: true,
                     keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                     maxLength: 4,
@@ -90,7 +119,7 @@ class RegistarView extends StatelessWidget {
                         BorderSide(color: Theme1.primary, width: 2.0),
                       ),
                       border: InputBorder.none,
-                      hintText: 'PIN',
+                      hintText: 'Pin',
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -123,7 +152,7 @@ class RegistarView extends StatelessWidget {
                         BorderSide(color: Theme1.primary, width: 2.0),
                       ),
                       border: InputBorder.none,
-                      hintText: 'NOME DA EMPRESA',
+                      hintText: 'Nome da empresa',
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -154,7 +183,7 @@ class RegistarView extends StatelessWidget {
                         BorderSide(color: Theme1.primary, width: 2.0),
                       ),
                       border: InputBorder.none,
-                      hintText: 'NIF',
+                      hintText: 'Nif',
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {

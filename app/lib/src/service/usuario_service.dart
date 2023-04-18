@@ -9,13 +9,12 @@ class UsuarioService{
 
     // busca todos os usuários
     List<Map<String, dynamic>> allUsers = await db.query('usuario');
-    print("Todos os usuários:");
     for (var user in allUsers) {
       print("${user['nome']}, PIN: ${user['pin']}, TIPO: ${user['tipo']}");
     }
     List<Map<String, dynamic>> results = await db.query(
       'usuario',
-      where: "nome = ? AND pin = ?",
+      where: "telefone = ? AND pin = ?",
       whereArgs: [nome, pin],
     );
 
