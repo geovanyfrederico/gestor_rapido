@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
         textTheme: AppTheme.textTheme,
         platform: TargetPlatform.iOS,
       ),
-      initialRoute: '/auth/entrar',
+      initialRoute: '/dashboard/geral',
       getPages: [
         GetPage(name: '/dashboard/geral', page: () => DashboardGeralView()),
         GetPage(name: '/dashboard/info', page: () => DashboardInfoView()),
@@ -53,7 +53,9 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/auth/entrar', page: () => EntrarView()),
         GetPage(name: '/auth/registar', page: () => RegistarView()),
         GetPage(name: '/auth/recuperar/pin', page: () => RecuperarPinView()),
-        GetPage(name: '/auth/recuperar/pin/codigo', page: () => RecuperarPinCodigoView()),
+        GetPage(
+            name: '/auth/recuperar/pin/codigo',
+            page: () => RecuperarPinCodigoView()),
         // Compras
         GetPage(name: '/compras/listar', page: () => ComprasListarView()),
         GetPage(name: '/compras/novo', page: () => ComprasNovoView()),
@@ -64,7 +66,8 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: '/contactos/NovoFornecedor',
             page: () => const ContactosNovoFornecedorView()),
-        GetPage(name: '/contactos/listar', page: () => const ContactosListarView()),
+        GetPage(
+            name: '/contactos/listar', page: () => const ContactosListarView()),
         // Produtos
         GetPage(name: '/produtos/novo', page: () => const ProdutosNovoView()),
         GetPage(name: '/produtos/listar', page: () => ProdutosListarView()),

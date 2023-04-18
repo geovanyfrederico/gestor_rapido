@@ -7,7 +7,7 @@ import 'package:gr/src/controllers/Auth/recuperar_pin_controller.dart';
 
 class RecuperarPinCodigoView extends StatelessWidget {
   final RecuperarPinController controlador =
-  Get.put(RecuperarPinController()); // Adicione o controller aqui
+      Get.put(RecuperarPinController()); // Adicione o controller aqui
   RecuperarPinCodigoView({super.key});
 
   @override
@@ -27,15 +27,12 @@ class RecuperarPinCodigoView extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.only(top: 60, left: 40, right: 40),
         child: Form(
-<<<<<<< HEAD:app/lib/src/views/auth/newpageSenha.dart
-            key: controlador.FormVerificar,
-            child: ListView(children: [
-              Text(
-=======
+//<<<<<<< HEAD:app/lib/src/views/auth/newpageSenha.dart
+
             key: controlador.formulario,
-            child:  ListView(children: [
-              const  Text(
->>>>>>> 2fe34d72e838b7bdc82c2afdadbeb7e6b6a7e3c1:app/lib/src/views/auth/recuperar_pin_codigo_view.dart
+            child: ListView(children: [
+              const Text(
+//>>>2fe34d72e838b7bdc82c2afdadbeb7e6b6a7e3c1:app/lib/src/views/auth/recuperar_pin_codigo_view.dart
                 'Insere o código de 6 dígitos enviado para:',
                 style: TextStyle(
                   fontSize: 32,
@@ -43,7 +40,7 @@ class RecuperarPinCodigoView extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const    Text(
+              const Text(
                 'E-mail/Numero',
                 style: TextStyle(
                   color: Colors.black38,
@@ -51,17 +48,17 @@ class RecuperarPinCodigoView extends StatelessWidget {
                   fontWeight: FontWeight.w300,
                 ),
               ),
-              const  SizedBox(
+              const SizedBox(
                 height: 16,
               ),
-              const   Text(
+              const Text(
                 'Insere o código',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              const    SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextFormField(
@@ -72,7 +69,7 @@ class RecuperarPinCodigoView extends StatelessWidget {
                   ),
                 ),
               ),
-              const   SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(

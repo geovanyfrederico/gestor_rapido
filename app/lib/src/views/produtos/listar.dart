@@ -35,7 +35,7 @@ class _ProdutosListarViewState extends State<ProdutosListarView> {
                 MaterialPageRoute(builder: (context) => DashboardGeralView()));
           },
         ),
-        title: Text('Stoks dos ProdutoS'),
+        title: Text('Produtos em Stok'),
       );
     } else {
       return AppBar(
