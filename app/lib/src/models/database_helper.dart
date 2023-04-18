@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {
-  static const _databaseName = 'gr1.db';
+  static const _databaseName = 'gr2.db';
   static const _databaseVersion = 1;
   static final DatabaseHelper instance = DatabaseHelper._init();
   // tem apenas uma referência ao banco de dados
@@ -39,7 +39,6 @@ class DatabaseHelper {
     await db.execute('''
           CREATE TABLE usuario (
    id INTEGER PRIMARY KEY AUTOINCREMENT ,
-   telefone TEXT  DEFAULT NULL,
    nome TEXT  DEFAULT NULL,
    tipo INTEGER  DEFAULT NULL,
    pin TEXT DEFAULT NULL,
