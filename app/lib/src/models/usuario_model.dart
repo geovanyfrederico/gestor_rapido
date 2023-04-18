@@ -11,11 +11,13 @@ class UsuarioModel {
     int? id;
     int tipo;
     String nome;
+    String telefone;
     String pin;
     bool ativo;
     UsuarioModel({
         this.id,
         required this.nome,
+        required this.telefone,
         required this.pin,
         this.ativo = true,
         this.tipo = tipoAdministrador
@@ -25,6 +27,7 @@ class UsuarioModel {
         return {
             'id': id,
             'nome': nome,
+            'telefone': telefone,
             'tipo': tipo,
             'pin': pin,
             'ativo': ativo ? 1:0,
@@ -34,6 +37,7 @@ class UsuarioModel {
         return UsuarioModel(
             id:map['id'],
             nome: map['nome'],
+            telefone: map['telefone'],
             tipo: map['tipo'],
             pin: map['pin'],
             ativo: map['ativo'] == 1 ? true:false,

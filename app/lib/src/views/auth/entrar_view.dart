@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gr/src/views/auth/recuperar_pin_view.dart';
+import 'package:gr/src/views/auth/registar_view.dart';
 import 'package:gr/src/views/dashboard/geral.dart';
 import 'package:gr/theme/theme1.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:gr/src/controllers/Auth/login_controller.dart';
-import 'package:phone_form_field/phone_form_field.dart';
 class EntrarView extends StatelessWidget {
   final LoginController controlador =
   Get.put(LoginController());
@@ -33,34 +33,33 @@ class EntrarView extends StatelessWidget {
                   height: 30,
                 ),
                 SizedBox(
-                    width: 200,
-                    height: 70,
-                    child: PhoneFormField(
-                      key: const Key('telefone'),
-
-                      showFlagInInput:false,
-                      controller: null,     // controller & initialValue value
-                      initialValue: null,   // can't be supplied simultaneously
-                      selectorNavigator: const DialogNavigator(),
-                      defaultCountry: 'AO', // default
-                      decoration: const InputDecoration(
-                        focusColor: Theme1.primary,
-                        fillColor: Theme1.gray,
-                        filled: true,
-                        contentPadding:
-                        EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                          BorderSide(color: Theme1.primary, width: 2.0),
-                        ),
-                        border: InputBorder.none,
-                        hintText: 'TELEFONE',
+                  width: 200,
+                  height: 70,
+                  child: TextFormField(
+                    key: const Key('usuario'),
+                    controller: controlador.telefone,
+                    maxLength: 9,
+                    keyboardType: TextInputType.phone,
+                    decoration: const InputDecoration(
+                      focusColor: Theme1.primary,
+                      fillColor: Theme1.gray,
+                      filled: true,
+                      contentPadding:
+                      EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                        BorderSide(color: Theme1.primary, width: 2.0),
                       ),
-                      // default
-                      enabled: true,          // default
-                      autofocus: true,       // default
-                      // ... + other textfield params
-                    )
+                      border: InputBorder.none,
+                      hintText: 'TELEFONE',
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Campo obrigatório';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
                 const SizedBox(
                   height: 15,
@@ -125,7 +124,7 @@ class EntrarView extends StatelessWidget {
                   alignment: Alignment.center,
                   child: TextButton(
                     onPressed: () {
-
+                      Get.to(RegistarView());
                     },
                     child: const Text(
                       "Criar conta",

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gr/src/views/auth/entrar_view.dart';
-import 'package:gr/src/views/auth/recuperar_pin_codigo_view.dart';
 import 'package:gr/src/views/auth/recuperar_pin_view.dart';
 import 'package:gr/src/views/auth/registar_view.dart';
 import 'package:gr/src/views/compras/listar.dart';
@@ -10,7 +9,6 @@ import 'package:gr/src/views/contactos/NovoCliente.dart';
 import 'package:gr/src/views/contactos/NovoFornecedor.dart';
 import 'package:gr/src/views/contactos/listar.dart';
 import 'package:gr/src/views/dashboard/geral.dart';
-
 import 'package:gr/src/views/dashboard/info.dart';
 import 'package:gr/src/views/produtos/novo.dart';
 import 'package:gr/src/views/produtos/listar.dart';
@@ -53,9 +51,12 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/auth/entrar', page: () => EntrarView()),
         GetPage(name: '/auth/registar', page: () => RegistarView()),
         GetPage(name: '/auth/recuperar/pin', page: () => RecuperarPinView()),
+<<<<<<< HEAD
         GetPage(
             name: '/auth/recuperar/pin/codigo',
             page: () => RecuperarPinCodigoView()),
+=======
+>>>>>>> 5478a0ef8e0ddc9757bbfee71a55420fdb5bf335
         // Compras
         GetPage(name: '/compras/listar', page: () => ComprasListarView()),
         GetPage(name: '/compras/novo', page: () => ComprasNovoView()),
