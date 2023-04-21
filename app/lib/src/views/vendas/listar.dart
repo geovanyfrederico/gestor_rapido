@@ -40,19 +40,42 @@ class VendasListarView extends StatelessWidget {
         ),
 
         itemBuilder: (BuildContext context, int produto) {
-          return Column(
-            children: [
-              Container(
-                height: 50,
-                width: 50,
-                child: Image.asset(
-                  tabela[produto].foto,
-                  height: 70,
+          return Container(
+            color: Colors.black12,
+            child: Column(
+              children: [
+                Container(
+                  width: 65,
+                  height: 65,
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 4, color: Colors.white),
+                      boxShadow: [
+                        BoxShadow(
+                          spreadRadius: 2,
+                          blurRadius: 10,
+                          color: Colors.black.withOpacity(0.1),
+                        )
+                      ],
+                      shape: BoxShape.rectangle,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(
+                          tabela[produto].foto,
+                        ),
+                      )),
                 ),
-              ),
-              Text(tabela[produto].nome),
-              Text(tabela[produto].valor.toString()),
-            ],
+                Positioned(
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Text(tabela[produto].nome),
+                        Text(tabela[produto].valor.toString()),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           );
         },
         padding: EdgeInsets.all(16),

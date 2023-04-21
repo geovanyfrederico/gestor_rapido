@@ -196,8 +196,8 @@ class Repositorio {
             'Bolo pequeno e redondo, feito de farinha, gordura, ovos e açúcar. '),
     Produtos(
         foto: 'assets/images/Gasosa.png',
-        nome: 'Gososa Nacional',
-        valor: 199,
+        nome: 'Gososa',
+        valor: 200,
         descricao:
             'Um refrigerante surpreendente, quer pela sua qualidade, quer pela oferta alargada de sabores.'),
     Produtos(
