@@ -15,7 +15,7 @@ class MenuDrawer extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
             const UserAccountsDrawerHeader(
-              accountName: Text('Fabrício Gonga'),
+              accountName: Text('Marcela Lucalua'),
               accountEmail: Text('925924797'),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.orangeAccent,
@@ -60,7 +60,7 @@ class MenuDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.person),
-              title: const Text('Usuarios'),
+              title: const Text('Utilizadores'),
               onTap: () {
                 Modular.to.navigate("/usuarios");
               },

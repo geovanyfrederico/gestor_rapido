@@ -30,7 +30,7 @@ class UsuariosAdicionarState extends State<UsuariosAdicionarPage> {
         ),
         backgroundColor: Colors.orange,
         centerTitle: true,
-        title: const Text('Adicionar usuarios'),
+        title: const Text('Adicionar utilizadores'),
       ),
       resizeToAvoidBottomInset:true,
       backgroundColor: Colors.grey[100],

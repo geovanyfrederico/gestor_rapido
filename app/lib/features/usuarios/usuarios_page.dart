@@ -46,7 +46,7 @@ class UsuariosPageState extends State<UsuariosPage> {
       appBar: AppBar(
         backgroundColor: Colors.orange,
         centerTitle: true,
-        title: const Text('Usuarios'),
+        title: const Text('Utilizadores'),
       ),
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.grey[100],
