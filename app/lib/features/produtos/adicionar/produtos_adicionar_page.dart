@@ -1,6 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:developer';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:gr/core/utils/snackbar_helper.dart';
 import 'package:gr/features/produtos/adicionar/produtos_adicionar_controller.dart';
 class ProdutosAdicionarPage extends StatefulWidget  {
   const ProdutosAdicionarPage({Key? key}) : super(key: key);
@@ -11,7 +14,7 @@ class ProdutosAdicionarPage extends StatefulWidget  {
 }
 class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
   final ProdutosAdicionarController controller = ProdutosAdicionarController();
-
+   File? imageFile;
   String dropdownValue = 'Vendedor';
   List<String> options = ['Administrador', 'Vendedor', 'Gerente'];
   @override
@@ -54,6 +57,39 @@ class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
               children: [
                 Column(
                   children:  [
+                    GestureDetector(
+                        onTap:() async {
+                          PickedFile? pickedFile = await ImagePicker().getImage(
+                            source: ImageSource.gallery,
+                            maxWidth: 1800,
+                            maxHeight: 1800,
+                          );
+                          if (pickedFile != null) {
+                            setState(() {
+                              imageFile = File(pickedFile.path);
+                            });
+                          }
+                          SnackbarHelper.success(context, 'Adicionar foto');
+                        },
+                        child:     Padding(
+                          padding: EdgeInsets.only(bottom: 20),
+                          child:
+                          imageFile == null ?
+                          CircleAvatar(
+                              radius: 70,
+                              backgroundImage:NetworkImage('https://via.placeholder.com/150'),
+                              backgroundColor: Colors.transparent
+                          ) :CircleAvatar(
+                              radius: 70,
+                              backgroundImage: Image.file(
+                            imageFile!,
+                            height: 70,
+                            fit: BoxFit.cover,
+                          ),
+                              backgroundColor: Colors.transparent
+                          )
+                        )
+                    ),
                     Padding(
                         padding: const EdgeInsets.only(bottom: 20),
                         child: TextField(
