@@ -1,6 +1,11 @@
 
 
+import 'package:sqflite/sqflite.dart';
+
+import 'database_helper.dart';
+
 class ProdutoModel {
+    String tabela = "produto";
     int? id;
     String codigo;
     String nome;
@@ -39,5 +44,8 @@ class ProdutoModel {
             stock: map['stock']
         );
     }
-
+    Future<int> salvar() async {
+        Database db = await DatabaseHelper.instance.database;
+        return db.insert(tabela, toMap());
+    }
 }

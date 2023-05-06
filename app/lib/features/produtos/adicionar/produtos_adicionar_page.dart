@@ -14,9 +14,7 @@ class ProdutosAdicionarPage extends StatefulWidget  {
 }
 class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
   final ProdutosAdicionarController controller = ProdutosAdicionarController();
-   File? imageFile;
-  String dropdownValue = 'Vendedor';
-  List<String> options = ['Administrador', 'Vendedor', 'Gerente'];
+  File? imageFile;
   @override
   void initState() {
     super.initState();
@@ -72,22 +70,13 @@ class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
                           SnackbarHelper.success(context, 'Adicionar foto');
                         },
                         child:     Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child:
-                          imageFile == null ?
-                          CircleAvatar(
-                              radius: 70,
-                              backgroundImage:NetworkImage('https://via.placeholder.com/150'),
-                              backgroundColor: Colors.transparent
-                          ) :CircleAvatar(
-                              radius: 70,
-                              backgroundImage: Image.file(
-                            imageFile!,
-                            height: 70,
-                            fit: BoxFit.cover,
-                          ),
-                              backgroundColor: Colors.transparent
-                          )
+                            padding:  EdgeInsets.only(bottom: 20),
+                            child:
+                            CircleAvatar(
+                                radius: 70,
+                                backgroundImage:NetworkImage('https://via.placeholder.com/150'),
+                                backgroundColor: Colors.transparent
+                            )
                         )
                     ),
                     Padding(
@@ -96,7 +85,7 @@ class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
                             keyboardType: TextInputType.text,
                             maxLength: 50,
                             autocorrect: false,
-                            controller: controller.nome,
+                            controller: controller.codigo,
                             // Every single time the text changes in a
                             // TextField, this onChanged callback is called
                             // and it passes in the value.
@@ -154,7 +143,7 @@ class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
 
                             maxLength: 50,
                             autocorrect: false,
-                            controller: controller.nome,
+                            controller: controller.preco,
                             // Every single time the text changes in a
                             // TextField, this onChanged callback is called
                             // and it passes in the value.
@@ -182,7 +171,7 @@ class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
                         child: TextField(
                             keyboardType: TextInputType.phone,
                             maxLength: 9,
-                            controller: controller.telefone,
+                            controller: controller.stock,
                             // Every single time the text changes in a
                             // TextField, this onChanged callback is called
                             // and it passes in the value.

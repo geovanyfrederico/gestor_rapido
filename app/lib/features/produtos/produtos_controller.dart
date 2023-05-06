@@ -11,9 +11,16 @@ import 'package:gr/models/database_helper.dart';
 
 class ProdutosController  extends ChangeNotifier{
   var loading = false;
+  final filtro = TextEditingController();
   Future<List<ProdutoModel>> buscar() async {
     Database db = await DatabaseHelper.instance.database;
-    List<Map<String, dynamic>> maps = await db.query('produto', orderBy: 'id DESC');
+    String query = 'SELECT * FROM produto';
+    if (filtro.text.isNotEmpty) {
+      query += " WHERE nome LIKE '%${filtro.text}%' OR codigo LIKE '%${filtro.text}%'";
+    }
+    query += ' ORDER BY id DESC';
+    List<Map<String, dynamic>> maps = await db.rawQuery(query);
+
     return List.generate(maps.length, (index) {
       return ProdutoModel(
         id: maps[index]['id'],
