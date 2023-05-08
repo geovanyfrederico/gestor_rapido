@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:gr/core/utils/Testos.dart';
 import 'package:gr/features/usuarios/usuarios_controller.dart';
 import 'package:gr/wigets/menu_drawer.dart';
 
@@ -166,14 +167,6 @@ class UsuariosPageState extends State<UsuariosPage> {
                                   },
                                 ),
                                 ListTile(
-                                  leading: const Icon(Icons.bar_chart),
-                                  title: const Text('Relatorios'),
-                                  onTap: () {
-                                    log("Visualizar");
-                                    Modular.to.navigate("/usuarios/visualizar?id=${snapshot.data![index].id}");
-                                  },
-                                ),
-                                ListTile(
                                   leading: Icon(Icons.delete, color: Colors.red,),
                                   title: Text('Eliminar', style: TextStyle(
                                       color: Colors.red
@@ -200,7 +193,7 @@ class UsuariosPageState extends State<UsuariosPage> {
                       leading:CircleAvatar(
                         backgroundColor: Colors.orangeAccent,
                         child: Text(
-                          "${snapshot.data![index].nome[0].toUpperCase()}",
+                          Testos.primeiraLetraNomeSobrenome(snapshot.data![index].nome),
                           style: TextStyle(fontSize: 20.0,
                               color: Colors.white
                           ),

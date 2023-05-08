@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,6 @@ class ProdutosAdicionarPage extends StatefulWidget  {
 }
 class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
   final ProdutosAdicionarController controller = ProdutosAdicionarController();
-  File? imageFile;
   @override
   void initState() {
     super.initState();
@@ -54,6 +52,7 @@ class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
             child:  ListView(
               children: [
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children:  [
                     GestureDetector(
                         onTap:() async {
@@ -64,17 +63,17 @@ class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
                           );
                           if (pickedFile != null) {
                             setState(() {
-                              imageFile = File(pickedFile.path);
+                              controller.foto = File(pickedFile.path);
                             });
                           }
                           SnackbarHelper.success(context, 'Adicionar foto');
                         },
                         child:     Padding(
-                            padding:  EdgeInsets.only(bottom: 20),
+                            padding:  const EdgeInsets.only(bottom: 20),
                             child:
                             CircleAvatar(
-                                radius: 70,
-                                backgroundImage:NetworkImage('https://via.placeholder.com/150'),
+                                radius: 60,
+                                backgroundImage:controller.foto != null ? AssetImage(controller.foto!.path) : const AssetImage("assets/images/produto/padrao.png"),
                                 backgroundColor: Colors.transparent
                             )
                         )
@@ -131,7 +130,7 @@ class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
                                 BorderSide(color: Colors.orange, width: 2.0),
                               ),
                               border: InputBorder.none,
-                              hintText: 'Nome',
+                              hintText: 'Nome *',
                               counterText: "",
                               prefixIcon: Icon(Icons.shopping_cart),
                             )
@@ -160,7 +159,7 @@ class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
                                 BorderSide(color: Colors.orange, width: 2.0),
                               ),
                               border: InputBorder.none,
-                              hintText: 'Preço',
+                              hintText: 'Preço *',
                               counterText: "",
                               prefixIcon: Icon(Icons.attach_money),
                             )

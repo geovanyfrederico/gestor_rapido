@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class Mat {
   static String numeroParaDinheiro(dynamic value, [String code = 'AOA', int digits = 2]) {
     if (value == null) {
@@ -25,5 +27,10 @@ class Mat {
       return value + '0';
     }
     return value;
+  }
+  static String codigoAleatorio() {
+    Random random = Random();
+    int randomNumber = random.nextInt(9000) + 1000;
+    return randomNumber.toString();
   }
 }

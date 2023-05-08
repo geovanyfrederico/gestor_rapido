@@ -10,7 +10,7 @@ class ProdutoModel {
     String codigo;
     String nome;
     double preco;
-    String foto;
+    String? foto;
     int stock;
     // List <MovimentoDeStockModel>  movimentoDeStocks;
     // List <ProdutoNaCompra>  produtoNaCompras;
@@ -21,7 +21,7 @@ class ProdutoModel {
         required this.codigo,
         required this.preco,
         required this.stock,
-        this.foto = "default.png",
+        this.foto ,
     });
 
     Map<String, dynamic> toMap() {

@@ -152,13 +152,6 @@ class ProdutosPageState extends State<ProdutosPage> {
                         builder: (context) {
                           return Wrap(
                             children: [
-                              ListTile(
-                                leading: const Icon(Icons.visibility),
-                                title: const Text('Visualizar'),
-                                onTap: () {
-                                  Modular.to.navigate("/usuarios/visualizar");
-                                },
-                              ),
                               const ListTile(
                                 leading: Icon(Icons.edit),
                                 title: Text('Editar'),
@@ -178,7 +171,11 @@ class ProdutosPageState extends State<ProdutosPage> {
                     },
                     title: Text(snapshot.data![index].nome),
                     subtitle: Text(snapshot.data![index].codigo),
-                    leading: const Icon(Icons.person, size: 40),
+                    leading: CircleAvatar(
+                        radius: 20,
+                        backgroundImage: snapshot.data![index].foto == null ? const AssetImage("assets/images/produto/padrao.png") : AssetImage(snapshot.data![index].foto.toString())  ,
+                        backgroundColor: Colors.transparent
+                    ),
                     trailing:  Text(Mat.numeroParaDinheiro(snapshot.data![index].preco.toString()))
                 ),
               ),

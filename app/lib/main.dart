@@ -9,7 +9,6 @@ import 'package:gr/features/contactos/contactos_page.dart';
 import 'package:gr/features/dasboard/dasboard_page.dart';
 import 'package:gr/features/usuarios/usuarios_page.dart';
 import 'package:gr/features/recuperar_pin/recuperar_pin_page.dart';
-import 'package:gr/features/usuarios/visualizar/usuarios_visualizar_page.dart';
 import 'features/clientes/adicionar/clientes_adicionar_page.dart';
 import 'features/recuperado_pin/recuperado_pin_page.dart';
 import 'features/usuarios/adicionar/usuarios_adicionar_page.dart';
@@ -61,8 +60,6 @@ class AppModule extends Module {
     //Usuarios
     ChildRoute('/usuarios', child: (context, args) =>   UsuariosPage(), transition: TransitionType.fadeIn),
     ChildRoute('/usuarios/adicionar', child: (context, args) =>   UsuariosAdicionarPage(), transition: TransitionType.fadeIn),
-    ChildRoute('/usuarios/visualizar', child: (context, args) => UsuariosVisualizarPage(id: args.queryParams['id']),transition: TransitionType.fadeIn),
-
     //Autenticacao
     ChildRoute('/registar', child: (context, args) =>   RegistarPage(), transition: TransitionType.fadeIn),
     ChildRoute('/entrar', child: (context, args) =>   EntrarPage(), transition: TransitionType.fadeIn),

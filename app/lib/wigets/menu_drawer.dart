@@ -1,10 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:gr/models/usuario_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-class MenuDrawer extends StatelessWidget {
-  const MenuDrawer({
-    Key? key,
-  }) : super(key: key);
+
+import '../core/utils/Testos.dart';
+
+class MenuDrawer extends StatefulWidget{
+  const MenuDrawer({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return  MenuDrawerState();
+  }
+
+}
+class MenuDrawerState extends State<MenuDrawer> {
+  late SharedPreferences _prefs;
+  late String usuarioNome = "";
+  late String usuarioTipo = "";
+  // Initialize shared preferences
+  Future<void> initPrefs() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      usuarioNome =  _prefs.getString("usuarioNome")!;
+      usuarioTipo =  UsuarioModel.tipoDescricaoStatico(_prefs.getInt("usuarioTipo")!) ;
+    });
+    // Check if user has completed onboarding
+  }
+
+  @override
+  void initState() {
+    initPrefs();
+    super.initState();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +44,13 @@ class MenuDrawer extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            const UserAccountsDrawerHeader(
-              accountName: Text('Marcela Lucalua'),
-              accountEmail: Text('925924797'),
+            UserAccountsDrawerHeader(
+              accountName: Text(usuarioNome),
+              accountEmail: Text(usuarioTipo),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.orangeAccent,
                 child: Text(
-                  'FG',
+                  Testos.primeiraLetraNomeSobrenome(usuarioNome),
                   style: TextStyle(fontSize: 20.0,
                       color: Colors.white
                   ),
@@ -74,7 +104,7 @@ class MenuDrawer extends StatelessWidget {
             ),
             const Divider(),
 
-             ListTile(
+            ListTile(
               leading: const Icon(Icons.query_stats),
               title: const Text('Relatorios'),
               onTap: () {
@@ -103,6 +133,8 @@ class MenuDrawer extends StatelessWidget {
       ),
     );
   }
+
+
 }
 
 
