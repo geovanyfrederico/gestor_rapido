@@ -13,6 +13,8 @@ import 'package:gr/features/usuarios/visualizar/usuarios_visualizar_page.dart';
 import 'features/clientes/adicionar/clientes_adicionar_page.dart';
 import 'features/recuperado_pin/recuperado_pin_page.dart';
 import 'features/usuarios/adicionar/usuarios_adicionar_page.dart';
+import 'features/vendas/adicionar/vendas_adicionar_page.dart';
+import 'features/vendas/vendas_page.dart';
 import 'test_page.dart';
 
 
@@ -50,14 +52,17 @@ class AppModule extends Module {
     //Produtos
     ChildRoute('/produtos', child: (context, args) =>   ProdutosPage(), transition: TransitionType.fadeIn),
     ChildRoute('/produtos/adicionar', child: (context, args) =>   ProdutosAdicionarPage(), transition: TransitionType.fadeIn),
+    //Vendas
+    ChildRoute('/vendas', child: (context, args) =>   VendasPage(), transition: TransitionType.fadeIn),
+    ChildRoute('/vendas/adicionar', child: (context, args) =>   VendasAdicionarPage(), transition: TransitionType.fadeIn),
     //Clientes
     ChildRoute('/clientes/adicionar', child: (context, args) =>   ClientesAdicionarPage(), transition: TransitionType.fadeIn),
-    ChildRoute('/Clientes/visualizar', child: (context, args) =>   UsuariosVisualizarPage(), transition: TransitionType.fadeIn),
 
     //Usuarios
     ChildRoute('/usuarios', child: (context, args) =>   UsuariosPage(), transition: TransitionType.fadeIn),
     ChildRoute('/usuarios/adicionar', child: (context, args) =>   UsuariosAdicionarPage(), transition: TransitionType.fadeIn),
-    ChildRoute('/usuarios/visualizar', child: (context, args) =>   UsuariosVisualizarPage(), transition: TransitionType.fadeIn),
+    ChildRoute('/usuarios/visualizar', child: (context, args) => UsuariosVisualizarPage(id: args.queryParams['id']),transition: TransitionType.fadeIn),
+
     //Autenticacao
     ChildRoute('/registar', child: (context, args) =>   RegistarPage(), transition: TransitionType.fadeIn),
     ChildRoute('/entrar', child: (context, args) =>   EntrarPage(), transition: TransitionType.fadeIn),

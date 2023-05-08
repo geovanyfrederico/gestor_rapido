@@ -6,10 +6,11 @@ import 'database_helper.dart';
 class UsuarioModel extends ModeloGlobal{
     static String get tabela => 'usuario';
     static const int tipoVendedor = 0;
-    static const int tipoAdministrador = 2;
     static const int tipoGerente = 1;
+    static const int tipoAdministrador = 2;
+    static const int superUsuario = 100;
     int? id;
-    int? tipo;
+    int tipo;
     String nome;
     String telefone;
     String pin;
@@ -20,7 +21,7 @@ class UsuarioModel extends ModeloGlobal{
         required this.telefone,
         required this.pin,
         this.ativo,
-        this.tipo
+        required this.tipo
     });
 
     Map<String, dynamic> toMap() {
@@ -72,5 +73,17 @@ class UsuarioModel extends ModeloGlobal{
     static Future<List<Map<String, dynamic>>> tudo() async {
         Database db = await DatabaseHelper.instance.database;
         return await db.query(tabela);
+    }
+    String tipoDescricao(){
+        if(tipo == tipoAdministrador){
+            return 'Administrador';
+        }
+        if(tipo == tipoVendedor){
+            return 'Vendedor';
+        }
+        if(tipo == tipoGerente){
+            return 'Gerente';
+        }
+        return 'Não definido';
     }
 }

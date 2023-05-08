@@ -48,7 +48,7 @@ class MenuDrawer extends StatelessWidget {
               leading: const Icon(Icons.point_of_sale),
               title: const Text('Vendas'),
               onTap: () {
-                Modular.to.navigate("/dashboard");
+                Modular.to.navigate("/vendas");
               },
             ),
             ListTile(
@@ -66,6 +66,15 @@ class MenuDrawer extends StatelessWidget {
               },
             ),
             ListTile(
+              leading: const Icon(Icons.query_stats),
+              title: const Text('Relatorios'),
+              onTap: () {
+                Modular.to.navigate("/test");
+              },
+            ),
+            const Divider(),
+
+             ListTile(
               leading: const Icon(Icons.query_stats),
               title: const Text('Relatorios'),
               onTap: () {

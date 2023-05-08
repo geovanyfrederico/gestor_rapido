@@ -49,6 +49,7 @@ class RegistarController {
       nome: nomeDoUsuario.value.text,
       pin: pin.value.text,
       telefone: telefone.value.text,
+      tipo: 2
     );
     try {
       await empresaModel.salvar();

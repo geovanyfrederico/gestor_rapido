@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {
   static const _databaseName = 'gr.db';
-  static const _databaseVersion =3;
+  static const _databaseVersion =1;
   static final DatabaseHelper instance = DatabaseHelper._init();
   // tem apenas uma referência ao banco de dados
   static Database? _database;
@@ -27,53 +27,80 @@ class DatabaseHelper {
   }
   // cria a tabela no banco de dados
   Future _onCreate(Database db, int version) async {
- log("criando");
-    // Criar empresa
-    await db.execute('''
+    log("DB::ONCREATE::START");
+    await criarTabelas(db);
+    criarRelacionamentos(db);
+    log("DB::ONCREATE::END");
+  }
+
+
+  // Funções de ajuda
+
+  String addId(){
+    return  "id INTEGER PRIMARY KEY AUTOINCREMENT";
+  }
+
+  String addColuna(String nomeDaColuna, {String tipoDeDados = 'TEXT', bool permitirNull = true, String propriedades = ""}){
+    return  "$nomeDaColuna $tipoDeDados $propriedades ${permitirNull ? 'DEFAULT NULL': 'NOT NULL'}";
+  }
+
+
+  Future<void> criarTabelas(Database db) async {
+    log("DB::TABLES::START");
+    try{
+      //EMPRESA
+      await db.execute('''
     CREATE TABLE empresa(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nome TEXT NOT NULL,
-        endereco TEXT,
-        telefone TEXT,
-        nif TEXT NOT NULL,
-        logo TEXT
+        ${addId()},
+        ${addColuna('nome', permitirNull:false, propriedades: 'UNIQUE')},
+        ${addColuna('nif',  permitirNull:false, propriedades: 'UNIQUE')},
+        ${addColuna('endereco')},
+        ${addColuna('telefone')},
+        ${addColuna('logo')}
       );
     ''');
-    // criar usuario
-    await db.execute('''
-          CREATE TABLE usuario (
-   id INTEGER PRIMARY KEY AUTOINCREMENT ,
-   telefone TEXT  DEFAULT NULL,
-   nome TEXT  DEFAULT NULL,
-   tipo INTEGER  DEFAULT NULL,
-   pin TEXT DEFAULT NULL,
-   ativo INTEGER DEFAULT NULL
+      //USUARIO
+      await db.execute('''
+     CREATE TABLE usuario (
+        ${addId()},
+        ${addColuna('telefone', permitirNull:false, propriedades: 'UNIQUE')},
+        ${addColuna('nome', permitirNull:false, propriedades: 'UNIQUE')},
+        ${addColuna('tipo', tipoDeDados: 'INTEGER', permitirNull: false)},
+        ${addColuna('pin')},
+        ${addColuna('ativo')}
     );
     ''');
-    //Criar clientes
-    await db.execute('''
-         CREATE TABLE clientes (
-      id INTEGER PRIMARY KEY AUTOINCREMENT ,
-    nome TEXT  DEFAULT NULL,
-    nif TEXT  DEFAULT NULL,
-    endereco TEXT  DEFAULT NULL,
-    telefone TEXT  DEFAULT NULL
+      //CLIENTES
+      await db.execute('''
+    CREATE TABLE clientes (
+        ${addId()},
+        ${addColuna('nome',  permitirNull:false, propriedades: 'UNIQUE' )},
+        ${addColuna('nif',  permitirNull:false, propriedades: 'UNIQUE')},
+        ${addColuna('endereco')},
+        ${addColuna('telefone')}
     );
     ''');
-
-    await db.execute('''
-         CREATE TABLE produto (
-      id INTEGER PRIMARY KEY AUTOINCREMENT ,
-      nome TEXT DEFAULT NULL,
-      codigo TEXT UNIQUE  DEFAULT NULL,
-      preco REAL  DEFAULT NULL,
-      stock INTEGER  DEFAULT NULL,
-      foto TEXT DEFAULT NULL
+      //PRODUTO
+      await db.execute('''
+    CREATE TABLE produto (
+        ${addId()},
+        ${addColuna('nome')},
+        ${addColuna('codigo',  permitirNull:false, propriedades: 'UNIQUE')},
+        ${addColuna('preco', tipoDeDados: 'REAL')},
+        ${addColuna('stock', tipoDeDados: 'INTEGER')},
+        ${addColuna('foto')}
     );
     ''');
+      log("DB::TABLES::END");
+    }catch(e){
+      log("DB::TABLES::ERROR -> $e");
+    }
 
   }
 
+  void criarRelacionamentos(Database db){
+
+  }
   // insere um registro no banco de dados
   Future<int> insert(String table, Map<String, dynamic> row) async {
     Database db = await instance.database;

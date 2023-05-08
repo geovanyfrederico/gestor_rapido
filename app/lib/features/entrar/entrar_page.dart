@@ -14,6 +14,7 @@ class EntrarPage extends StatefulWidget {
 class _EntrarPageState extends State<EntrarPage> {
   final EntrarController _controller = EntrarController();
   late SharedPreferences _prefs;
+ bool _obscureText = true;
   @override
   void initState() {
     super.initState();
@@ -94,9 +95,10 @@ class _EntrarPageState extends State<EntrarPage> {
                           //
                           // Set the text of your controller to
                           // to the next value.
-                          obscureText: true,
-                          decoration: const InputDecoration(
+                          obscureText: _obscureText,
+                          decoration:  InputDecoration(
                             focusColor: Colors.orange,
+
                             filled: true,
                             contentPadding:
                             EdgeInsets.symmetric(vertical: 15, horizontal: 20),
@@ -107,7 +109,14 @@ class _EntrarPageState extends State<EntrarPage> {
                             border: InputBorder.none,
                             hintText: 'Pin',
                             counterText: "",
-                            suffixIcon: Icon(Icons.visibility, color: Colors.orange),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _obscureText = !_obscureText;
+                                });
+                              },
+                              child: Icon(_obscureText ? Icons.visibility : Icons.visibility_off,),
+                            ),
 
                           )
                       )
@@ -118,7 +127,7 @@ class _EntrarPageState extends State<EntrarPage> {
                     child: SizedBox(
                       child: TextButton(
                           onPressed: ()  {
-                              Modular.to.navigate("/recuperar");
+                            Modular.to.navigate("/recuperar");
                           },
                           child: const Text("Esquceu a senha?"),
                           style: TextButton.styleFrom(

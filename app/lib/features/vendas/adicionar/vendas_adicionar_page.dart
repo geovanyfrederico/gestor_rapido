@@ -1,20 +1,20 @@
 import 'dart:developer';
-
+import 'dart:io';
+import 'package:gr/features/vendas/adicionar/vendas_adicionar_controller.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:gr/features/usuarios/adicionar/usuarios_adicionar_controller.dart';
-import 'package:gr/models/usuario_model.dart';
-class UsuariosAdicionarPage extends StatefulWidget  {
-  const UsuariosAdicionarPage({Key? key}) : super(key: key);
+import 'package:gr/core/utils/snackbar_helper.dart';
+class VendasAdicionarPage extends StatefulWidget  {
+  const VendasAdicionarPage({Key? key}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
-    return UsuariosAdicionarState();
+    return VendasAdicionarState();
   }
 }
-class UsuariosAdicionarState extends State<UsuariosAdicionarPage> {
-  final UsuariosAdicionarController controller = UsuariosAdicionarController();
-  String dropdownValue = 'Vendedor';
-  List<String> options = ['Administrador', 'Vendedor', 'Gerente'];
+class VendasAdicionarState extends State<VendasAdicionarPage> {
+  final VendasAdicionarController controller = VendasAdicionarController();
+  File? imageFile;
   @override
   void initState() {
     super.initState();
@@ -23,17 +23,18 @@ class UsuariosAdicionarState extends State<UsuariosAdicionarPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => {
-            Modular.to.navigate("/usuarios")
+            Modular.to.navigate("/vendas")
           },
         ),
         backgroundColor: Colors.orange,
         centerTitle: true,
-        title: const Text('Adicionar utilizadores'),
+        title: const Text('Adicionar vendas'),
       ),
       resizeToAvoidBottomInset:true,
       backgroundColor: Colors.grey[100],
@@ -54,6 +55,59 @@ class UsuariosAdicionarState extends State<UsuariosAdicionarPage> {
               children: [
                 Column(
                   children:  [
+                    GestureDetector(
+                        onTap:() async {
+                          PickedFile? pickedFile = await ImagePicker().getImage(
+                            source: ImageSource.gallery,
+                            maxWidth: 1800,
+                            maxHeight: 1800,
+                          );
+                          if (pickedFile != null) {
+                            setState(() {
+                              imageFile = File(pickedFile.path);
+                            });
+                          }
+                          SnackbarHelper.success(context, 'Adicionar foto');
+                        },
+                        child:     Padding(
+                            padding:  EdgeInsets.only(bottom: 20),
+                            child:
+                            CircleAvatar(
+                                radius: 70,
+                                backgroundImage:NetworkImage('https://via.placeholder.com/150'),
+                                backgroundColor: Colors.transparent
+                            )
+                        )
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: TextField(
+                            keyboardType: TextInputType.text,
+                            maxLength: 50,
+                            autocorrect: false,
+                            controller: controller.codigo,
+                            // Every single time the text changes in a
+                            // TextField, this onChanged callback is called
+                            // and it passes in the value.
+                            //
+                            // Set the text of your controller to
+                            // to the next value.
+                            decoration: const InputDecoration(
+                              focusColor: Colors.orange,
+                              filled: true,
+                              contentPadding:
+                              EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Colors.orange, width: 2.0),
+                              ),
+                              border: InputBorder.none,
+                              hintText: 'Código',
+                              counterText: "",
+                              prefixIcon: Icon(Icons.qr_code),
+                            )
+                        )
+                    ),
                     Padding(
                         padding: const EdgeInsets.only(bottom: 20),
                         child: TextField(
@@ -79,7 +133,36 @@ class UsuariosAdicionarState extends State<UsuariosAdicionarPage> {
                               border: InputBorder.none,
                               hintText: 'Nome',
                               counterText: "",
-                              prefixIcon: Icon(Icons.person),
+                              prefixIcon: Icon(Icons.shopping_cart),
+                            )
+                        )
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: TextField(
+
+                            maxLength: 50,
+                            autocorrect: false,
+                            controller: controller.preco,
+                            // Every single time the text changes in a
+                            // TextField, this onChanged callback is called
+                            // and it passes in the value.
+                            //
+                            // Set the text of your controller to
+                            // to the next value.
+                            decoration: const InputDecoration(
+                              focusColor: Colors.orange,
+                              filled: true,
+                              contentPadding:
+                              EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Colors.orange, width: 2.0),
+                              ),
+                              border: InputBorder.none,
+                              hintText: 'Preço',
+                              counterText: "",
+                              prefixIcon: Icon(Icons.attach_money),
                             )
                         )
                     ),
@@ -88,7 +171,7 @@ class UsuariosAdicionarState extends State<UsuariosAdicionarPage> {
                         child: TextField(
                             keyboardType: TextInputType.phone,
                             maxLength: 9,
-                            controller: controller.telefone,
+                            controller: controller.stock,
                             // Every single time the text changes in a
                             // TextField, this onChanged callback is called
                             // and it passes in the value.
@@ -105,85 +188,13 @@ class UsuariosAdicionarState extends State<UsuariosAdicionarPage> {
                                 BorderSide(color: Colors.orange, width: 2.0),
                               ),
                               border: InputBorder.none,
-                              hintText: 'Telefone',
+                              hintText: 'Stock Inicial',
                               counterText: "",
                               prefixIcon: Icon(Icons.phone),
                             )
                         )
                     ),
-                    Padding(
-                        padding: EdgeInsets.only(bottom: 20),
-                        child: TextField(
-                            keyboardType: TextInputType.number,
-                            maxLength: 4,
-                            controller: controller.pin,
-                            // Every single time the text changes in a
-                            // TextField, this onChanged callback is called
-                            // and it passes in the value.
-                            //
-                            // Set the text of your controller to
-                            // to the next value.
-                            obscureText: true,
-                            decoration: const InputDecoration(
-                              focusColor: Colors.orange,
-                              filled: true,
-                              contentPadding:
-                              EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                BorderSide(color: Colors.orange, width: 2.0),
-                              ),
-                              border: InputBorder.none,
-                              hintText: 'Pin',
-                              counterText: "",
-                              prefixIcon: Icon(Icons.key),
-                            )
-                        )
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      width: 10000,
-                      color: Colors.grey[300],
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          value: dropdownValue,
-                          onChanged: ( newValue) {
 
-                            switch (newValue){
-                              case 'Administrador':
-                                controller.tipo.text = UsuarioModel.tipoAdministrador.toString();
-                                break;
-                              case 'Vendedor':
-                                controller.tipo.text = UsuarioModel.tipoVendedor.toString();
-                                break;
-                              case 'Gerente':
-                                controller.tipo.text = UsuarioModel.tipoGerente.toString();
-                                break;
-                            }
-                            setState(() {
-                               dropdownValue = newValue!;
-                            });
-                          },
-                          items: options.map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          icon: const Icon(Icons.arrow_drop_down),
-                          iconSize: 24,
-                          elevation: 16,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16.0,
-                          ),
-                          underline: Container(
-                            height: 0,
-                            color: Colors.transparent,
-                          ),
-                        ),
-                      ),
-                    )
                   ],
                 )
               ],

@@ -1,10 +1,6 @@
-import 'dart:collection';
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:gr/models/usuario_model.dart';
 import 'package:sqflite/sqflite.dart';
-
 import 'package:gr/models/database_helper.dart';
 
 
@@ -12,7 +8,7 @@ class UsuariosController  extends ChangeNotifier{
 
   var  usuarios = <UsuarioModel>[];
   var loading = false;
-
+  final filtro = TextEditingController();
 
   Future<List<UsuarioModel>> buscarUsuarios() async {
     Database db = await DatabaseHelper.instance.database;
@@ -23,6 +19,7 @@ class UsuariosController  extends ChangeNotifier{
         nome: maps[index]['nome'],
         telefone: maps[index]['telefone'],
         pin: maps[index]['pin'],
+        tipo: maps[index]['tipo'],
       );
     });
   }

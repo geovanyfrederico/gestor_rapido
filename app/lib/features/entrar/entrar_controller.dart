@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:gr/models/database_helper.dart';
@@ -8,6 +9,13 @@ class EntrarController{
   final telefone = TextEditingController();
   final pin = TextEditingController();
 
+   // Crie uma instância do SharedPreferences.
+  SharedPreferences? prefs;
+
+  // Inicialize o SharedPreferences na construção do controlador.
+  EntrarController() {
+    initSharedPreferences();
+  }
   bool valido(){
     if(telefone.value.text.isEmpty){
       return false;
@@ -39,6 +47,10 @@ class EntrarController{
       );
 
       if (results.isNotEmpty) {
+         await prefs?.setInt("usuarioId", results.first['id']);
+          await prefs?.setString("usuarioNome", results.first['nome']);
+          await prefs?.setString("usuarioTelefone", results.first['telefone']);
+          await prefs?.setInt("usuarioTipo", results.first['tipo']);
         SnackbarHelper.success(context,"Bem vindo.");
         return true;
       }
@@ -49,5 +61,9 @@ class EntrarController{
       return false;
     }
 
+  }
+
+  Future<void> initSharedPreferences() async {
+    prefs = await SharedPreferences.getInstance();
   }
 }

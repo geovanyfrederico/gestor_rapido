@@ -10,12 +10,10 @@ import 'package:sqflite/sqflite.dart';
 import 'package:gr/models/database_helper.dart';
 
 
-class ProdutosController  extends ChangeNotifier{
+class VendasController  extends ChangeNotifier{
   var loading = false;
   final filtro = TextEditingController();
   Future<List<ProdutoModel>> buscar() async {
-
-
     Database db = await DatabaseHelper.instance.database;
     String query = 'SELECT * FROM produto';
     if (filtro.text.isNotEmpty) {

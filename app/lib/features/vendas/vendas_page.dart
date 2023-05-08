@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:gr/features/produtos/produtos_controller.dart';
+import 'package:gr/features/vendas/vendas_controller.dart';
 import 'package:gr/wigets/menu_drawer.dart';
+import 'package:gr/core/utils/mat.dart';
+import 'package:gr/models/produto_model.dart';
 
-import '../../core/utils/mat.dart';
-import '../../models/produto_model.dart';
-import '../../models/usuario_model.dart';
-
-class ProdutosPage extends StatefulWidget {
-  const ProdutosPage({Key? key}) : super(key: key);
+class VendasPage extends StatefulWidget {
+  const VendasPage({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return ProdutosPageState();
+    return VendasPageState();
   }
 
 }
-class ProdutosPageState extends State<ProdutosPage> {
-  ProdutosController controller = ProdutosController();
+class VendasPageState extends State<VendasPage> {
+  VendasController controller = VendasController();
 
   @override
   void initState() {
@@ -45,8 +43,9 @@ class ProdutosPageState extends State<ProdutosPage> {
       appBar: AppBar(
         backgroundColor: Colors.orange,
         centerTitle: true,
-        title: const Text('Produtos'),
+        title: const Text('vendas'),
         actions: [
+
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
@@ -97,13 +96,14 @@ class ProdutosPageState extends State<ProdutosPage> {
               );
             },
           ),
+
         ],
       ),
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.grey[100],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Modular.to.navigate("/produtos/adicionar");
+          Modular.to.navigate("/vendas/adicionar");
         },
         backgroundColor: Colors.orange,
         child: const Icon(Icons.add),
@@ -117,7 +117,7 @@ class ProdutosPageState extends State<ProdutosPage> {
             }
             // Erro
             if(snapshot.hasError){
-              return const Center(child: Text("Ocorreu um erro ao buscar os produtos."));
+              return const Center(child: Text("Ocorreu um erro ao buscar os vendas."));
             }
             // Lista vasia
             if(snapshot.data!.isEmpty){
@@ -130,7 +130,7 @@ class ProdutosPageState extends State<ProdutosPage> {
                       height: 300,
                       child: Image.asset('assets/images/ilustration/gr9.png')
                   ),
-                  const Text("Sem produtos",
+                  const Text("Sem vendas",
                       style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.w400,

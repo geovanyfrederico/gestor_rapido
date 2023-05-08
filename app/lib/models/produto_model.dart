@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart';
 import 'database_helper.dart';
 
 class ProdutoModel {
-    String tabela = "produto";
+    static String get tabela => 'produto';
     int? id;
     String codigo;
     String nome;
@@ -47,5 +47,9 @@ class ProdutoModel {
     Future<int> salvar() async {
         Database db = await DatabaseHelper.instance.database;
         return db.insert(tabela, toMap());
+    }
+    static Future<int> eliminar(int id) async {
+        Database db = await DatabaseHelper.instance.database;
+        return await db.delete(tabela, where: 'id = ?', whereArgs: [id]);
     }
 }
