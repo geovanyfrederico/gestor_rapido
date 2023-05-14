@@ -24,7 +24,7 @@ class MenuDrawerState extends State<MenuDrawer> {
     _prefs = await SharedPreferences.getInstance();
     setState(() {
       usuarioNome =  _prefs.getString("usuarioNome")!;
-      usuarioTipo =  UsuarioModel.tipoDescricaoStatico(_prefs.getInt("usuarioTipo")!) ;
+      usuarioTipo =  UsuarioModel.tipoDescricaoStatico(_prefs.getInt("usuarioTipo")?.toInt()) ;
     });
     // Check if user has completed onboarding
   }

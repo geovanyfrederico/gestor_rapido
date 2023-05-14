@@ -9,11 +9,12 @@ import 'package:gr/features/contactos/contactos_page.dart';
 import 'package:gr/features/dasboard/dasboard_page.dart';
 import 'package:gr/features/usuarios/usuarios_page.dart';
 import 'package:gr/features/recuperar_pin/recuperar_pin_page.dart';
-import 'features/clientes/adicionar/clientes_adicionar_page.dart';
-import 'features/recuperado_pin/recuperado_pin_page.dart';
-import 'features/usuarios/adicionar/usuarios_adicionar_page.dart';
-import 'features/vendas/adicionar/vendas_adicionar_page.dart';
-import 'features/vendas/vendas_page.dart';
+import 'package:gr/features/clientes/adicionar/clientes_adicionar_page.dart';
+import 'package:gr/features/fornecedores/adicionar/fornecedores_adicionar_page.dart';
+import 'package:gr/features/recuperado_pin/recuperado_pin_page.dart';
+import 'package:gr/features/usuarios/adicionar/usuarios_adicionar_page.dart';
+import 'package:gr/features/vendas/adicionar/vendas_adicionar_page.dart';
+import 'package:gr/features/vendas/vendas_page.dart';
 import 'test_page.dart';
 
 
@@ -56,6 +57,8 @@ class AppModule extends Module {
     ChildRoute('/vendas/adicionar', child: (context, args) =>   VendasAdicionarPage(), transition: TransitionType.fadeIn),
     //Clientes
     ChildRoute('/clientes/adicionar', child: (context, args) =>   ClientesAdicionarPage(), transition: TransitionType.fadeIn),
+    //Forncedores
+    ChildRoute('/fornecedores/adicionar', child: (context, args) =>   FornecedoresAdicionarPage(), transition: TransitionType.fadeIn),
 
     //Usuarios
     ChildRoute('/usuarios', child: (context, args) =>   UsuariosPage(), transition: TransitionType.fadeIn),

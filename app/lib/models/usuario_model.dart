@@ -86,7 +86,7 @@ class UsuarioModel extends ModeloGlobal{
         }
         return 'Não definido';
     }
-    static String tipoDescricaoStatico(int tipo){
+    static String tipoDescricaoStatico(int? tipo){
         if(tipo == tipoAdministrador){
             return 'Administrador';
         }

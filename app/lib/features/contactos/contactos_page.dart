@@ -1,6 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:gr/core/constantes.dart';
 import 'package:gr/wigets/menu_drawer.dart';
 import 'package:gr/features/clientes/clientes_page.dart';
+import 'package:gr/features/fornecedores/fornecedores_page.dart';
+
+import 'contactos_controller.dart';
+
 class ContactosPage extends StatefulWidget {
   const ContactosPage({Key? key}) : super(key: key);
   @override
@@ -8,6 +15,8 @@ class ContactosPage extends StatefulWidget {
 }
 
 class _ContactosPageState extends State<ContactosPage> {
+  final ContactosController controller = ContactosController();
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -18,28 +27,34 @@ class _ContactosPageState extends State<ContactosPage> {
           backgroundColor: Colors.orange,
           centerTitle: true,
           bottom:  TabBar(
+            onTap: (int i) {
+              setState(() {
+                controller.tab = i;
+              });
+
+            },
             indicatorColor:  Colors.orangeAccent,
             tabs: [
               Tab(
                 child:Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [Icon(Icons.person), Text("Clientes")],
+                  children: const [Icon(Icons.person), Text(Constantes.clientes)],
                 ),
               ),
               Tab(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [Icon(Icons.person), Text("Fornecedores")],
+                  children: const [Icon(Icons.person), Text(Constantes.fornecedores)],
                 ),
               )
             ],
           ),
-          title: const Text('Contactos'),
+          title: Text(controller.titulo()),
         ),
         body:   TabBarView(
           children: [
             ClientesPage(),
-            Center( child: Text("Page 2"))
+            FornecedoresPage(),
           ],
         ),
       ),
