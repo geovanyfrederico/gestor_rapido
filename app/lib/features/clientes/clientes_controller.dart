@@ -14,7 +14,7 @@ class ClientesListarController  extends ChangeNotifier{
 
   Future<void> buscarClientes() async {
     Database db = await DatabaseHelper.instance.database;
-    List<Map<String, dynamic>> maps = await db.query('clientes', orderBy: 'id DESC');
+    List<Map<String, dynamic>> maps = await db.query('cliente', orderBy: 'id DESC');
     clientes =  List.generate(maps.length, (index) {
       return ClienteModel(
         id: maps[index]['id'],

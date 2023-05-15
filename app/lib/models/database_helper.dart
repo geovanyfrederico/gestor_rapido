@@ -59,6 +59,9 @@ class DatabaseHelper {
         ${addColuna('logo')}
       );
     ''');
+
+
+
       //USUARIO
       await db.execute('''
      CREATE TABLE usuario (
@@ -70,9 +73,11 @@ class DatabaseHelper {
         ${addColuna('ativo')}
     );
     ''');
-      //CLIENTES
+
+      //COMPRAR
+      //Fornecedor
       await db.execute('''
-    CREATE TABLE clientes (
+    CREATE TABLE fornecedor (
         ${addId()},
         ${addColuna('nome',  permitirNull:false, propriedades: 'UNIQUE' )},
         ${addColuna('nif',  permitirNull:false, propriedades: 'UNIQUE')},
@@ -80,6 +85,79 @@ class DatabaseHelper {
         ${addColuna('telefone')}
     );
     ''');
+      //Compra
+      await db.execute('''
+    CREATE TABLE compra (
+        ${addId()},
+        ${addColuna('nome')},
+        ${addColuna('data',  permitirNull:false)},
+        ${addColuna('totalQtd',permitirNull:false, tipoDeDados : 'INTEGER')},
+        ${addColuna('totalPagar',permitirNull:false, tipoDeDados : 'REAL')},
+        ${addColuna('totalPago',permitirNull:false, tipoDeDados : 'REAL')},
+        ${addColuna('troco',permitirNull:false, tipoDeDados : 'REAL')},
+        ${addColuna('fornecedorId',permitirNull:false)},
+        ${addColuna('usuarioId',permitirNull:false)},
+        ${addColuna('codigo',  permitirNull:false, propriedades: 'UNIQUE')}
+    );
+    ''');
+
+      await db.execute('''
+    CREATE TABLE produtoNaCompra (
+        ${addId()},
+        ${addColuna('nome',permitirNull:false)},
+        ${addColuna('totalQtd', permitirNull:false, tipoDeDados : 'INTEGER')},
+        ${addColuna('precoTotal', permitirNull:false, tipoDeDados : 'REAL')},
+        ${addColuna('preco', permitirNull:false, tipoDeDados : 'REAL')},
+        ${addColuna('produtoId', permitirNull:false)},
+        ${addColuna('compraId', permitirNull:false)}
+    );
+    ''');
+
+      //Vender
+
+      //CLIENTES
+      await db.execute('''
+    CREATE TABLE cliente (
+        ${addId()},
+        ${addColuna('nome',  permitirNull:false, propriedades: 'UNIQUE' )},
+        ${addColuna('nif',  permitirNull:true)},
+        ${addColuna('endereco')},
+        ${addColuna('telefone')}
+    );
+    ''');
+
+      //PRODUTO
+      await db.execute('''
+    CREATE TABLE venda (
+        ${addId()},
+        ${addColuna('nome')},
+        ${addColuna('codigo',  permitirNull:false, propriedades: 'UNIQUE')},
+        ${addColuna('data',  permitirNull:false)},
+        ${addColuna('totalQtd',permitirNull:false, tipoDeDados : 'INTEGER')},
+        ${addColuna('totalPagar',permitirNull:false, tipoDeDados : 'REAL')},
+        ${addColuna('totalPago',permitirNull:false, tipoDeDados : 'REAL')},
+        ${addColuna('troco',permitirNull:false, tipoDeDados : 'REAL')},
+        ${addColuna('fornecedorId',permitirNull:false)},
+        ${addColuna('usuarioId',permitirNull:false)},
+        ${addColuna('clienteId',permitirNull:false)}
+    );
+    ''');
+
+
+      await db.execute('''
+    CREATE TABLE produtoNaVenda (
+        ${addId()},
+        ${addColuna('nome',permitirNull:false)},
+        ${addColuna('totalQtd', permitirNull:false, tipoDeDados : 'INTEGER')},
+        ${addColuna('precoTotal', permitirNull:false, tipoDeDados : 'REAL')},
+        ${addColuna('preco', permitirNull:false, tipoDeDados : 'REAL')},
+        ${addColuna('produtoId', permitirNull:false)},
+        ${addColuna('vendaId', permitirNull:false)}
+    );
+    ''');
+
+//GLOBAL
+
       //PRODUTO
       await db.execute('''
     CREATE TABLE produto (
@@ -91,6 +169,20 @@ class DatabaseHelper {
         ${addColuna('foto')}
     );
     ''');
+
+      // movimentoDeStock
+      await db.execute('''
+    CREATE TABLE movimentoDeStock (
+        ${addId()},
+        ${addColuna('tipo',permitirNull:false)},
+        ${addColuna('ref')},
+        ${addColuna('data',  permitirNull:false)},
+        ${addColuna('totalQtd', permitirNull:false, tipoDeDados : 'INTEGER')},
+        ${addColuna('produtoId',permitirNull:false)},
+        ${addColuna('usuarioId',permitirNull:false)}
+    );
+    ''');
+
       log("DB::TABLES::END");
     }catch(e){
       log("DB::TABLES::ERROR -> $e");

@@ -5,7 +5,7 @@ import 'database_helper.dart';
 
 class ClienteModel extends ModeloGlobal{
 
-    static String get tabela => 'clientes';
+    static String get tabela => 'cliente';
     late final int? id;
     late final String nome;
     late final String? endereco;
@@ -42,7 +42,7 @@ class ClienteModel extends ModeloGlobal{
     }
     Future<int> salvar() async {
         Database db = await DatabaseHelper.instance.database;
-        return db.insert('clientes', toMap());
+        return db.insert('cliente', toMap());
     }
 // exclui um registro do banco de dados
     static Future<int> eliminar(int? id) async {

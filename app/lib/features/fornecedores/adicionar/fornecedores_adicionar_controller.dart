@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
-import 'package:gr/models/cliente_model.dart';
-import 'package:gr/models/database_helper.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:gr/models/fornecedor_model.dart';
 
-import '../../../models/usuario_model.dart';
 
 class FornecedoresAdicionarController{
   final nome = TextEditingController();
@@ -30,25 +27,26 @@ class FornecedoresAdicionarController{
   }
 
   Future<bool> salvar(context) async {
-    if(!valido(context)){
+    if (!valido(context)) {
       return false;
     }
-    ClienteModel clienteModel = ClienteModel(
-      nome: nome.value.text,
-      telefone: telefone.value.text,
-      nif: nif.value.text,
-      endereco:endereco.value.text
+    FornecedorModel fornecedorModel = FornecedorModel(
+        nome: nome.value.text,
+        telefone: telefone.value.text,
+        nif: nif.value.text,
+        endereco: endereco.value.text
     );
-    if(await clienteModel.salvar() > 0){
-      SnackbarHelper.success(context, "Cliente adicionado.");
+    try {
+      await fornecedorModel.salvar();
+      SnackbarHelper.success(context, "Fornecedor adicionado.");
       limparFormulario();
-      return  true;
+      return true;
+    } catch (e) {
+      SnackbarHelper.error(
+          context, "Não foi possivel adicionar o cliente, "+e.toString());
+      return false;
     }
-
-    SnackbarHelper.error(context, "Não foi possivel adicionar o cliente, tente novamente");
-    return false;
   }
-
 
 
 }

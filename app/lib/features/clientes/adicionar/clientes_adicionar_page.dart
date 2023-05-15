@@ -103,7 +103,7 @@ class ClientesAdicionarState extends State<ClientesAdicionarPage> {
                               BorderSide(color: Colors.orange, width: 2.0),
                             ),
                             border: InputBorder.none,
-                            hintText: 'NIF *',
+                            hintText: 'NIF',
                             counterText: "",
                             prefixIcon: Icon(Icons.store),
                           )

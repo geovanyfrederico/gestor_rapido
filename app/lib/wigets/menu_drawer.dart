@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gr/models/usuario_model.dart';
@@ -22,6 +24,7 @@ class MenuDrawerState extends State<MenuDrawer> {
   // Initialize shared preferences
   Future<void> initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
+    log(_prefs.getKeys().toString());
     setState(() {
       usuarioNome =  _prefs.getString("usuarioNome")!;
       usuarioTipo =  UsuarioModel.tipoDescricaoStatico(_prefs.getInt("usuarioTipo")?.toInt()) ;
@@ -118,6 +121,8 @@ class MenuDrawerState extends State<MenuDrawer> {
               onTap: () async {
                 SharedPreferences _prefs = await SharedPreferences.getInstance();
                 await _prefs.setBool('logado', false);
+                await _prefs.remove('usuarioNome');
+                await _prefs.remove('usuarioTipo');
                 Modular.to.navigate("/entrar");
               },
             ),

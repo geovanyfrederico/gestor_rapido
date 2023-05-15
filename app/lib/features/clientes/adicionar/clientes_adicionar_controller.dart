@@ -13,9 +13,7 @@ class ClientesAdicionarController{
   final endereco = TextEditingController();
 
   bool valido(context){
-    if( nome.value.text.isEmpty
-        || nif.value.text.isEmpty
-    ){
+    if( nome.value.text.isEmpty){
       SnackbarHelper.warning(context, "Preencha todos campos");
       return false;
     }

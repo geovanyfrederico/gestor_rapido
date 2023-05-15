@@ -38,7 +38,7 @@ class ForncedoresListarView extends State<FornecedoresPage> {
         child: const Icon(Icons.add),
       ),
       body: SafeArea(
-          child: controller.clientes.isEmpty ?
+          child: controller.fornecedores.isEmpty ?
           Center(child:
           Column(
             crossAxisAlignment:CrossAxisAlignment.center,
@@ -61,7 +61,7 @@ class ForncedoresListarView extends State<FornecedoresPage> {
           Padding(
               padding: const EdgeInsets.only(top: 20),
               child:   ListView.builder(
-                itemCount: controller.clientes.length,
+                itemCount: controller.fornecedores.length,
                 itemBuilder: (context, index) => Card(
                   elevation: 1,
                   margin: const EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 5),
@@ -93,8 +93,8 @@ class ForncedoresListarView extends State<FornecedoresPage> {
                         },
                       );
                     },
-                    title: Text(controller.clientes[index].nome),
-                    subtitle: Text(controller.clientes[index].nif),
+                    title: Text(controller.fornecedores[index].nome),
+                    subtitle: Text(controller.fornecedores[index].nif),
                     trailing: const Icon(Icons.arrow_right_alt_rounded),
                   ),
                 ),
