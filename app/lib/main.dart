@@ -7,6 +7,7 @@ import 'package:gr/features/produtos/produtos_page.dart';
 import 'package:gr/features/registrar/registar_page.dart';
 import 'package:gr/features/contactos/contactos_page.dart';
 import 'package:gr/features/dasboard/dasboard_page.dart';
+import 'package:gr/features/tabelas/categorias/categorias_page.dart';
 import 'package:gr/features/usuarios/usuarios_page.dart';
 import 'package:gr/features/recuperar_pin/recuperar_pin_page.dart';
 import 'package:gr/features/clientes/adicionar/clientes_adicionar_page.dart';
@@ -15,6 +16,7 @@ import 'package:gr/features/recuperado_pin/recuperado_pin_page.dart';
 import 'package:gr/features/usuarios/adicionar/usuarios_adicionar_page.dart';
 import 'package:gr/features/vendas/adicionar/vendas_adicionar_page.dart';
 import 'package:gr/features/vendas/vendas_page.dart';
+import 'features/tabelas/tabelas_page.dart';
 import 'test_page.dart';
 
 
@@ -67,6 +69,9 @@ class AppModule extends Module {
     ChildRoute('/registar', child: (context, args) =>   RegistarPage(), transition: TransitionType.fadeIn),
     ChildRoute('/entrar', child: (context, args) =>   EntrarPage(), transition: TransitionType.fadeIn),
     ChildRoute('/recuperar', child: (context, args) =>   RecuperarPinPage(), transition: TransitionType.fadeIn),
+    //outros
+    ChildRoute('/tabelas', child: (context, args) =>   TabelasPage(), transition: TransitionType.fadeIn),
+    ChildRoute('/categorias', child: (context, args) =>   CategoriasPage(), transition: TransitionType.fadeIn),
   ];
 }
 

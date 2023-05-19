@@ -1,20 +1,20 @@
 import 'package:gr/models/produto_model.dart';
 class ProdutoNaVendaModel {
-    int id;
+    int? id;
     int produtoId;
     int qtd;
     String nome;
     double preco;
     double precoTotal;
-    ProdutoModel produto;
+    ProdutoModel? produto;
     ProdutoNaVendaModel({
-        required this.id,
+        this.id,
         required this.produtoId,
         required this.qtd,
         required this.nome,
         required this.preco,
         required this.precoTotal,
-        required this.produto
+        this.produto
     });
 
     // List <MovimentoDeStockModel>  movimentoDeStocks;

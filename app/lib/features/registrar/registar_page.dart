@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gr/features/registrar/registrar_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegistarPage extends StatelessWidget {
   final _controller = RegistarController();
 
-   RegistarPage({Key? key}) : super(key: key);
-
+  RegistarPage({Key? key}) : super(key: key);
+  Future<void> finalizarEntrar() async {
+    Modular.to.navigate("/dashboard");
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

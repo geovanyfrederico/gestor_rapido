@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
 import 'package:gr/models/empresa_model.dart';
 import 'package:gr/models/usuario_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../core/utils/sms.dart';
 
 class RegistarController {
-
+  // Crie uma instância do SharedPreferences.
+  SharedPreferences? prefs;
 
   final nomeDaEmpresa = TextEditingController();
   final nomeDoUsuario = TextEditingController();
@@ -46,17 +50,26 @@ class RegistarController {
         nif: nif.value.text
     );
     UsuarioModel usuarioModel = UsuarioModel(
-      nome: nomeDoUsuario.value.text,
-      pin: pin.value.text,
-      telefone: telefone.value.text,
-      tipo: 2
+        nome: nomeDoUsuario.value.text,
+        pin: pin.value.text,
+        telefone: telefone.value.text,
+        tipo: 2
     );
     try {
       await empresaModel.salvar();
-      await usuarioModel.salvar();
+      final usuarioId = await usuarioModel.salvar();
+
       SnackbarHelper.success(context, "Successo");
+
+      var _prefs = await SharedPreferences.getInstance();
+      await _prefs.setBool('logado', true);
+      await _prefs.setInt("usuarioId", usuarioId);
+      await _prefs.setString("usuarioNome", usuarioModel.nome);
+      await _prefs.setString("usuarioTelefone", usuarioModel.telefone);
+      await _prefs.setInt("usuarioTipo",usuarioModel.tipo);
+
       // Envia uma mensagem de boas vindas.
-      //  SmsService.send(telefone.value.text, "Bem vindo ao Gestor Rápido, código de verificação: ${Matematica.gerarNumerosAleatorios(5)}");
+      SMS.send(telefone.value.text, "${usuarioModel.nome}, bem vindo ao Gestor Rápido.");
       return true;
     } catch ( e) {
       SnackbarHelper.error(context, "Erro: "+e.toString());

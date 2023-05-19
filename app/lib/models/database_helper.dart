@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {
   static const _databaseName = 'gr.db';
-  static const _databaseVersion =1;
+  static const _databaseVersion =2;
   static final DatabaseHelper instance = DatabaseHelper._init();
   // tem apenas uma referência ao banco de dados
   static Database? _database;
@@ -158,6 +158,13 @@ class DatabaseHelper {
 
 //GLOBAL
 
+      //Categoria
+      await db.execute('''
+    CREATE TABLE categoria (
+        ${addId()},
+        ${addColuna('nome',permitirNull: false, propriedades: 'UNIQUE' )}
+    );
+    ''');
       //PRODUTO
       await db.execute('''
     CREATE TABLE produto (

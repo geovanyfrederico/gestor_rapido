@@ -143,7 +143,6 @@ class _EntrarPageState extends State<EntrarPage> {
                   Container(
                     height: 50,
                     alignment: Alignment.center,
-
                     child: SizedBox.expand(
                       child: ElevatedButton(
                           onPressed: () async => {

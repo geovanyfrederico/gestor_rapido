@@ -106,12 +106,18 @@ class MenuDrawerState extends State<MenuDrawer> {
               },
             ),
             const Divider(),
-
             ListTile(
-              leading: const Icon(Icons.query_stats),
-              title: const Text('Relatorios'),
+              leading: const Icon(Icons.store),
+              title: const Text('Empresa'),
               onTap: () {
-                Modular.to.navigate("/test");
+                Modular.to.navigate("/empresa");
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.table_rows),
+              title: const Text('Tabelas'),
+              onTap: () {
+                Modular.to.navigate("/tabelas");
               },
             ),
             const Divider(),
