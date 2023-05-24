@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:gr/features/vendas/adicionar/vendas_adicionar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:gr/features/vendas/adicionar/vendas_adicionar_no_carrinho_controller.dart';
+import 'package:gr/core/utils/mat.dart';
 
 class VendasAdicionarPage extends StatefulWidget {
   const VendasAdicionarPage({Key? key}) : super(key: key);
@@ -13,15 +15,16 @@ class VendasAdicionarPage extends StatefulWidget {
 
 class VendasAdicionarState extends State<VendasAdicionarPage> {
   final VendasAdicionarController controller = VendasAdicionarController();
+  final VendasAdicionarNoCarrinhController _vendasAdicionarNoCarrinhController =
+      VendasAdicionarNoCarrinhController();
   File? imageFile;
 
   @override
   void initState() {
     super.initState();
-    controller.buscarCategorias().then((_) => {setState(() {})});
+    _vendasAdicionarNoCarrinhController.buscarProdutos();
   }
 
-  _init() {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -182,7 +185,8 @@ class VendasAdicionarState extends State<VendasAdicionarPage> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () async {
-                            _showAddToCartModal(context);
+                            _showAddToCartModal(
+                                context, _vendasAdicionarNoCarrinhController);
                           },
                           child: const Text(
                             "Adicionar produtos",
@@ -217,7 +221,10 @@ class VendasAdicionarState extends State<VendasAdicionarPage> {
   }
 }
 
-void _showAddToCartModal(BuildContext context) {
+Future<void> _showAddToCartModal(
+    BuildContext context,
+    VendasAdicionarNoCarrinhController
+        _vendasAdicionarNoCarrinhoController) async {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -242,39 +249,40 @@ void _showAddToCartModal(BuildContext context) {
               ),
             ),
             SizedBox(height: 16),
-            TextFormField(
-              decoration: InputDecoration(
-                hintText: 'Pesquisar Produtos',
-                border: OutlineInputBorder(),
-                suffixIcon: Icon(Icons.search),
-              ),
-            ),
-            SizedBox(height: 16),
             Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: 2,
-                      itemBuilder: (context, index) {
-                        return _buildCategoryItem('Categoria ${index + 1}');
-                      },
-                    ),
-                  ),
-                  Expanded(
                     flex: 2,
                     child: ListView.builder(
-                      itemCount: 2,
+                      itemCount:
+                          _vendasAdicionarNoCarrinhoController.produtos.length,
                       itemBuilder: (context, index) {
                         return _buildProductItem(
-                          'Produto ${index + 1}',
-                          'Descrição do Produto ${index + 1}',
-                          'R\$ ${10 + index * 10},00',
-                        );
+                            _vendasAdicionarNoCarrinhoController
+                                .produtos[index].nome,
+                            _vendasAdicionarNoCarrinhoController
+                                .produtos[index].codigo,
+                            Mat.numeroParaDinheiro(
+                                _vendasAdicionarNoCarrinhoController
+                                    .produtos[index].preco),
+                            _vendasAdicionarNoCarrinhoController
+                                .produtos[index].stock);
                       },
                     ),
                   ),
                 ],
+              ),
+            ),
+            SizedBox(height: 16),
+            TextFormField(
+              onChanged: (value) async => {
+                await _vendasAdicionarNoCarrinhoController.filtrar(value),
+              },
+              decoration: InputDecoration(
+                hintText: 'Escreva para filtrar',
+                border: OutlineInputBorder(),
+                suffixIcon: Icon(Icons.search),
               ),
             ),
           ],
@@ -290,67 +298,21 @@ Widget _buildCategoryItem(String categoryName) {
   );
 }
 
-Widget _buildProductItem(String productName, String description, String price) {
+Widget _buildProductItem(
+    String productName, String description, String price, int stock) {
   return Card(
+      child: Padding(
+    padding: EdgeInsets.all(5),
     child: ListTile(
-      title: Text(productName),
-      subtitle: Text(description),
-      trailing: Text(price),
+      title: Text(
+        productName,
+        style: TextStyle(fontSize: 18),
+      ),
+      subtitle: Text("Código: " + description + "\nStock:" + stock.toString()),
+      trailing: Text(
+        price,
+        style: TextStyle(fontWeight: FontWeight.w600),
+      ),
     ),
-  );
+  ));
 }
-
-class Product {
-  final String name;
-  final String imageUrl;
-  final String category;
-
-  Product({required this.name, required this.imageUrl, required this.category});
-}
-
-class Category {
-  final String name;
-  final String imageUrl;
-
-  Category({required this.name, required this.imageUrl});
-}
-
-final List<Category> categories = [
-  Category(
-      name: "Eletrônicos", imageUrl: "https://picsum.photos/id/237/200/300"),
-  Category(name: "Roupas", imageUrl: "https://picsum.photos/id/238/200/300"),
-  Category(name: "Livros", imageUrl: "https://picsum.photos/id/239/200/300"),
-  Category(name: "Outro", imageUrl: "https://picsum.photos/id/239/200/300"),
-  Category(name: "Outro2", imageUrl: "https://picsum.photos/id/239/200/300"),
-  Category(name: "Outro4", imageUrl: "https://picsum.photos/id/239/200/300"),
-  Category(name: "Outro4234", imageUrl: "https://picsum.photos/id/239/200/300"),
-  Category(
-      name: "Outro42343", imageUrl: "https://picsum.photos/id/239/200/300"),
-];
-
-final List<Product> products = [
-  Product(
-      name: "iPhone 12",
-      imageUrl: "https://picsum.photos/id/240/300/200",
-      category: "Eletrônicos"),
-  Product(
-      name: "Samsung Galaxy S21",
-      imageUrl: "https://picsum.photos/id/241/300/200",
-      category: "Eletrônicos"),
-  Product(
-      name: "Camisa Polo",
-      imageUrl: "https://picsum.photos/id/242/300/200",
-      category: "Roupas"),
-  Product(
-      name: "Calça Jeans",
-      imageUrl: "https://picsum.photos/id/243/300/200",
-      category: "Roupas"),
-  Product(
-      name: "O Pequeno Príncipe",
-      imageUrl: "https://picsum.photos/id/244/300/200",
-      category: "Livros"),
-  Product(
-      name: "Dom Casmurro",
-      imageUrl: "https://picsum.photos/id/245/300/200",
-      category: "Livros"),
-];

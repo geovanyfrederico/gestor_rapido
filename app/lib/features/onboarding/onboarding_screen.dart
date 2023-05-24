@@ -58,20 +58,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             controller: _pageController,
             onPageChanged: _onPageChanged,
             children: const [
-             OnboardingPage(
+              OnboardingPage(
                 imagePath: 'assets/images/ilustration/gr4.png',
                 title: 'Bem vindo ao Gestor Rápido',
-                description: 'Gerencie suas atividades comerciais de forma eficiente e sem complicações.',
+                description:
+                    'Gerencie suas atividades comerciais de forma eficiente e sem complicações.',
               ),
               OnboardingPage(
                 imagePath: 'assets/images/ilustration/gr2.png',
                 title: 'Simplifique sua gestão',
-                description: 'Deixe o trabalho pesado para o Gestor Rápido e tenha mais tempo para focar no crescimento de seus negócios.',
+                description:
+                    'Deixe o trabalho pesado para o Gestor Rápido e tenha mais tempo para focar no crescimento de seus negócios.',
               ),
               OnboardingPage(
                 imagePath: 'assets/images/ilustration/gr3.png',
                 title: 'Comece agora',
-                description: 'A organizar sua gestão de maneira simples e eficiente - vamos começar?',
+                description:
+                    'A organizar sua gestão de maneira simples e eficiente - vamos começar?',
               ),
             ],
           ),
@@ -82,7 +85,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 3,
-                    (index) => Container(
+                (index) => Container(
                   width: 8.0,
                   height: 8.0,
                   margin: EdgeInsets.symmetric(horizontal: 4.0),
@@ -99,24 +102,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             right: 16.0,
             child: _isLastPage
                 ? TextButton(
-                onPressed: _completeOnboarding,
-                child:  Text('Começar',  style: TextStyle(
-                    color: Colors.white
-                )),
-
-            )
+                    onPressed: _completeOnboarding,
+                    child:
+                        Text('Começar', style: TextStyle(color: Colors.orange)),
+                  )
                 : TextButton(
-              onPressed: () {
-                _pageController.nextPage(
-                  duration:
-                  const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut,
-                );
-              },
-              child: const Text('Avançar', style: TextStyle(
-                  color: Colors.orange
-              )),
-            ),
+                    onPressed: () {
+                      _pageController.nextPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                    child: const Text('Avançar',
+                        style: TextStyle(color: Colors.orange)),
+                  ),
           ),
           Positioned(
             top: 32.0,
@@ -125,10 +124,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               onPressed: () {
                 Modular.to.navigate('/registar');
               },
-              child: const Text('Finalizar',
-              style: TextStyle(
-                color: Colors.orange
-              ),),
+              child: const Text(
+                'Finalizar',
+                style: TextStyle(color: Colors.orange),
+              ),
             ),
           ),
         ],
@@ -176,4 +175,3 @@ class OnboardingPage extends StatelessWidget {
     );
   }
 }
-
