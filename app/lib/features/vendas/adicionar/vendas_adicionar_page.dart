@@ -1,9 +1,11 @@
-import 'dart:io';
+import 'dart:developer';
 import 'package:gr/features/vendas/adicionar/vendas_adicionar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:gr/features/vendas/adicionar/vendas_adicionar_no_carrinho_controller.dart';
-import 'package:gr/core/utils/mat.dart';
+import 'package:gr/features/vendas/adicionar/wigets/payment_modal.dart';
+import 'package:gr/features/vendas/adicionar/wigets/produtos_no_carrinho_page.dart';
+
+import '../../../models/produto_model.dart';
 
 class VendasAdicionarPage extends StatefulWidget {
   const VendasAdicionarPage({Key? key}) : super(key: key);
@@ -15,14 +17,18 @@ class VendasAdicionarPage extends StatefulWidget {
 
 class VendasAdicionarState extends State<VendasAdicionarPage> {
   final VendasAdicionarController controller = VendasAdicionarController();
-  final VendasAdicionarNoCarrinhController _vendasAdicionarNoCarrinhController =
-      VendasAdicionarNoCarrinhController();
-  File? imageFile;
+
+  String? valorFilho;
+
+  // Função de callback para receber o valor do filho
+  void adicionarAoCarrinho(ProdutoModel produto) {
+    controller.adicionar(produto);
+    setState(() {});
+  }
 
   @override
   void initState() {
     super.initState();
-    _vendasAdicionarNoCarrinhController.buscarProdutos();
   }
 
   @override
@@ -44,82 +50,111 @@ class VendasAdicionarState extends State<VendasAdicionarPage> {
         children: [
           Container(),
           Positioned.fill(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: controller.cartItems.length,
-              padding: const EdgeInsets.all(8),
-              itemBuilder: (context, index) => Card(
-                child: Container(
-                  height: 110,
-                  padding: const EdgeInsets.all(15),
-                  width: 100,
-                  margin: const EdgeInsets.all(2),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 80,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  controller.cartItems[index].nome)),
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                controller.cartItems[index].nome,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Expanded(
-                                child: Text(
-                                  controller.cartItems[index].nome,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              Text(
-                                controller.cartItems[index].preco.toString(),
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Row(
+            child: controller.cartItems.isEmpty
+                ? Center(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            color: Colors.grey[200],
-                            child: const Icon(Icons.remove),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                                controller.cartItems[index].qtd.toString()),
-                          ),
-                          Container(
-                            color: Colors.grey[200],
-                            child: const Icon(Icons.add),
-                          ),
-                        ],
+                              padding:
+                                  const EdgeInsets.only(right: 50, top: 50),
+                              width: 360,
+                              child: Image.asset(
+                                  'assets/images/ilustration/gr9.png')),
+                          const Text(
+                            'Adicione produtos ao carrinho',
+                            style: TextStyle(
+                                fontWeight: FontWeight.normal, fontSize: 20),
+                          )
+                        ]),
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: controller.cartItems.length,
+                    padding: const EdgeInsets.all(8),
+                    itemBuilder: (context, index) => Card(
+                      child: Container(
+                        height: 90,
+                        padding: const EdgeInsets.all(15),
+                        width: 100,
+                        margin: const EdgeInsets.all(2),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                                radius: 35,
+                                backgroundImage: AssetImage(controller
+                                    .cartItems[index].produto!
+                                    .getFoto()),
+                                backgroundColor: Colors.transparent),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      controller.cartItems[index].nome,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      controller
+                                          .cartItems[index].produto!.codigo,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      controller.cartItems[index]
+                                          .precoTotalToMoney(),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.orange),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () => {
+                                    controller.removeQtd(index),
+                                    setState(() {})
+                                  },
+                                  child: Container(
+                                    color: Colors.grey[200],
+                                    child: const Icon(Icons.remove),
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(controller.cartItems[index].qtd
+                                      .toString()),
+                                ),
+                                GestureDetector(
+                                    onTap: () => {
+                                          controller.addQtd(index),
+                                          setState(() {})
+                                        },
+                                    child: Container(
+                                      color: Colors.grey[200],
+                                      child: const Icon(Icons.add),
+                                    ))
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
+                      shadowColor: Colors.grey[600],
+                      elevation: 1,
+                    ),
                   ),
-                ),
-                shadowColor: Colors.grey[600],
-                elevation: 1,
-              ),
-            ),
           ),
           Positioned(
             bottom: 0,
@@ -149,9 +184,9 @@ class VendasAdicionarState extends State<VendasAdicionarPage> {
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
-                          children: const [
+                          children: [
                             Text(
-                              "100.00 AOA",
+                              controller.totalPagarToMoney(),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20),
                             ),
@@ -165,7 +200,15 @@ class VendasAdicionarState extends State<VendasAdicionarPage> {
                     children: [
                       Expanded(
                           child: ElevatedButton(
-                              onPressed: () async => {},
+                              onPressed: () async => {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      isScrollControlled: true,
+                                      builder: (BuildContext context) {
+                                        return PaymentModal();
+                                      },
+                                    )
+                                  },
                               child: const Text("Finalizar"),
                               style: ElevatedButton.styleFrom(
                                 padding: EdgeInsets.symmetric(
@@ -185,8 +228,20 @@ class VendasAdicionarState extends State<VendasAdicionarPage> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () async {
-                            _showAddToCartModal(
-                                context, _vendasAdicionarNoCarrinhController);
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(16),
+                                  topRight: Radius.circular(16),
+                                ),
+                              ),
+                              builder: (BuildContext context) {
+                                return ProdutoNoCarrinhoPage(
+                                    callback: adicionarAoCarrinho);
+                              },
+                            );
                           },
                           child: const Text(
                             "Adicionar produtos",
@@ -219,100 +274,4 @@ class VendasAdicionarState extends State<VendasAdicionarPage> {
       )),
     );
   }
-}
-
-Future<void> _showAddToCartModal(
-    BuildContext context,
-    VendasAdicionarNoCarrinhController
-        _vendasAdicionarNoCarrinhoController) async {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(16),
-        topRight: Radius.circular(16),
-      ),
-    ),
-    builder: (BuildContext context) {
-      return Container(
-        padding: EdgeInsets.all(16),
-        height: MediaQuery.of(context).size.height * 0.8,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Adicionar ao Carrinho',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 16),
-            Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: ListView.builder(
-                      itemCount:
-                          _vendasAdicionarNoCarrinhoController.produtos.length,
-                      itemBuilder: (context, index) {
-                        return _buildProductItem(
-                            _vendasAdicionarNoCarrinhoController
-                                .produtos[index].nome,
-                            _vendasAdicionarNoCarrinhoController
-                                .produtos[index].codigo,
-                            Mat.numeroParaDinheiro(
-                                _vendasAdicionarNoCarrinhoController
-                                    .produtos[index].preco),
-                            _vendasAdicionarNoCarrinhoController
-                                .produtos[index].stock);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 16),
-            TextFormField(
-              onChanged: (value) async => {
-                await _vendasAdicionarNoCarrinhoController.filtrar(value),
-              },
-              decoration: InputDecoration(
-                hintText: 'Escreva para filtrar',
-                border: OutlineInputBorder(),
-                suffixIcon: Icon(Icons.search),
-              ),
-            ),
-          ],
-        ),
-      );
-    },
-  );
-}
-
-Widget _buildCategoryItem(String categoryName) {
-  return ListTile(
-    title: Text(categoryName),
-  );
-}
-
-Widget _buildProductItem(
-    String productName, String description, String price, int stock) {
-  return Card(
-      child: Padding(
-    padding: EdgeInsets.all(5),
-    child: ListTile(
-      title: Text(
-        productName,
-        style: TextStyle(fontSize: 18),
-      ),
-      subtitle: Text("Código: " + description + "\nStock:" + stock.toString()),
-      trailing: Text(
-        price,
-        style: TextStyle(fontWeight: FontWeight.w600),
-      ),
-    ),
-  ));
 }

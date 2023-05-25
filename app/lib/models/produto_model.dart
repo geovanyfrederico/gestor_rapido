@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:sqflite/sqflite.dart';
 
 import 'database_helper.dart';
@@ -33,6 +35,14 @@ class ProdutoModel {
     };
   }
 
+  String getFoto() {
+    if (foto == null) {
+      return "assets/images/produto/padrao.png";
+    } else {
+      return foto.toString();
+    }
+  }
+
   factory ProdutoModel.fromMap(Map<String, dynamic> map) {
     return ProdutoModel(
         id: map['id'],
@@ -46,6 +56,7 @@ class ProdutoModel {
     Database db = await DatabaseHelper.instance.database;
     List<Map<String, dynamic>> maps =
         await db.query('produto', orderBy: 'id DESC');
+
     return List.generate(maps.length, (index) {
       return ProdutoModel(
           id: maps[index]['id'],
