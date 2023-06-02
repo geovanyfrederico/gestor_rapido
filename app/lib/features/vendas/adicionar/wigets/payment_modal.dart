@@ -2,24 +2,39 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:gr/features/vendas/adicionar/wigets/payment_modal_controller.dart';
+import 'package:gr/models/produto_na_venda_model.dart';
 
 import '../../../../core/utils/mat.dart';
 import '../../../../models/produto_model.dart';
 import 'produtos_no_carrinho_controller.dart';
 
 class PaymentModal extends StatefulWidget {
-  const PaymentModal({Key? key}) : super(key: key);
+  const PaymentModal({
+    Key? key,
+    required this.produtosDoCarrinho,
+    required this.totalPagarDoCarrinho,
+  }) : super(key: key);
 
+  final List<ProdutoNaVendaModel> produtosDoCarrinho;
+  final double totalPagarDoCarrinho;
   @override
   _ModalContentState createState() => _ModalContentState();
 }
 
 class _ModalContentState extends State<PaymentModal> {
-  final ProdutoNoCarrinhoController _produtoNoCarrinhoPage =
-      ProdutoNoCarrinhoController();
+  final PaymentModalController _paymentModalController =
+  PaymentModalController();
 
+  void _update(){
+    _paymentModalController.calcularResumo();
+    setState(() {
+
+    });
+  }
   @override
   void initState() {
+    _paymentModalController.setResumo(widget.produtosDoCarrinho, widget.totalPagarDoCarrinho);
     super.initState();
   }
 
@@ -29,72 +44,122 @@ class _ModalContentState extends State<PaymentModal> {
         heightFactor: 0.9,
         child: SingleChildScrollView(
             child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.9,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                padding: EdgeInsets.only(top: 16, bottom: 15),
-                child: const Text(
-                  'Confirmação do pedido',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Expanded(
-                  child: Column(
+              height: MediaQuery.of(context).size.height * 0.9,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Card(
-                      elevation: 1,
-                      margin: const EdgeInsets.only(
-                          left: 10, top: 10, right: 10, bottom: 5),
-                      child: Padding(
-                          padding: EdgeInsets.all(2),
-                          child: ListTile(
-                            onTap: () {
-                              Modular.to.navigate("/categorias");
-                            },
-                            title: Text("Consumidor Final"),
-                            subtitle: Text("50000000"),
-                            trailing: Icon(Icons.arrow_right_alt_rounded),
-                          ))),
-                  Card(
-                      elevation: 1,
-                      margin: const EdgeInsets.only(
-                          left: 10, top: 10, right: 10, bottom: 5),
-                      child: Padding(
-                          padding: EdgeInsets.all(2),
-                          child: ListTile(
-                            onTap: () {
-                              Modular.to.navigate("/categorias");
-                            },
-                            leading: Icon(Icons.money),
-                            title: Text("Dinheiro"),
-                          ))),
-                  Card(
-                      elevation: 1,
-                      margin: const EdgeInsets.only(
-                          left: 10, top: 10, right: 10, bottom: 5),
-                      child: Padding(
-                          padding: EdgeInsets.all(2),
-                          child: ListTile(
-                            onTap: () {
-                              Modular.to.navigate("/categorias");
-                            },
-                            title: Text("Consumidor Final"),
-                            subtitle: Text(
-                                "NIF: 50000000 \nTel: +244 925924797 \nEnd: Benguela Lobito"),
-                            trailing: Icon(Icons.arrow_right_alt_rounded),
-                          ))),
+                  Container(
+                    padding: EdgeInsets.only(top: 16, bottom: 15),
+                    child: const Text(
+                      'Confirmação do pedido',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: Column(
+                        children: [
+                          Card(
+                              elevation: 1,
+                              margin: const EdgeInsets.only(
+                                  left: 10, top: 10, right: 10, bottom: 5),
+                              child: Padding(
+                                  padding: EdgeInsets.all(2),
+                                  child: ListTile(
+                                    onTap: () {
+                                      Modular.to.navigate("/categorias");
+                                    },
+                                    title: Text("Consumidor Final"),
+                                    subtitle: Text("NIF: 50000000"),
+                                    trailing: Icon(Icons.arrow_right_alt_rounded),
+                                  ))),
+                          Card(
+                              elevation: 1,
+                              margin: const EdgeInsets.only(
+                                  left: 10, top: 10, right: 10, bottom: 5),
+                              child: Padding(
+                                  padding: EdgeInsets.all(2),
+                                  child: ListTile(
+                                    onTap: () {
+                                      Modular.to.navigate("/categorias");
+                                    },
+                                    title: Text("Dinheiro"),
+                                    trailing: Icon(Icons.arrow_right_alt_rounded),
+                                  ))),
+                          Card(
+                              elevation: 1,
+                              margin: const EdgeInsets.only(
+                                  left: 10, top: 10, right: 10, bottom: 5),
+                              child: Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  child: ListTile(
+                                    onTap: () {
+                                      Modular.to.navigate("/categorias");
+                                    },
+                                    title: Text("RESUMO",
+                                        style: TextStyle(
+                                            fontSize: 15, fontWeight: FontWeight.bold)),
+                                    subtitle: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(height: 10),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Total Pagar",
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                            Text(
+                                              Mat.numeroParaDinheiro(_paymentModalController.totalPagar),
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 5),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Total Pago",
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                            Text(
+                                              Mat.numeroParaDinheiro(_paymentModalController.totalPago),
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 5),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Troco",
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                            Text(
+                                              Mat.numeroParaDinheiro(_paymentModalController.troco),
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ))),
+                        ],
+                      )),
+                  SizedBox(height: 16),
+                  _buildFooter()
                 ],
-              )),
-              SizedBox(height: 16),
-              _buildFooter()
-            ],
-          ),
-        )));
+              ),
+            )));
   }
 
   Widget _buildProductItem(ProdutoModel produto) {
@@ -126,13 +191,58 @@ class _ModalContentState extends State<PaymentModal> {
         child: Column(
           children: [
             TextFormField(
+              controller: _paymentModalController.totalPagoInput,
               decoration: const InputDecoration(
                 hintText: 'Valor pago',
                 border: OutlineInputBorder(),
                 suffixIcon: Icon(Icons.money),
               ),
+              onChanged: (value){
+                _update();
+              },
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 10),
+          /*  Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Card(
+                    color: Colors.grey[300],
+                    child: Padding(
+                      padding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: Text("2.000"),
+                    )),
+                Card(
+                    color: Colors.grey[300],
+                    child: Padding(
+                      padding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: Text("2.000"),
+                    )),
+                Card(
+                    color: Colors.grey[300],
+                    child: Padding(
+                      padding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: Text("2.000"),
+                    )),
+                Card(
+                    color: Colors.grey[300],
+                    child: Padding(
+                      padding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: Text("2.000"),
+                    )),
+                Card(
+                    color: Colors.grey[300],
+                    child: Padding(
+                      padding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: Text("2.000"),
+                    ))
+              ],
+            ),
+            SizedBox(height: 16),*/
             Row(
               children: [
                 Expanded(

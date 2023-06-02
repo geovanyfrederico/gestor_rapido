@@ -5,30 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7ac31ce2-683a-48f9-bf61-dc8522f2c0d3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/Cliente.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/ClienteModel.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/Compra.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/CompraModel.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/Empresa.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/EmpresaModel.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/Fornecedor.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/FornecedorModel.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/MovimentoDeStock.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/MovimentoDeStockModel.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/Produto.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/ProdutoModel.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/ProdutoNaCompra.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/ProdutoNaCompraModel.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/ProdutoNaVenda.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/ProdutoNaVendaModel.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/Sistema.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/SistemaModel.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/Usuario.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/UsuarioModel.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/Venda.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/src/models/VendaModel.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/src/models/DatabaseHelper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/src/models/DatabaseHelper.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/macos/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/app/macos/Podfile.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/exemplo_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gestor_rapido.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gestor_rapido.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/features/entrar/entrar_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/features/entrar/entrar_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/features/fornecedores/fornecedores_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/features/fornecedores/fornecedores_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/features/fornecedores/fornecedores_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/features/fornecedores/fornecedores_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/features/vendas/adicionar/wigets/payment_modal.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/features/vendas/adicionar/wigets/payment_modal.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/models/cliente_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/models/cliente_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/models/database_helper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/models/database_helper.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/test_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/exemplo_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,16 +33,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
-    <property name="cidr.known.project.marker" value="true" />
-    <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="show.migrate.to.gradle.popup" value="false" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/dikey/Documents/www/pessoal/gestor_rapido",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -65,8 +50,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1673771479620</updated>
+      <workItem from="1685735363452" duration="37000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

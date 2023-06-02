@@ -7,13 +7,16 @@ import 'package:gr/models/database_helper.dart';
 
 import '../../models/fornecedor_model.dart';
 
-
-class FornecedoresListarController  extends ChangeNotifier{
+class FornecedoresListarController extends ChangeNotifier {
   var fornecedores = <FornecedorModel>[];
-  Future<void> buscarClientes() async {
+
+  Future<void> buscarFornecedores() async {
     Database db = await DatabaseHelper.instance.database;
-    List<Map<String, dynamic>> maps = await db.query('fornecedor', orderBy: 'id DESC');
-    fornecedores =  List.generate(maps.length, (index) {
+
+    List<Map<String, dynamic>> maps =
+        await db.query('fornecedor', orderBy: 'id DESC');
+
+    fornecedores = List.generate(maps.length, (index) {
       return FornecedorModel(
         id: maps[index]['id'],
         nome: maps[index]['nome'],
@@ -26,13 +29,14 @@ class FornecedoresListarController  extends ChangeNotifier{
 
   Future<bool> eliminar(index, BuildContext context) async {
     FornecedorModel clienteModel = fornecedores[index];
-    if( await FornecedorModel.eliminar(clienteModel.id) > 0){
-      SnackbarHelper.success(context, "Successo: "+ clienteModel.nome+ " eliminado.");
+    if (await FornecedorModel.eliminar(clienteModel.id) > 0) {
+      SnackbarHelper.success(
+          context, "Successo: " + clienteModel.nome + " eliminado.");
       fornecedores.removeAt(index);
       return true;
     }
-    SnackbarHelper.error(context, "Erro: não é possivel eliminar este cliente.");
+    SnackbarHelper.error(
+        context, "Erro: não é possivel eliminar este cliente.");
     return false;
   }
-
 }

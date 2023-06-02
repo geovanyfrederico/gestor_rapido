@@ -39,7 +39,27 @@ class EmpresaModel {
             logo: map['logo'],
         );
     }
-
+    static Future<int> count() async {
+        Database db = await DatabaseHelper.instance.database;
+        List<Map<String, dynamic>> maps =
+        await db.query('empresa', orderBy: 'id DESC');
+        return maps.length;
+    }
+    static Future<List<EmpresaModel>> index() async {
+        Database db = await DatabaseHelper.instance.database;
+        List<Map<String, dynamic>> maps =
+        await db.query('empresa', orderBy: 'id DESC');
+        return List.generate(maps.length, (index) {
+            return EmpresaModel(
+                id: maps[index]['id'],
+                nome: maps[index]['nome'],
+                nif: maps[index]['nif'],
+                endereco: maps[index]['endereco'],
+                telefone: maps[index]['telefone'],
+                logo: maps[index]['logo'],
+            );
+        });
+    }
     Future<int> salvar() async {
         Database db = await DatabaseHelper.instance.database;
         return db.insert(tabela, {

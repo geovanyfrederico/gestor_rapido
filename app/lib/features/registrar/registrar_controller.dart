@@ -55,6 +55,11 @@ class RegistarController {
         telefone: telefone.value.text,
         tipo: 2
     );
+    final empresas =   await EmpresaModel.count();
+    if(empresas != 0){
+      SnackbarHelper.error(context, "Já existe uma empresa registrada neste despositivo");
+      return false;
+    }
     try {
       await empresaModel.salvar();
       final usuarioId = await usuarioModel.salvar();

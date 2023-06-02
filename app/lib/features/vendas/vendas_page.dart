@@ -43,7 +43,7 @@ class VendasPageState extends State<VendasPage> {
       appBar: AppBar(
         backgroundColor: Colors.orange,
         centerTitle: true,
-        title: const Text('vendas'),
+        title: const Text('Vendas'),
         actions: [
 
           IconButton(

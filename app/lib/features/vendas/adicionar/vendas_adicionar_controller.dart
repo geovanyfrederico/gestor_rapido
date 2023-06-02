@@ -14,13 +14,13 @@ class VendasAdicionarController {
   final nome = TextEditingController();
   final preco = TextEditingController();
   final stock = TextEditingController();
-  final cartItems = <ProdutoNaVendaModel>[];
+  final produtos = <ProdutoNaVendaModel>[];
   var categorias = <CategoriasModel>[];
 
   late double totalPagar = 0;
   void adicionar(ProdutoModel produtoModel) {
     late bool naoTem = true;
-    cartItems.forEach((element) {
+    produtos.forEach((element) {
       if (element.produtoId == produtoModel.id) {
         naoTem = false;
         element.addQtd();
@@ -34,20 +34,20 @@ class VendasAdicionarController {
           produto: produtoModel,
           preco: produtoModel.preco,
           precoTotal: produtoModel.preco * 1);
-      cartItems.add(produtoNaVendaModel);
+      produtos.add(produtoNaVendaModel);
     }
     calcular();
   }
 
   void addQtd(int index) {
-    cartItems[index].addQtd();
+    produtos[index].addQtd();
     calcular();
   }
 
   void removeQtd(int index) {
-    cartItems[index].removeQtd();
-    if (cartItems[index].qtd == 0) {
-      cartItems.removeAt(index);
+    produtos[index].removeQtd();
+    if (produtos[index].qtd == 0) {
+      produtos.removeAt(index);
     }
     calcular();
   }
@@ -55,11 +55,18 @@ class VendasAdicionarController {
   void calcular() {
     // Logica para calcular
     totalPagar = 0;
-    cartItems.forEach((element) {
+    produtos.forEach((element) {
       totalPagar = totalPagar + element.precoTotal;
     });
   }
 
+  bool podeFinalizarVenda(BuildContext context){
+    if (totalPagar <= 0){
+      SnackbarHelper.error(context, 'Não é possivel finalizar um carrinho vazio.');
+      return false;
+    }
+    return true;
+  }
   String totalPagarToMoney() {
     return Mat.numeroParaDinheiro(totalPagar);
   }

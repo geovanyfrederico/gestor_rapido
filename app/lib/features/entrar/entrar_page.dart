@@ -10,43 +10,43 @@ class EntrarPage extends StatefulWidget {
   _EntrarPageState createState() => _EntrarPageState();
 }
 
-
 class _EntrarPageState extends State<EntrarPage> {
   final EntrarController _controller = EntrarController();
   late SharedPreferences _prefs;
- bool _obscureText = true;
+  bool _obscureText = true;
   @override
   void initState() {
     super.initState();
     initPrefs();
   }
+
   // Initialize shared preferences
   Future<void> initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
     // Check if user has completed onboarding
-    final hasCompletedOnboarding =
-        _prefs.getBool('logado') ?? false;
+    final hasCompletedOnboarding = _prefs.getBool('logado') ?? false;
     if (hasCompletedOnboarding) {
       Modular.to.navigate('/dashboard');
     }
   }
+
   Future<void> finalizarEntrar() async {
     await _prefs.setBool('logado', true);
     Modular.to.navigate("/dashboard");
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.grey[10],
         body: Container(
           padding: const EdgeInsets.only(top: 60, left: 40, right: 40),
-          child:  ListView(
+          child: ListView(
             children: [
               SizedBox(
                   width: 100,
                   height: 100,
-                  child: Image.asset('assets/images/logo.png')
-              ),
+                  child: Image.asset('assets/images/logo.png')),
               const Text(
                 'GESTOR  RÁPIDO',
                 textAlign: TextAlign.center,
@@ -55,7 +55,7 @@ class _EntrarPageState extends State<EntrarPage> {
                 height: 30,
               ),
               Column(
-                children:  [
+                children: [
                   Padding(
                       padding: const EdgeInsets.only(bottom: 20),
                       child: TextField(
@@ -71,18 +71,16 @@ class _EntrarPageState extends State<EntrarPage> {
                           decoration: const InputDecoration(
                             focusColor: Colors.orange,
                             filled: true,
-                            contentPadding:
-                            EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 20),
                             focusedBorder: OutlineInputBorder(
                               borderSide:
-                              BorderSide(color: Colors.orange, width: 2.0),
+                                  BorderSide(color: Colors.orange, width: 2.0),
                             ),
                             border: InputBorder.none,
                             hintText: 'Telefone',
                             counterText: "",
-                          )
-                      )
-                  ),
+                          ))),
                   Padding(
                       padding: EdgeInsets.only(bottom: 0),
                       child: TextField(
@@ -96,15 +94,14 @@ class _EntrarPageState extends State<EntrarPage> {
                           // Set the text of your controller to
                           // to the next value.
                           obscureText: _obscureText,
-                          decoration:  InputDecoration(
+                          decoration: InputDecoration(
                             focusColor: Colors.orange,
-
                             filled: true,
-                            contentPadding:
-                            EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 20),
                             focusedBorder: OutlineInputBorder(
                               borderSide:
-                              BorderSide(color: Colors.orange, width: 2.0),
+                                  BorderSide(color: Colors.orange, width: 2.0),
                             ),
                             border: InputBorder.none,
                             hintText: 'Pin',
@@ -115,29 +112,29 @@ class _EntrarPageState extends State<EntrarPage> {
                                   _obscureText = !_obscureText;
                                 });
                               },
-                              child: Icon(_obscureText ? Icons.visibility : Icons.visibility_off,),
+                              child: Icon(
+                                _obscureText
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                              ),
                             ),
-
-                          )
-                      )
-                  ),
+                          ))),
                   Container(
                     height: 55,
                     alignment: Alignment.centerRight,
                     child: SizedBox(
                       child: TextButton(
-                          onPressed: ()  {
+                          onPressed: () {
                             Modular.to.navigate("/recuperar");
                           },
-                          child: const Text("Esquceu a senha?"),
+                          child: const Text("Esqueceu o pin?"),
                           style: TextButton.styleFrom(
                             primary: Colors.grey[600],
                             textStyle: const TextStyle(
                               fontSize: 15.0,
                               fontWeight: FontWeight.w600,
                             ),
-                          )
-                      ),
+                          )),
                     ),
                   ),
                   Container(
@@ -146,8 +143,10 @@ class _EntrarPageState extends State<EntrarPage> {
                     child: SizedBox.expand(
                       child: ElevatedButton(
                           onPressed: () async => {
-                            await _controller.entrar(context) ? finalizarEntrar() : false
-                          },
+                                await _controller.entrar(context)
+                                    ? finalizarEntrar()
+                                    : false
+                              },
                           child: const Text("Entrar"),
                           style: ElevatedButton.styleFrom(
                             primary: Colors.orange,
@@ -155,8 +154,7 @@ class _EntrarPageState extends State<EntrarPage> {
                               fontSize: 15.0,
                               fontWeight: FontWeight.w600,
                             ),
-                          )
-                      ),
+                          )),
                     ),
                   ),
                   Container(
@@ -173,15 +171,13 @@ class _EntrarPageState extends State<EntrarPage> {
                               fontSize: 15.0,
                               fontWeight: FontWeight.w600,
                             ),
-                          )
-                      ),
+                          )),
                     ),
                   ),
                 ],
               )
             ],
           ),
-        )
-    );
+        ));
   }
 }
