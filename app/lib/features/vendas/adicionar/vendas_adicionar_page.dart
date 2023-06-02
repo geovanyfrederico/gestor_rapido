@@ -240,8 +240,7 @@ class VendasAdicionarState extends State<VendasAdicionarPage> {
                                     ),
                                   ),
                                   builder: (BuildContext context) {
-                                    return ProdutoNoCarrinhoPage(
-                                        callback: adicionarAoCarrinho);
+                                    return ProdutoNoCarrinhoPage(callback: adicionarAoCarrinho);
                                   },
                                 );
                               },

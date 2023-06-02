@@ -13,10 +13,10 @@ class ClienteModel extends ModeloGlobal {
   //List<VendaModel> vendas = [];
   ClienteModel(
       {this.id,
-      required this.nome,
-      required this.nif,
-      this.endereco,
-      this.telefone});
+        required this.nome,
+        required this.nif,
+        this.endereco,
+        this.telefone});
 
   Map<String, dynamic> toMap() {
     return {
@@ -47,5 +47,18 @@ class ClienteModel extends ModeloGlobal {
   static Future<int> eliminar(int? id) async {
     Database db = await DatabaseHelper.instance.database;
     return await db.delete(tabela, where: 'id = ?', whereArgs: [id]);
+  }
+
+  static Future<ClienteModel> findOneById(int id) async {
+    Database db = await DatabaseHelper.instance.database;
+    List<Map<String, dynamic>> maps = await db.query(
+      tabela,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    if (maps.isNotEmpty) {
+      return ClienteModel.fromMap(maps.first);
+    }
+   throw Exception("Não foi possivel encontrar este cliente");
   }
 }

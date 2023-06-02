@@ -28,13 +28,14 @@ class _ModalContentState extends State<PaymentModal> {
 
   void _update(){
     _paymentModalController.calcularResumo();
-    setState(() {
+    setState(() {});
 
-    });
   }
   @override
   void initState() {
-    _paymentModalController.setResumo(widget.produtosDoCarrinho, widget.totalPagarDoCarrinho);
+    _paymentModalController.init(widget.produtosDoCarrinho, widget.totalPagarDoCarrinho).then((value) => {
+      setState(() {})
+    });
     super.initState();
   }
 
@@ -69,11 +70,11 @@ class _ModalContentState extends State<PaymentModal> {
                                   padding: EdgeInsets.all(2),
                                   child: ListTile(
                                     onTap: () {
-                                      Modular.to.navigate("/categorias");
+
                                     },
-                                    title: Text("Consumidor Final"),
-                                    subtitle: Text("NIF: 50000000"),
-                                    trailing: Icon(Icons.arrow_right_alt_rounded),
+                                    title: Text(_paymentModalController.cliente.nome),
+                                    subtitle: Text("NIF: ${_paymentModalController.cliente.nif}"),
+                                    trailing: const Icon(Icons.arrow_right_alt_rounded),
                                   ))),
                           Card(
                               elevation: 1,
@@ -202,7 +203,7 @@ class _ModalContentState extends State<PaymentModal> {
               },
             ),
             SizedBox(height: 10),
-          /*  Row(
+            /*  Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Card(
