@@ -2,61 +2,63 @@ import 'dart:ffi';
 
 import 'package:gr/models/cliente_model.dart';
 import 'package:gr/models/usuario_model.dart';
+import 'package:sqflite/sqflite.dart';
 
 import 'cliente_model.dart';
+import 'database_helper.dart';
 
 class VendaModel {
-    int id;
-    int cliente_id;
-    int usuario_id;
+    int? id;
+    int? clienteId;
+    int? usuarioId;
     String data;
     int totalQtd;
     double totalPagar;
     double totalPago;
     double troco;
-    late ClienteModel cliente;
-    late UsuarioModel usuario;
+    late ClienteModel? cliente;
+    late UsuarioModel? usuario;
 
     VendaModel({
-        required this.id,
-        required this.cliente_id,
-        required this.usuario_id,
+        this.id,
+        this.clienteId,
+        this.usuarioId,
         required this.data,
         required this.totalQtd,
         required this.totalPagar,
         required this.totalPago,
         required this.troco,
-        required this.cliente,
-        required this.usuario,
+        cliente, usuario
     });
 
     Map<String, dynamic> toMap() {
         return {
             'id':id,
-            'cliente_id':cliente_id,
-            'usuario_id':usuario_id,
+            'clienteId':clienteId,
+            'usuarioId':usuarioId,
             'data':data,
             'totalQtd':totalQtd,
             'totalPagar':totalPagar,
             'totalPago':totalPago,
             'troco':troco,
-            'clientes':cliente,
-            'usuario':usuario,
         };
     }
 
     factory VendaModel.fromMap(Map<String, dynamic> map) {
         return VendaModel(
             id: map['id'],
-            cliente_id: map['cliente_id'],
-            usuario_id: map['usuario_id'] ,
+            clienteId: map['clienteId'],
+            usuarioId: map['usuarioId'] ,
             data: map['data'],
             totalQtd: map['totalQtd'],
             totalPagar: map['totalPagar'],
             totalPago: map['totalPago'] ,
             troco: map['troco'],
-            cliente: map['clientes'],
-            usuario: map['usuario'],
         );
+    }
+
+    Future<Future<int>> salvar() async {
+        Database db = await DatabaseHelper.instance.database;
+        return db.insert('venda', toMap());
     }
 }

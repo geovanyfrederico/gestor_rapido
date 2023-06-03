@@ -1,6 +1,9 @@
 import 'package:gr/models/produto_model.dart';
+import 'package:gr/models/venda_model.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../core/utils/mat.dart';
+import 'database_helper.dart';
 
 class ProdutoNaVendaModel {
   int? id;
@@ -10,14 +13,17 @@ class ProdutoNaVendaModel {
   double preco;
   double precoTotal;
   ProdutoModel? produto;
+  int? vendaId;
   ProdutoNaVendaModel(
       {this.id,
-      required this.produtoId,
-      required this.qtd,
-      required this.nome,
-      required this.preco,
-      required this.precoTotal,
-      this.produto});
+        required this.produtoId,
+        required this.qtd,
+        required this.nome,
+        required this.preco,
+        required this.precoTotal,
+        this.produto,
+        this.vendaId
+      });
 
   // List <MovimentoDeStockModel>  movimentoDeStocks;
   // List <ProdutoNaCompra>  produtoNaCompras;
@@ -31,6 +37,7 @@ class ProdutoNaVendaModel {
       'produtoId': produtoId,
       'precoTotal': precoTotal,
       'qtd': qtd,
+      'vendaId':vendaId
     };
   }
 
@@ -61,5 +68,9 @@ class ProdutoNaVendaModel {
   void removeQtd() {
     qtd--;
     precoTotal = preco * qtd;
+  }
+  Future<Future<int>> salvar() async {
+    Database db = await DatabaseHelper.instance.database;
+    return db.insert('produtoNaVenda', toMap());
   }
 }

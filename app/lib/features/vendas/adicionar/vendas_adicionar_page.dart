@@ -1,11 +1,9 @@
-import 'dart:developer';
 import 'package:gr/features/vendas/adicionar/vendas_adicionar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:gr/features/vendas/adicionar/wigets/payment_modal.dart';
+import 'package:gr/features/vendas/adicionar/wigets/finalizar_modal/finalizar_modal_page.dart';
 import 'package:gr/features/vendas/adicionar/wigets/produtos_no_carrinho_page.dart';
-
-import '../../../models/produto_model.dart';
+import 'package:gr/models/produto_model.dart';
 
 class VendasAdicionarPage extends StatefulWidget {
   const VendasAdicionarPage({Key? key}) : super(key: key);
@@ -206,7 +204,7 @@ class VendasAdicionarState extends State<VendasAdicionarPage> {
                                         context: context,
                                         isScrollControlled: true,
                                         builder: (BuildContext context) {
-                                          return PaymentModal(totalPagarDoCarrinho: controller.totalPagar, produtosDoCarrinho: controller.produtos,);
+                                          return FinalizarModalPage(totalPagarDoCarrinho: controller.totalPagar, produtosDoCarrinho: controller.produtos,);
                                         },
                                       )
                                     }

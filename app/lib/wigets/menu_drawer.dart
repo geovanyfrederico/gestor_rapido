@@ -24,7 +24,7 @@ class MenuDrawerState extends State<MenuDrawer> {
   // Initialize shared preferences
   Future<void> initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
-    log(_prefs.getKeys().toString());
+
     setState(() {
       usuarioNome =  _prefs.getString("usuarioNome")!;
       usuarioTipo =  UsuarioModel.tipoDescricaoStatico(_prefs.getInt("usuarioTipo")?.toInt()) ;

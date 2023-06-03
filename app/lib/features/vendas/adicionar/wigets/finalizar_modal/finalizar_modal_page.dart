@@ -1,16 +1,14 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:gr/features/vendas/adicionar/wigets/payment_modal_controller.dart';
 import 'package:gr/models/produto_na_venda_model.dart';
+import 'package:gr/core/utils/mat.dart';
+import 'package:gr/models/produto_model.dart';
+import 'package:gr/models/cliente_model.dart';
+import '../cliente_modal/cliente_modal_page.dart';
+import 'finalizar_modal_controller.dart';
 
-import '../../../../core/utils/mat.dart';
-import '../../../../models/produto_model.dart';
-import 'produtos_no_carrinho_controller.dart';
-
-class PaymentModal extends StatefulWidget {
-  const PaymentModal({
+class FinalizarModalPage extends StatefulWidget {
+  const FinalizarModalPage({
     Key? key,
     required this.produtosDoCarrinho,
     required this.totalPagarDoCarrinho,
@@ -18,22 +16,47 @@ class PaymentModal extends StatefulWidget {
 
   final List<ProdutoNaVendaModel> produtosDoCarrinho;
   final double totalPagarDoCarrinho;
+
   @override
   _ModalContentState createState() => _ModalContentState();
 }
 
-class _ModalContentState extends State<PaymentModal> {
-  final PaymentModalController _paymentModalController =
-  PaymentModalController();
+class _ModalContentState extends State<FinalizarModalPage> {
+  final FinalizarModalController controller =
+  FinalizarModalController();
+  void _exibirAlerta(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Erro'),
+          content: Text('Ocorreu um erro. Tente novamente.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
+  // Função de callback para receber o valor do filho
+  void setCliente(ClienteModel cliente) {
+    controller.setCliente(cliente);
+    setState(() {});
+  }
   void _update(){
-    _paymentModalController.calcularResumo();
+    controller.calcularResumo();
     setState(() {});
 
   }
   @override
   void initState() {
-    _paymentModalController.init(widget.produtosDoCarrinho, widget.totalPagarDoCarrinho).then((value) => {
+    controller.init(widget.produtosDoCarrinho, widget.totalPagarDoCarrinho).then((value) => {
       setState(() {})
     });
     super.initState();
@@ -70,10 +93,16 @@ class _ModalContentState extends State<PaymentModal> {
                                   padding: EdgeInsets.all(2),
                                   child: ListTile(
                                     onTap: () {
-
+                                      showModalBottomSheet(
+                                        context: context,
+                                        isScrollControlled: true,
+                                        builder: (BuildContext context) {
+                                          return ClienteModalPage(callback: setCliente);
+                                        },
+                                      );
                                     },
-                                    title: Text(_paymentModalController.cliente.nome),
-                                    subtitle: Text("NIF: ${_paymentModalController.cliente.nif}"),
+                                    title: Text(controller.cliente.nome),
+                                    subtitle: Text("NIF: ${controller.cliente.nif}"),
                                     trailing: const Icon(Icons.arrow_right_alt_rounded),
                                   ))),
                           Card(
@@ -84,7 +113,7 @@ class _ModalContentState extends State<PaymentModal> {
                                   padding: EdgeInsets.all(2),
                                   child: ListTile(
                                     onTap: () {
-                                      Modular.to.navigate("/categorias");
+                                      // Modular.to.navigate("/categorias");
                                     },
                                     title: Text("Dinheiro"),
                                     trailing: Icon(Icons.arrow_right_alt_rounded),
@@ -116,7 +145,7 @@ class _ModalContentState extends State<PaymentModal> {
                                               style: TextStyle(fontSize: 18),
                                             ),
                                             Text(
-                                              Mat.numeroParaDinheiro(_paymentModalController.totalPagar),
+                                              Mat.numeroParaDinheiro(controller.totalPagar),
                                               style: TextStyle(fontSize: 18),
                                             ),
                                           ],
@@ -131,7 +160,7 @@ class _ModalContentState extends State<PaymentModal> {
                                               style: TextStyle(fontSize: 18),
                                             ),
                                             Text(
-                                              Mat.numeroParaDinheiro(_paymentModalController.totalPago),
+                                              Mat.numeroParaDinheiro(controller.totalPago),
                                               style: TextStyle(fontSize: 18),
                                             ),
                                           ],
@@ -146,7 +175,7 @@ class _ModalContentState extends State<PaymentModal> {
                                               style: TextStyle(fontSize: 18),
                                             ),
                                             Text(
-                                              Mat.numeroParaDinheiro(_paymentModalController.troco),
+                                              Mat.numeroParaDinheiro(controller.troco),
                                               style: TextStyle(fontSize: 18),
                                             ),
                                           ],
@@ -192,7 +221,7 @@ class _ModalContentState extends State<PaymentModal> {
         child: Column(
           children: [
             TextFormField(
-              controller: _paymentModalController.totalPagoInput,
+              controller: controller.totalPagoInput,
               decoration: const InputDecoration(
                 hintText: 'Valor pago',
                 border: OutlineInputBorder(),
@@ -248,7 +277,9 @@ class _ModalContentState extends State<PaymentModal> {
               children: [
                 Expanded(
                     child: ElevatedButton(
-                        onPressed: () async => {},
+                        onPressed: () async => {
+                          controller.finalizar(context)
+                        },
                         child: const Text("Finalizar"),
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(

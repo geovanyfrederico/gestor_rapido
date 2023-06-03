@@ -59,6 +59,28 @@ class ClienteModel extends ModeloGlobal {
     if (maps.isNotEmpty) {
       return ClienteModel.fromMap(maps.first);
     }
-   throw Exception("Não foi possivel encontrar este cliente");
+    throw Exception("Não foi possivel encontrar este cliente");
   }
+
+  static Future<List<ClienteModel>> index() async {
+    Database db = await DatabaseHelper.instance.database;
+    List<Map<String, dynamic>> maps =
+    await db.query('cliente', orderBy: 'id DESC');
+
+    return List.generate(maps.length, (index) {
+      return ClienteModel.fromMap(maps[index]);
+    });
+  }
+
+  static Future<List<ClienteModel>> search(String search) async {
+    Database db = await DatabaseHelper.instance.database;
+    List<Map<String, dynamic>> maps = await db.query('cliente',
+        orderBy: 'id DESC',
+        where: 'nome LIKE ? OR nif LIKE ?',
+        whereArgs: ['%$search%', '%$search%']);
+    return List.generate(maps.length, (index) {
+      return ClienteModel.fromMap(maps[index]);
+    });
+  }
+
 }
