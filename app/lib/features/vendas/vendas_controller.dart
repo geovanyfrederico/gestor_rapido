@@ -29,7 +29,7 @@ class VendasController  extends ChangeNotifier{
     });
   }
   Future<bool> eliminar(id, BuildContext context) async {
-   await ProdutoModel.eliminar(id) > 0 ? SnackbarHelper.success(context, 'Operação concluida') :  SnackbarHelper.success(context, 'Operação não concluida');
+    await ProdutoModel.eliminar(id) > 0 ? SnackbarHelper.success(context, 'Operação concluida') :  SnackbarHelper.success(context, 'Operação não concluida');
     return true;
   }
 

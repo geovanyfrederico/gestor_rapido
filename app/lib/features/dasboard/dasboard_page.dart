@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:gr/wigets/menu_drawer.dart';
 
+import '../../core/utils/mat.dart';
+import '../../core/utils/tempo.dart';
+import '../../models/venda_model.dart';
+import '../vendas/visualizar/visualizar_modal_page.dart';
+import 'dasboard_controller.dart';
+
 class DashboardPage extends StatefulWidget {
-   const DashboardPage({Key? key}) : super(key: key);
+  const DashboardPage({Key? key}) : super(key: key);
 
   @override
   _DashboardPageState createState() => _DashboardPageState();
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  final List<Sale> _sales = [    Sale(date: '2023-04-20', amount: 120.50),    Sale(date: '2023-04-19', amount: 78.90),    Sale(date: '2023-04-18', amount: 250.00),    Sale(date: '2023-04-17', amount: 90.25),    Sale(date: '2023-04-16', amount: 150.00),  ];
+  DashboardController controller = DashboardController();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.init().then((value) => {
+      setState(() {})
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +50,13 @@ class _DashboardPageState extends State<DashboardPage> {
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: const [
+                        children:  [
                           Text(
                             'Hoje',
                             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                           ),
                           SizedBox(height: 8.0),
-                          Text(
-                            '120.50 Kz',
+                          Text(controller.vendasDiariasDinheiro,
                             style: TextStyle(fontSize: 18.0, color: Colors.white),
                           ),
                         ],
@@ -61,14 +74,13 @@ class _DashboardPageState extends State<DashboardPage> {
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: const [
+                        children:  [
                           Text(
                             'Esta semana',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 8.0),
-                          Text(
-                            '120.50 Kz',
+                          Text( controller.vendasSemanaisDinheiro,
                             style: TextStyle(fontSize: 18.0),
                           ),
                         ],
@@ -89,8 +101,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 8.0),
-                          const Text(
-                            '789.65 Kz',
+                          Text(controller.vendasMensaisDinheiro,
                             style: const TextStyle(fontSize: 18.0),
                           ),
                         ],
@@ -107,13 +118,58 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             const SizedBox(height: 16.0),
             Expanded(
-              child: ListView.builder(
-                itemCount: _sales.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: ListTile(
-                      title: Text('Data: ${_sales[index].date}'),
-                      subtitle: Text('Valor: ${_sales[index].amount.toStringAsFixed(2)} kz'),
+              child: FutureBuilder<List<VendaModel>>(
+                future: controller.ultimasVendas(),
+                builder: (context, snapshot)  {
+                  if(snapshot.connectionState != ConnectionState.done){
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  // Erro
+                  if(snapshot.hasError){
+                    return const Center(child: Text("Ocorreu um erro ao buscar os vendas."));
+                  }
+                  // Lista vasia
+                  if(snapshot.data!.isEmpty){
+                    return Center(child: Column(
+                      crossAxisAlignment:CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                            width: 300,
+                            height: 300,
+                            child: Image.asset('assets/images/ilustration/gr9.png')
+                        ),
+                        const Text("Sem vendas",
+                            style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.grey
+                            ))
+                      ],
+                    ));
+                  }
+                  // Tudo correu bem
+                  return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) => Card(
+                      elevation: 1,
+                      margin: const EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 5),
+                      child: Padding(
+                          padding:EdgeInsets.all(5) ,
+                          child:
+                          ListTile(
+                              onTap: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) {
+                                    return VisualizarModalPage(venda: snapshot.data![index]);
+                                  },
+                                );
+                              },
+                              title: Text("Venda "+snapshot.data![index].id.toString()),
+                              subtitle: Text("Qtd: ${snapshot.data![index].totalQtd.toString()}\nData: ${Tempo.formatarData(snapshot.data![index].data.toString())}"),
+                              trailing:  Text(Mat.numeroParaDinheiro(snapshot.data![index].totalPagar.toString()))
+                          )),
                     ),
                   );
                 },
@@ -126,9 +182,3 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 }
 
-class Sale {
-  final String date;
-  final double amount;
-
-  Sale({required this.date, required this.amount});
-}

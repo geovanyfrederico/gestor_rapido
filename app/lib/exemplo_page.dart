@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import 'exemplo_controller.dart';
 
@@ -20,7 +21,9 @@ class _ExemploPageState extends State<ExemploPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-                onPressed: () => {controller.iniciar(), controller.iniciar2()},
+                onPressed: () => {
+                  Modular.to.pushNamed('/dashboard'),
+                },
                 child: Text("Clicame"))
           ],
         ),

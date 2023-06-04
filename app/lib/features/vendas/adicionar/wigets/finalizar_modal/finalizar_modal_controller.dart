@@ -74,8 +74,7 @@ class FinalizarModalController {
 
 
   String _hoje(){
-    DateTime today = DateTime.now();
-    return DateFormat('yyyy-MM-dd').format(today);
+    return DateTime.now().toIso8601String();
   }
   Future<int> usuarioId() async {
     late SharedPreferences _prefs;

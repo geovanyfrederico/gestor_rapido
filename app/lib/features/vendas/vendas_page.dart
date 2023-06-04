@@ -7,8 +7,6 @@ import 'package:gr/features/vendas/vendas_controller.dart';
 import 'package:gr/features/vendas/visualizar/visualizar_modal_page.dart';
 import 'package:gr/wigets/menu_drawer.dart';
 import 'package:gr/core/utils/mat.dart';
-import 'package:gr/models/produto_model.dart';
-
 import '../../models/venda_model.dart';
 
 class VendasPage extends StatefulWidget {
@@ -117,7 +115,7 @@ class VendasPageState extends State<VendasPage> {
       body: SafeArea(
         child: FutureBuilder<List<VendaModel>>(
           future: controller.buscar(),
-          builder: (context, snapshot) {
+          builder: (context, snapshot)  {
             if(snapshot.connectionState != ConnectionState.done){
               return const Center(child: CircularProgressIndicator());
             }

@@ -24,10 +24,10 @@ class MenuDrawerState extends State<MenuDrawer> {
   // Initialize shared preferences
   Future<void> initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
+    usuarioNome =  _prefs.getString("usuarioNome")!;
+    usuarioTipo =  UsuarioModel.tipoDescricaoStatico(_prefs.getInt("usuarioTipo")?.toInt()) ;
 
     setState(() {
-      usuarioNome =  _prefs.getString("usuarioNome")!;
-      usuarioTipo =  UsuarioModel.tipoDescricaoStatico(_prefs.getInt("usuarioTipo")?.toInt()) ;
     });
     // Check if user has completed onboarding
   }
@@ -102,7 +102,7 @@ class MenuDrawerState extends State<MenuDrawer> {
               leading: const Icon(Icons.query_stats),
               title: const Text('Relatorios'),
               onTap: () {
-                Modular.to.navigate("/test");
+                Modular.to.navigate("/relatorios");
               },
             ),
             const Divider(),

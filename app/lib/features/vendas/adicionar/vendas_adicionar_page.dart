@@ -79,7 +79,12 @@ class VendasAdicionarState extends State<VendasAdicionarPage> {
                     : ListView.builder(
                   shrinkWrap: true,
                   itemCount: controller.produtos.length,
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.only(
+                    right: 0,
+                    left: 0,
+                    top:0,
+                    bottom: 230
+                  ),
                   itemBuilder: (context, index) => Card(
                     child: Container(
                       height: 90,
