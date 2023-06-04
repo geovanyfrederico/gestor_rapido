@@ -10,12 +10,7 @@ import '../../../models/produto_model.dart';
 import '../../../models/usuario_model.dart';
 
 class VendasAdicionarController {
-  final codigo = TextEditingController();
-  final nome = TextEditingController();
-  final preco = TextEditingController();
-  final stock = TextEditingController();
-  final produtos = <ProdutoNaVendaModel>[];
-  var categorias = <CategoriasModel>[];
+  late  List<ProdutoNaVendaModel> produtos = <ProdutoNaVendaModel>[];
 
   late double totalPagar = 0;
   void adicionar(ProdutoModel produtoModel) {
@@ -30,7 +25,7 @@ class VendasAdicionarController {
       ProdutoNaVendaModel produtoNaVendaModel = ProdutoNaVendaModel(
           nome: produtoModel.nome,
           produtoId: produtoModel.id,
-          qtd: 1,
+          totalQtd: 1,
           produto: produtoModel,
           preco: produtoModel.preco,
           precoTotal: produtoModel.preco * 1);
@@ -46,7 +41,7 @@ class VendasAdicionarController {
 
   void removeQtd(int index) {
     produtos[index].removeQtd();
-    if (produtos[index].qtd == 0) {
+    if (produtos[index].totalQtd == 0) {
       produtos.removeAt(index);
     }
     calcular();
@@ -69,5 +64,11 @@ class VendasAdicionarController {
   }
   String totalPagarToMoney() {
     return Mat.numeroParaDinheiro(totalPagar);
+  }
+
+  void finalizarVenda() {
+    produtos.clear();
+    totalPagar = 0;
+    calcular();
   }
 }

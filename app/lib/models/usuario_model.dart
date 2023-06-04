@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:gr/models/modelo_global.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -97,5 +99,18 @@ class UsuarioModel extends ModeloGlobal{
             return 'Gerente';
         }
         return 'Não definido';
+    }
+
+    static findOneById(int id) async {
+        Database db = await DatabaseHelper.instance.database;
+        List<Map<String, dynamic>> maps = await db.query(
+            tabela,
+            where: 'id = ?',
+            whereArgs: [id],
+        );
+        if (maps.isNotEmpty) {
+            return UsuarioModel.fromMap(maps.first);
+        }
+        throw Exception("Não foi possivel encontrar este cliente");
     }
 }

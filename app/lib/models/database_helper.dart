@@ -53,10 +53,15 @@ class DatabaseHelper {
     return "$nomeDaColuna $tipoDeDados $propriedades ${permitirNull ? 'DEFAULT NULL' : 'NOT NULL'}";
   }
 
+  String addChave(String nomeDaColuna, String tabelaDeReferencia, String colunaDeReferencia) {
+    return "$nomeDaColuna INTEGER NOT NULL REFERENCES $tabelaDeReferencia($colunaDeReferencia)";
+  }
+
   Future<void> criarTabelas(Database db) async {
     log("DB::TABLES::START");
     try {
-      //EMPRESA
+
+
       await db.execute('''
     CREATE TABLE empresa(
         ${addId()},
@@ -136,16 +141,13 @@ class DatabaseHelper {
       await db.execute('''
     CREATE TABLE venda (
         ${addId()},
-        ${addColuna('nome')},
-        ${addColuna('codigo', permitirNull: false, propriedades: 'UNIQUE')},
         ${addColuna('data', permitirNull: false)},
         ${addColuna('totalQtd', permitirNull: false, tipoDeDados: 'INTEGER')},
         ${addColuna('totalPagar', permitirNull: false, tipoDeDados: 'REAL')},
         ${addColuna('totalPago', permitirNull: false, tipoDeDados: 'REAL')},
         ${addColuna('troco', permitirNull: false, tipoDeDados: 'REAL')},
-        ${addColuna('fornecedorId', permitirNull: false)},
-        ${addColuna('usuarioId', permitirNull: false)},
-        ${addColuna('clienteId', permitirNull: false)}
+        ${addChave('usuarioId','usuario', 'id')},
+        ${addChave('clienteId', 'cliente', 'id')}
     );
     ''');
 
@@ -201,7 +203,9 @@ class DatabaseHelper {
     }
   }
 
-  void criarRelacionamentos(Database db) {}
+  Future<void> criarRelacionamentos(Database db) async {
+
+  }
   // insere um registro no banco de dados
   Future<int> insert(String table, Map<String, dynamic> row) async {
     Database db = await instance.database;
@@ -246,5 +250,7 @@ class DatabaseHelper {
       INSERT INTO cliente(nome, endereco, telefone, nif)
       VALUES(?, ?, ?, ?)
       ''', ['Consumidor Final', 'Desconhecido', '', '99999999']);
+
+
   }
 }

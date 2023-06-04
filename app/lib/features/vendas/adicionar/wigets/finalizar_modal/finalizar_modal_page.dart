@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gr/models/produto_na_venda_model.dart';
 import 'package:gr/core/utils/mat.dart';
 import 'package:gr/models/produto_model.dart';
 import 'package:gr/models/cliente_model.dart';
+import '../../../../../core/utils/alert_help.dart';
 import '../cliente_modal/cliente_modal_page.dart';
 import 'finalizar_modal_controller.dart';
 
@@ -12,11 +15,12 @@ class FinalizarModalPage extends StatefulWidget {
     Key? key,
     required this.produtosDoCarrinho,
     required this.totalPagarDoCarrinho,
+    this.callback
   }) : super(key: key);
 
   final List<ProdutoNaVendaModel> produtosDoCarrinho;
   final double totalPagarDoCarrinho;
-
+  final Function(double troco)? callback;
   @override
   _ModalContentState createState() => _ModalContentState();
 }
@@ -24,30 +28,14 @@ class FinalizarModalPage extends StatefulWidget {
 class _ModalContentState extends State<FinalizarModalPage> {
   final FinalizarModalController controller =
   FinalizarModalController();
-  void _exibirAlerta(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Erro'),
-          content: Text('Ocorreu um erro. Tente novamente.'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   // Função de callback para receber o valor do filho
   void setCliente(ClienteModel cliente) {
     controller.setCliente(cliente);
     setState(() {});
+  }
+  void _concluido( ) {
+    widget.callback?.call(controller.troco);
   }
   void _update(){
     controller.calcularResumo();
@@ -126,7 +114,7 @@ class _ModalContentState extends State<FinalizarModalPage> {
                                   padding: EdgeInsets.symmetric(vertical: 10),
                                   child: ListTile(
                                     onTap: () {
-                                      Modular.to.navigate("/categorias");
+
                                     },
                                     title: Text("RESUMO",
                                         style: TextStyle(
@@ -278,7 +266,9 @@ class _ModalContentState extends State<FinalizarModalPage> {
                 Expanded(
                     child: ElevatedButton(
                         onPressed: () async => {
-                          controller.finalizar(context)
+                          if  (await controller.finalizar(context)){
+                            _concluido(),
+                          }
                         },
                         child: const Text("Finalizar"),
                         style: ElevatedButton.styleFrom(

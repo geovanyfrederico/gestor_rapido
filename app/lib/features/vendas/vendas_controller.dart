@@ -9,28 +9,23 @@ import 'package:sqflite/sqflite.dart';
 
 import 'package:gr/models/database_helper.dart';
 
+import '../../models/venda_model.dart';
+
 
 class VendasController  extends ChangeNotifier{
   var loading = false;
   final filtro = TextEditingController();
-  Future<List<ProdutoModel>> buscar() async {
+  Future<List<VendaModel>> buscar() async {
     Database db = await DatabaseHelper.instance.database;
-    String query = 'SELECT * FROM produto';
+    String query = 'SELECT * FROM venda';
     if (filtro.text.isNotEmpty) {
-      query += " WHERE nome LIKE '%${filtro.text}%' OR codigo LIKE '%${filtro.text}%'";
+      query += " WHERE codigo = '${filtro.text}'";
     }
     query += ' ORDER BY id DESC';
     List<Map<String, dynamic>> maps = await db.rawQuery(query);
 
     return List.generate(maps.length, (index) {
-      return ProdutoModel(
-        id: maps[index]['id'],
-        nome: maps[index]['nome'],
-        codigo: maps[index]['codigo'],
-        preco: maps[index]['preco'],
-        stock: maps[index]['stock'],
-        foto: maps[index]['foto'],
-      );
+      return VendaModel.fromMap(maps[index]);
     });
   }
   Future<bool> eliminar(id, BuildContext context) async {

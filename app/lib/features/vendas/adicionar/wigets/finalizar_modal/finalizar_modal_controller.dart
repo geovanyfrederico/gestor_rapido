@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
@@ -11,7 +13,6 @@ import '../../../../../core/utils/alert_help.dart';
 class FinalizarModalController {
   final filtro = TextEditingController();
   final totalPagoInput = TextEditingController();
-
 
   List<ProdutoNaVendaModel> produtos = <ProdutoNaVendaModel>[];
   double totalPagar = 0;
@@ -43,25 +44,32 @@ class FinalizarModalController {
       AlertHelper.error(context, 'Quantia paga insuficiente.', title: 'Erro');
       return false;
     }
-    late int totalQtd = 0;
-    produtos.forEach((element) {
-      totalQtd = totalQtd + element.qtd;
-    });
-    int clienteId = await usuarioId();
-    VendaModel vendaModel = VendaModel(
-        clienteId: cliente.id
-        , usuarioId:clienteId
-        , data: _hoje()
-        , totalQtd: totalQtd
-        , totalPagar: totalPagar
-        , totalPago: totalPago
-        , troco: troco );
-    vendaModel.id = (await vendaModel.salvar()) as int?;
+    try{
+      late int totalQtd = 0;
+      produtos.forEach((element) {
+        totalQtd = totalQtd + element.totalQtd;
+      });
+      int clienteId = await usuarioId();
+      VendaModel vendaModel = VendaModel(
+          clienteId: cliente.id
+          , usuarioId:clienteId
+          , data: _hoje()
+          , totalQtd: totalQtd
+          , totalPagar: totalPagar
+          , totalPago: totalPago
+          , troco: troco );
+      vendaModel.id = await vendaModel.salvar();
 
-    produtos.forEach((element) {
-      element.vendaId = vendaModel.id;
-    });
-    return true;
+      produtos.forEach((element) {
+        element.vendaId = vendaModel.id;
+        element.salvar();
+      });
+      return true;
+    }catch(e){
+      AlertHelper.error(context, 'Erro a realizar a venda, porfavor tente novamente.', title: 'Erro');
+      return false;
+    }
+
   }
 
 
@@ -73,5 +81,9 @@ class FinalizarModalController {
     late SharedPreferences _prefs;
     _prefs = await SharedPreferences.getInstance();
     return _prefs.getInt("usuarioId")!;
+  }
+
+  void limpar() {
+
   }
 }

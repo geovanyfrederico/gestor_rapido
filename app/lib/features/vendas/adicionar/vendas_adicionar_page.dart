@@ -1,3 +1,5 @@
+import 'package:gr/core/utils/alert_help.dart';
+import 'package:gr/core/utils/mat.dart';
 import 'package:gr/features/vendas/adicionar/vendas_adicionar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -18,6 +20,13 @@ class VendasAdicionarState extends State<VendasAdicionarPage> {
 
   String? valorFilho;
 
+  // Função de callback para receber o valor do filho
+  void finalizarVenda(double troco ) {
+    controller.finalizarVenda();
+    Navigator.pop(context);
+    setState(() {});
+    AlertHelper.success(context, 'Troco: '+Mat.numeroParaDinheiro(troco), title: 'Venda concluida');
+  }
   // Função de callback para receber o valor do filho
   void adicionarAoCarrinho(ProdutoModel produto) {
     controller.adicionar(produto);
@@ -132,7 +141,7 @@ class VendasAdicionarState extends State<VendasAdicionarPage> {
                               ),
                               Container(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text(controller.produtos[index].qtd
+                                child: Text(controller.produtos[index].totalQtd
                                     .toString()),
                               ),
                               GestureDetector(
@@ -204,7 +213,7 @@ class VendasAdicionarState extends State<VendasAdicionarPage> {
                                         context: context,
                                         isScrollControlled: true,
                                         builder: (BuildContext context) {
-                                          return FinalizarModalPage(totalPagarDoCarrinho: controller.totalPagar, produtosDoCarrinho: controller.produtos,);
+                                          return FinalizarModalPage(totalPagarDoCarrinho: controller.totalPagar, produtosDoCarrinho: controller.produtos, callback: finalizarVenda);
                                         },
                                       )
                                     }

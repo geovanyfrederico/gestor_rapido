@@ -21,19 +21,19 @@ class AlertHelper {
     );
   }
 
-  static void success(BuildContext context, String message, {String title = 'Success'}) {
+  static void success(BuildContext context, String message, {String title = 'Sucesso'}) {
     _showAlertDialog(context, title, message);
   }
 
-  static void error(BuildContext context, String message, {String title = 'Error'}) {
+  static void error(BuildContext context, String message, {String title = 'Erro'}) {
     _showAlertDialog(context, title, message);
   }
 
-  static void warning(BuildContext context, String message, {String title = 'Warning'}) {
+  static void warning(BuildContext context, String message, {String title = 'Atenção'}) {
     _showAlertDialog(context, title, message);
   }
 
-  static void info(BuildContext context, String message, {String title = 'Info'}) {
+  static void info(BuildContext context, String message, {String title = 'Informação'}) {
     _showAlertDialog(context, title, message);
   }
 }

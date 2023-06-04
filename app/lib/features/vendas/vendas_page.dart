@@ -1,9 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:gr/core/utils/tempo.dart';
 import 'package:gr/features/vendas/vendas_controller.dart';
+import 'package:gr/features/vendas/visualizar/visualizar_modal_page.dart';
 import 'package:gr/wigets/menu_drawer.dart';
 import 'package:gr/core/utils/mat.dart';
 import 'package:gr/models/produto_model.dart';
+
+import '../../models/venda_model.dart';
 
 class VendasPage extends StatefulWidget {
   const VendasPage({Key? key}) : super(key: key);
@@ -109,7 +115,7 @@ class VendasPageState extends State<VendasPage> {
         child: const Icon(Icons.add),
       ),
       body: SafeArea(
-        child: FutureBuilder<List<ProdutoModel>>(
+        child: FutureBuilder<List<VendaModel>>(
           future: controller.buscar(),
           builder: (context, snapshot) {
             if(snapshot.connectionState != ConnectionState.done){
@@ -145,42 +151,22 @@ class VendasPageState extends State<VendasPage> {
               itemBuilder: (context, index) => Card(
                 elevation: 1,
                 margin: const EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 5),
-                child: ListTile(
-                    onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (context) {
-                          return Wrap(
-                            children: [
-                              ListTile(
-                                leading: const Icon(Icons.visibility),
-                                title: const Text('Visualizar'),
-                                onTap: () {
-                                  Modular.to.navigate("/usuarios/visualizar");
-                                },
-                              ),
-                              const ListTile(
-                                leading: Icon(Icons.edit),
-                                title: Text('Editar'),
-                              ),
-                              ListTile(
-                                leading: Icon(Icons.delete),
-                                title: Text('Eliminar'),
-                                onTap: () {
-                                  _eliminar(snapshot.data![index].id, context);
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ],
+                child: Padding(
+                    padding:EdgeInsets.all(5) ,
+                    child:
+                    ListTile(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return VisualizarModalPage(venda: snapshot.data![index]);
+                            },
                           );
                         },
-                      );
-                    },
-                    title: Text(snapshot.data![index].nome),
-                    subtitle: Text(snapshot.data![index].codigo),
-                    leading: const Icon(Icons.person, size: 40),
-                    trailing:  Text(Mat.numeroParaDinheiro(snapshot.data![index].preco.toString()))
-                ),
+                        title: Text("Venda "+snapshot.data![index].id.toString()),
+                        subtitle: Text("Qtd: ${snapshot.data![index].totalQtd.toString()}\nData: ${Tempo.formatarData(snapshot.data![index].data.toString())}"),
+                        trailing:  Text(Mat.numeroParaDinheiro(snapshot.data![index].totalPagar.toString()))
+                    )),
               ),
             );
           },

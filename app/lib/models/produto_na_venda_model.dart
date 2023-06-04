@@ -8,16 +8,16 @@ import 'database_helper.dart';
 class ProdutoNaVendaModel {
   int? id;
   int? produtoId;
-  int qtd;
+  int totalQtd;
   String nome;
   double preco;
   double precoTotal;
   ProdutoModel? produto;
   int? vendaId;
   ProdutoNaVendaModel(
-      {this.id,
+      { this.id,
         required this.produtoId,
-        required this.qtd,
+        required this.totalQtd,
         required this.nome,
         required this.preco,
         required this.precoTotal,
@@ -36,7 +36,7 @@ class ProdutoNaVendaModel {
       'preco': preco,
       'produtoId': produtoId,
       'precoTotal': precoTotal,
-      'qtd': qtd,
+      'totalQtd': totalQtd,
       'vendaId':vendaId
     };
   }
@@ -50,10 +50,11 @@ class ProdutoNaVendaModel {
   }
 
   factory ProdutoNaVendaModel.fromMap(Map<String, dynamic> map) {
+
     return ProdutoNaVendaModel(
         id: map['id'],
-        produtoId: map['produtoId'],
-        qtd: map['qtd'],
+        produtoId: int.parse(map['produtoId']),
+        totalQtd: map['totalQtd'],
         nome: map['nome'],
         preco: map['preco'],
         precoTotal: map['precoTotal'],
@@ -61,16 +62,28 @@ class ProdutoNaVendaModel {
   }
 
   void addQtd() {
-    qtd++;
-    precoTotal = preco * qtd;
+    totalQtd++;
+    precoTotal = preco * totalQtd;
   }
 
   void removeQtd() {
-    qtd--;
-    precoTotal = preco * qtd;
+    totalQtd--;
+    precoTotal = preco * totalQtd;
   }
-  Future<Future<int>> salvar() async {
+  Future<int?> salvar() async {
     Database db = await DatabaseHelper.instance.database;
     return db.insert('produtoNaVenda', toMap());
+  }
+
+ static Future<List<ProdutoNaVendaModel>> findAllByVendaId(int id) async{
+    Database db = await DatabaseHelper.instance.database;
+    List<Map<String, dynamic>> maps = await db.query('produtoNaVenda',
+        orderBy: 'id DESC',
+        where: 'vendaId = ?',
+        whereArgs: [id]);
+    return List.generate(maps.length, (index) {
+      return ProdutoNaVendaModel.fromMap(maps[index]);
+    });
+
   }
 }
