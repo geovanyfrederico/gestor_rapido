@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gr/core/utils/alert_help.dart';
 import 'package:gr/core/utils/mat.dart';
 import 'package:gr/features/vendas/adicionar/vendas_adicionar_controller.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gr/features/vendas/adicionar/wigets/finalizar_modal/finalizar_modal_page.dart';
 import 'package:gr/features/vendas/adicionar/wigets/produtos_no_carrinho_page.dart';
 import 'package:gr/models/produto_model.dart';

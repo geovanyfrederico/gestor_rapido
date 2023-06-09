@@ -1,13 +1,8 @@
-import 'dart:collection';
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
-import 'package:gr/models/produto_model.dart';
-import 'package:gr/models/usuario_model.dart';
-import 'package:sqflite/sqflite.dart';
-
 import 'package:gr/models/database_helper.dart';
+import 'package:gr/models/produto_model.dart';
+import 'package:sqflite/sqflite.dart';
 
 
 class ProdutosController  extends ChangeNotifier{

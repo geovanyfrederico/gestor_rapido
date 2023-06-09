@@ -1,13 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
-import 'package:gr/models/categoria_model.dart';
-import 'package:gr/models/database_helper.dart';
 import 'package:gr/models/produto_na_venda_model.dart';
-import 'package:sqflite/sqflite.dart';
 
 import '../../../core/utils/mat.dart';
 import '../../../models/produto_model.dart';
-import '../../../models/usuario_model.dart';
 
 class VendasAdicionarController {
   late  List<ProdutoNaVendaModel> produtos = <ProdutoNaVendaModel>[];

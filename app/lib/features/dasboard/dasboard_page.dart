@@ -29,7 +29,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      drawer: const MenuDrawer(),
+      drawer:  MenuDrawer(),
       appBar: AppBar(
         title: const Text('Resumo de Vendas'),
         backgroundColor: Colors.orange,

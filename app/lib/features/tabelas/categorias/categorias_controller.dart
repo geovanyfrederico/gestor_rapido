@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gr/core/utils/database_error_handler.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
 import 'package:gr/models/categoria_model.dart';
-import 'package:sqflite/sqflite.dart';
 
 class CategoriasController extends ChangeNotifier {
   var categorias = <CategoriasModel>[];

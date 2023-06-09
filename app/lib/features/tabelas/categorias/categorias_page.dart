@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gr/features/tabelas/categorias/categorias_controller.dart';
 
 import '../../../wigets/menu_drawer.dart';
@@ -37,7 +36,7 @@ class CategoriasView extends State<CategoriasPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      drawer: const MenuDrawer(),
+      drawer:  MenuDrawer(),
       appBar: AppBar(
         title: const Text('Categorias de produto'),
         backgroundColor: Colors.orange,

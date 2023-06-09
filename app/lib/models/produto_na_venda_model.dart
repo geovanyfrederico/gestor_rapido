@@ -1,5 +1,4 @@
 import 'package:gr/models/produto_model.dart';
-import 'package:gr/models/venda_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../core/utils/mat.dart';

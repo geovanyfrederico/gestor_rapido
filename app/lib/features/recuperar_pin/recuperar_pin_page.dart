@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:gr/features/entrar/entrar_controller.dart';
 import 'package:gr/features/recuperar_pin/recuperar_pin_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

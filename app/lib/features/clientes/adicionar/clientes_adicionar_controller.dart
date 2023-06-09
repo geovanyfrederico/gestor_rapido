@@ -1,10 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
 import 'package:gr/models/cliente_model.dart';
-import 'package:gr/models/database_helper.dart';
-import 'package:sqflite/sqflite.dart';
-
-import '../../../models/usuario_model.dart';
 
 class ClientesAdicionarController{
   final nome = TextEditingController();

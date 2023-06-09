@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gr/models/cliente_model.dart';
-import 'package:gr/models/produto_model.dart';
 
 class ClienteModalController {
   final filtro = TextEditingController();

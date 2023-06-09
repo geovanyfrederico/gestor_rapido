@@ -1,12 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gr/core/utils/snackbar_helper.dart';
 import 'package:gr/models/cliente_model.dart';
 import 'package:gr/models/produto_na_venda_model.dart';
 import 'package:gr/models/venda_model.dart';
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../core/utils/alert_help.dart';
@@ -46,9 +42,9 @@ class FinalizarModalController {
     }
     try{
       late int totalQtd = 0;
-      produtos.forEach((element) {
+      for (var element in produtos) {
         totalQtd = totalQtd + element.totalQtd;
-      });
+      }
       int clienteId = await usuarioId();
       VendaModel vendaModel = VendaModel(
           clienteId: cliente.id

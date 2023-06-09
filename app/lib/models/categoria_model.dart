@@ -1,5 +1,6 @@
 import 'package:gr/models/modelo_global.dart';
 import 'package:sqflite/sqflite.dart';
+
 import 'database_helper.dart';
 
 class CategoriasModel extends ModeloGlobal {

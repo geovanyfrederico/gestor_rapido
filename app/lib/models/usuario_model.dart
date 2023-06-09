@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:gr/models/modelo_global.dart';
 import 'package:sqflite/sqflite.dart';
 

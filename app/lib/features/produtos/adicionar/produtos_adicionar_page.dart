@@ -1,9 +1,10 @@
 import 'dart:io';
-import 'package:image_picker/image_picker.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
 import 'package:gr/features/produtos/adicionar/produtos_adicionar_controller.dart';
+import 'package:image_picker/image_picker.dart';
 class ProdutosAdicionarPage extends StatefulWidget  {
   const ProdutosAdicionarPage({Key? key}) : super(key: key);
   @override

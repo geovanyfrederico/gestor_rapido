@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:gr/core/utils/mat.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
@@ -47,7 +48,7 @@ class ProdutosAdicionarController{
       nome: nome.value.text,
       codigo: codigo.value.text,
       preco: double.parse(preco.value.text),
-      stock: int.parse(preco.value.text),
+      stock: int.parse(stock.value.text),
     );
     if(foto != null){
       produtoModelo.foto   = foto!.path;

@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:gr/models/produto_na_venda_model.dart';
 import 'package:gr/core/utils/mat.dart';
-import 'package:gr/models/produto_model.dart';
 import 'package:gr/models/cliente_model.dart';
-import '../../../../../core/utils/alert_help.dart';
+import 'package:gr/models/produto_model.dart';
+import 'package:gr/models/produto_na_venda_model.dart';
+
 import '../cliente_modal/cliente_modal_page.dart';
 import 'finalizar_modal_controller.dart';
 
@@ -113,9 +110,7 @@ class _ModalContentState extends State<FinalizarModalPage> {
                               child: Padding(
                                   padding: EdgeInsets.symmetric(vertical: 10),
                                   child: ListTile(
-                                    onTap: () {
-
-                                    },
+                                    onTap: () { },
                                     title: Text("RESUMO",
                                         style: TextStyle(
                                             fontSize: 15, fontWeight: FontWeight.bold)),

@@ -1,10 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:gr/core/constantes.dart';
-import 'package:gr/wigets/menu_drawer.dart';
 import 'package:gr/features/clientes/clientes_page.dart';
 import 'package:gr/features/fornecedores/fornecedores_page.dart';
+import 'package:gr/wigets/menu_drawer.dart';
 
 import 'contactos_controller.dart';
 

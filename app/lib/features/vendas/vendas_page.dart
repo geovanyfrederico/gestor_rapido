@@ -1,12 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:gr/core/utils/mat.dart';
 import 'package:gr/core/utils/tempo.dart';
 import 'package:gr/features/vendas/vendas_controller.dart';
 import 'package:gr/features/vendas/visualizar/visualizar_modal_page.dart';
 import 'package:gr/wigets/menu_drawer.dart';
-import 'package:gr/core/utils/mat.dart';
+
 import '../../models/venda_model.dart';
 
 class VendasPage extends StatefulWidget {
@@ -43,7 +42,7 @@ class VendasPageState extends State<VendasPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const MenuDrawer(),
+      drawer:  MenuDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.orange,
         centerTitle: true,

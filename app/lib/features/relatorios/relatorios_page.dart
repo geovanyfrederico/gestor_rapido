@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gr/wigets/menu_drawer.dart';
 
-import '../../core/utils/mat.dart';
-import '../../core/utils/tempo.dart';
-import '../../models/venda_model.dart';
-import '../vendas/visualizar/visualizar_modal_page.dart';
 import 'relatorios_controller.dart';
 
 class RelatoriosPage extends StatefulWidget {
@@ -30,7 +26,7 @@ class _RelatoriosPageState extends State<RelatoriosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.grey[100],
-        drawer: const MenuDrawer(),
+        drawer:  MenuDrawer(),
         appBar: AppBar(
           title: const Text('Relatorios'),
           backgroundColor: Colors.orange,
@@ -52,11 +48,11 @@ class _RelatoriosPageState extends State<RelatoriosPage> {
     );
   }
   Widget _buildRelatorioCard(String titulo, String subtitulo, {String image = 'gr1', String link = ""} ){
-    return Card(
-        child: GestureDetector(
-          onTap: (){
-            Modular.to.pushNamed('/relatorios/$link');
-          },
+    return GestureDetector(
+        onTap: (){
+          Modular.to.pushNamed('/relatorios/$link');
+        },
+        child: Card(
           child: Padding( padding: const EdgeInsets.all(10),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,

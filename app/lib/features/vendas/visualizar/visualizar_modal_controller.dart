@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:gr/models/cliente_model.dart';
 import 'package:gr/models/produto_na_venda_model.dart';
 import 'package:gr/models/usuario_model.dart';

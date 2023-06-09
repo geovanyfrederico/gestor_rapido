@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:gr/core/utils/mat.dart';
-import 'package:gr/models/produto_model.dart';
 import 'package:gr/models/produto_na_venda_model.dart';
 import 'package:gr/models/venda_model.dart';
+
 import '../../../core/utils/tempo.dart';
 import 'visualizar_modal_controller.dart';
 

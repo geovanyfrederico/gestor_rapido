@@ -45,7 +45,7 @@ class UsuariosPageState extends State<UsuariosPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const MenuDrawer(),
+      drawer:  MenuDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.orange,
         centerTitle: true,

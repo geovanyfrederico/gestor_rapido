@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gr/features/clientes/clientes_controller.dart';
-import 'package:gr/features/clientes/adicionar/clientes_adicionar_page.dart';
 
 
 class ClientesPage extends StatefulWidget  {

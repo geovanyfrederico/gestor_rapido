@@ -1,6 +1,3 @@
-import 'dart:developer';
-import 'dart:ffi';
-
 import 'package:gr/models/cliente_model.dart';
 import 'package:gr/models/produto_na_venda_model.dart';
 import 'package:gr/models/usuario_model.dart';
@@ -112,6 +109,6 @@ class VendaModel {
         return List.generate(maps.length, (index) {
             return VendaModel.fromMap(maps[index]);
         });
-
     }
+
 }

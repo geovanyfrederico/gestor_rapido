@@ -5,7 +5,6 @@ import 'package:gr/wigets/menu_drawer.dart';
 
 import '../../core/utils/mat.dart';
 import '../../models/produto_model.dart';
-import '../../models/usuario_model.dart';
 
 class ProdutosPage extends StatefulWidget {
   const ProdutosPage({Key? key}) : super(key: key);
@@ -41,7 +40,7 @@ class ProdutosPageState extends State<ProdutosPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const MenuDrawer(),
+      drawer:  MenuDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.orange,
         centerTitle: true,
@@ -170,7 +169,7 @@ class ProdutosPageState extends State<ProdutosPage> {
                       );
                     },
                     title: Text(snapshot.data![index].nome),
-                    subtitle: Text(snapshot.data![index].codigo),
+                    subtitle: Text("Cod: ${snapshot.data![index].codigo}\nStock:${snapshot.data![index].stock}"),
                     leading: CircleAvatar(
                         radius: 20,
                         backgroundImage: snapshot.data![index].foto == null ? const AssetImage("assets/images/produto/padrao.png") : AssetImage(snapshot.data![index].foto.toString())  ,

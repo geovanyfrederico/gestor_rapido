@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gr/features/fornecedores/fornecedores_controller.dart';
 
-import 'package:gr/core/constantes.dart';
-
 class FornecedoresPage extends StatefulWidget {
   const FornecedoresPage({Key? key}) : super(key: key);
 

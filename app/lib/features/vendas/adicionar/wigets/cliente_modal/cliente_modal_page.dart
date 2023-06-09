@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gr/core/utils/mat.dart';
 import 'package:gr/models/cliente_model.dart';
+
 import 'cliente_modal_controller.dart';
 
 
@@ -25,7 +25,6 @@ class ClienteModalState extends State<ClienteModalPage> {
 
   void _adicionar(ClienteModel item) {
     widget.callback?.call(item);
-
   }
 
   Future<void> iniProdutoNoCarrinho() async {

@@ -1,5 +1,5 @@
-import 'dart:developer';
 import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:sqflite/sqflite.dart';

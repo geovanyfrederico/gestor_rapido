@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gr/features/registrar/registrar_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class RegistarPage extends StatefulWidget {
   const RegistarPage({Key? key}) : super(key: key);
