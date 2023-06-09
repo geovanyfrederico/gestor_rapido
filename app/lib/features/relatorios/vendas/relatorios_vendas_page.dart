@@ -122,9 +122,11 @@ class RelatoriosVendasState extends State<RelatoriosVendasPage> {
                 onTap: () {
 
                 },
-                title: const Text("Resumo",
-                    style: TextStyle(
-                        fontSize: 15, fontWeight: FontWeight.bold)),
+                title: Center(
+                  child: const Text("Resumo",
+                      style: TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold)),
+                ),
                 subtitle: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -183,7 +185,7 @@ class RelatoriosVendasState extends State<RelatoriosVendasPage> {
                         const Text("Menor venda"),
                         Text(Mat.numeroParaDinheiro(controller.menorVenda)),
                       ],
-                    ),
+                    )
                   ],
                 ),
               ))),
@@ -274,8 +276,10 @@ class RelatoriosVendasState extends State<RelatoriosVendasPage> {
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: ListTile(
                   onTap: () { },
-                  title:  Text("Vendas por clientes(${controller.vendasPorCliente.length})",
-                      style: TextStyle( fontSize: 15, fontWeight: FontWeight.bold)),
+                  title:  Center(
+                    child: Text("Vendas por clientes(${controller.vendasPorCliente.length})",
+                        style: TextStyle( fontSize: 15, fontWeight: FontWeight.bold)),
+                  ),
                   subtitle: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     child: SizedBox(
@@ -323,8 +327,10 @@ class RelatoriosVendasState extends State<RelatoriosVendasPage> {
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: ListTile(
                   onTap: () { },
-                  title:  Text("Vendas por utilizador(${controller.vendasPorUtilizador.length})",
-                      style: TextStyle( fontSize: 15, fontWeight: FontWeight.bold)),
+                  title:  Center(
+                    child: Text("Vendas por utilizador(${controller.vendasPorUtilizador.length})",
+                        style: TextStyle( fontSize: 15, fontWeight: FontWeight.bold)),
+                  ),
                   subtitle: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     child: SizedBox(

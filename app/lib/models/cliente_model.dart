@@ -39,7 +39,6 @@ class ClienteModel extends ModeloGlobal {
   }
   Future<int> salvar() async {
     Database db = await DatabaseHelper.instance.database;
-
     return db.insert('cliente', toMap());
   }
 

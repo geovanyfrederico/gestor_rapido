@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:collection/collection.dart';
 import 'package:gr/core/utils/tempo.dart';
 import 'package:gr/models/cliente_model.dart';
@@ -20,6 +22,8 @@ class RelatoriosVendasController {
   List<UtilizadorModel> melhoresVendedores =  <UtilizadorModel>[];
   Map<ClienteModel?, double> vendasPorCliente = {};
   Map<UtilizadorModel?, double> vendasPorUtilizador= {};
+
+  Map<UtilizadorModel?, double> clienteTop = {};
   void clear(){
     totalPagar = 0;
     totalQtd = 0;
@@ -94,8 +98,12 @@ class RelatoriosVendasController {
           vendasPorCliente[cliente] = valorVenda;
         }
       }
+
     }
+
+
   }
+
   void calcularVendasUtilizador() {
     vendasPorUtilizador = {};
     for (VendaModel venda in vendas) {

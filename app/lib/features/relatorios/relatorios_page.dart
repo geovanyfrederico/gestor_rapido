@@ -35,7 +35,6 @@ class _RelatoriosPageState extends State<RelatoriosPage> {
           child: ListView(
             padding: EdgeInsets.all(10),
             children: [
-              _buildRelatorioCard("Geral", "Visualize um relatório geral de como está sua gestão", image: 'gr1', link:"geral"),
               _buildRelatorioCard("Clientes", "Veja um relatório detalhado sobre seus clientes",image: 'gr7', link:"clientes"),
               _buildRelatorioCard("Vendas", "Acompanhe as informações de vendas e faturamento",image: 'gr3', link:"vendas"),
               _buildRelatorioCard("Utilizadores", "Analise o desempenho dos utilizadores da sua empresa",image: 'gr4', link:"utilizadores"),
