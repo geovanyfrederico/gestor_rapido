@@ -45,10 +45,10 @@ class FinalizarModalController {
       for (var element in produtos) {
         totalQtd = totalQtd + element.totalQtd;
       }
-      int clienteId = await usuarioId();
+      int clienteId = await utilizadorId();
       VendaModel vendaModel = VendaModel(
           clienteId: cliente.id
-          , usuarioId:clienteId
+          , utilizadorId:clienteId
           , data: _hoje()
           , totalQtd: totalQtd
           , totalPagar: totalPagar
@@ -72,10 +72,10 @@ class FinalizarModalController {
   String _hoje(){
     return DateTime.now().toIso8601String();
   }
-  Future<int> usuarioId() async {
+  Future<int> utilizadorId() async {
     late SharedPreferences _prefs;
     _prefs = await SharedPreferences.getInstance();
-    return _prefs.getInt("usuarioId")!;
+    return _prefs.getInt("utilizadorId")!;
   }
 
   void limpar() {

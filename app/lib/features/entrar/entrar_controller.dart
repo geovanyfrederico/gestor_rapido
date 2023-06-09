@@ -35,25 +35,25 @@ class EntrarController{
       Database db = await DatabaseHelper.instance.database;
 
       /* busca todos os usuários
-      List<Map<String, dynamic>> allUsers = await db.query('usuario');
+      List<Map<String, dynamic>> allUsers = await db.query('utilizador');
       for (var user in allUsers) {
         print("${user['nome']}, PIN: ${user['pin']}, TIPO: ${user['telefone']}");
       }*/
       List<Map<String, dynamic>> results = await db.query(
-        'usuario',
+        'utilizador',
         where: "telefone = ? AND pin = ?",
         whereArgs: [telefone.value.text, pin.value.text],
       );
 
       if (results.isNotEmpty) {
-         await prefs?.setInt("usuarioId", results.first['id']);
-          await prefs?.setString("usuarioNome", results.first['nome']);
-          await prefs?.setString("usuarioTelefone", results.first['telefone']);
-          await prefs?.setInt("usuarioTipo", results.first['tipo']);
+         await prefs?.setInt("utilizadorId", results.first['id']);
+          await prefs?.setString("utilizadorNome", results.first['nome']);
+          await prefs?.setString("utilizadorTelefone", results.first['telefone']);
+          await prefs?.setInt("utilizadorTipo", results.first['tipo']);
         SnackbarHelper.success(context,"Bem vindo.");
         return true;
       }
-      SnackbarHelper.error(context,"Usuario ou pin incorrecto.");
+      SnackbarHelper.error(context,"Utilizador ou pin incorrecto.");
       return false;
     }catch(e){
       SnackbarHelper.error(context, "Erro:"+e.toString());

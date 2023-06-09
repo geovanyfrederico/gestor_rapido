@@ -1,6 +1,7 @@
 import 'package:gr/models/cliente_model.dart';
 import 'package:gr/models/produto_na_venda_model.dart';
-import 'package:gr/models/usuario_model.dart';
+import 'package:gr/models/utilizador_model.dart';
+import 'package:gr/models/utilizador_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'cliente_model.dart';
@@ -9,14 +10,14 @@ import 'database_helper.dart';
 class VendaModel {
     int? id;
     int? clienteId;
-    int? usuarioId;
+    int? utilizadorId;
     String data;
     int totalQtd;
     double totalPagar;
     double totalPago;
     double troco;
     ClienteModel? clienteModel;
-    UsuarioModel? usuarioModel;
+    UtilizadorModel? utilizadorModel;
 
     Future<List<ProdutoNaVendaModel>> get produtos async {
         return await ProdutoNaVendaModel.findAllByVendaId(id!);
@@ -25,15 +26,15 @@ class VendaModel {
         clienteModel ??= await ClienteModel.findOneById(clienteId!);
         return clienteModel!;
     }
-    Future<UsuarioModel> get usuario async {
-        usuarioModel ??= await UsuarioModel.findOneById(usuarioId!);
-        return usuarioModel!;
+    Future<UtilizadorModel> get utilizador async {
+        utilizadorModel ??= await UtilizadorModel.findOneById(utilizadorId!);
+        return utilizadorModel!;
 
     }
     VendaModel({
         this.id,
         this.clienteId,
-        this.usuarioId,
+        this.utilizadorId,
         required this.data,
         required this.totalQtd,
         required this.totalPagar,
@@ -45,7 +46,7 @@ class VendaModel {
         return {
             'id':id,
             'clienteId':clienteId,
-            'usuarioId':usuarioId,
+            'utilizadorId':utilizadorId,
             'data':data,
             'totalQtd':totalQtd,
             'totalPagar':totalPagar,
@@ -59,7 +60,7 @@ class VendaModel {
         return VendaModel(
             id: map['id'],
             clienteId: map['clienteId'],
-            usuarioId: map['usuarioId'] ,
+            utilizadorId: map['utilizadorId'] ,
             data: map['data'],
             totalQtd: map['totalQtd'],
             totalPagar: map['totalPagar'],

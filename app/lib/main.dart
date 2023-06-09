@@ -13,8 +13,8 @@ import 'package:gr/features/registrar/registar_page.dart';
 import 'package:gr/features/relatorios/clientes/relatorios_clientes_page.dart';
 import 'package:gr/features/relatorios/relatorios_page.dart';
 import 'package:gr/features/tabelas/categorias/categorias_page.dart';
-import 'package:gr/features/usuarios/adicionar/usuarios_adicionar_page.dart';
-import 'package:gr/features/usuarios/usuarios_page.dart';
+import 'package:gr/features/utilizadores/adicionar/utilizadores_adicionar_page.dart';
+import 'package:gr/features/utilizadores/utilizadores_page.dart';
 import 'package:gr/features/vendas/adicionar/vendas_adicionar_page.dart';
 import 'package:gr/features/vendas/vendas_page.dart';
 
@@ -82,12 +82,12 @@ class AppModule extends Module {
         child: (context, args) => FornecedoresAdicionarPage(),
         transition: TransitionType.fadeIn),
 
-    //Usuarios
-    ChildRoute('/usuarios',
-        child: (context, args) => UsuariosPage(),
+    //Utilizadors
+    ChildRoute('/utilizadores',
+        child: (context, args) => UtilizadorsPage(),
         transition: TransitionType.fadeIn),
-    ChildRoute('/usuarios/adicionar',
-        child: (context, args) => UsuariosAdicionarPage(),
+    ChildRoute('/utilizadores/adicionar',
+        child: (context, args) => UtilizadorsAdicionarPage(),
         transition: TransitionType.fadeIn),
     //Autenticacao
     ChildRoute('/registar',

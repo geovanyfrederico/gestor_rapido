@@ -9,7 +9,7 @@ import 'package:sqflite/sqflite.dart';
 class DatabaseHelper {
   static const _databaseName = 'gr.db';
 
-  static const _databaseVersion = 2;
+  static const _databaseVersion = 1;
 
   static final DatabaseHelper instance = DatabaseHelper._init();
 
@@ -76,7 +76,7 @@ class DatabaseHelper {
 
       //USUARIO
       await db.execute('''
-     CREATE TABLE usuario (
+     CREATE TABLE utilizador (
         ${addId()},
         ${addColuna('telefone', permitirNull: false, propriedades: 'UNIQUE')},
         ${addColuna('nome', permitirNull: false, propriedades: 'UNIQUE')},
@@ -108,7 +108,7 @@ class DatabaseHelper {
         ${addColuna('totalPago', permitirNull: false, tipoDeDados: 'REAL')},
         ${addColuna('troco', permitirNull: false, tipoDeDados: 'REAL')},
         ${addColuna('fornecedorId', permitirNull: false)},
-        ${addColuna('usuarioId', permitirNull: false)},
+        ${addColuna('utilizadorId', permitirNull: false)},
         ${addColuna('codigo', permitirNull: false, propriedades: 'UNIQUE')}
     );
     ''');
@@ -147,7 +147,7 @@ class DatabaseHelper {
         ${addColuna('totalPagar', permitirNull: false, tipoDeDados: 'REAL')},
         ${addColuna('totalPago', permitirNull: false, tipoDeDados: 'REAL')},
         ${addColuna('troco', permitirNull: false, tipoDeDados: 'REAL')},
-        ${addChave('usuarioId','usuario', 'id')},
+        ${addChave('utilizadorId','utilizador', 'id')},
         ${addChave('clienteId', 'cliente', 'id')}
     );
     ''');
@@ -194,7 +194,7 @@ class DatabaseHelper {
         ${addColuna('data', permitirNull: false)},
         ${addColuna('totalQtd', permitirNull: false, tipoDeDados: 'INTEGER')},
         ${addColuna('produtoId', permitirNull: false)},
-        ${addColuna('usuarioId', permitirNull: false)}
+        ${addColuna('utilizadorId', permitirNull: false)}
     );
     ''');
 

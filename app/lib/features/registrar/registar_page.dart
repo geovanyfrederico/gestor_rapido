@@ -46,7 +46,7 @@ class _RegistarPageState extends State<RegistarPage> {
                       padding: EdgeInsets.only(bottom: 10, top: 10),
                       child: TextField(
                           keyboardType: TextInputType.text,
-                          controller: _controller.nomeDoUsuario,
+                          controller: _controller.nomeDoUtilizador,
 
                           // Every single time the text changes in a
                           // TextField, this onChanged callback is called

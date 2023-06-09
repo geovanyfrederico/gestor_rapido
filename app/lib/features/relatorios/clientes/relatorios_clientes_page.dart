@@ -255,7 +255,7 @@ class RelatoriosClientesState extends State<RelatoriosClientesPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Venda ${controller.vendas[index].id.toString()} \nData: ${Tempo.formatarData(controller.vendas[index].data)}\nOperador: ${controller.vendas[index].usuarioModel?.nome}"),
+                        Text("Venda ${controller.vendas[index].id.toString()} \nData: ${Tempo.formatarData(controller.vendas[index].data)}\nUtilizador: ${controller.vendas[index].utilizadorModel?.nome}"),
 
                         Text("${Mat.numeroParaDinheiro(controller.vendas[index].totalPagar)}"),
                       ],

@@ -2,19 +2,19 @@
 class CompraModel {
     int id;
     int fornecedorId;
-    int usuarioId;
+    int utilizadorId;
     DateTime data;
     int totalQtd;
     double totalPagar;
     double totalPago;
     double troco;
     /* Fornecedor fornecedor;
-  Usuario usuario;*/
+  Utilizador utilizador;*/
 
     CompraModel({
         required this.id,
         required this.fornecedorId,
-        required this.usuarioId,
+        required this.utilizadorId,
         required this.data,
         required this.totalQtd,
         required this.totalPagar,
@@ -26,7 +26,7 @@ class CompraModel {
         return {
             'id': id,
             'fornecedorId': fornecedorId,
-            'usuarioId': usuarioId,
+            'utilizadorId': utilizadorId,
             'data': data,
             'totalQtd': totalQtd,
             'totalPagar': totalPagar,
@@ -38,7 +38,7 @@ class CompraModel {
         return CompraModel(
             id: map['id'],
             fornecedorId: map['fornecedorId'],
-            usuarioId: map['usuarioId'],
+            utilizadorId: map['utilizadorId'],
             data: map['data'],
             totalQtd: map['totalQtd'],
             totalPagar: map['totalPagar'],

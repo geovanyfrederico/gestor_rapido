@@ -59,7 +59,7 @@ class RelatoriosClientesController {
     });
 
     for (VendaModel element in vendas) {
-      element.usuarioModel = await  element.usuario;
+      element.utilizadorModel = await  element.utilizador;
 
       totalPagar += element.totalPagar;
       totalQtd += element.totalQtd;

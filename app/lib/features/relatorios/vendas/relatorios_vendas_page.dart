@@ -167,55 +167,8 @@ class RelatoriosVendasState extends State<RelatoriosVendasPage> {
                     ],
                   ),
                 ))),
-        Card(
-            elevation: 1,
-            margin: const EdgeInsets.only(
-                left: 10, top: 10, right: 10, bottom: 5),
-            child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: ListTile(
-                  onTap: () {
 
-                  },
-                  title: const Text("Top 3 Clientes",
-                      style: TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold)),
-                  subtitle: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text("Melhor vendedor"),
-                          Text("${Tempo.formatarDataNull(controller.inicio?.toIso8601String())}  - ${Tempo.formatarDataNull(controller.fim?.toIso8601String())}"),
-                        ],
-                      ),
-                      const SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text("Pior Vendedor"),
-                          Text(controller.vendas.length.toString()),
-                        ],
-                      ),
-                      const SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text("Qtd items"),
-                          Text(controller.totalQtd.toString()),
-                        ],
-                      ),
-                    ],
-                  ),
-                )
-            )
-        ),
+        topPorUtilizador(),
         topPorCliente(),
         Container(
           margin: const EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 5),
@@ -269,7 +222,7 @@ class RelatoriosVendasState extends State<RelatoriosVendasPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Venda ${controller.vendas[index].id.toString()} \nData: ${Tempo.formatarData(controller.vendas[index].data)}\nOperador: ${controller.vendas[index].usuarioModel?.nome}"),
+                        Text("Venda ${controller.vendas[index].id.toString()} \nData: ${Tempo.formatarData(controller.vendas[index].data)}\nUtilizador: ${controller.vendas[index].utilizadorModel?.nome}"),
 
                         Text("${Mat.numeroParaDinheiro(controller.vendas[index].totalPagar)}"),
                       ],
@@ -294,12 +247,12 @@ class RelatoriosVendasState extends State<RelatoriosVendasPage> {
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: ListTile(
                 onTap: () { },
-                title: const Text("Vendas por clientes",
+                title:  Text("Vendas por clientes(${controller.vendasPorCliente.length})",
                     style: TextStyle( fontSize: 15, fontWeight: FontWeight.bold)),
                 subtitle: SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: SizedBox(
-                    height: 200, // Defina uma altura fixa para o ListView interno ou ajuste conforme necessário
+                    height: 150, // Defina uma altura fixa para o ListView interno ou ajuste conforme necessário
                     child: ListView.builder(
                       shrinkWrap: true, // Defina shrinkWrap como true
                       itemCount: controller.vendasPorCliente.length,
@@ -312,6 +265,45 @@ class RelatoriosVendasState extends State<RelatoriosVendasPage> {
                             children: [
                               Text("${controller.vendasPorCliente.keys.elementAt(index)?.nome} "),
                               Text(Mat.numeroParaDinheiro(controller.vendasPorCliente.values.elementAt(index).toString())),
+                            ],
+                          ),
+                          // Aqui você pode adicionar mais widgets e personalizar a exibição de cada item do ListView
+                          // utilizando os dados de produtoNaVenda
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+            )
+        )
+    );
+  }
+  Widget topPorUtilizador(){
+    return Card(
+        elevation: 1,
+        margin: const EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 5),
+        child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: ListTile(
+                onTap: () { },
+                title:  Text("Vendas por utilizador(${controller.vendasPorUtilizador.length})",
+                    style: TextStyle( fontSize: 15, fontWeight: FontWeight.bold)),
+                subtitle: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                    height: 150, // Defina uma altura fixa para o ListView interno ou ajuste conforme necessário
+                    child: ListView.builder(
+                      shrinkWrap: true, // Defina shrinkWrap como true
+                      itemCount: controller.vendasPorUtilizador.length,
+                      itemBuilder: (context, index) => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 15),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("${controller.vendasPorUtilizador.keys.elementAt(index)?.nome} "),
+                              Text(Mat.numeroParaDinheiro(controller.vendasPorUtilizador.values.elementAt(index).toString())),
                             ],
                           ),
                           // Aqui você pode adicionar mais widgets e personalizar a exibição de cada item do ListView
