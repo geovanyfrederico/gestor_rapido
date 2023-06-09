@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gr/models/cliente_model.dart';
@@ -6,6 +8,7 @@ import 'package:gr/models/venda_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../core/utils/alert_help.dart';
+import '../../../../../models/produto_model.dart';
 class FinalizarModalController {
   final filtro = TextEditingController();
   final totalPagoInput = TextEditingController();
@@ -56,12 +59,17 @@ class FinalizarModalController {
           , troco: troco );
       vendaModel.id = await vendaModel.salvar();
 
-      produtos.forEach((element) {
-        element.vendaId = vendaModel.id;
-        element.salvar();
-      });
+      for (var pnv in produtos) {
+        ProdutoModel produtoModel = await ProdutoModel.findOneById(pnv.produtoId!);
+
+        produtoModel.stock -= pnv.totalQtd;
+        pnv.vendaId = vendaModel.id;
+        await produtoModel.update();
+        await pnv.salvar();
+      }
       return true;
     }catch(e){
+      log(e.toString());
       AlertHelper.error(context, 'Erro a realizar a venda, porfavor tente novamente.', title: 'Erro');
       return false;
     }
