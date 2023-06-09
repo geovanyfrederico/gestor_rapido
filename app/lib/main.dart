@@ -11,7 +11,9 @@ import 'package:gr/features/produtos/produtos_page.dart';
 import 'package:gr/features/recuperar_pin/recuperar_pin_page.dart';
 import 'package:gr/features/registrar/registar_page.dart';
 import 'package:gr/features/relatorios/clientes/relatorios_clientes_page.dart';
+import 'package:gr/features/relatorios/produto/relatorios_produtos_page.dart';
 import 'package:gr/features/relatorios/relatorios_page.dart';
+import 'package:gr/features/relatorios/utilizadores/relatorios_utilizadores_page.dart';
 import 'package:gr/features/tabelas/categorias/categorias_page.dart';
 import 'package:gr/features/utilizadores/adicionar/utilizadores_adicionar_page.dart';
 import 'package:gr/features/utilizadores/utilizadores_page.dart';
@@ -115,6 +117,8 @@ class AppModule extends Module {
     ChildRoute('/relatorios/vendas',
         child: (context, args) => RelatoriosVendasPage(),
         transition: TransitionType.fadeIn),
-
+ChildRoute('/relatorios/produtos',
+        child: (context, args) => RelatoriosProdutosPage(),
+        transition: TransitionType.fadeIn),
   ];
 }

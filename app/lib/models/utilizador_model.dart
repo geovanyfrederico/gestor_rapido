@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:gr/models/modelo_global.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -111,4 +113,27 @@ class UtilizadorModel extends ModeloGlobal{
         }
         throw Exception("Não foi possivel encontrar este cliente");
     }
+
+    static Future<List<UtilizadorModel>> search(String search) async {
+        Database db = await DatabaseHelper.instance.database;
+        List<Map<String, dynamic>> maps = await db.query('utilizador',
+            orderBy: 'id DESC',
+            where: 'nome LIKE ? OR telefone LIKE ?',
+            whereArgs: ['%$search%', '%$search%']);
+        return List.generate(maps.length, (index) {
+            return UtilizadorModel.fromMap(maps[index]);
+        });
+    }
+
+    static Future<List<UtilizadorModel>> index() async {
+        Database db = await DatabaseHelper.instance.database;
+        List<Map<String, dynamic>> maps =
+        await db.query('utilizador', orderBy: 'id DESC');
+        return List.generate(maps.length, (index) {
+            log(maps[index].toString());
+            return UtilizadorModel.fromMap(maps[index]);
+        });
+    }
+
+
 }

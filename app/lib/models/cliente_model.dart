@@ -1,4 +1,5 @@
 import 'package:gr/models/modelo_global.dart';
+import 'package:gr/models/utilizador_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'database_helper.dart';
@@ -82,5 +83,6 @@ class ClienteModel extends ModeloGlobal {
       return ClienteModel.fromMap(maps[index]);
     });
   }
+
 
 }
