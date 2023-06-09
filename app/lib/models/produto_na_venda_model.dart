@@ -52,7 +52,7 @@ class ProdutoNaVendaModel {
 
     return ProdutoNaVendaModel(
         id: map['id'],
-        produtoId: int.parse(map['produtoId']),
+        produtoId: map['produtoId'],
         totalQtd: map['totalQtd'],
         nome: map['nome'],
         preco: map['preco'],

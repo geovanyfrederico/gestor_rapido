@@ -22,8 +22,8 @@ class ClientesListarView extends State<ClientesPage> {
       setState(() {});
     });
   }
-  _eliminar(index, BuildContext context){
-    controller.eliminar(index, context);
+  _eliminar(index, BuildContext context) async {
+   await controller.eliminar(index, context);
     setState(() {});
   }
   @override

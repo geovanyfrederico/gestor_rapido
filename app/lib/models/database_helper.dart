@@ -9,7 +9,7 @@ import 'package:sqflite/sqflite.dart';
 class DatabaseHelper {
   static const _databaseName = 'gr.db';
 
-  static const _databaseVersion = 1;
+  static const _databaseVersion = 2;
 
   static final DatabaseHelper instance = DatabaseHelper._init();
 
@@ -54,15 +54,16 @@ class DatabaseHelper {
     return "$nomeDaColuna $tipoDeDados $propriedades ${permitirNull ? 'DEFAULT NULL' : 'NOT NULL'}";
   }
 
-  String addChave(String nomeDaColuna, String tabelaDeReferencia, String colunaDeReferencia) {
-    return "$nomeDaColuna INTEGER NOT NULL REFERENCES $tabelaDeReferencia($colunaDeReferencia)";
+  Future<void> criarChaveEstrangeira(Database db, String nomeTabela, String nomeColuna, String tabelaReferenciada, String colunaReferenciada) async {
+    await db.execute('''
+    ALTER TABLE $nomeTabela
+    ADD COLUMN $nomeColuna INTEGER DEFAULT 0 REFERENCES $tabelaReferenciada($colunaReferenciada) ON DELETE RESTRICT;
+  ''');
   }
-
   Future<void> criarTabelas(Database db) async {
     log("DB::TABLES::START");
+    db.execute("PRAGMA foreign_keys=ON");
     try {
-
-
       await db.execute('''
     CREATE TABLE empresa(
         ${addId()},
@@ -73,7 +74,6 @@ class DatabaseHelper {
         ${addColuna('logo')}
       );
     ''');
-
       //USUARIO
       await db.execute('''
      CREATE TABLE utilizador (
@@ -85,7 +85,6 @@ class DatabaseHelper {
         ${addColuna('ativo')}
     );
     ''');
-
       //COMPRAR
       //Fornecedor
       await db.execute('''
@@ -97,36 +96,6 @@ class DatabaseHelper {
         ${addColuna('telefone')}
     );
     ''');
-      //Compra
-      await db.execute('''
-    CREATE TABLE compra (
-        ${addId()},
-        ${addColuna('nome')},
-        ${addColuna('data', permitirNull: false)},
-        ${addColuna('totalQtd', permitirNull: false, tipoDeDados: 'INTEGER')},
-        ${addColuna('totalPagar', permitirNull: false, tipoDeDados: 'REAL')},
-        ${addColuna('totalPago', permitirNull: false, tipoDeDados: 'REAL')},
-        ${addColuna('troco', permitirNull: false, tipoDeDados: 'REAL')},
-        ${addColuna('fornecedorId', permitirNull: false)},
-        ${addColuna('utilizadorId', permitirNull: false)},
-        ${addColuna('codigo', permitirNull: false, propriedades: 'UNIQUE')}
-    );
-    ''');
-
-      await db.execute('''
-    CREATE TABLE produtoNaCompra (
-        ${addId()},
-        ${addColuna('nome', permitirNull: false)},
-        ${addColuna('totalQtd', permitirNull: false, tipoDeDados: 'INTEGER')},
-        ${addColuna('precoTotal', permitirNull: false, tipoDeDados: 'REAL')},
-        ${addColuna('preco', permitirNull: false, tipoDeDados: 'REAL')},
-        ${addColuna('produtoId', permitirNull: false)},
-        ${addColuna('compraId', permitirNull: false)}
-    );
-    ''');
-
-      //Vender
-
       //CLIENTES
       await db.execute('''
     CREATE TABLE cliente (
@@ -135,42 +104,6 @@ class DatabaseHelper {
         ${addColuna('nif', permitirNull: true)},
         ${addColuna('endereco')},
         ${addColuna('telefone')}
-    );
-    ''');
-
-      //PRODUTO
-      await db.execute('''
-    CREATE TABLE venda (
-        ${addId()},
-        ${addColuna('data', permitirNull: false)},
-        ${addColuna('totalQtd', permitirNull: false, tipoDeDados: 'INTEGER')},
-        ${addColuna('totalPagar', permitirNull: false, tipoDeDados: 'REAL')},
-        ${addColuna('totalPago', permitirNull: false, tipoDeDados: 'REAL')},
-        ${addColuna('troco', permitirNull: false, tipoDeDados: 'REAL')},
-        ${addChave('utilizadorId','utilizador', 'id')},
-        ${addChave('clienteId', 'cliente', 'id')}
-    );
-    ''');
-
-      await db.execute('''
-    CREATE TABLE produtoNaVenda (
-        ${addId()},
-        ${addColuna('nome', permitirNull: false)},
-        ${addColuna('totalQtd', permitirNull: false, tipoDeDados: 'INTEGER')},
-        ${addColuna('precoTotal', permitirNull: false, tipoDeDados: 'REAL')},
-        ${addColuna('preco', permitirNull: false, tipoDeDados: 'REAL')},
-        ${addColuna('produtoId', permitirNull: false)},
-        ${addColuna('vendaId', permitirNull: false)}
-    );
-    ''');
-
-//GLOBAL
-
-      //Categoria
-      await db.execute('''
-    CREATE TABLE categoria (
-        ${addId()},
-        ${addColuna('nome', permitirNull: false, propriedades: 'UNIQUE')}
     );
     ''');
       //PRODUTO
@@ -184,19 +117,77 @@ class DatabaseHelper {
         ${addColuna('foto')}
     );
     ''');
-
-      // movimentoDeStock
+      //Categoria
       await db.execute('''
+    CREATE TABLE categoria (
+        ${addId()},
+        ${addColuna('nome', permitirNull: false, propriedades: 'UNIQUE')}
+    );
+    ''');
+      // movimentoDeStock
+      await db.rawQuery('''
     CREATE TABLE movimentoDeStock (
         ${addId()},
         ${addColuna('tipo', permitirNull: false)},
         ${addColuna('ref')},
         ${addColuna('data', permitirNull: false)},
-        ${addColuna('totalQtd', permitirNull: false, tipoDeDados: 'INTEGER')},
-        ${addColuna('produtoId', permitirNull: false)},
-        ${addColuna('utilizadorId', permitirNull: false)}
+        ${addColuna('totalQtd', permitirNull: false, tipoDeDados: 'INTEGER')}
     );
     ''');
+      //Venda
+      await db.execute('''
+    CREATE TABLE venda (
+        ${addId()},
+        ${addColuna('data', permitirNull: false)},
+        ${addColuna('totalQtd', permitirNull: false, tipoDeDados: 'INTEGER')},
+        ${addColuna('totalPagar', permitirNull: false, tipoDeDados: 'REAL')},
+        ${addColuna('totalPago', permitirNull: false, tipoDeDados: 'REAL')},
+        ${addColuna('troco', permitirNull: false, tipoDeDados: 'REAL')}
+    );
+    ''');
+      await db.execute('''
+    CREATE TABLE produtoNaVenda (
+        ${addId()},
+        ${addColuna('nome', permitirNull: false)},
+        ${addColuna('totalQtd', permitirNull: false, tipoDeDados: 'INTEGER')},
+        ${addColuna('precoTotal', permitirNull: false, tipoDeDados: 'REAL')},
+        ${addColuna('preco', permitirNull: false, tipoDeDados: 'REAL')}
+    );
+    ''');
+      //Compra
+      await db.execute('''
+    CREATE TABLE compra (
+        ${addId()},
+        ${addColuna('nome')},
+        ${addColuna('data', permitirNull: false)},
+        ${addColuna('totalQtd', permitirNull: false, tipoDeDados: 'INTEGER')},
+        ${addColuna('totalPagar', permitirNull: false, tipoDeDados: 'REAL')},
+        ${addColuna('totalPago', permitirNull: false, tipoDeDados: 'REAL')},
+        ${addColuna('troco', permitirNull: false, tipoDeDados: 'REAL')},
+        ${addColuna('codigo', permitirNull: false, propriedades: 'UNIQUE')}
+    );
+    ''');
+      await db.execute('''
+    CREATE TABLE produtoNaCompra (
+        ${addId()},
+        ${addColuna('nome', permitirNull: false)},
+        ${addColuna('totalQtd', permitirNull: false, tipoDeDados: 'INTEGER')},
+        ${addColuna('precoTotal', permitirNull: false, tipoDeDados: 'REAL')},
+        ${addColuna('preco', permitirNull: false, tipoDeDados: 'REAL')}
+    );
+    ''');
+      await criarChaveEstrangeira(db, "movimentoDeStock", "produtoId", "produto", "id");
+      await criarChaveEstrangeira(db, "movimentoDeStock", "utilizadorId", "utilizador", "id");
+
+      await criarChaveEstrangeira(db, "compra", "fornecedorId", "fornecedor", "id");
+      await criarChaveEstrangeira(db, "compra", "utilizadorId", "utilizador", "id");
+      await criarChaveEstrangeira(db, "produtoNaCompra", "produtoId", "produto", "id");
+      await criarChaveEstrangeira(db, "produtoNaCompra", "compraId", "compra", "id");
+
+      await criarChaveEstrangeira(db, "produtoNaVenda", "produtoId", "produto", "id");
+      await criarChaveEstrangeira(db, "produtoNaVenda", "vendaId", "venda", "id");
+      await criarChaveEstrangeira(db, "venda", "utilizadorId", "utilizador", "id");
+      await criarChaveEstrangeira(db, "venda", "clienteId", "cliente", "id");
 
       log("DB::TABLES::END");
     } catch (e) {
