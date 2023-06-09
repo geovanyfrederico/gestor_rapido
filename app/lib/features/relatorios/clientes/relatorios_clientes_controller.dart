@@ -58,7 +58,7 @@ class RelatoriosClientesController {
       return VendaModel.fromMap(maps[index]);
     });
 
-    for (var element in vendas) {
+    for (VendaModel element in vendas) {
       element.usuarioModel = await  element.usuario;
 
       totalPagar += element.totalPagar;
