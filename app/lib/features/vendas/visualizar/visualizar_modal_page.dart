@@ -178,7 +178,6 @@ class VisualizarModalState extends State<VisualizarModalPage> {
                                 ));
                               }
                               // Tudo correu bem
-
                               return ListView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),

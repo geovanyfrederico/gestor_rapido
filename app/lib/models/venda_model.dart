@@ -15,15 +15,20 @@ class VendaModel {
     double totalPagar;
     double totalPago;
     double troco;
+    ClienteModel? clienteModel;
+    UsuarioModel? usuarioModel;
 
     Future<List<ProdutoNaVendaModel>> get produtos async {
         return await ProdutoNaVendaModel.findAllByVendaId(id!);
     }
     Future<ClienteModel> get cliente async {
-        return await ClienteModel.findOneById(clienteId!);
+        clienteModel ??= await ClienteModel.findOneById(clienteId!);
+        return clienteModel!;
     }
     Future<UsuarioModel> get usuario async {
-        return await UsuarioModel.findOneById(usuarioId!);
+        usuarioModel ??= await UsuarioModel.findOneById(usuarioId!);
+        return usuarioModel!;
+
     }
     VendaModel({
         this.id,
@@ -50,6 +55,7 @@ class VendaModel {
     }
 
     factory VendaModel.fromMap(Map<String, dynamic> map) {
+
         return VendaModel(
             id: map['id'],
             clienteId: map['clienteId'],

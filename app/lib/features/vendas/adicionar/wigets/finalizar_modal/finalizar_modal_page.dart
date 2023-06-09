@@ -37,7 +37,6 @@ class _ModalContentState extends State<FinalizarModalPage> {
   void _update(){
     controller.calcularResumo();
     setState(() {});
-
   }
   @override
   void initState() {

@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:gr/features/relatorios/clientes/relatorios_clientes_controller.dart';
+import 'package:gr/features/relatorios/vendas/relatorios_vendas_controller.dart';
 import 'package:gr/models/cliente_model.dart';
+import '../../../core/utils/mat.dart';
+import '../../../core/utils/tempo.dart';
+import '../../../wigets/date_range_selector.dart';
 
-import 'package:gr/core/utils/mat.dart';
-import 'package:gr/core/utils/tempo.dart';
-import 'package:gr/wigets/date_range_selector.dart';
-
-import '../../vendas/adicionar/wigets/cliente_modal/cliente_modal_page.dart';
-
-class RelatoriosClientesPage extends StatefulWidget {
-  const RelatoriosClientesPage({Key? key}) : super(key: key);
+class RelatoriosVendasPage extends StatefulWidget {
+  const RelatoriosVendasPage({Key? key}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
-    return RelatoriosClientesState();
+    return RelatoriosVendasState();
   }
 }
 
-class RelatoriosClientesState extends State<RelatoriosClientesPage> {
-  final RelatoriosClientesController controller = RelatoriosClientesController();
+class RelatoriosVendasState extends State<RelatoriosVendasPage> {
+  final RelatoriosVendasController controller = RelatoriosVendasController();
   bool notInited = true;
   bool loading = false;
   // Função de callback para receber o valor do filho
@@ -54,7 +51,7 @@ class RelatoriosClientesState extends State<RelatoriosClientesPage> {
         ),
         backgroundColor: Colors.orange,
         centerTitle: true,
-        title: const Text('Relatorios de clientes'),
+        title: const Text('Relatorios de vendas'),
       ),
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.grey[100],
@@ -74,27 +71,6 @@ class RelatoriosClientesState extends State<RelatoriosClientesPage> {
                   padding: const EdgeInsets.all(15),
                   child: Column(
                     children: [
-                      Card(
-                          elevation: 0,
-                          margin: const EdgeInsets.only(
-                              left: 0, top: 0, right:0, bottom: 0),
-                          child: Padding(
-                              padding: EdgeInsets.all(0),
-                              child: ListTile(
-                                onTap: () {
-                                  showModalBottomSheet(
-                                    context: context,
-                                    isScrollControlled: true,
-                                    builder: (BuildContext context) {
-                                      return ClienteModalPage(callback: setCliente);
-                                    },
-                                  );
-                                },
-                                title: Text(controller.cliente.nome),
-                                subtitle: Text("NIF: ${controller.cliente.nif}"),
-                              )
-                          )
-                      ),
                       Padding(
                           padding:
                           const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
@@ -133,18 +109,6 @@ class RelatoriosClientesState extends State<RelatoriosClientesPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "Cliente",
-                          ),
-                          Text(controller.cliente.nome),
-                        ],
-                      ),
-                      const SizedBox(height: 5),
                       const SizedBox(height: 5),
                       Row(
                         mainAxisAlignment:
@@ -203,6 +167,56 @@ class RelatoriosClientesState extends State<RelatoriosClientesPage> {
                     ],
                   ),
                 ))),
+        Card(
+            elevation: 1,
+            margin: const EdgeInsets.only(
+                left: 10, top: 10, right: 10, bottom: 5),
+            child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: ListTile(
+                  onTap: () {
+
+                  },
+                  title: const Text("Top 3 Clientes",
+                      style: TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold)),
+                  subtitle: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("Melhor vendedor"),
+                          Text("${Tempo.formatarDataNull(controller.inicio?.toIso8601String())}  - ${Tempo.formatarDataNull(controller.fim?.toIso8601String())}"),
+                        ],
+                      ),
+                      const SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("Pior Vendedor"),
+                          Text(controller.vendas.length.toString()),
+                        ],
+                      ),
+                      const SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("Qtd items"),
+                          Text(controller.totalQtd.toString()),
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+            )
+        ),
+        topPorCliente(),
         Container(
           margin: const EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 5),
           decoration: BoxDecoration(
@@ -269,6 +283,46 @@ class RelatoriosClientesState extends State<RelatoriosClientesPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget topPorCliente(){
+    return Card(
+        elevation: 1,
+        margin: const EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 5),
+        child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: ListTile(
+                onTap: () { },
+                title: const Text("Vendas por clientes",
+                    style: TextStyle( fontSize: 15, fontWeight: FontWeight.bold)),
+                subtitle: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                    height: 200, // Defina uma altura fixa para o ListView interno ou ajuste conforme necessário
+                    child: ListView.builder(
+                      shrinkWrap: true, // Defina shrinkWrap como true
+                      itemCount: controller.vendasPorCliente.length,
+                      itemBuilder: (context, index) => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 15),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("${controller.vendasPorCliente.keys.elementAt(index)?.nome} "),
+                              Text(Mat.numeroParaDinheiro(controller.vendasPorCliente.values.elementAt(index).toString())),
+                            ],
+                          ),
+                          // Aqui você pode adicionar mais widgets e personalizar a exibição de cada item do ListView
+                          // utilizando os dados de produtoNaVenda
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+            )
+        )
     );
   }
 
