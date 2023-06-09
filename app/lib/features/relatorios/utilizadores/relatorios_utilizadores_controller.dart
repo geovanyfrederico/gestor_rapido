@@ -1,12 +1,8 @@
-import 'dart:developer';
-
 import 'package:gr/core/utils/tempo.dart';
-import 'package:gr/models/utilizador_model.dart';
 import 'package:gr/models/database_helper.dart';
+import 'package:gr/models/utilizador_model.dart';
 import 'package:gr/models/venda_model.dart';
 import 'package:sqflite/sqflite.dart';
-
-import '../../../models/cliente_model.dart';
 class RelatoriosUtilizadoresController {
 
   late UtilizadorModel utilizador  = UtilizadorModel(id:0, nome: 'Selecione um utilizador', telefone: '', pin: '', tipo:0);

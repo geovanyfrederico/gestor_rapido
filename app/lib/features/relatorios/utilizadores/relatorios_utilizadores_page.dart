@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:gr/features/relatorios/utilizadores/relatorios_utilizadores_controller.dart';
-import 'package:gr/models/utilizador_model.dart';
 import 'package:gr/core/utils/mat.dart';
 import 'package:gr/core/utils/tempo.dart';
+import 'package:gr/features/relatorios/utilizadores/relatorios_utilizadores_controller.dart';
+import 'package:gr/models/utilizador_model.dart';
 import 'package:gr/wigets/date_range_selector.dart';
 
 import '../../utilizadores/wigets/utilizador_modal_page.dart';

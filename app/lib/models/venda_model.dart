@@ -1,7 +1,6 @@
 import 'package:gr/models/cliente_model.dart';
 import 'package:gr/models/produto_na_venda_model.dart';
 import 'package:gr/models/utilizador_model.dart';
-import 'package:gr/models/utilizador_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'cliente_model.dart';

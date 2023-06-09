@@ -38,7 +38,6 @@ class _RelatoriosPageState extends State<RelatoriosPage> {
               _buildRelatorioCard("Vendas", "Acompanhe as informações de vendas e faturamento",image: 'gr3', link:"vendas"),
               _buildRelatorioCard("Clientes", "Veja um relatório detalhado sobre seus clientes",image: 'gr7', link:"clientes"),
               _buildRelatorioCard("Utilizadores", "Analise o desempenho dos utilizadores da sua empresa",image: 'gr4', link:"utilizadores"),
-              _buildRelatorioCard("Produto", "Obtenha insights sobre os seus produtos mais vendidos",image: 'gr9', link:"produtos"),
               _buildRelatorioCard("Compras", "Avalie os registros de compras e fornecedores",image: 'gr7', link:"compras"),
               _buildRelatorioCard("Por Fornecedor", "Veja um relatório específico para cada fornecedor",image: 'gr6', link:"fornecedor"),
             ],

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:gr/features/relatorios/clientes/relatorios_clientes_controller.dart';
-import 'package:gr/models/cliente_model.dart';
-
 import 'package:gr/core/utils/mat.dart';
 import 'package:gr/core/utils/tempo.dart';
+import 'package:gr/features/relatorios/clientes/relatorios_clientes_controller.dart';
+import 'package:gr/models/cliente_model.dart';
 import 'package:gr/wigets/date_range_selector.dart';
 
 import '../../vendas/adicionar/wigets/cliente_modal/cliente_modal_page.dart';
