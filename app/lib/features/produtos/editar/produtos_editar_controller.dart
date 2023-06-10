@@ -10,6 +10,8 @@ class ProdutosEditarController {
   final nome = TextEditingController();
   final preco = TextEditingController();
   final stock = TextEditingController();
+  final motivo = TextEditingController();
+
   late ProdutoModel produto;
   Future<void> init(ProdutoModel produtoInited) async {
     produto = produtoInited;
@@ -47,7 +49,9 @@ class ProdutosEditarController {
       produto.preco = double.parse(preco.value.text);
       if(produto.stock != stockAtual){
         produto.stock = stockAtual;
-        MovimentoDeStockModel( produtoId: produto.id!, utilizadorId: uId, data: _hoje(), totalQtd: stockAtual, ref: 'S/Ref', tipo: 'Atualização').insert();
+        //Verifica se existe um motivo para atualizar o stock
+        motivo.text = motivo.value.text.isEmpty ? "S/Ref" : motivo.value.text;
+        MovimentoDeStockModel( produtoId: produto.id!, utilizadorId: uId, data: _hoje(), totalQtd: stockAtual, ref: motivo.value.text, tipo: 'Atualização').insert();
       }
       await produto.update();
       AlertHelper.success(context, "Operação concluida");

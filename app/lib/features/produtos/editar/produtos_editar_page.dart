@@ -41,8 +41,7 @@ class ProdutosEditarState extends State<ProdutosEditarPage> {
   @override
   Widget build(BuildContext context)  {
     final screenHeight = MediaQuery.of(context).size.height;
-    final targetHeight = screenHeight *0.6; // 80% da altura da tela
-
+    final targetHeight = screenHeight * 0.7; // 80% da altura da tela
     return SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child:  Container(
@@ -60,12 +59,6 @@ class ProdutosEditarState extends State<ProdutosEditarPage> {
                           maxLength: 50,
                           autocorrect: false,
                           controller: controller.nome,
-                          // Every single time the text changes in a
-                          // TextField, this onChanged callback is called
-                          // and it passes in the value.
-                          //
-                          // Set the text of your controller to
-                          // to the next value.
                           decoration: const InputDecoration(
                             focusColor: Colors.orange,
                             filled: true,
@@ -89,12 +82,6 @@ class ProdutosEditarState extends State<ProdutosEditarPage> {
                           maxLength: 50,
                           autocorrect: false,
                           controller: controller.preco,
-                          // Every single time the text changes in a
-                          // TextField, this onChanged callback is called
-                          // and it passes in the value.
-                          //
-                          // Set the text of your controller to
-                          // to the next value.
                           decoration: const InputDecoration(
                             focusColor: Colors.orange,
                             filled: true,
@@ -118,12 +105,6 @@ class ProdutosEditarState extends State<ProdutosEditarPage> {
                           maxLength: 50,
                           autocorrect: false,
                           controller: controller.codigo,
-                          // Every single time the text changes in a
-                          // TextField, this onChanged callback is called
-                          // and it passes in the value.
-                          //
-                          // Set the text of your controller to
-                          // to the next value.
                           decoration: const InputDecoration(
                             focusColor: Colors.orange,
                             filled: true,
@@ -146,12 +127,6 @@ class ProdutosEditarState extends State<ProdutosEditarPage> {
                           keyboardType: TextInputType.number,
                           maxLength: 9,
                           controller: controller.stock,
-                          // Every single time the text changes in a
-                          // TextField, this onChanged callback is called
-                          // and it passes in the value.
-                          //
-                          // Set the text of your controller to
-                          // to the next value.
                           decoration: const InputDecoration(
                             focusColor: Colors.orange,
                             filled: true,
@@ -163,6 +138,28 @@ class ProdutosEditarState extends State<ProdutosEditarPage> {
                             ),
                             border: InputBorder.none,
                             hintText: 'Stock Inicial',
+                            counterText: "",
+                            prefixIcon: Icon(Icons.inbox_sharp),
+                          )
+                      )
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: TextField(
+                          keyboardType: TextInputType.text,
+                          maxLength: 255,
+                          controller: controller.motivo,
+                          decoration: const InputDecoration(
+                            focusColor: Colors.orange,
+                            filled: true,
+                            contentPadding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                              BorderSide(color: Colors.orange, width: 2.0),
+                            ),
+                            border: InputBorder.none,
+                            hintText: 'Motivo de atualização de stock',
                             counterText: "",
                             prefixIcon: Icon(Icons.inbox_sharp),
                           )

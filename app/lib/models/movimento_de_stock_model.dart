@@ -77,6 +77,16 @@ class MovimentoDeStockModel {
         return result.first;
     }
 
+    String icon() {
+        if(tipo == "Saída"){
+            return "-";
+        }
+        if(tipo == "Entrada"){
+            return "+";
+        }
+        return "=";
+    }
+
 
 
 

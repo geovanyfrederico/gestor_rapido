@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gr/features/produtos/produtos_controller.dart';
+import 'package:gr/features/produtos/stock/produtos_stock_page.dart';
 import 'package:gr/wigets/menu_drawer.dart';
 import '../../core/utils/mat.dart';
 import '../../models/produto_model.dart';
@@ -164,14 +165,24 @@ class ProdutosPageState extends State<ProdutosPage> {
                               ListTile(
                                 onTap:() {
                                   Navigator.pop(context);
+                                  abrirModalStockProduto(snapshot, index);
+                                },
+                                leading: Icon(Icons.inbox_sharp),
+                                title: Text('Stock'),
+                              ),
+                              ListTile(
+                                onTap:() {
+                                  Navigator.pop(context);
                                   abrirModalEditarProduto(snapshot, index);
                                 },
                                 leading: Icon(Icons.edit),
                                 title: Text('Editar'),
                               ),
                               ListTile(
-                                leading: Icon(Icons.delete),
-                                title: Text('Eliminar'),
+                                leading: Icon(Icons.delete,color: Colors.red),
+                                title: Text('Eliminar', style: TextStyle(
+                                    color: Colors.red
+                                )),
                                 onTap: () {
                                   _eliminar(snapshot.data![index].id, context);
                                   Navigator.pop(context);
@@ -204,6 +215,15 @@ class ProdutosPageState extends State<ProdutosPage> {
       isScrollControlled: true,
       builder: (context) {
         return ProdutosEditarPage(produto: snapshot.data![index], callback: atualizado);
+      },
+    );
+  }
+  abrirModalStockProduto(AsyncSnapshot<List<ProdutoModel>> snapshot, int index){
+    return showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return ProdutosStockPage(produto: snapshot.data![index], callback: atualizado);
       },
     );
   }
