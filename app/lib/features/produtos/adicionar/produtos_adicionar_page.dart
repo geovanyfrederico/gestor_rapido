@@ -17,12 +17,10 @@ class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -33,7 +31,7 @@ class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
         ),
         backgroundColor: Colors.orange,
         centerTitle: true,
-        title: const Text('Adicionar produtos'),
+        title: const Text('Adicionar produto'),
       ),
       resizeToAvoidBottomInset:true,
       backgroundColor: Colors.grey[100],
@@ -55,27 +53,87 @@ class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:  [
-                    GestureDetector(
-                        onTap:() async {
-                          PickedFile? pickedFile = await ImagePicker().getImage(
-                            source: ImageSource.gallery,
-                            maxWidth: 1800,
-                            maxHeight: 1800,
-                          );
-                          if (pickedFile != null) {
-                            setState(() {
-                              controller.foto = File(pickedFile.path);
-                            });
-                          }
-                          SnackbarHelper.success(context, 'Adicionar foto');
-                        },
-                        child:     Padding(
-                            padding:  const EdgeInsets.only(bottom: 20),
-                            child:
-                            CircleAvatar(
-                                radius: 60,
-                                backgroundImage:controller.foto != null ? AssetImage(controller.foto!.path) : const AssetImage("assets/images/produto/padrao.png"),
-                                backgroundColor: Colors.transparent
+                    Center(
+                      child: GestureDetector(
+                          onTap:() async {
+                            PickedFile? pickedFile = await ImagePicker().getImage(
+                              source: ImageSource.gallery,
+                              maxWidth: 1800,
+                              maxHeight: 1800,
+                            );
+                            if (pickedFile != null) {
+                              setState(() {
+                                controller.foto = File(pickedFile.path);
+                              });
+                            }
+                            SnackbarHelper.success(context, 'Adicionar foto');
+                          },
+                          child:     Padding(
+                              padding:  const EdgeInsets.only(bottom: 20),
+                              child:
+                              CircleAvatar(
+                                  radius: 60,
+                                  backgroundImage:controller.foto != null ? AssetImage(controller.foto!.path) : const AssetImage("assets/images/produto/padrao.png"),
+                                  backgroundColor: Colors.transparent
+                              )
+                          )
+                      ),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: TextField(
+                            keyboardType: TextInputType.text,
+                            maxLength: 50,
+                            autocorrect: false,
+                            controller: controller.nome,
+                            // Every single time the text changes in a
+                            // TextField, this onChanged callback is called
+                            // and it passes in the value.
+                            //
+                            // Set the text of your controller to
+                            // to the next value.
+                            decoration: const InputDecoration(
+                              focusColor: Colors.orange,
+                              filled: true,
+                              contentPadding:
+                              EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Colors.orange, width: 2.0),
+                              ),
+                              border: InputBorder.none,
+                              hintText: 'Nome *',
+                              counterText: "",
+                              prefixIcon: Icon(Icons.shopping_cart),
+                            )
+                        )
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: TextField(
+                            keyboardType: TextInputType.numberWithOptions(decimal: true),
+                            maxLength: 50,
+                            autocorrect: false,
+                            controller: controller.preco,
+                            // Every single time the text changes in a
+                            // TextField, this onChanged callback is called
+                            // and it passes in the value.
+                            //
+                            // Set the text of your controller to
+                            // to the next value.
+                            decoration: const InputDecoration(
+                              focusColor: Colors.orange,
+                              filled: true,
+                              contentPadding:
+                              EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Colors.orange, width: 2.0),
+                              ),
+                              border: InputBorder.none,
+                              hintText: 'Preço *',
+                              counterText: "",
+                              prefixIcon: Icon(Icons.attach_money),
                             )
                         )
                     ),
@@ -111,65 +169,7 @@ class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
                     Padding(
                         padding: const EdgeInsets.only(bottom: 20),
                         child: TextField(
-                            keyboardType: TextInputType.text,
-                            maxLength: 50,
-                            autocorrect: false,
-                            controller: controller.nome,
-                            // Every single time the text changes in a
-                            // TextField, this onChanged callback is called
-                            // and it passes in the value.
-                            //
-                            // Set the text of your controller to
-                            // to the next value.
-                            decoration: const InputDecoration(
-                              focusColor: Colors.orange,
-                              filled: true,
-                              contentPadding:
-                              EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                BorderSide(color: Colors.orange, width: 2.0),
-                              ),
-                              border: InputBorder.none,
-                              hintText: 'Nome *',
-                              counterText: "",
-                              prefixIcon: Icon(Icons.shopping_cart),
-                            )
-                        )
-                    ),
-                    Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: TextField(
-
-                            maxLength: 50,
-                            autocorrect: false,
-                            controller: controller.preco,
-                            // Every single time the text changes in a
-                            // TextField, this onChanged callback is called
-                            // and it passes in the value.
-                            //
-                            // Set the text of your controller to
-                            // to the next value.
-                            decoration: const InputDecoration(
-                              focusColor: Colors.orange,
-                              filled: true,
-                              contentPadding:
-                              EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                BorderSide(color: Colors.orange, width: 2.0),
-                              ),
-                              border: InputBorder.none,
-                              hintText: 'Preço *',
-                              counterText: "",
-                              prefixIcon: Icon(Icons.attach_money),
-                            )
-                        )
-                    ),
-                    Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: TextField(
-                            keyboardType: TextInputType.phone,
+                            keyboardType: TextInputType.number,
                             maxLength: 9,
                             controller: controller.stock,
                             // Every single time the text changes in a
@@ -190,11 +190,10 @@ class ProdutosAdicionarState extends State<ProdutosAdicionarPage> {
                               border: InputBorder.none,
                               hintText: 'Stock Inicial',
                               counterText: "",
-                              prefixIcon: Icon(Icons.phone),
+                              prefixIcon: Icon(Icons.inbox_sharp),
                             )
                         )
                     ),
-
                   ],
                 )
               ],
