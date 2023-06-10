@@ -1,21 +1,23 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:gr/core/utils/mat.dart';
 import 'package:gr/features/produtos/editar/produtos_editar_controller.dart';
-import 'package:gr/core/utils/tempo.dart';
+
 import 'package:gr/models/produto_model.dart';
+import 'package:image_picker/image_picker.dart';
+
+import '../../../core/utils/snackbar_helper.dart';
 
 
 class ProdutosEditarPage extends StatefulWidget {
-  const ProdutosEditarPage({
-    Key? key, required this.produto}) : super(key: key);
+  const   ProdutosEditarPage({
+    Key? key, required this.produto,  this.callback}) : super(key: key);
 
   final ProdutoModel produto;
+  final Function(bool atualizado)? callback;
   @override
-  VisualizarModalState createState() => VisualizarModalState();
+  ProdutosEditarState createState() => ProdutosEditarState();
 }
 
-class VisualizarModalState extends State<ProdutosEditarPage> {
+class ProdutosEditarState extends State<ProdutosEditarPage> {
   final ProdutosEditarController controller =
   ProdutosEditarController();
 
@@ -29,46 +31,188 @@ class VisualizarModalState extends State<ProdutosEditarPage> {
     await controller.init(widget.produto);
     setState(() {});
   }
+  Future<void> _atualizar() async {
+    final atualizado  = await controller.atualizar(context);
+    widget.callback?.call(atualizado);
+    setState(() {});
+  }
+
+
   @override
   Widget build(BuildContext context)  {
     final screenHeight = MediaQuery.of(context).size.height;
-    final targetHeight = screenHeight *0.9; // 80% da altura da tela
+    final targetHeight = screenHeight *0.6; // 80% da altura da tela
 
     return SingleChildScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      child:  SizedBox(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child:  Container(
           height: targetHeight,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          padding:  const EdgeInsets.only(left: 20, top: 40, right: 20, bottom: 20),
+          child:  ListView(
             children: [
-              Card(
-                  elevation: 1,
-                  margin: const EdgeInsets.only(
-                      left: 10, top: 10, right: 10, bottom: 5),
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: ListTile(
-                        onTap: () {
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children:  [
+                  Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: TextField(
+                          keyboardType: TextInputType.text,
+                          maxLength: 50,
+                          autocorrect: false,
+                          controller: controller.nome,
+                          // Every single time the text changes in a
+                          // TextField, this onChanged callback is called
+                          // and it passes in the value.
+                          //
+                          // Set the text of your controller to
+                          // to the next value.
+                          decoration: const InputDecoration(
+                            focusColor: Colors.orange,
+                            filled: true,
+                            contentPadding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                              BorderSide(color: Colors.orange, width: 2.0),
+                            ),
+                            border: InputBorder.none,
+                            hintText: 'Nome *',
+                            counterText: "",
+                            prefixIcon: Icon(Icons.shopping_cart),
+                          )
+                      )
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: TextField(
+                          keyboardType: TextInputType.numberWithOptions(decimal: true),
+                          maxLength: 50,
+                          autocorrect: false,
+                          controller: controller.preco,
+                          // Every single time the text changes in a
+                          // TextField, this onChanged callback is called
+                          // and it passes in the value.
+                          //
+                          // Set the text of your controller to
+                          // to the next value.
+                          decoration: const InputDecoration(
+                            focusColor: Colors.orange,
+                            filled: true,
+                            contentPadding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                              BorderSide(color: Colors.orange, width: 2.0),
+                            ),
+                            border: InputBorder.none,
+                            hintText: 'Preço *',
+                            counterText: "",
+                            prefixIcon: Icon(Icons.attach_money),
+                          )
+                      )
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: TextField(
+                          keyboardType: TextInputType.text,
+                          maxLength: 50,
+                          autocorrect: false,
+                          controller: controller.codigo,
+                          // Every single time the text changes in a
+                          // TextField, this onChanged callback is called
+                          // and it passes in the value.
+                          //
+                          // Set the text of your controller to
+                          // to the next value.
+                          decoration: const InputDecoration(
+                            focusColor: Colors.orange,
+                            filled: true,
+                            contentPadding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                              BorderSide(color: Colors.orange, width: 2.0),
+                            ),
+                            border: InputBorder.none,
+                            hintText: 'Código',
+                            counterText: "",
+                            prefixIcon: Icon(Icons.qr_code),
+                          )
+                      )
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: TextField(
+                          keyboardType: TextInputType.number,
+                          maxLength: 9,
+                          controller: controller.stock,
+                          // Every single time the text changes in a
+                          // TextField, this onChanged callback is called
+                          // and it passes in the value.
+                          //
+                          // Set the text of your controller to
+                          // to the next value.
+                          decoration: const InputDecoration(
+                            focusColor: Colors.orange,
+                            filled: true,
+                            contentPadding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                              BorderSide(color: Colors.orange, width: 2.0),
+                            ),
+                            border: InputBorder.none,
+                            hintText: 'Stock Inicial',
+                            counterText: "",
+                            prefixIcon: Icon(Icons.inbox_sharp),
+                          )
+                      )
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Center(
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Row(
+                              children: [
+                                Icon(Icons.info, color: Colors.grey[500], size: 15),
+                                SizedBox(width: 5),
+                                Text(
+                                  "Editar o stock irá criar um novo movimento de stock",
+                                  style: TextStyle(color: Colors.grey[500]),
+                                ),
+                              ],
+                            ),
+                          )
+
+                      )
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Container(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          _atualizar();
 
                         },
-                        title:  Text("Editar ${controller.produto.nome}",
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold)),
-                        subtitle: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-
-
-                          ],
+                        child: const Text("Atualizar"),
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(vertical: 15),
+                          primary: Colors.orange,
+                          textStyle: const TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      )
+                      ),
+                    ),
                   )
-              ),
-
+                ],
+              )
             ],
-          )
-      ),
+          ),
+        )
     );
 
 

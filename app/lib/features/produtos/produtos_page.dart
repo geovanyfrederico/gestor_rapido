@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:gr/features/produtos/editar/produtos_editar_controller.dart';
 import 'package:gr/features/produtos/produtos_controller.dart';
 import 'package:gr/wigets/menu_drawer.dart';
-
 import '../../core/utils/mat.dart';
 import '../../models/produto_model.dart';
 import 'editar/produtos_editar_page.dart';
@@ -25,13 +23,17 @@ class ProdutosPageState extends State<ProdutosPage> {
     super.initState();
 
   }
-  void _eliminar(int? id, BuildContext context) {
-    controller.eliminar(id, context).then((_) {
-      setState(() {}); // Atualiza o estado para construir a lista após os dados terem sido buscados
-    });
+  Future<void> _eliminar(int? id, BuildContext context) async {
+    await  controller.eliminar(id, context);
+    setState(() {});
   }
 
-
+  // Função de callback para receber o valor do filho
+  void atualizado(bool atualizado) {
+    if(atualizado){
+      setState(() {});
+    }
+  }
   @override
   void dispose() {
     controller.dispose();
@@ -122,23 +124,29 @@ class ProdutosPageState extends State<ProdutosPage> {
             }
             // Lista vasia
             if(snapshot.data!.isEmpty){
-              return Center(child: Column(
-                crossAxisAlignment:CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                      width: 300,
-                      height: 300,
-                      child: Image.asset('assets/images/ilustration/gr9.png')
-                  ),
-                  const Text("Sem produtos",
-                      style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.grey
-                      ))
-                ],
-              ));
+              return GestureDetector(
+                onTap: (){
+                  Modular.to.navigate("/produtos/adicionar");
+                },
+                child: Center(
+                    child: Column(
+                      crossAxisAlignment:CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                            width: 300,
+                            height: 300,
+                            child: Image.asset('assets/images/ilustration/gr9.png')
+                        ),
+                        const Text("Sem produtos",
+                            style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.grey
+                            ))
+                      ],
+                    )),
+              );
             }
             // Tudo correu bem
             return ListView.builder(
@@ -153,9 +161,10 @@ class ProdutosPageState extends State<ProdutosPage> {
                         builder: (context) {
                           return Wrap(
                             children: [
-                               ListTile(
+                              ListTile(
                                 onTap:() {
-                                  ProdutosEditarPage(produto: snapshot.data![index]);
+                                  Navigator.pop(context);
+                                  abrirModalEditarProduto(snapshot, index);
                                 },
                                 leading: Icon(Icons.edit),
                                 title: Text('Editar'),
@@ -187,6 +196,15 @@ class ProdutosPageState extends State<ProdutosPage> {
           },
         ),
       ),
+    );
+  }
+  abrirModalEditarProduto(AsyncSnapshot<List<ProdutoModel>> snapshot, int index){
+    return showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return ProdutosEditarPage(produto: snapshot.data![index], callback: atualizado);
+      },
     );
   }
 

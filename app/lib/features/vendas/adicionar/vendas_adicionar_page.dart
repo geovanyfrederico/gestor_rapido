@@ -233,7 +233,8 @@ class VendasAdicionarState extends State<VendasAdicionarPage> {
                                       fontSize: 15.0,
                                       fontWeight: FontWeight.w600,
                                     ),
-                                  )))
+                                  ))
+                          )
                         ],
                       ),
                       SizedBox(height: 8),

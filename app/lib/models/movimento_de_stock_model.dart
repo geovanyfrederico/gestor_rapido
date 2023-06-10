@@ -13,7 +13,7 @@ class MovimentoDeStockModel {
 
 
     MovimentoDeStockModel({
-         this.id,
+        this.id,
         required this.produtoId,
         required this.utilizadorId,
         required this.data,
@@ -76,6 +76,10 @@ class MovimentoDeStockModel {
         await db.query('movimentoDeStock', where: 'id = ?', whereArgs: [id], limit: 1);
         return result.first;
     }
+
+
+
+
 }
 
 
