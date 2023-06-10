@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gr/models/cliente_model.dart';
+import 'package:gr/models/movimento_de_stock_model.dart';
 import 'package:gr/models/produto_na_venda_model.dart';
 import 'package:gr/models/venda_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -48,10 +49,10 @@ class FinalizarModalController {
       for (var element in produtos) {
         totalQtd = totalQtd + element.totalQtd;
       }
-      int clienteId = await utilizadorId();
+      int uId = await utilizadorId();
       VendaModel vendaModel = VendaModel(
           clienteId: cliente.id
-          , utilizadorId:clienteId
+          , utilizadorId:uId
           , data: _hoje()
           , totalQtd: totalQtd
           , totalPagar: totalPagar
@@ -65,6 +66,7 @@ class FinalizarModalController {
         produtoModel.stock -= pnv.totalQtd;
         pnv.vendaId = vendaModel.id;
         await produtoModel.update();
+        MovimentoDeStockModel( produtoId: produtoModel.id!, utilizadorId: uId, data: _hoje(), totalQtd: pnv.totalQtd, ref: 'Venda ${vendaModel.id}', tipo: 'Saída').insert();
         await pnv.salvar();
       }
       return true;
