@@ -23,9 +23,8 @@ class VisualizarModalState extends State<VisualizarModalPage> {
 
   @override
   void initState() {
-    _init().then((value) => {
-      super.initState()
-    });
+    _init();
+    super.initState();
 
   }
   Future<void> _init() async {
@@ -80,7 +79,7 @@ class VisualizarModalState extends State<VisualizarModalPage> {
                                 const Text(
                                   "Vendedor",
                                 ),
-                                Text(controller.usuario.nome),
+                                Text(controller.utilizador.nome),
                               ],
                             ),
                             const SizedBox(height: 5),
@@ -221,7 +220,7 @@ class VisualizarModalState extends State<VisualizarModalPage> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-          /*  Row(
+            /*  Row(
               children: [
                 Expanded(
                     child: ElevatedButton(

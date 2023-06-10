@@ -1,13 +1,11 @@
-import 'dart:developer';
-
 import 'package:gr/core/utils/tempo.dart';
-import 'package:gr/models/cliente_model.dart';
 import 'package:gr/models/database_helper.dart';
+import 'package:gr/models/utilizador_model.dart';
 import 'package:gr/models/venda_model.dart';
 import 'package:sqflite/sqflite.dart';
-class RelatoriosClientesController {
+class RelatoriosUtilizadoresController {
 
-  late ClienteModel cliente = ClienteModel(id:1, nome: 'Consumidor Final', nif: '99999999');
+  late UtilizadorModel utilizador  = UtilizadorModel(id:0, nome: 'Selecione um utilizador', telefone: '', pin: '', tipo:0);
   late DateTime? inicio = Tempo.today().start;
   late DateTime? fim = Tempo.today().end;
   late List<VendaModel> vendas = <VendaModel>[];
@@ -23,8 +21,8 @@ class RelatoriosClientesController {
     maiorVenda = 0.0;
     vendas = <VendaModel>[];
   }
-  void setCliente(ClienteModel clienteSet) {
-    cliente = clienteSet;
+  void setUtilizador(UtilizadorModel utilizadorSet) {
+    utilizador = utilizadorSet;
   }
 
 
@@ -35,22 +33,21 @@ class RelatoriosClientesController {
 
   Future<bool> gerarRelatorios() async {
     clear();
-  log("${inicio?.toIso8601String()}, ${fim?.toIso8601String()}, ${cliente.id} - ${cliente.nome}");
     final Database database = await DatabaseHelper.instance.database;
     late List<Map<String, dynamic>> maps = [];
     if(inicio?.toIso8601String() == fim?.toIso8601String()){
       maps = await database.rawQuery(
         '''
-    SELECT * FROM venda WHERE  data = ? AND clienteId = ?
+    SELECT * FROM venda WHERE  data = ? AND utilizadorId = ?
     ''',
-        [inicio?.toIso8601String(), cliente.id],
+        [inicio?.toIso8601String(), utilizador.id],
       );
     }else{
       maps = await database.rawQuery(
         '''
-    SELECT * FROM venda WHERE  data BETWEEN ? AND ? AND clienteId = ?
+    SELECT * FROM venda WHERE  data BETWEEN ? AND ? AND utilizadorId = ?
     ''',
-        [inicio?.toIso8601String(), fim?.toIso8601String(), cliente.id],
+        [inicio?.toIso8601String(), fim?.toIso8601String(), utilizador.id],
       );
     }
 
@@ -72,6 +69,12 @@ class RelatoriosClientesController {
     }
 
     return true;
+  }
+
+  Future<void> getDefaultUtilizador() async {
+    if(utilizador.id ==0){
+      utilizador = await UtilizadorModel.findOneById(1);
+    }
   }
 
 }

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
 import 'package:gr/models/empresa_model.dart';
-import 'package:gr/models/usuario_model.dart';
+import 'package:gr/models/utilizador_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/utils/sms.dart';
@@ -12,7 +12,7 @@ class RegistarController {
   SharedPreferences? prefs;
 
   final nomeDaEmpresa = TextEditingController();
-  final nomeDoUsuario = TextEditingController();
+  final nomeDoUtilizador = TextEditingController();
   final nif = TextEditingController();
   final telefone = TextEditingController();
   final pin = TextEditingController();
@@ -21,7 +21,7 @@ class RegistarController {
     if(nomeDaEmpresa.value.text.isEmpty) {
       return false;
     }
-    if(nomeDoUsuario.value.text.isEmpty) {
+    if(nomeDoUtilizador.value.text.isEmpty) {
       return false;
     }
     if(nif.value.text.isEmpty) {
@@ -49,8 +49,8 @@ class RegistarController {
         nome: nomeDaEmpresa.value.text,
         nif: nif.value.text
     );
-    UsuarioModel usuarioModel = UsuarioModel(
-        nome: nomeDoUsuario.value.text,
+    UtilizadorModel utilizadorModel = UtilizadorModel(
+        nome: nomeDoUtilizador.value.text,
         pin: pin.value.text,
         telefone: telefone.value.text,
         tipo: 2
@@ -62,19 +62,19 @@ class RegistarController {
     }
     try {
       await empresaModel.salvar();
-      final usuarioId = await usuarioModel.salvar();
+      final utilizadorId = await utilizadorModel.salvar();
 
       SnackbarHelper.success(context, "Successo");
 
       var _prefs = await SharedPreferences.getInstance();
       await _prefs.setBool('logado', true);
-      await _prefs.setInt("usuarioId", usuarioId);
-      await _prefs.setString("usuarioNome", usuarioModel.nome);
-      await _prefs.setString("usuarioTelefone", usuarioModel.telefone);
-      await _prefs.setInt("usuarioTipo",usuarioModel.tipo);
+      await _prefs.setInt("utilizadorId", utilizadorId);
+      await _prefs.setString("utilizadorNome", utilizadorModel.nome);
+      await _prefs.setString("utilizadorTelefone", utilizadorModel.telefone);
+      await _prefs.setInt("utilizadorTipo",utilizadorModel.tipo);
 
       // Envia uma mensagem de boas vindas.
-      SMS.send(telefone.value.text, "${usuarioModel.nome}, bem vindo ao Gestor Rápido.");
+      SMS.send(telefone.value.text, "${utilizadorModel.nome}, bem vindo ao Gestor Rápido.");
       return true;
     } catch ( e) {
       SnackbarHelper.error(context, "Erro: "+e.toString());

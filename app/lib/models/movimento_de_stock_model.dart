@@ -1,7 +1,7 @@
 class MovimentoDeStockModel {
     int id;
     int produtoId;
-    int usuarioId;
+    int utilizadorId;
     DateTime data;
     int qtd;
     String ref;
@@ -10,7 +10,7 @@ class MovimentoDeStockModel {
     MovimentoDeStockModel({
         required this.id,
         required this.produtoId,
-        required this.usuarioId,
+        required this.utilizadorId,
         required this.data,
         required this.qtd,
         required this.ref,
@@ -21,7 +21,7 @@ class MovimentoDeStockModel {
         return {
             'id': id,
             'produtoId': produtoId,
-            'usuarioId': usuarioId,
+            'utilizadorId': utilizadorId,
             'data': data,
             'qtd': qtd,
             'ref': ref,
@@ -33,7 +33,7 @@ class MovimentoDeStockModel {
         return MovimentoDeStockModel(
             id: map['id'],
             produtoId: map['produtoId'],
-            usuarioId: map['usuarioId'],
+            utilizadorId: map['utilizadorId'],
             data: map['data'],
             qtd: map['qtd'],
             ref: map['ref'],

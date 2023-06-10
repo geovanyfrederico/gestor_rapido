@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
 
-import '../../../models/usuario_model.dart';
+import '../../../models/utilizador_model.dart';
 
-class UsuariosAdicionarController{
+class UtilizadorsAdicionarController{
   final nome = TextEditingController();
   final telefone = TextEditingController();
   final pin = TextEditingController();
@@ -31,19 +31,19 @@ class UsuariosAdicionarController{
     if(!valido(context)){
       return false;
     }
-    UsuarioModel usuarioModel = UsuarioModel(
+    UtilizadorModel utilizadorModel = UtilizadorModel(
       nome: nome.value.text,
       pin: pin.value.text,
       telefone: telefone.value.text,
       tipo: 0
     );
-    if(await usuarioModel.salvar() > 0){
-      SnackbarHelper.success(context, "Usuario adicionado.");
+    if(await utilizadorModel.salvar() > 0){
+      SnackbarHelper.success(context, "Utilizador adicionado.");
       limparFormulario();
       return  true;
     }
 
-    SnackbarHelper.error(context, "Não foi possivel adicionar o usuarios, tente novamente");
+    SnackbarHelper.error(context, "Não foi possivel adicionar o utilizadores, tente novamente");
     return false;
   }
 

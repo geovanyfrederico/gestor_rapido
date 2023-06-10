@@ -1,3 +1,4 @@
+import 'package:gr/models/cliente_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'database_helper.dart';
@@ -53,7 +54,7 @@ class ProdutoModel {
   static Future<List<ProdutoModel>> index() async {
     Database db = await DatabaseHelper.instance.database;
     List<Map<String, dynamic>> maps =
-        await db.query('produto', orderBy: 'id DESC');
+    await db.query('produto', orderBy: 'id DESC');
 
     return List.generate(maps.length, (index) {
       return ProdutoModel(
@@ -68,6 +69,11 @@ class ProdutoModel {
   Future<int> salvar() async {
     Database db = await DatabaseHelper.instance.database;
     return db.insert(tabela, toMap());
+  }
+  // atualiza um registro no banco de dados
+  Future<int> update() async {
+    Database db = await DatabaseHelper.instance.database;
+    return await db.update(tabela,toMap(), where: 'id = ?', whereArgs: [id]);
   }
 
   static Future<int> eliminar(int id) async {
@@ -90,5 +96,17 @@ class ProdutoModel {
         stock: maps[index]['stock'],
       );
     });
+  }
+  static findOneById(int id) async {
+    Database db = await DatabaseHelper.instance.database;
+    List<Map<String, dynamic>> maps = await db.query(
+      tabela,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    if (maps.isNotEmpty) {
+      return ProdutoModel.fromMap(maps.first);
+    }
+    throw Exception("Não foi possivel encontrar este produto");
   }
 }

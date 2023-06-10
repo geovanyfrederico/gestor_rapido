@@ -28,15 +28,20 @@ class ClientesListarController  extends ChangeNotifier{
   Future<bool> eliminar(index, BuildContext context) async {
 
     ClienteModel clienteModel = clientes[index];
-    if (clienteModel.id==1) {
+      if (clienteModel.id==1) {
       SnackbarHelper.error(context, "Erro: este cliente não pode ser eliminado.");
       return false;
 
     }
-    if( await ClienteModel.eliminar(clienteModel.id) > 0){
-      SnackbarHelper.success(context, "Successo: "+ clienteModel.nome+ " eliminado.");
-      clientes.removeAt(index);
-      return true;
+    try{
+      if(await ClienteModel.eliminar(clienteModel.id) > 0){
+        SnackbarHelper.success(context, "Successo: "+ clienteModel.nome+ " eliminado.");
+        clientes.removeAt(index);
+        return true;
+      }
+    }catch(e){
+      SnackbarHelper.error(context, "Erro: não é possivel eliminar este cliente, é possivel que esteja relacionado com uma venda.");
+      return false;
     }
     SnackbarHelper.error(context, "Erro: não é possivel eliminar este cliente.");
     return false;

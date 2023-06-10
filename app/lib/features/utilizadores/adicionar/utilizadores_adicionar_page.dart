@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:gr/features/usuarios/adicionar/usuarios_adicionar_controller.dart';
-import 'package:gr/models/usuario_model.dart';
-class UsuariosAdicionarPage extends StatefulWidget  {
-  const UsuariosAdicionarPage({Key? key}) : super(key: key);
+import 'package:gr/features/utilizadores/adicionar/utilizadores_adicionar_controller.dart';
+import 'package:gr/models/utilizador_model.dart';
+class UtilizadorsAdicionarPage extends StatefulWidget  {
+  const UtilizadorsAdicionarPage({Key? key}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
-    return UsuariosAdicionarState();
+    return UtilizadorsAdicionarState();
   }
 }
-class UsuariosAdicionarState extends State<UsuariosAdicionarPage> {
-  final UsuariosAdicionarController controller = UsuariosAdicionarController();
+class UtilizadorsAdicionarState extends State<UtilizadorsAdicionarPage> {
+  final UtilizadorsAdicionarController controller = UtilizadorsAdicionarController();
   String dropdownValue = 'Vendedor';
   List<String> options = ['Administrador', 'Vendedor', 'Gerente'];
   @override
@@ -26,7 +26,7 @@ class UsuariosAdicionarState extends State<UsuariosAdicionarPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => {
-            Modular.to.navigate("/usuarios")
+            Modular.to.navigate("/utilizadores")
           },
         ),
         backgroundColor: Colors.orange,
@@ -149,13 +149,13 @@ class UsuariosAdicionarState extends State<UsuariosAdicionarPage> {
 
                             switch (newValue){
                               case 'Administrador':
-                                controller.tipo.text = UsuarioModel.tipoAdministrador.toString();
+                                controller.tipo.text = UtilizadorModel.tipoAdministrador.toString();
                                 break;
                               case 'Vendedor':
-                                controller.tipo.text = UsuarioModel.tipoVendedor.toString();
+                                controller.tipo.text = UtilizadorModel.tipoVendedor.toString();
                                 break;
                               case 'Gerente':
-                                controller.tipo.text = UsuarioModel.tipoGerente.toString();
+                                controller.tipo.text = UtilizadorModel.tipoGerente.toString();
                                 break;
                             }
                             setState(() {

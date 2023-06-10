@@ -33,7 +33,7 @@ class RecuperarPinController{
     // Verificar se existe um telefone na base de dados
     Database db = await DatabaseHelper.instance.database;
     List<Map<String, dynamic>> results = await db.query(
-      'usuario',
+      'utilizador',
       where: "telefone = ?",
       whereArgs: [telefone.value.text],
     );
@@ -131,7 +131,7 @@ class RecuperadoPinController{
     // Verificar se existe um telefone na base de dados
     Database db = await DatabaseHelper.instance.database;
 
-    int foiAtualizado = await db.update('usuario', {'pin': novoPin.value.text, }, where: "telefone = ?", whereArgs: [telefone]);
+    int foiAtualizado = await db.update('utilizador', {'pin': novoPin.value.text, }, where: "telefone = ?", whereArgs: [telefone]);
 
     if(foiAtualizado > 0) {
       enviarMensagemDePinAlterado();

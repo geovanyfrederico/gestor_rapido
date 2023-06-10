@@ -3,27 +3,27 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gr/core/utils/Testos.dart';
-import 'package:gr/features/usuarios/usuarios_controller.dart';
+import 'package:gr/features/utilizadores/utilizadores_controller.dart';
 import 'package:gr/wigets/menu_drawer.dart';
 
-import '../../models/usuario_model.dart';
+import '../../models/utilizador_model.dart';
 
-class UsuariosPage extends StatefulWidget {
-  const UsuariosPage({Key? key}) : super(key: key);
+class UtilizadorsPage extends StatefulWidget {
+  const UtilizadorsPage({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return UsuariosPageState();
+    return UtilizadorsPageState();
   }
 }
 
-class UsuariosPageState extends State<UsuariosPage> {
-  UsuariosController controller = UsuariosController();
+class UtilizadorsPageState extends State<UtilizadorsPage> {
+  UtilizadorsController controller = UtilizadorsController();
 
   @override
   void initState() {
     super.initState();
-    controller.buscarUsuarios().then((_) {
+    controller.buscarUtilizadors().then((_) {
       setState(
           () {}); // Atualiza o estado para construir a lista após os dados terem sido buscados
     });
@@ -104,14 +104,14 @@ class UsuariosPageState extends State<UsuariosPage> {
       backgroundColor: Colors.grey[100],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Modular.to.navigate("/usuarios/adicionar");
+          Modular.to.navigate("/utilizadores/adicionar");
         },
         backgroundColor: Colors.orange,
         child: const Icon(Icons.add),
       ),
       body: SafeArea(
-        child: FutureBuilder<List<UsuarioModel>>(
-          future: controller.buscarUsuarios(),
+        child: FutureBuilder<List<UtilizadorModel>>(
+          future: controller.buscarUtilizadors(),
           builder: (context, snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
               return const Center(child: CircularProgressIndicator());
@@ -133,7 +133,7 @@ class UsuariosPageState extends State<UsuariosPage> {
                       height: 300,
                       child:
                           Image.asset('assets/images/ilustration/concept.png')),
-                  const Text("Sem usuarios",
+                  const Text("Sem utilizadores",
                       style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.w400,

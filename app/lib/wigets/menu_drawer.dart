@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:gr/models/usuario_model.dart';
+import 'package:gr/models/utilizador_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/utils/Testos.dart';
+import '../models/utilizador_model.dart';
 
 class MenuDrawer extends StatefulWidget{
   const MenuDrawer({Key? key}) : super(key: key);
@@ -17,13 +18,13 @@ class MenuDrawer extends StatefulWidget{
 }
 class MenuDrawerState extends State<MenuDrawer> {
   late SharedPreferences _prefs;
-  late String usuarioNome = "";
-  late String usuarioTipo = "";
+  late String utilizadorNome = "";
+  late String utilizadorTipo = "";
   // Initialize shared preferences
   Future<void> initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
-    usuarioNome =  _prefs.getString("usuarioNome")!;
-    usuarioTipo =  UsuarioModel.tipoDescricaoStatico(_prefs.getInt("usuarioTipo")?.toInt()) ;
+    utilizadorNome =  _prefs.getString("utilizadorNome")!;
+    utilizadorTipo =  UtilizadorModel.tipoDescricaoStatico(_prefs.getInt("utilizadorTipo")?.toInt()) ;
 
     setState(() {
     });
@@ -46,12 +47,12 @@ class MenuDrawerState extends State<MenuDrawer> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text(usuarioNome),
-              accountEmail: Text(usuarioTipo),
+              accountName: Text(utilizadorNome),
+              accountEmail: Text(utilizadorTipo),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.orangeAccent,
                 child: Text(
-                  Testos.primeiraLetraNomeSobrenome(usuarioNome),
+                  Testos.primeiraLetraNomeSobrenome(utilizadorNome),
                   style: TextStyle(fontSize: 20.0,
                       color: Colors.white
                   ),
@@ -93,7 +94,7 @@ class MenuDrawerState extends State<MenuDrawer> {
               leading: const Icon(Icons.person),
               title: const Text('Utilizadores'),
               onTap: () {
-                Modular.to.navigate("/usuarios");
+                Modular.to.navigate("/utilizadores");
               },
             ),
             ListTile(
@@ -125,8 +126,8 @@ class MenuDrawerState extends State<MenuDrawer> {
               onTap: () async {
                 SharedPreferences _prefs = await SharedPreferences.getInstance();
                 await _prefs.setBool('logado', false);
-                await _prefs.remove('usuarioNome');
-                await _prefs.remove('usuarioTipo');
+                await _prefs.remove('utilizadorNome');
+                await _prefs.remove('utilizadorTipo');
                 Modular.to.navigate("/entrar");
               },
             ),

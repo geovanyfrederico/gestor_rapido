@@ -39,13 +39,13 @@ class ClienteModel extends ModeloGlobal {
   }
   Future<int> salvar() async {
     Database db = await DatabaseHelper.instance.database;
-
     return db.insert('cliente', toMap());
   }
 
 // exclui um registro do banco de dados
   static Future<int> eliminar(int? id) async {
     Database db = await DatabaseHelper.instance.database;
+    await  db.execute("PRAGMA foreign_keys=ON");
     return await db.delete(tabela, where: 'id = ?', whereArgs: [id]);
   }
 
@@ -82,5 +82,6 @@ class ClienteModel extends ModeloGlobal {
       return ClienteModel.fromMap(maps[index]);
     });
   }
+
 
 }

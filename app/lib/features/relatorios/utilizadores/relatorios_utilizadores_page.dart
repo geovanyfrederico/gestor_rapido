@@ -2,27 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gr/core/utils/mat.dart';
 import 'package:gr/core/utils/tempo.dart';
-import 'package:gr/features/relatorios/clientes/relatorios_clientes_controller.dart';
-import 'package:gr/models/cliente_model.dart';
+import 'package:gr/features/relatorios/utilizadores/relatorios_utilizadores_controller.dart';
+import 'package:gr/models/utilizador_model.dart';
 import 'package:gr/wigets/date_range_selector.dart';
 
-import '../../vendas/adicionar/wigets/cliente_modal/cliente_modal_page.dart';
+import '../../utilizadores/wigets/utilizador_modal_page.dart';
 
-class RelatoriosClientesPage extends StatefulWidget {
-  const RelatoriosClientesPage({Key? key}) : super(key: key);
+class RelatoriosUtilizadoresPage extends StatefulWidget {
+  const RelatoriosUtilizadoresPage({Key? key}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
-    return RelatoriosClientesState();
+    return RelatoriosUtilizadoresState();
   }
 }
 
-class RelatoriosClientesState extends State<RelatoriosClientesPage> {
-  final RelatoriosClientesController controller = RelatoriosClientesController();
+class RelatoriosUtilizadoresState extends State<RelatoriosUtilizadoresPage> {
+  final RelatoriosUtilizadoresController controller = RelatoriosUtilizadoresController();
   bool notInited = true;
   bool loading = false;
   // Função de callback para receber o valor do filho
-  Future<void> setCliente(ClienteModel cliente) async {
-    controller.setCliente(cliente);
+  Future<void> setUtilizador(UtilizadorModel utilizador) async {
+    controller.setUtilizador(utilizador);
     await controller.gerarRelatorios();
     setState(() {});
   }
@@ -34,6 +34,7 @@ class RelatoriosClientesState extends State<RelatoriosClientesPage> {
   }
 
   Future<void> gerarRelatorio() async {
+    await controller.getDefaultUtilizador();
     await controller.gerarRelatorios();
     setState(() {});
   }
@@ -43,7 +44,8 @@ class RelatoriosClientesState extends State<RelatoriosClientesPage> {
     gerarRelatorio();
   }
 
-  @override
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -53,60 +55,62 @@ class RelatoriosClientesState extends State<RelatoriosClientesPage> {
         ),
         backgroundColor: Colors.orange,
         centerTitle: true,
-        title: const Text('Relatorios de clientes'),
+        title: const Text('Relatorios de utilizadores'),
       ),
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.grey[100],
       body: SafeArea(
-          child: Stack(
+        child: SingleChildScrollView(
+          child: Column(
             children: [
-              Container(),
-              Positioned.fill(child: Center(
-                child: relatorioPage(context),
-              ),),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  color: Colors.white,
-                  padding: const EdgeInsets.all(15),
-                  child: Column(
-                    children: [
-                      Card(
-                          elevation: 0,
-                          margin: const EdgeInsets.only(
-                              left: 0, top: 0, right:0, bottom: 0),
-                          child: Padding(
-                              padding: EdgeInsets.all(0),
-                              child: ListTile(
-                                onTap: () {
-                                  showModalBottomSheet(
-                                    context: context,
-                                    isScrollControlled: true,
-                                    builder: (BuildContext context) {
-                                      return ClienteModalPage(callback: setCliente);
-                                    },
-                                  );
-                                },
-                                title: Text(controller.cliente.nome),
-                                subtitle: Text("NIF: ${controller.cliente.nif}"),
-                              )
-                          )
+              relatorioPage(context),
+              Container(
+                color: Colors.white,
+                padding: const EdgeInsets.all(15),
+                child: Column(
+                  children: [
+                    Card(
+                      elevation: 0,
+                      margin: const EdgeInsets.all(0),
+                      child: Padding(
+                        padding: EdgeInsets.all(0),
+                        child: ListTile(
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              builder: (BuildContext context) {
+                                return UtilizadorModalPage(
+                                  callback: setUtilizador,
+                                );
+                              },
+                            );
+                          },
+                          title: Text(controller.utilizador.nome),
+                          subtitle: Text(
+                            "Telefone: ${controller.utilizador.telefone}",
+                          ),
+                        ),
                       ),
-                      Padding(
-                          padding:
-                          const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                          child: DateRangeSelector(callback: setTime)
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 0,
+                        horizontal: 0,
                       ),
-                    ],
-                  ),
+                      child: DateRangeSelector(callback: setTime),
+                    ),
+                  ],
                 ),
-              )
+              ),
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
+
+
   Widget relatorioPage(BuildContext context){
     if(loading){
       return const Center(child: CircularProgressIndicator());
@@ -148,9 +152,9 @@ class RelatoriosClientesState extends State<RelatoriosClientesPage> {
                           MainAxisAlignment.spaceBetween,
                           children: [
                             const Text(
-                              "Cliente",
+                              "Utilizador",
                             ),
-                            Text(controller.cliente.nome),
+                            Text(controller.utilizador.nome),
                           ],
                         ),
                         const SizedBox(height: 5),
@@ -256,7 +260,7 @@ class RelatoriosClientesState extends State<RelatoriosClientesPage> {
           itemBuilder: (context, index) => SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             child: SizedBox(
-              height: 200, // Defina uma altura fixa para o ListView interno ou ajuste conforme necessário
+              height: 500, // Defina uma altura fixa para o ListView interno ou ajuste conforme necessário
               child: ListView.builder(
                 shrinkWrap: true, // Defina shrinkWrap como true
                 itemCount: controller.vendas.length,
