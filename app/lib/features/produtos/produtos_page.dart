@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:gr/features/produtos/editar/produtos_editar_controller.dart';
 import 'package:gr/features/produtos/produtos_controller.dart';
 import 'package:gr/wigets/menu_drawer.dart';
 
 import '../../core/utils/mat.dart';
 import '../../models/produto_model.dart';
+import 'editar/produtos_editar_page.dart';
 
 class ProdutosPage extends StatefulWidget {
   const ProdutosPage({Key? key}) : super(key: key);
@@ -151,7 +153,10 @@ class ProdutosPageState extends State<ProdutosPage> {
                         builder: (context) {
                           return Wrap(
                             children: [
-                              const ListTile(
+                               ListTile(
+                                onTap:() {
+                                  ProdutosEditarPage(produto: snapshot.data![index]);
+                                },
                                 leading: Icon(Icons.edit),
                                 title: Text('Editar'),
                               ),
