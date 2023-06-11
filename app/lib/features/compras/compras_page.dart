@@ -23,7 +23,7 @@ class ComprasPageState extends State<ComprasPage> {
   @override
   void initState() {
     super.initState();
-    
+
   }
   void _eliminar(int? id, BuildContext context) {
     controller.eliminar(id, context).then((_) {
