@@ -85,11 +85,12 @@ class DatabaseHelper {
     ''');
       //COMPRAR
       //Fornecedor
+      //CLIENTES
       await db.execute('''
     CREATE TABLE fornecedor (
         ${addId()},
         ${addColuna('nome', permitirNull: false, propriedades: 'UNIQUE')},
-        ${addColuna('nif', permitirNull: false, propriedades: 'UNIQUE')},
+        ${addColuna('nif', permitirNull: true)},
         ${addColuna('endereco')},
         ${addColuna('telefone')}
     );

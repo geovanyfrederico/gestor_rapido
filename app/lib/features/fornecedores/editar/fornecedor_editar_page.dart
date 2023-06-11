@@ -1,56 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:gr/models/fornecedor_model.dart';
+import 'fornecedor_editar_controller.dart';
 
-import 'fornecedores_adicionar_controller.dart';
-class FornecedoresAdicionarPage extends StatefulWidget  {
-  const FornecedoresAdicionarPage({Key? key}) : super(key: key);
+class FornecedorEditarPage extends StatefulWidget {
+  const   FornecedorEditarPage({
+    Key? key, required this.fornecedor,  this.callback}) : super(key: key);
+
+  final FornecedorModel fornecedor;
+  final Function(bool atualizado)? callback;
   @override
-  State<StatefulWidget> createState() {
-    return FornecedoresAdicionarState();
-  }
+  FornecedorEditarState createState() => FornecedorEditarState();
 }
-class FornecedoresAdicionarState extends State<FornecedoresAdicionarPage> {
-  final FornecedoresAdicionarController controller = FornecedoresAdicionarController();
+
+class FornecedorEditarState extends State<FornecedorEditarPage> {
+  final FornecedorEditarController controller =
+  FornecedorEditarController();
 
   @override
   void initState() {
     super.initState();
+    _init();
 
   }
+  Future<void> _init() async {
+    await controller.init(widget.fornecedor);
+    setState(() {});
+  }
+  Future<void> _atualizar() async {
+    final atualizado  = await controller.atualizar(context);
+    widget.callback?.call(atualizado);
+    setState(() {});
+  }
+
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => {
-            Modular.to.navigate("/contactos")
-          },
-        ),
-        backgroundColor: Colors.orange,
-        centerTitle: true,
-        title: const Text('Adicionar fornecedores'),
-      ),
-      resizeToAvoidBottomInset:true,
-      backgroundColor: Colors.grey[100],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          controller.salvar(context);
-          setState(() {
-
-          });
-        },
-        backgroundColor: Colors.orange,
-        child: const Icon(Icons.save),
-      ),
-      body:  SafeArea(
+  Widget build(BuildContext context)  {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final targetHeight = screenHeight * 0.54; // 80% da altura da tela
+    return SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child:  Container(
+          height: targetHeight,
+          padding:  const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
           child:  ListView(
-            padding:  const EdgeInsets.only(left: 20, top: 40, right: 20, bottom: 20),
             children: [
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children:  [
+
                   Padding(
                       padding: const EdgeInsets.only(bottom: 20),
                       child: TextField(
@@ -137,7 +134,6 @@ class FornecedoresAdicionarState extends State<FornecedoresAdicionarPage> {
                           )
                       )
                   ),
-
                   Padding(
                       padding: EdgeInsets.only(bottom: 20),
                       child: TextField(
@@ -167,12 +163,34 @@ class FornecedoresAdicionarState extends State<FornecedoresAdicionarPage> {
                           )
                       )
                   ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Container(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          _atualizar();
+
+                        },
+                        child: const Text("Atualizar"),
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(vertical: 15),
+                          primary: Colors.orange,
+                          textStyle: const TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               )
             ],
-          )
-      ),
+          ),
+        )
     );
+
+
   }
 }
-

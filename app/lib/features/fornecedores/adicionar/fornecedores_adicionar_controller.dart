@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
 import 'package:gr/models/fornecedor_model.dart';
 
-
 class FornecedoresAdicionarController{
   final nome = TextEditingController();
   final telefone = TextEditingController();
@@ -10,9 +9,7 @@ class FornecedoresAdicionarController{
   final endereco = TextEditingController();
 
   bool valido(context){
-    if( nome.value.text.isEmpty
-        || nif.value.text.isEmpty
-    ){
+    if( nome.value.text.isEmpty){
       SnackbarHelper.warning(context, "Preencha todos campos");
       return false;
     }
@@ -27,26 +24,25 @@ class FornecedoresAdicionarController{
   }
 
   Future<bool> salvar(context) async {
-    if (!valido(context)) {
+    if(!valido(context)){
       return false;
     }
     FornecedorModel fornecedorModel = FornecedorModel(
-        nome: nome.value.text,
-        telefone: telefone.value.text,
-        nif: nif.value.text,
-        endereco: endereco.value.text
+      nome: nome.value.text,
+      telefone: telefone.value.text,
+      nif: nif.value.text,
+      endereco:endereco.value.text
     );
-    try {
-      await fornecedorModel.salvar();
+    if(await fornecedorModel.salvar() > 0){
       SnackbarHelper.success(context, "Fornecedor adicionado.");
       limparFormulario();
-      return true;
-    } catch (e) {
-      SnackbarHelper.error(
-          context, "Não foi possivel adicionar o cliente, "+e.toString());
-      return false;
+      return  true;
     }
+
+    SnackbarHelper.error(context, "Não foi possivel adicionar o fornecedor, tente novamente");
+    return false;
   }
+
 
 
 }
