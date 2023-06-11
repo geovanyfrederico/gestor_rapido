@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
 import 'package:gr/models/fornecedor_model.dart';
 import 'package:gr/models/database_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
+
+import '../../models/utilizador_model.dart';
 
 
 class FornecedoresListarController  extends ChangeNotifier{
@@ -24,8 +27,18 @@ class FornecedoresListarController  extends ChangeNotifier{
       );
     });
   }
-
+  Future<int> utilizadorTipo() async {
+    late SharedPreferences _prefs;
+    _prefs = await SharedPreferences.getInstance();
+    return _prefs.getInt("utilizadorTipo")!;
+  }
   Future<bool> eliminar(index, BuildContext context) async {
+    int uTipo = await utilizadorTipo();
+    if(UtilizadorModel.tipoVendedor == uTipo){
+      SnackbarHelper.error(context, "Voce não tem permissão.");
+      return false;
+    }
+
     FornecedorModel fornecedorModel = fornecedores[index];
     try{
       if(await FornecedorModel.eliminar(fornecedorModel.id) > 0){

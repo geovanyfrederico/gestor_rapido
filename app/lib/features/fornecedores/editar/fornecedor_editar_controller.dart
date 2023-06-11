@@ -3,8 +3,10 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gr/core/utils/alert_help.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/fornecedor_model.dart';
+import '../../../models/utilizador_model.dart';
 
 class FornecedorEditarController {
   var nome = TextEditingController();
@@ -28,8 +30,17 @@ class FornecedorEditarController {
     }
     return true;
   }
-
+  Future<int> utilizadorTipo() async {
+    late SharedPreferences _prefs;
+    _prefs = await SharedPreferences.getInstance();
+    return _prefs.getInt("utilizadorTipo")!;
+  }
   Future<bool> atualizar(BuildContext context) async {
+    int uTipo = await utilizadorTipo();
+    if(UtilizadorModel.tipoVendedor == uTipo){
+      AlertHelper.error(context, "Voce não tem permissão.");
+      return false;
+    }
     if (!valido(context)) {
       return false;
     }
