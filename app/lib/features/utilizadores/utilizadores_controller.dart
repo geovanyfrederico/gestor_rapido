@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:gr/core/utils/alert_help.dart';
+import 'package:gr/core/utils/snackbar_helper.dart';
+import 'package:gr/core/utils/snackbar_helper.dart';
 import 'package:gr/models/database_helper.dart';
 import 'package:gr/models/utilizador_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -23,9 +26,15 @@ class UtilizadorsController  extends ChangeNotifier{
       );
     });
   }
-  Future<bool> eliminar(id) async {
-    UtilizadorModel.eliminar(id);
-    return true;
+  Future<bool> eliminar(BuildContext context, int? id) async {
+    try{
+      await UtilizadorModel.eliminar(id!);
+      SnackbarHelper.success(context, 'Operação concluida.');
+      return true;
+    }catch(e){
+      SnackbarHelper.error(context, 'Não foi possivel eliminar este utilizador. \n O mesmo tem vendas ou compras realizadas.');
+      return false;
+    }
   }
 
 }

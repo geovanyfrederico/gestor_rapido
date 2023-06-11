@@ -25,16 +25,15 @@ class UtilizadorsPageState extends State<UtilizadorsPage> {
     super.initState();
     controller.buscarUtilizadors().then((_) {
       setState(
-          () {}); // Atualiza o estado para construir a lista após os dados terem sido buscados
+              () {}); // Atualiza o estado para construir a lista após os dados terem sido buscados
     });
   }
 
-  void _eliminar(int? id) {
-    controller.eliminar(id).then((_) {
-      setState(
-          () {}); // Atualiza o estado para construir a lista após os dados terem sido buscados
-    });
+  Future<void> _eliminar(BuildContext context, int? id) async {
+    await controller.eliminar(context, id);
+    setState(() {}); // Atualiza o estado para construir a lista após os dados terem sido buscados
   }
+
 
   @override
   void dispose() {
@@ -125,21 +124,21 @@ class UtilizadorsPageState extends State<UtilizadorsPage> {
             if (snapshot.data!.isEmpty) {
               return Center(
                   child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                      width: 300,
-                      height: 300,
-                      child:
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                          width: 300,
+                          height: 300,
+                          child:
                           Image.asset('assets/images/ilustration/concept.png')),
-                  const Text("Sem utilizadores",
-                      style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.grey))
-                ],
-              ));
+                      const Text("Sem utilizadores",
+                          style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey))
+                    ],
+                  ));
             }
             // Tudo correu bem
             return ListView.builder(
@@ -174,9 +173,9 @@ class UtilizadorsPageState extends State<UtilizadorsPage> {
                                 style: TextStyle(color: Colors.red),
                               ),
                               onTap: () {
-                                log("eliminar");
-                                _eliminar(snapshot.data![index].id);
                                 Navigator.pop(context);
+                                _eliminar(context, snapshot.data![index].id);
+
                               },
                             ),
                           ],
@@ -195,9 +194,9 @@ class UtilizadorsPageState extends State<UtilizadorsPage> {
                   leading: CircleAvatar(
                     backgroundColor: Colors.orangeAccent,
                     child: Text(
-                      Testos.primeiraLetraNomeSobrenome(
+                      Testos.siglas(
                           snapshot.data![index].nome),
-                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                      style: TextStyle(fontSize: 17.0, color: Colors.white),
                     ),
                   ),
                 ),

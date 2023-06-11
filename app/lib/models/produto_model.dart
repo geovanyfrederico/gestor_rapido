@@ -77,6 +77,7 @@ class ProdutoModel {
 
   static Future<int> eliminar(int id) async {
     Database db = await DatabaseHelper.instance.database;
+    await db.execute("PRAGMA foreign_keys=ON");
     return await db.delete(tabela, where: 'id = ?', whereArgs: [id]);
   }
 
