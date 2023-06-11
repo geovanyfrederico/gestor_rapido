@@ -16,8 +16,7 @@ class _RegistarPageState extends State<RegistarPage> {
   void initState() {
     super.initState();
   }
-
-
+  
   Future<void> finalizarEntrar() async {
     Modular.to.navigate("/dashboard");
 
