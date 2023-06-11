@@ -24,7 +24,7 @@ class _DashboardPageState extends State<DashboardPage> {
       setState(() {})
     });
   }
-  
+
 
   @override
   Widget build(BuildContext context) {
