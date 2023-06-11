@@ -19,7 +19,7 @@ class _EntrarPageState extends State<EntrarPage> {
     super.initState();
     initPrefs();
   }
-
+  
   // Initialize shared preferences
   Future<void> initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
