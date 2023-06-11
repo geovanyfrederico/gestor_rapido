@@ -16,6 +16,7 @@ class EntrarController{
     initSharedPreferences();
   }
   bool valido(){
+
     if(telefone.value.text.isEmpty){
       return false;
     }

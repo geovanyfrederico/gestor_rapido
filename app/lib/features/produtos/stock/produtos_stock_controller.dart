@@ -19,6 +19,7 @@ class ProdutosStockController {
         whereArgs: [produto.id]);
     movimentos =  List.generate(maps.length, (index) {
       return MovimentoDeStockModel.fromMap(maps[index]);
+
     });
 
   }

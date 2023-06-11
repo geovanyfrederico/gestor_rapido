@@ -22,6 +22,7 @@ class ClientesListarView extends State<ClientesPage> {
   // Função de callback para receber o valor do filho
   void atualizado(bool atualizado) {
     if(atualizado){
+
       setState(() {});
     }
   }

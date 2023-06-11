@@ -24,6 +24,7 @@ class ProdutosAdicionarController{
     // gerar um código aleatorio se estiver vazio
     if(codigo.value.text.isEmpty){
       codigo.text = "P"+Mat.codigoAleatorio();
+
     }
     if(stock.value.text.isEmpty){
       stock.text = 0.toString() ;
