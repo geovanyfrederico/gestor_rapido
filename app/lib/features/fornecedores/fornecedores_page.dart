@@ -22,7 +22,6 @@ class FornecedoresListarView extends State<FornecedoresPage> {
   // Função de callback para receber o valor do filho
   void atualizado(bool atualizado) {
     if(atualizado){
-
       setState(() {});
     }
   }
