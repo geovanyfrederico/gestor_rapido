@@ -1,5 +1,6 @@
 import 'package:gr/models/movimento_de_stock_model.dart';
 import 'package:sqflite/sqflite.dart';
+
 import '../../../models/database_helper.dart';
 import '../../../models/produto_model.dart';
 class ProdutosStockController {

@@ -18,6 +18,7 @@ import 'package:gr/features/utilizadores/adicionar/utilizadores_adicionar_page.d
 import 'package:gr/features/utilizadores/utilizadores_page.dart';
 import 'package:gr/features/vendas/adicionar/vendas_adicionar_page.dart';
 import 'package:gr/features/vendas/vendas_page.dart';
+
 import 'exemplo_page.dart';
 import 'features/relatorios/vendas/relatorios_vendas_page.dart';
 import 'features/tabelas/tabelas_page.dart';
@@ -115,8 +116,11 @@ class AppModule extends Module {
     ChildRoute('/relatorios/vendas',
         child: (context, args) => RelatoriosVendasPage(),
         transition: TransitionType.fadeIn),
-     ChildRoute('/relatorios/utilizadores',
+    ChildRoute('/relatorios/utilizadores',
         child: (context, args) => RelatoriosUtilizadoresPage(),
+        transition: TransitionType.fadeIn),
+    ChildRoute('/empresa',
+        child: (context, args) => EmpresaPage(),
         transition: TransitionType.fadeIn),
   ];
 }

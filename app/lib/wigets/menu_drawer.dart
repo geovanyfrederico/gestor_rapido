@@ -112,13 +112,6 @@ class MenuDrawerState extends State<MenuDrawer> {
                 Modular.to.navigate("/empresa");
               },
             ),
-            ListTile(
-              leading: const Icon(Icons.table_rows),
-              title: const Text('Tabelas'),
-              onTap: () {
-                Modular.to.navigate("/tabelas");
-              },
-            ),
             const Divider(),
             ListTile(
               leading:const Icon(Icons.logout),

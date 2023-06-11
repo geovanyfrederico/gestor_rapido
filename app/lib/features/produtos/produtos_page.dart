@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gr/features/produtos/produtos_controller.dart';
 import 'package:gr/features/produtos/stock/produtos_stock_page.dart';
 import 'package:gr/wigets/menu_drawer.dart';
+
 import '../../core/utils/mat.dart';
 import '../../models/produto_model.dart';
 import 'editar/produtos_editar_page.dart';

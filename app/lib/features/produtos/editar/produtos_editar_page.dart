@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gr/features/produtos/editar/produtos_editar_controller.dart';
-
 import 'package:gr/models/produto_model.dart';
-import 'package:image_picker/image_picker.dart';
-
-import '../../../core/utils/snackbar_helper.dart';
 
 
 class ProdutosEditarPage extends StatefulWidget {

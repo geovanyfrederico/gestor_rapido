@@ -1,4 +1,3 @@
-import 'package:gr/models/cliente_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'database_helper.dart';
