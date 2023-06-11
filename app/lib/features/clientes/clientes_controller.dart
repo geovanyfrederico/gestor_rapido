@@ -38,6 +38,7 @@ class ClientesListarController  extends ChangeNotifier{
       SnackbarHelper.error(context, "Voce não tem permissão.");
       return false;
 
+      
     }
     ClienteModel clienteModel = clientes[index];
     if (clienteModel.id==1) {
