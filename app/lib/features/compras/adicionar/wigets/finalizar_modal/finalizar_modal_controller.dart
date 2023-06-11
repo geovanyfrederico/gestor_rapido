@@ -1,14 +1,12 @@
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gr/models/cliente_model.dart';
 import 'package:gr/models/movimento_de_stock_model.dart';
 import 'package:gr/models/produto_na_compra_model.dart';
 import 'package:gr/models/compra_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../../core/utils/alert_help.dart';
+import '../../../../../models/fornecedor_model.dart';
 import '../../../../../models/produto_model.dart';
 class FinalizarModalController {
   final filtro = TextEditingController();
@@ -18,14 +16,14 @@ class FinalizarModalController {
   double totalPagar = 0;
   double totalPago = 0;
   double troco = 0;
-  late ClienteModel cliente = ClienteModel(nome: 'Consumidor Final', nif: '9999999');
+  late FornecedorModel fornecedor = FornecedorModel(nome: '', nif: '');
 
   Future<bool> init(List<ProdutoNaCompraModel> produtosDoCarrinho, double totalPagarDoCarrinho) async {
     produtos = produtosDoCarrinho;
     totalPagar = totalPagarDoCarrinho;
     totalPago = totalPagarDoCarrinho;
     totalPagoInput.text = totalPagarDoCarrinho.toString();
-    cliente = await ClienteModel.findOneById(1);
+    fornecedor = await FornecedorModel.findOneById(1);
     return true;
   }
 
@@ -34,8 +32,8 @@ class FinalizarModalController {
     troco = totalPago  - totalPagar;
   }
 
-  void setCliente(ClienteModel clienteSet) {
-    cliente = clienteSet;
+  void setFornecedor(FornecedorModel fornecedorInit) {
+    fornecedor = fornecedorInit;
   }
 
   Future<bool> finalizar(BuildContext context) async {
@@ -51,7 +49,7 @@ class FinalizarModalController {
       }
       int uId = await utilizadorId();
       CompraModel compraModel = CompraModel(
-          fornecedorId: cliente.id
+          fornecedorId: fornecedor.id
           , utilizadorId:uId
           , data: _hoje()
           , totalQtd: totalQtd
@@ -62,11 +60,10 @@ class FinalizarModalController {
 
       for (var pnv in produtos) {
         ProdutoModel produtoModel = await ProdutoModel.findOneById(pnv.produtoId!);
-
-        produtoModel.stock -= pnv.totalQtd;
+        produtoModel.stock += pnv.totalQtd;
         pnv.compraId = compraModel.id;
         await produtoModel.update();
-        MovimentoDeStockModel( produtoId: produtoModel.id!, utilizadorId: uId, data: _hoje(), totalQtd: pnv.totalQtd, ref: 'Compra ${compraModel.id}', tipo: 'Saída').insert();
+        MovimentoDeStockModel( produtoId: produtoModel.id!, utilizadorId: uId, data: _hoje(), totalQtd: pnv.totalQtd, ref: 'Compra ${compraModel.id}', tipo: 'Entrada').insert();
         await pnv.salvar();
       }
       return true;
@@ -86,9 +83,5 @@ class FinalizarModalController {
     late SharedPreferences _prefs;
     _prefs = await SharedPreferences.getInstance();
     return _prefs.getInt("utilizadorId")!;
-  }
-
-  void limpar() {
-
   }
 }

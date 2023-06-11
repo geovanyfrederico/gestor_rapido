@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gr/core/utils/mat.dart';
-import 'package:gr/models/cliente_model.dart';
+import 'package:gr/models/fornecedor_model.dart';
 import 'package:gr/models/produto_model.dart';
 import 'package:gr/models/produto_na_compra_model.dart';
-
-import '../cliente_modal/cliente_modal_page.dart';
+import '../../../../../models/fornecedor_model.dart';
+import '../fornecedor_modal/fornecedor_modal_page.dart';
 import 'finalizar_modal_controller.dart';
 
 class FinalizarModalPage extends StatefulWidget {
@@ -27,8 +27,8 @@ class _ModalContentState extends State<FinalizarModalPage> {
   FinalizarModalController();
 
   // Função de callback para receber o valor do filho
-  void setCliente(ClienteModel cliente) {
-    controller.setCliente(cliente);
+  setFornecedor(FornecedorModel fornecedor) {
+    controller.setFornecedor(fornecedor);
     setState(() {});
   }
   void _concluido( ) {
@@ -38,12 +38,14 @@ class _ModalContentState extends State<FinalizarModalPage> {
     controller.calcularResumo();
     setState(() {});
   }
+  Future<void> _init() async {
+    await controller.init(widget.produtosDoCarrinho, widget.totalPagarDoCarrinho);
+    setState(() {});
+  }
   @override
   void initState() {
-    controller.init(widget.produtosDoCarrinho, widget.totalPagarDoCarrinho).then((value) => {
-      setState(() {})
-    });
     super.initState();
+    _init();
   }
 
   @override
@@ -81,12 +83,12 @@ class _ModalContentState extends State<FinalizarModalPage> {
                                         context: context,
                                         isScrollControlled: true,
                                         builder: (BuildContext context) {
-                                          return ClienteModalPage(callback: setCliente);
+                                          return FornecedorModalPage(callback: setFornecedor);
                                         },
                                       );
                                     },
-                                    title: Text(controller.cliente.nome),
-                                    subtitle: Text("NIF: ${controller.cliente.nif}"),
+                                    title: Text(controller.fornecedor.nome),
+                                    subtitle: Text("NIF: ${controller.fornecedor.nif}"),
                                     trailing: const Icon(Icons.arrow_right_alt_rounded),
                                   ))),
                           Card(
@@ -274,7 +276,9 @@ class _ModalContentState extends State<FinalizarModalPage> {
                             fontSize: 15.0,
                             fontWeight: FontWeight.w600,
                           ),
-                        )))
+                        )
+                    )
+                )
               ],
             )
           ],

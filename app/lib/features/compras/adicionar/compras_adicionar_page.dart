@@ -33,7 +33,6 @@ class ComprasAdicionarState extends State<ComprasAdicionarPage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {// Variável para armazenar o preço de compra inserido pelo usuário
-
         return AlertDialog(
           title: const Text('Preço de Compra'),
           content: TextField(
@@ -42,17 +41,28 @@ class ComprasAdicionarState extends State<ComprasAdicionarPage> {
               precoDeCompra = double.tryParse(value) ?? 0.0;
             },
             decoration: const InputDecoration(
-              labelText: 'Digite o preço de compra',
+                labelText: 'Digite o preço de compra',
+                fillColor: Colors.orange
             ),
           ),
           actions: [
-            TextButton(
-              onPressed: () {
-                controller.adicionar(produto, precoDeCompra);
-                Navigator.of(context).pop();
-                setState(() {});
-              },
-              child: const Text('Adicionar ao Carrinho'),
+            Center(
+              child: TextButton(
+                style: TextButton.styleFrom(
+                    backgroundColor: Colors.orange
+                ),
+                onPressed: () {
+                  controller.adicionar(produto, precoDeCompra);
+                  Navigator.of(context).pop();
+                  setState(() {});
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: const Text('Adicionar ao Carrinho', style: TextStyle(
+                      color: Colors.white
+                  ),),
+                ),
+              ),
             ),
           ],
         );
@@ -96,7 +106,7 @@ class ComprasAdicionarState extends State<ComprasAdicionarPage> {
                             width: 360,
                             child: Image.asset(
                                 'assets/images/ilustration/gr9.png')),
-                        const Text(
+                        Text(
                           'Adicione produtos ao carrinho',
                           style: TextStyle(
                               fontWeight: FontWeight.normal, fontSize: 20),
@@ -148,9 +158,7 @@ class ComprasAdicionarState extends State<ComprasAdicionarPage> {
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
-                                  Text(
-                                    controller.produtos[index]
-                                        .precoTotalToMoney(),
+                                  Text("${controller.produtos[index].precoToMoney()} * ${controller.produtos[index].totalQtd} = ${controller.produtos[index].precoTotalToMoney()}",
                                     style: const TextStyle(
                                         fontWeight: FontWeight.normal,
                                         color: Colors.orange),

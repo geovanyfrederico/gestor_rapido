@@ -1,9 +1,8 @@
-import 'package:gr/models/cliente_model.dart';
+import 'package:gr/models/fornecedor_model.dart';
 import 'package:gr/models/produto_na_compra_model.dart';
 import 'package:gr/models/utilizador_model.dart';
 import 'package:sqflite/sqflite.dart';
-
-import 'cliente_model.dart';
+import 'fornecedor_model.dart';
 import 'database_helper.dart';
 
 class CompraModel {
@@ -15,15 +14,15 @@ class CompraModel {
     double totalPagar;
     double totalPago;
     double troco;
-    ClienteModel? clienteModel;
+    FornecedorModel? fornecedorModel;
     UtilizadorModel? utilizadorModel;
 
     Future<List<ProdutoNaCompraModel>> get produtos async {
         return await ProdutoNaCompraModel.findAllByVendaId(id!);
     }
-    Future<ClienteModel> get cliente async {
-        clienteModel ??= await ClienteModel.findOneById(fornecedorId!);
-        return clienteModel!;
+    Future<FornecedorModel> get fornecedor async {
+        fornecedorModel ??= await FornecedorModel.findOneById(fornecedorId!);
+        return fornecedorModel!;
     }
     Future<UtilizadorModel> get utilizador async {
         utilizadorModel ??= await UtilizadorModel.findOneById(utilizadorId!);

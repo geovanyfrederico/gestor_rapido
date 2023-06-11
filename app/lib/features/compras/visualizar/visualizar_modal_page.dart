@@ -66,9 +66,9 @@ class VisualizarModalState extends State<VisualizarModalPage> {
                               MainAxisAlignment.spaceBetween,
                               children: [
                                 const Text(
-                                  "Cliente",
+                                  "Fornecedor",
                                 ),
-                                Text(controller.cliente.nome),
+                                Text(controller.fornecedor.nome),
                               ],
                             ),
                             const SizedBox(height: 5),

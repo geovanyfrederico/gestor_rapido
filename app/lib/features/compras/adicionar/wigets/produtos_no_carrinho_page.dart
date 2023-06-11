@@ -23,7 +23,6 @@ class _ModalContentState extends State<ProdutoNoCarrinhoPage> {
   }
 
   void _adicionar(ProdutoModel produto) {
-
     widget.callback?.call(produto);
   }
 

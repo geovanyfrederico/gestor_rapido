@@ -14,7 +14,12 @@ class ComprasAdicionarController {
     produtos.forEach((element) {
       if (element.produtoId == produtoModel.id) {
         naoTem = false;
-        element.addQtd();
+        if(precoDeCompra == 0){
+          element.addQtd();
+        }else{
+          element.addQtdComNovoPreco(precoDeCompra);
+        }
+
       }
     });
     if (naoTem) {
@@ -23,8 +28,8 @@ class ComprasAdicionarController {
           produtoId: produtoModel.id,
           totalQtd: 1,
           produto: produtoModel,
-          preco: produtoModel.preco,
-          precoTotal: produtoModel.preco * 1);
+          preco:precoDeCompra,
+          precoTotal: precoDeCompra * 1);
       produtos.add(produtoNaCompraModel);
     }
     calcular();

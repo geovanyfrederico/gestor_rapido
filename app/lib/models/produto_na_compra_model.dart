@@ -64,7 +64,11 @@ class ProdutoNaCompraModel {
     totalQtd++;
     precoTotal = preco * totalQtd;
   }
-
+  void addQtdComNovoPreco(double precoDeCompra) {
+    totalQtd++;
+    preco = precoDeCompra;
+    precoTotal = preco * totalQtd;
+  }
   void removeQtd() {
     totalQtd--;
     precoTotal = preco * totalQtd;
@@ -74,7 +78,7 @@ class ProdutoNaCompraModel {
     return db.insert('produtoNaCompra', toMap());
   }
 
- static Future<List<ProdutoNaCompraModel>> findAllByVendaId(int id) async{
+  static Future<List<ProdutoNaCompraModel>> findAllByVendaId(int id) async{
     Database db = await DatabaseHelper.instance.database;
     List<Map<String, dynamic>> maps = await db.query('produtoNaCompra',
         orderBy: 'id DESC',

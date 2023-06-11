@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:gr/models/cliente_model.dart';
-
-import 'cliente_modal_controller.dart';
-
+import 'package:gr/models/fornecedor_model.dart';
+import 'fornecedor_modal_controller.dart';
 
 
-class ClienteModalPage extends StatefulWidget {
-  const ClienteModalPage({Key? key, this.callback}) : super(key: key);
-  final Function(ClienteModel)? callback;
+
+class FornecedorModalPage extends StatefulWidget {
+  const FornecedorModalPage({Key? key, this.callback}) : super(key: key);
+  final Function(FornecedorModel)? callback;
   @override
-  ClienteModalState createState() => ClienteModalState();
+  FornecedorModalState createState() => FornecedorModalState();
 }
 
-class ClienteModalState extends State<ClienteModalPage> {
-  final ClienteModalController controller =
-  ClienteModalController();
+class FornecedorModalState extends State<FornecedorModalPage> {
+  final FornecedorModalController controller =
+  FornecedorModalController();
 
   @override
   void initState() {
@@ -23,7 +22,7 @@ class ClienteModalState extends State<ClienteModalPage> {
     iniProdutoNoCarrinho();
   }
 
-  void _adicionar(ClienteModel item) {
+  void _adicionar(FornecedorModel item) {
     widget.callback?.call(item);
   }
 
@@ -50,7 +49,7 @@ class ClienteModalState extends State<ClienteModalPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Selecionar cliente',
+            'Selecionar Fornecedor',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -80,7 +79,7 @@ class ClienteModalState extends State<ClienteModalPage> {
     );
   }
 
-  Widget _buildProductItem(ClienteModel item) {
+  Widget _buildProductItem(FornecedorModel item) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(5),

@@ -239,7 +239,10 @@ class DatabaseHelper {
       INSERT INTO cliente(nome, endereco, telefone, nif)
       VALUES(?, ?, ?, ?)
       ''', ['Consumidor Final', 'Desconhecido', '', '99999999']);
-
+    await db.execute('''
+      INSERT INTO fornecedor(nome, endereco, telefone, nif)
+      VALUES(?, ?, ?, ?)
+      ''', ['Fornecedor Final', 'Desconhecido', '', '99999999']);
 
   }
 }
