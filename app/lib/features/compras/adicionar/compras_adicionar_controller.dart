@@ -9,7 +9,7 @@ class ComprasAdicionarController {
   late  List<ProdutoNaCompraModel> produtos = <ProdutoNaCompraModel>[];
 
   late double totalPagar = 0;
-  void adicionar(ProdutoModel produtoModel) {
+  void adicionar(ProdutoModel produtoModel, double precoDeCompra) {
     late bool naoTem = true;
     produtos.forEach((element) {
       if (element.produtoId == produtoModel.id) {

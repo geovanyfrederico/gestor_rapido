@@ -29,8 +29,35 @@ class ComprasAdicionarState extends State<ComprasAdicionarPage> {
   }
   // Função de callback para receber o valor do filho
   void adicionarAoCarrinho(ProdutoModel produto) {
-    controller.adicionar(produto);
-    setState(() {});
+    late double precoDeCompra  = 0;
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {// Variável para armazenar o preço de compra inserido pelo usuário
+
+        return AlertDialog(
+          title: const Text('Preço de Compra'),
+          content: TextField(
+            keyboardType: TextInputType.number,
+            onChanged: (value) {
+              precoDeCompra = double.tryParse(value) ?? 0.0;
+            },
+            decoration: const InputDecoration(
+              labelText: 'Digite o preço de compra',
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                controller.adicionar(produto, precoDeCompra);
+                Navigator.of(context).pop();
+                setState(() {});
+              },
+              child: const Text('Adicionar ao Carrinho'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -80,10 +107,10 @@ class ComprasAdicionarState extends State<ComprasAdicionarPage> {
                   shrinkWrap: true,
                   itemCount: controller.produtos.length,
                   padding: const EdgeInsets.only(
-                    right: 0,
-                    left: 0,
-                    top:0,
-                    bottom: 230
+                      right: 0,
+                      left: 0,
+                      top:0,
+                      bottom: 230
                   ),
                   itemBuilder: (context, index) => Card(
                     child: Container(
