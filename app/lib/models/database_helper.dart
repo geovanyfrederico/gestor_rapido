@@ -157,13 +157,11 @@ class DatabaseHelper {
       await db.execute('''
     CREATE TABLE compra (
         ${addId()},
-        ${addColuna('nome')},
         ${addColuna('data', permitirNull: false)},
         ${addColuna('totalQtd', permitirNull: false, tipoDeDados: 'INTEGER')},
         ${addColuna('totalPagar', permitirNull: false, tipoDeDados: 'REAL')},
         ${addColuna('totalPago', permitirNull: false, tipoDeDados: 'REAL')},
-        ${addColuna('troco', permitirNull: false, tipoDeDados: 'REAL')},
-        ${addColuna('codigo', permitirNull: false, propriedades: 'UNIQUE')}
+        ${addColuna('troco', permitirNull: false, tipoDeDados: 'REAL')}
     );
     ''');
       await db.execute('''

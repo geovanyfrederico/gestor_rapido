@@ -26,13 +26,7 @@ class FornecedoresListarController  extends ChangeNotifier{
   }
 
   Future<bool> eliminar(index, BuildContext context) async {
-
     FornecedorModel fornecedorModel = fornecedores[index];
-      if (fornecedorModel.id==1) {
-      SnackbarHelper.error(context, "Erro: este fornecedor não pode ser eliminado.");
-      return false;
-
-    }
     try{
       if(await FornecedorModel.eliminar(fornecedorModel.id) > 0){
         SnackbarHelper.success(context, "Successo: "+ fornecedorModel.nome+ " eliminado.");

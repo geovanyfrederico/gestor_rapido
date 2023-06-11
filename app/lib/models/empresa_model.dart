@@ -75,7 +75,7 @@ class EmpresaModel {
         Database db = await DatabaseHelper.instance.database;
         return await db.update(tabela,toMap(), where: 'id = $id', whereArgs: [id]);
     }
-    static findFirst() async {
+    static Future<EmpresaModel> findFirst() async {
         Database db = await DatabaseHelper.instance.database;
         List<Map<String, dynamic>> maps = await db.query("empresa", where: 'id = 1');
         if (maps.isNotEmpty) {

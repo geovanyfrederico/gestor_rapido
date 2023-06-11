@@ -20,6 +20,8 @@ import 'package:gr/features/vendas/adicionar/vendas_adicionar_page.dart';
 import 'package:gr/features/vendas/vendas_page.dart';
 
 import 'exemplo_page.dart';
+import 'features/compras/adicionar/compras_adicionar_page.dart';
+import 'features/compras/compras_page.dart';
 import 'features/empresa/empresa_page.dart';
 import 'features/relatorios/vendas/relatorios_vendas_page.dart';
 import 'features/tabelas/tabelas_page.dart';
@@ -74,6 +76,12 @@ class AppModule extends Module {
         transition: TransitionType.fadeIn),
     ChildRoute('/vendas/adicionar',
         child: (context, args) => VendasAdicionarPage(),
+        transition: TransitionType.fadeIn),
+    ChildRoute('/compras',
+        child: (context, args) => ComprasPage(),
+        transition: TransitionType.fadeIn),
+    ChildRoute('/compras/adicionar',
+        child: (context, args) => ComprasAdicionarPage(),
         transition: TransitionType.fadeIn),
     //Clientes
     ChildRoute('/clientes/adicionar',

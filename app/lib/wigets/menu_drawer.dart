@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:gr/models/empresa_model.dart';
 import 'package:gr/models/utilizador_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,15 +19,19 @@ class MenuDrawer extends StatefulWidget{
 }
 class MenuDrawerState extends State<MenuDrawer> {
   late SharedPreferences _prefs;
-  late String utilizadorNome = "";
+  late String utilizadorNome = "Gestor Rapido";
   late String utilizadorTipo = "";
+  late String empresaNome = "Gestor Rapido";
+
   // Initialize shared preferences
   Future<void> initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
     utilizadorNome =  _prefs.getString("utilizadorNome")!;
     utilizadorTipo =  UtilizadorModel.tipoDescricaoStatico(_prefs.getInt("utilizadorTipo")?.toInt()) ;
-
+    EmpresaModel empresa = await EmpresaModel.findFirst();
+    empresaNome = empresa.nome;
     setState(() {
+
     });
     // Check if user has completed onboarding
   }
@@ -47,14 +52,18 @@ class MenuDrawerState extends State<MenuDrawer> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text(utilizadorNome),
+              accountName: Text("\n${empresaNome}\n$utilizadorNome"),
               accountEmail: Text(utilizadorTipo),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.orangeAccent,
-                child: Text(
-                  Testos.primeiraLetraNomeSobrenome(utilizadorNome),
-                  style: TextStyle(fontSize: 20.0,
-                      color: Colors.white
+              currentAccountPicture: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+                child: CircleAvatar(
+
+                  backgroundColor: Colors.orangeAccent,
+                  child: Text(
+                    Testos.siglas(utilizadorNome),
+                    style: TextStyle(fontSize: 20.0,
+                        color: Colors.white
+                    ),
                   ),
                 ),
               ),
@@ -62,6 +71,8 @@ class MenuDrawerState extends State<MenuDrawer> {
                 color: Colors.orange, // Define a cor do cabeçalho
               ),
             ),
+
+
             ListTile(
               leading: const Icon(Icons.apps),
               title: const Text('Início'),
@@ -81,6 +92,13 @@ class MenuDrawerState extends State<MenuDrawer> {
               title: const Text('Vendas'),
               onTap: () {
                 Modular.to.navigate("/vendas");
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.storefront_sharp),
+              title: const Text('Compras'),
+              onTap: () {
+                Modular.to.navigate("/compras");
               },
             ),
             ListTile(
