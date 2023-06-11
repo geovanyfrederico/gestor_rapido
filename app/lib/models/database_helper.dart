@@ -8,7 +8,7 @@ import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
   static const _databaseName = 'gr.db';
-  static const _databaseVersion = 3;
+  static const _databaseVersion = 1;
   static final DatabaseHelper instance = DatabaseHelper._init();
 
   // tem apenas uma referência ao banco de dados
