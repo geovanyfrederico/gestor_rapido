@@ -23,7 +23,6 @@ class _RecuperarPinPageState extends State<RecuperarPinPage> {
     super.initState();
     codigoEnviado  = false;
     verificado = false;
-
   }
 
   Future<void> enviarCodigo(BuildContext context) async {
