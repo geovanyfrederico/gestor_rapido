@@ -1,46 +1,51 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
-import 'package:gr/models/cliente_model.dart';
+import 'package:gr/models/empresa_model.dart';
 
 class EmpresaController{
+
   final nome = TextEditingController();
   final telefone = TextEditingController();
   final nif = TextEditingController();
   final endereco = TextEditingController();
-
+  late EmpresaModel empresa  = EmpresaModel(nome: "", nif: "");
   bool valido(context){
     if( nome.value.text.isEmpty){
       SnackbarHelper.warning(context, "Preencha todos campos");
       return false;
     }
-
+    if(nif.value.text.isEmpty){
+      SnackbarHelper.warning(context, "Preencha todos campos");
+      return false;
+    }
     return true;
   }
-  void limparFormulario(){
-    nome.clear();
-    telefone.clear();
-    nif.clear();
-    endereco.clear();
-  }
 
-  Future<bool> salvar(context) async {
+  Future<bool> atualizar(context) async {
     if(!valido(context)){
       return false;
     }
-    ClienteModel clienteModel = ClienteModel(
-      nome: nome.value.text,
-      telefone: telefone.value.text,
-      nif: nif.value.text,
-      endereco:endereco.value.text
-    );
-    if(await clienteModel.salvar() > 0){
-      SnackbarHelper.success(context, "Cliente adicionado.");
-      limparFormulario();
-      return  true;
+    empresa.nome = nome.value.text ;
+    empresa.telefone = telefone.value.text ;
+    empresa.nif = nif.value.text ;
+    empresa.endereco = endereco.value.text ;
+    try{
+      empresa.update();
+      SnackbarHelper.success(context, "Operação concluida");
+      return true;
+    }catch(e){
+      SnackbarHelper.error(context, "Não foi atualizar. \n Erro:${e.toString()}");
+      return false;
     }
 
-    SnackbarHelper.error(context, "Não foi possivel adicionar o cliente, tente novamente");
-    return false;
+  }
+
+  Future<void> init() async {
+    empresa = await EmpresaModel.findFirst();
+    nome.text = empresa.nome;
+    telefone.text = empresa.telefone;
+    nif.text = empresa.nif;
+    endereco.text = empresa.endereco;
   }
 
 

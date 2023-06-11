@@ -20,6 +20,7 @@ import 'package:gr/features/vendas/adicionar/vendas_adicionar_page.dart';
 import 'package:gr/features/vendas/vendas_page.dart';
 
 import 'exemplo_page.dart';
+import 'features/empresa/empresa_page.dart';
 import 'features/relatorios/vendas/relatorios_vendas_page.dart';
 import 'features/tabelas/tabelas_page.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:gr/wigets/menu_drawer.dart';
 
 import 'empresa_controller.dart';
 class EmpresaPage extends StatefulWidget  {
@@ -11,39 +11,53 @@ class EmpresaPage extends StatefulWidget  {
 }
 class EmpresaPageState extends State<EmpresaPage> {
   final EmpresaController controller = EmpresaController();
-
   @override
   void initState() {
     super.initState();
-
+    iniciar();
   }
+  Future<void> iniciar() async{
+    await controller.init();
+    setState(() {
 
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      drawer:  MenuDrawer(),
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => {
-            Modular.to.navigate("/contactos")
-          },
-        ),
+
         backgroundColor: Colors.orange,
         centerTitle: true,
-        title: const Text('Adicionar clientes'),
+        title: const Text('Gerir empresa'),
       ),
-      resizeToAvoidBottomInset:true,
+      resizeToAvoidBottomInset:false,
       backgroundColor: Colors.grey[100],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          controller.salvar(context);
-          setState(() {
+      floatingActionButton: Container(
+        width: 130,
+        height: 40,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              primary: Colors.orange
+          ),
+          onPressed: () {
+            controller.atualizar(context);
+            setState(() {
 
-          });
-        },
-        backgroundColor: Colors.orange,
-        child: const Icon(Icons.save),
+            });
+          },
+          child:  Center(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(Icons.save),
+                Text(" Atualizar")
+              ],
+            ),
+          ),
+        ),
       ),
       body:  SafeArea(
           child:  ListView(
@@ -103,7 +117,7 @@ class EmpresaPageState extends State<EmpresaPage> {
                               BorderSide(color: Colors.orange, width: 2.0),
                             ),
                             border: InputBorder.none,
-                            hintText: 'NIF',
+                            hintText: 'NIF *',
                             counterText: "",
                             prefixIcon: Icon(Icons.store),
                           )
