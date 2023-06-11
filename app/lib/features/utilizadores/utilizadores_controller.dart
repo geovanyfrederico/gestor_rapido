@@ -4,6 +4,7 @@ import 'package:gr/core/utils/snackbar_helper.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
 import 'package:gr/models/database_helper.dart';
 import 'package:gr/models/utilizador_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 
@@ -26,7 +27,18 @@ class UtilizadorsController  extends ChangeNotifier{
       );
     });
   }
+  Future<int> utilizadorTipo() async {
+    late SharedPreferences _prefs;
+    _prefs = await SharedPreferences.getInstance();
+    return _prefs.getInt("utilizadorTipo")!;
+  }
   Future<bool> eliminar(BuildContext context, int? id) async {
+    int uTipo = await utilizadorTipo();
+    if(UtilizadorModel.tipoVendedor == uTipo){
+      SnackbarHelper.error(context, "Voce não tem permissão.");
+      return false;
+    }
+
     try{
       await UtilizadorModel.eliminar(id!);
       SnackbarHelper.success(context, 'Operação concluida.');
