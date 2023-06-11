@@ -85,6 +85,7 @@ class ClientesListarView extends State<ClientesPage> {
                             children:  [
                               ListTile(
                                 onTap: () {
+
                                   Navigator.pop(context);
                                   abrirModalEditarCliente(context, controller.clientes[index]);
                                 },

@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
 import 'package:gr/models/empresa_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../models/utilizador_model.dart';
 
 class EmpresaController{
 
@@ -22,6 +25,12 @@ class EmpresaController{
   }
 
   Future<bool> atualizar(context) async {
+    int uTipo = await utilizadorTipo();
+    if(UtilizadorModel.tipoVendedor == uTipo){
+      SnackbarHelper.error(context, "Voce não tem permissão.");
+      return false;
+    }
+
     if(!valido(context)){
       return false;
     }
@@ -49,5 +58,9 @@ class EmpresaController{
   }
 
 
-
+  Future<int> utilizadorTipo() async {
+    late SharedPreferences _prefs;
+    _prefs = await SharedPreferences.getInstance();
+    return _prefs.getInt("utilizadorTipo")!;
+  }
 }

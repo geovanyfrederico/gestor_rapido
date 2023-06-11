@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gr/core/utils/snackbar_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/utilizador_model.dart';
 
@@ -28,14 +29,20 @@ class UtilizadorsAdicionarController{
   }
 
   Future<bool> salvar(context) async {
+    int uTipo = await utilizadorTipo();
+    if(UtilizadorModel.tipoVendedor == uTipo){
+      SnackbarHelper.error(context, "Voce não tem permissão.");
+      return false;
+    }
+
     if(!valido(context)){
       return false;
     }
     UtilizadorModel utilizadorModel = UtilizadorModel(
-      nome: nome.value.text,
-      pin: pin.value.text,
-      telefone: telefone.value.text,
-      tipo: 0
+        nome: nome.value.text,
+        pin: pin.value.text,
+        telefone: telefone.value.text,
+        tipo: 0
     );
     if(await utilizadorModel.salvar() > 0){
       SnackbarHelper.success(context, "Utilizador adicionado.");
@@ -47,6 +54,10 @@ class UtilizadorsAdicionarController{
     return false;
   }
 
-
+  Future<int> utilizadorTipo() async {
+    late SharedPreferences _prefs;
+    _prefs = await SharedPreferences.getInstance();
+    return _prefs.getInt("utilizadorTipo")!;
+  }
 
 }

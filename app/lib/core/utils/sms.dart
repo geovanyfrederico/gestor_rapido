@@ -4,7 +4,7 @@ class SMS {
     String message = mensagem;
     String msisdn = '244'+telefone;
     String sender = 'GR';
-    String token = 'pPsQUeJqQcaRH5vdAj2fs7NxqSLSVNOhGh5VRFbz16ovRUSWvwGp-flEBGIInimC';
+    String token = '1pPsQUeJqQcaRH5vdAj2fs7NxqSLSVNOhGh5VRFbz16ovRUSWvwGp-flEBGIInimC';
     String url = 'https://gatewayapi.com/rest/mtsms?'
         'message=$message&'
         'recipients.0.msisdn=$msisdn&'

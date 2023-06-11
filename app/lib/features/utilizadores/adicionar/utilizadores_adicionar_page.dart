@@ -12,7 +12,7 @@ class UtilizadorsAdicionarPage extends StatefulWidget  {
 class UtilizadorsAdicionarState extends State<UtilizadorsAdicionarPage> {
   final UtilizadorsAdicionarController controller = UtilizadorsAdicionarController();
   String dropdownValue = 'Vendedor';
-  List<String> options = ['Administrador', 'Vendedor', 'Gerente'];
+  List<String> options = ['Administrador', 'Vendedor'];
   @override
   void initState() {
     super.initState();
@@ -153,9 +153,6 @@ class UtilizadorsAdicionarState extends State<UtilizadorsAdicionarPage> {
                                 break;
                               case 'Vendedor':
                                 controller.tipo.text = UtilizadorModel.tipoVendedor.toString();
-                                break;
-                              case 'Gerente':
-                                controller.tipo.text = UtilizadorModel.tipoGerente.toString();
                                 break;
                             }
                             setState(() {
