@@ -5,11 +5,11 @@ import 'database_helper.dart';
 
 class ClienteModel extends ModeloGlobal {
   static String get tabela => 'cliente';
-  late final int? id;
-  late final String nome;
-  late final String? endereco;
-  late final String? telefone;
-  late final String nif;
+  late  int? id;
+  late  String nome;
+  late  String? endereco;
+  late  String? telefone;
+  late  String nif;
   //List<VendaModel> vendas = [];
   ClienteModel(
       {this.id,
@@ -82,6 +82,8 @@ class ClienteModel extends ModeloGlobal {
       return ClienteModel.fromMap(maps[index]);
     });
   }
+
+  update() {}
 
 
 }

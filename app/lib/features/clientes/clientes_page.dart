@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gr/features/clientes/clientes_controller.dart';
 
+import '../../models/cliente_model.dart';
+import 'editar/cliente_editar_page.dart';
+
 
 class ClientesPage extends StatefulWidget  {
   const ClientesPage({Key? key}) : super(key: key);
@@ -15,6 +18,13 @@ class ClientesPage extends StatefulWidget  {
 
 class ClientesListarView extends State<ClientesPage> {
   final ClientesListarController controller = ClientesListarController();
+
+  // Função de callback para receber o valor do filho
+  void atualizado(bool atualizado) {
+    if(atualizado){
+      setState(() {});
+    }
+  }
   @override
   void initState() {
     super.initState();
@@ -23,7 +33,7 @@ class ClientesListarView extends State<ClientesPage> {
     });
   }
   _eliminar(index, BuildContext context) async {
-   await controller.eliminar(index, context);
+    await controller.eliminar(index, context);
     setState(() {});
   }
   @override
@@ -60,7 +70,7 @@ class ClientesListarView extends State<ClientesPage> {
           )
           ) :
           Padding(
-              padding: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 10),
               child:   ListView.builder(
                 itemCount: controller.clientes.length,
                 itemBuilder: (context, index) => Card(
@@ -73,11 +83,11 @@ class ClientesListarView extends State<ClientesPage> {
                         builder: (context) {
                           return Wrap(
                             children:  [
-                              const ListTile(
-                                leading: Icon(Icons.visibility),
-                                title: Text('Visualizar'),
-                              ),
-                              const  ListTile(
+                              ListTile(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  abrirModalEditarCliente(context, controller.clientes[index]);
+                                },
                                 leading: Icon(Icons.edit),
                                 title: Text('Editar'),
                               ),
@@ -105,5 +115,15 @@ class ClientesListarView extends State<ClientesPage> {
       ),
     );
   }
+  abrirModalEditarCliente(BuildContext context, ClienteModel cliente){
+    return showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return ClienteEditarPage(cliente: cliente, callback: atualizado);
+      },
+    );
+  }
+
 }
 
