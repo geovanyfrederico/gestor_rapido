@@ -27,7 +27,7 @@ class Tempo {
 
   static DateTimeRange thisWeek() {
     DateTime now = DateTime.now();
-    DateTime startOfWeek = now.subtract(Duration(days: now.weekday - 1));
+    DateTime startOfWeek = DateTime(now.year, now.month, now.day - now.weekday + 1, 0, 0, 0);
     DateTime endOfWeek = startOfWeek.add(Duration(days: 7)).subtract(Duration(milliseconds: 1));
     return DateTimeRange(start: startOfWeek, end: endOfWeek);
   }

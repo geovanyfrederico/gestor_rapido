@@ -1,6 +1,10 @@
+
+import 'dart:developer';
+
 import 'package:gr/models/cliente_model.dart';
 import 'package:gr/models/produto_na_venda_model.dart';
 import 'package:gr/models/utilizador_model.dart';
+import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'cliente_model.dart';
@@ -92,13 +96,10 @@ class VendaModel {
     static  Future<List<VendaModel>> vendasSemanais() async {
 
         final Database database = await  DatabaseHelper.instance.database;
-
         final DateTime now = DateTime.now();
-        final DateTime startOfWeek = now.subtract(Duration(days: now.weekday - 1));
+        final DateTime startOfWeek = DateTime(now.year, now.month, now.day - now.weekday + 1, 0, 0, 0);
         final DateTime endOfWeek = startOfWeek.add(Duration(days: 7));
-
         final List<Map<String, dynamic>> maps = await database.rawQuery(''' SELECT * FROM venda WHERE data BETWEEN ? AND ? ''', [startOfWeek.toIso8601String(), endOfWeek.toIso8601String()]);
-
         return List.generate(maps.length, (index) {
             return VendaModel.fromMap(maps[index]);
         });
